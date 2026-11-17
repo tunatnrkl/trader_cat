@@ -1,0 +1,42 @@
+533,534c533,534
+< const CF=2000000n,CM=[1n,4n,16n,64n],VOLN=[4,8,16,32,64],VCM=[15n,40n,100n];
+< const COINS=[];DEF.forEach((cat,k)=>cat.forEach((r,j)=>{const boss=j===4,P0=P(DEF[0][j][1])*[1n,2000000n,8000000000000n,64000000000000000000n][k],PP=(k===0&&j===0)?P0:P0*4n*(k===2&&j>0?(j===4?48n:24n):k===3?(j>0?112n:40n):10n)/10n,costs=(boss?[]:j===0?VCM.slice(0,2):VCM).map(m=>PP*m/10n);
+---
+> const CF=2000000n,CM=[1n,4n,16n,64n],VOLN=[4,8,16,32,64],VCM=[10n,25n,60n];
+> const COINS=[];DEF.forEach((cat,k)=>cat.forEach((r,j)=>{const boss=j===4,P0=P(DEF[0][j][1])*[1n,2000000n,8000000000000n,64000000000000000000n][k],PP=k===0?P0:P0*4n*(k===2&&j>0?(j===4?48n:24n):k===3?(j>0?112n:40n):10n)/10n,costs=(boss?[]:j===0?VCM.slice(0,2):VCM).map(m=>PP*m/10n);
+896c896
+< const defS=()=>({v:49,rci:null,rbOn:1,hintOff:0,tot:0n,lc:D(2),introDone:0,rev:{},finG:0,bl:1,bc:1,en:0,enT:0,cash:D(2),open:COINS.map(()=>0),co:[1,0,0,0],cl:COINS.map(()=>1),ll:COINS.map(()=>1),rob:0,robOn:1,rlv:[1,1,1,1],rl:[1,1,1,1],tc:1,tcOn:1,ptm:0,pc2:0,spc:0,rb:[],rerr:0,rlvl:0,view:'main',auto:0,autoOn:1,al:1,food:0,over:0,done:0,bottles:0,hist:[],set:{mk:1,lb:1,snd:1}});
+---
+> const defS=()=>({v:49,rci:null,rbOn:1,hintOff:0,tot:0n,lc:D(2),introDone:0,rev:{},finG:0,bl:1,bc:1,en:0,enT:0,cash:D(2),open:COINS.map(()=>0),co:[1,0,0,0],cl:COINS.map((c,i)=>i===0?2:1),ll:COINS.map(()=>1),rob:0,robOn:1,rlv:[1,1,1,1],rl:[1,1,1,1],tc:1,tcOn:1,ptm:0,pc2:0,spc:0,rb:[],rerr:0,rlvl:0,view:'main',auto:0,autoOn:1,al:1,food:0,over:0,done:0,bottles:0,hist:[],set:{mk:1,lb:1,snd:1}});
+927c927
+< const UNLK=[150n,150n,150n,150n];   /* v49: coin, fiyatının %150'si kadar NET kâr edilince açılır */   /* kalibre: her katalog ~33 dk */
+---
+> const UNLK=[100n,250n,220n,600n];   /* v49: coin, fiyatının %150'si kadar NET kâr edilince açılır */   /* kalibre: her katalog ~33 dk */
+982c982
+<  const cc=cl<c.max?c.costs[cl-1]:0n,lc=c.p*BigInt(Math.pow(2,ll)*2),oc=al<5?OTC[al-1]:0n,tcc=tc<6?TCC[tc+1]:0n,bkc=bl<10?BONEC[bl-1]:0n,cpc=bc<10?CAPC[bc-1]:0n,ru=rl<ML?RC[k][rl-1]:0n,rlc=rk<MR?rlcost(k,rk):0n;
+---
+>  const cc=cl<c.max?c.costs[cl-1]:0n,lc=c.p*BigInt(Math.pow(2,ll)),oc=al<5?OTC[al-1]:0n,tcc=tc<6?TCC[tc+1]:0n,bkc=bl<10?BONEC[bl-1]:0n,cpc=bc<10?CAPC[bc-1]:0n,ru=rl<ML?RC[k][rl-1]:0n,rlc=rk<MR?rlcost(k,rk):0n;
+986c986
+<  h+=card('lup',icn('bolt',3),'KALDIRAÇ',`${c.n} · ${L}x`,c.boss?'':seg(ll,LMAX(ci)),c.boss?'<span class="mx">SABİT</span>':ll<LMAX(ci)?go('lup',lc,!act&&afford(lc)):mx,'Kaldıraç: kâr ve zarar kaldıraç katı kadar büyür. Fiyat = coin fiyatı × hedef kaldıraç × 2.',ll<LMAX(ci)&&!act&&afford(lc)?'can':'');
+---
+>  h+=card('lup',icn('bolt',3),'KALDIRAÇ',`${c.n} · ${L}x`,c.boss?'':seg(ll,LMAX(ci)),c.boss?'<span class="mx">SABİT</span>':ll<LMAX(ci)?go('lup',lc,!act&&afford(lc)):mx,'Kaldıraç: kâr ve zarar kaldıraç katı kadar büyür. Fiyat = coin fiyatı × hedef kaldıraç.',ll<LMAX(ci)&&!act&&afford(lc)?'can':'');
+1007c1007
+<  else if(a==='lup'){if(G.st!=='active'&&S.ll[ci]<LMAX(ci)&&pay(c.p*BigInt(Math.pow(2,S.ll[ci])*2),c.n+' Kaldıraç '+Math.pow(2,S.ll[ci])+'x')){S.ll[ci]++;G.lev=Math.pow(2,S.ll[ci]-1);tier=S.ll[ci]===LMAX(ci)?'B':'A';t1=c.n+' kaldıraç '+Math.pow(2,S.ll[ci]-1)+'x'}}
+---
+>  else if(a==='lup'){if(G.st!=='active'&&S.ll[ci]<LMAX(ci)&&pay(c.p*BigInt(Math.pow(2,S.ll[ci])),c.n+' Kaldıraç '+Math.pow(2,S.ll[ci])+'x')){S.ll[ci]++;G.lev=Math.pow(2,S.ll[ci]-1);tier=S.ll[ci]===LMAX(ci)?'B':'A';t1=c.n+' kaldıraç '+Math.pow(2,S.ll[ci]-1)+'x'}}
+1309c1309
+<  $('#auto').classList.toggle('on',v==='auto');if(v==='auto')buildGrid();if(ch){SH='';RBK='';$('#shop').scrollTop=0;if(typeof ui==='function'&&anim!==false)ui();fitPass();requestAnimationFrame(fitPass)}}   /* v35: geçiş anında, animasyon yok */
+---
+>  $('#auto').classList.toggle('on',v==='auto');if(v==='auto')buildGrid();if(ch){SH='';RBK='';$('#shop').scrollTop=0;if(typeof ui==='function'&&anim!==false)ui()}}   /* v35: geçiş anında, animasyon yok */
+1516c1516
+<  'Bilgisayar onarıldı · Pebble açıldı':'Computer repaired · Pebble unlocked','Bobby sahiplenildi':'Bobby adopted','Oto-Tur satın alındı':'Auto-Round bought','Bilgisayar Seviye 2':'Computer Level 2','Bilgisayar onarıldı':'Computer repaired','Kedi Maması (Final) satın alındı':'Cat Food (Final) bought','Otomasyon Merkezi':'Automation Center','Bobby Katalog':'Bobby Catalog','Kemik':'Bone','Kapasite':'Capacity','Robot':'Robot','ROBOT DEPOSU':'ROBOT DEPOT','Fiyat':'Price','Volatilite':'Volatility','dönüm noktası':'turning points','Sen ×':'You ×','Bobby ×':'Bobby ×','· Nakit':'· Cash','· Bobby':'· Bobby'},
+---
+>  'Bobby Katalog':'Bobby Catalog','Kemik':'Bone','Kapasite':'Capacity','Robot':'Robot','ROBOT DEPOSU':'ROBOT DEPOT','Fiyat':'Price','Volatilite':'Volatility','dönüm noktası':'turning points','Sen ×':'You ×','Bobby ×':'Bobby ×','· Nakit':'· Cash','· Bobby':'· Bobby'},
+1523c1523
+<   [/^15 sn tur\. Sabit fiyattan başlar\.$/,'15 s round. Starts at a fixed price.'],[/^(\d+) dönüm$/,'$1 turning points'],[/^Satıldı:$/,'Sold:'],[/^(.*) Coin Lv(\d+)$/,'$1 Coin Lv$2'],[/^(.*) Kaldıraç (\d+)x$/,'$1 Leverage $2x'],[/^Bobby Katalog (\d+) Lv(\d+)$/,'Bobby Catalog $1 Lv$2'],[/^Oto-Tur Lv(\d+)$/,'Auto-Round Lv$1'],[/^Zaman Kapsülü Lv(\d+) \((\d+)x\)$/,'Time Capsule Lv$1 ($2x)'],[/^Robot (\d+) eklendi$/,'Robot $1 added'],[/^Robot-(\d+) doğruluk Lv(\d+)$/,'Robot-$1 accuracy Lv$2'],[/^Bobby kemik seviyesi (\d+)$/,'Bobby bone level $1'],[/^Bobby kapasite seviyesi (\d+)$/,'Bobby capacity level $1'],[/^(.*) coini açıldı$/,'$1 coin unlocked'],[/^Pozisyon: (.*) \(katalog fiyatı\)\.$/,'Position: $1 (catalog price).'],[/^Satıldı: (.*)$/,'Sold: $1'],[/^Süre doldu, satıldı: (.*)$/,"Time's up, sold: $1"],[/^Likidasyon! (.*)$/,'Liquidated! $1'],[/^Süre doldu, satıldı:$/,"Time's up, sold:"],[/^Bobby Lv(\d+)$/,'Bobby Lv$1'],[/^Katalog (\d+) · (.*)$/,'Catalog $1 · $2'],
+---
+>   [/^15 sn tur\. Sabit fiyattan başlar\.$/,'15 s round. Starts at a fixed price.'],[/^(\d+) dönüm$/,'$1 turning points'],[/^Satıldı:$/,'Sold:'],[/^Süre doldu, satıldı:$/,"Time's up, sold:"],[/^Bobby Lv(\d+)$/,'Bobby Lv$1'],[/^Katalog (\d+) · (.*)$/,'Catalog $1 · $2'],
+1530c1530
+< const TROBS=new MutationObserver(ms=>{for(const m of ms){if(m.type==='characterData'){const n=m.target;if(n.__tr){n.__tr=0;continue}_orig.set(n,n.nodeValue);trNode(n)}else m.addedNodes.forEach(trTree)}if(LANG!=='tr'&&!window.__fp){window.__fp=1;requestAnimationFrame(()=>{window.__fp=0;fitPass()})}});
+---
+> const TROBS=new MutationObserver(ms=>{for(const m of ms){if(m.type==='characterData'){const n=m.target;if(n.__tr){n.__tr=0;continue}_orig.set(n,n.nodeValue);trNode(n)}else m.addedNodes.forEach(trTree)}});
