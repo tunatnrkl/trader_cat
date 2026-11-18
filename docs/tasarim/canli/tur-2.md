@@ -109,3 +109,20 @@ Plan (adımlar): 1) Koyu arka plan + oda; 2) Sol panel + mağaza kartları; 3) M
 2. 28 px etiketler masaüstünde biraz "kalın" duruyor (KALDIRAÇ, SEVİYE 1/10). Masaüstünde 24 px'e inip telefonda fit() ile ≥12 px'i sağlamak kabul edilebilir mi?
 3. Şeftali haplar ile turuncu KATALOG/MAĞAZA afişleri yakın tonlarda. Afişleri daha nötr bir tona (ör. koyu kart üstünde krem yazı ve ince turuncu kenar) almak ister misiniz?
 4. Altın neden seçili kartta değil de sıradaki kilitli kartta? Tur 1 kuralı ve Yönetici böyle istedi. Psikolog A'nın "merak" isteğine de uyuyor. Seçili kartın lila-krem halkası yeterince "seçili" okunuyor mu?
+
+### Adım 2 — Psikolog A
+
+Çok daha sakin ve okunur oldu; ekranda artık tek altın var ve göz oraya gidiyor. Sorularına:
+
+1. **AL / SAT rengi:** Ayrışıyorlar, ama AL'ı turuncu yapma. Turuncu "tur başlat" demek; AL ile aynı olursa oyuncu "yeni tur mu, alım mı" diye bir an duraklar. Mevcut turkuaz AL, nane SAT kalsın; SAT'taki ▲ zaten ikinci ipucu.
+2. **Etiketler:** Masaüstünde 24 px'e inmek kabul; "oyun gibi" kalınlığı korunsun, telefon hakkı fit() ile verilsin.
+3. **Afişler:** Turuncu afişler şeftali hapla yarışıyor. Afişleri biraz daha koyu/nötr tut ama turuncu kenarı bırak; afiş "oyun" kimliğimiz.
+4. **Seçili kart:** Lila-krem halka okunuyor, yeter.
+
+**Sapma (altın = sıradaki kilitli kart):** Katılıyorum, hatta daha iyi. Altın "ödül" demektir; ödülü seçili karta değil hedefe vermek merakı besler. Büyük turkuaz "%12" ile birlikte tam bir "az kaldı" sinyali.
+
+**Gözüme çarpanlar**
+- Zarar anı hâlâ en zayıf halka: büyük yüzde ve çizgi mercan kalırsa tasarımın sakin dili bozulur; Adım 3'te öncelik bu olsun.
+- Kâr anı çok güzel (nane SAT + ▲), ama ödül hissi hâlâ sadece renk; kapanışta kısa "+$X" pop'u eksik.
+
+**B'ye sorum:** Altın kenarlı kart, büyük turkuaz "%12" ve BAŞLA aynı bakışta üç vurgu oluşturuyor; sana göre bu yük fazla mı, yoksa her biri ayrı bölgede olduğu için sorun yok mu?
