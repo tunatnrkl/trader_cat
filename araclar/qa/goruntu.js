@@ -1,7 +1,7 @@
-// Standart ekran görüntüsü seti -> docs/tasarim/son/   Kullanım: node araclar/qa/goruntu.js
+// Standart ekran görüntüsü seti -> docs/tasarim/son/ (TI_URL, TI_OUT ile başka kopya/klasör)   Kullanım: node araclar/qa/goruntu.js
 const fs=require('fs'),path=require('path');
 const {chromium,open,sleep,dismissSil}=require('./lib');
-const OUT=path.join(__dirname,'..','..','docs','tasarim','son');
+const OUT=process.env.TI_OUT||path.join(__dirname,'..','..','docs','tasarim','son');  // TI_OUT ile değiştirilebilir
 fs.mkdirSync(OUT,{recursive:true});
 const INJ=()=>{S.fix=1;S.introDone=1;S.hintOff=1;S.cash=D(150);S.rob=1;S.open[0]=1;S.open[1]=1;S.spc=1;save();ui()};
 const DESK={},TEL={viewport:{width:844,height:390},isMobile:true,hasTouch:true,deviceScaleFactor:1};

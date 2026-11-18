@@ -16,7 +16,7 @@ Ayrıntılı kod haritası: `docs/kod-haritasi.md` (satır numaraları yaklaşı
 - **Tek işlem formülü:** `calculateTradeResult` — oyuncu, Bobby ve robot hepsi bunu kullanır.
 - **Yeni metin:** Türkçe yazılır, İngilizcesi `I18N.en`'e eklenir, gösterimde `L()` kullanılır. Not: bazı fonksiyonlarda yerel `const L` global `L()`'yi gölgeler.
 - Oyun mantığı, sayılar, fiyatlar, denge ve kayıt formatı kullanıcı onayı olmadan değiştirilmez. Denge önerileri: `docs/denge-onerisi.md`.
-- Görsel: %100 pixel art, mevcut palet; bulanık/gradyan/vektör görsel ve emoji yok; ışık yönü sol üst.
+- Görsel: kullanıcı modern, yuvarlak, "oyun gibi" bir arayüz istiyor (örnek: `docs/tasarim/ornek/`); arayüz pixel art olmak zorunda değil, hayvan sprite'ları pixel kalabilir. Göz yormayan, glow/neon yok, emoji yok. Süren yeniden tasarım: `docs/tasarim/durum.md`.
 
 ## Test
 - Tarayıcı konsolunda: `runTradeTests()`, `runBobbyTests()`, `runRobotE2E()`, `runBobbyE2E()` — durumu yedekleyip geri yükler.

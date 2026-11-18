@@ -1,29 +1,26 @@
 # Yeniden Tasarım Döngüsü — Durum
 
-Kullanıcı isteği (2026-11-18): Tüm grafikleri baştan aşağı değiştir. Göz yormayan, akıcı, sıkmayan renk tonları; "oyun gibi" olsun, şu an içini daraltıyor. Kullanıcı durdurana kadar sürekli yeniden tasarla: en iyi noktaya gel, sonra baştan başla ve değişmesi gerekenleri değiştir. Psikolog testçi tasarımı yorumlayıp Yönetici'ye bildirir; Testçi psikologa not iletir.
+## Kullanıcı isteği
+- 2026-11-18 (1): Tüm grafikleri baştan aşağı değiştir; göz yormayan, akıcı, sıkmayan; oyun gibi olsun; kullanıcı durdurana kadar sürekli yeniden tasarla.
+- 2026-11-18 (2) — DÜZELTME: "Sadece renkleri değiştiriyorsun; tasarım (biçim) değişsin." Örnek: `docs/tasarim/ornek/ornek-1.jpg`. 4 tasarımcı çalışsın; 2 psikolog testçi aralarında konuşup tartışsın, tartışmalar kullanıcıya görünür olsun (`docs/tasarim/tartisma/`). Tasarımda daha yüksek efor.
+- İlk renk-only deneme (A1, commit 21fa62a) geri alındı; index.html tasarım öncesi hâline döndü (97b1e92 içeriği).
 
 ## Değişmezler
-- Oyun mantığı, sayılar, fiyatlar, denge, kayıt formatı (`trading-idle-save`) DEĞİŞMEZ.
-- `runTradeTests`, `runBobbyTests`, `runBobbyE2E`, `runRobotE2E` geçmeli; konsol temiz; eski kayıt açılmalı; TR/EN ve telefon yatayında taşma yok (`node araclar/qa/smoke.js`).
-- Tek dosya (index.html), bağımlılıksız, dış dosya/CDN yok.
-- Stil: pixel art korunur (oyunun kimliği), ama palet/ışık/düzen/sprite'lar tamamen yenilenebilir.
-- Tıklama alanları erişilebilir kalmalı (telefon yatayında parmakla basılabilir).
+- Oyun mantığı, sayılar, fiyatlar, denge, kayıt formatı DEĞİŞMEZ; id ve data-* öznitelikleri korunur.
+- `TI_URL=... node araclar/qa/smoke.js` 63/63; TR/EN, telefon yatayında taşma yok.
+- Tek dosya, bağımlılıksız. Arayüz pixel art olmak zorunda değil (kullanıcı örneği modern yuvarlak arayüz); hayvan sprite'ları pixel kalabilir.
+- Brif: `docs/tasarim/brief.md`.
 
-## Döngü
-1. Görsel tasarımcı (Opus) aşamayı uygular → 2. Testçi (Sonnet): smoke + ekran görüntüleri (`docs/tasarim/son/`) + "Psikologa not" → 3. Psikolog (Sonnet): yorum, puan, öncelikli istekler → 4. Yönetici: kabul/ret, commit+push, sıradaki aşama. Tüm aşamalar bitince → yeni tur (geri bildirimlerden yeni aşama listesi).
-
-## Tur 1 aşamaları
-- [x] A1 Sanat yönü + palet + genel CSS (arka plan, paneller, butonlar, monitör çerçevesi, tipografi) — `docs/tasarim/sanat-yonu.md`
-- [ ] A2 İşlem grafiği (canvas): çizgi, ızgara, renkler, akıcılık, alım/satım işaretleri, üst bilgi
-- [ ] A3 Sprite'lar: coinler, Bobby, kedi, kaplar, robotlar, duvar/raf, ikonlar
-- [ ] A4 Mağaza kartları, sol coin listesi, otomasyon merkezi düzeni
-- [ ] A5 Menü, tanıtım, bitiş sahnesi, toast/modal/ipucu, geçiş animasyonları
+## Döngü (her tur)
+1. 4 tasarımcı (Opus, high) paralel, her biri kendi kopyasında: `tasarim/konsept-N/index.html` → `goruntu/` (8 görüntü) + `NOTLAR.md`.
+2. 2 psikolog (A: oyun hissi & motivasyon, B: göz/zihin sağlığı & ergonomi) 4 konsepti tartışır: `docs/tasarim/tartisma/tur-N.md` (açılış → itiraz → yanıt → ortak karar: kazanan + diğerlerinden alınacak fikirler + en önemli düzeltmeler).
+3. Yönetici: kazananı `index.html`'ye alır (smoke 63/63), commit+push, `docs/tasarim/son/` güncellenir.
+4. Yeni tur: 4 tasarımcı kazanan üzerinden 4 farklı iyileştirme varyantı/alan yapar → tekrar tartışma → birleştir. Kullanıcı durdurana kadar.
 
 ## Şu an
-- Tur: 1 · A1: tasarım 21fa62a, testçi 63/63 (tur-1/A1-testci.md, görüntüler tur-1/A1-goruntu/), psikolog değerlendiriyor (→ tur-1/A1-psikolog.md). A2 tasarımcısı paralel çalışıyor (grafik; renk anlamı: pozisyon açıkken alım fiyatına göre). Psikologun A1 istekleri A2 sonrası düzeltme turuna/A3'e taşınacak.
-- A2–A5 için tasarımcının notları: A2 hud() sabit renkleri (#FFD45E,#4CD08A,#E5484D), çizgi shadowBlur + dolgu gradyanı, neon fiyat etiketi. A3 COL coin renkleri çok doygun, wallCanvas pencere/çerçeve, Bobby kabı/kulübe/#pbs enerji, sol listedeki turuncu ok. A4 "daha fazla" ipucu son kartın üstüne biniyor, robot bölme içi JS renkleri, .sc.glow/.sc.fin yanıp sönme hızlı, bölüm başlıkları küçük; kart kuralları #stage .sc önceliğini aşmalı. A5 ana menü, "yeni açıldı" penceresi, final sahnesi, eğitim karartması, SON DAKİKA yanıp sönmesi; body.soft ölü kod.
-- Nabız: send_later ile 60 dk'da bir (bekleyen nabız trigger id'si: trig_01RSyPsaaJppPb5kPNwUMUZm). Yeni nabız kurmadan önce eskisini delete_trigger ile sil, id'yi buraya yaz.
-- Rol şablonları: docs/tasarim/roller.md
+- Tur 1: 4 konsept yapılıyor (1 Gece Arcade—örneğe yakın, 2 Pastel Cozy Gündüz, 3 Tok Mobil Oyun, 4 Lofi Akşam Odası). Sonra psikolog tartışması.
+- Nabız: send_later 60 dk (bekleyen: trig_01RSyPsaaJppPb5kPNwUMUZm). Yeni nabız kurmadan önce eskisini delete_trigger ile sil, id'yi buraya yaz.
 
 ## Günlük (en yeni üstte)
-- 2026-11-18: Döngü kuruldu. Önceki görünüm `docs/tasarim/once/` altında.
+- 01:30 Kullanıcı itirazı → yeni süreç (4 tasarımcı + 2 psikolog tartışması). A1 geri alındı.
+- 01:07 Döngü kuruldu. Önceki görünüm `docs/tasarim/once/`.

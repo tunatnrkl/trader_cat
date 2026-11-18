@@ -1,6 +1,6 @@
 const {chromium}=require('playwright');
-const URL='file:///home/user/trader_cat/index.html';
-const DIR=__dirname;
+const URL=process.env.TI_URL||'file:///home/user/trader_cat/index.html';  // başka kopyayı test etmek için: TI_URL=file:///.../index.html
+const DIR=process.env.TI_SHOTS||__dirname;require('fs').mkdirSync(DIR,{recursive:true});
 async function open(b,opt={}){
   const ctx=await b.newContext(Object.assign({viewport:{width:1440,height:900},deviceScaleFactor:1},opt.ctx||{}));
   if(opt.save!==undefined||opt.lang){await ctx.addInitScript(([s,l,fresh])=>{try{if(s!==undefined&&s!==null&&!sessionStorage.__qa){localStorage.setItem('trading-idle-save',s)}sessionStorage.__qa=1;if(l)localStorage.setItem('ti-lang',l)}catch(e){}},[opt.save===undefined?null:opt.save,opt.lang||null]);}
