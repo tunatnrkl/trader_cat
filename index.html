@@ -754,6 +754,91 @@ body.rm .pl{animation:none!important}
 #right .sc.bob .br .sg i{flex-basis:11px!important;height:11px!important}#right .sc.bob .br .sg{gap:4px!important}
 #right .sc.bob .br.en .sg{gap:0!important}
 #right .sc.bob .bh .sm{min-width:0}
+
+/* =====================================================================
+   TUR 2 / ADIM 2 — sol panel + mağaza, tek altın kuralı, Ortak tavsiye 1
+   Renk anlamları: ALTIN = yalnız "sıradaki hedef" (sıradaki kilitli coin kartında ince, sabit kenar).
+   ŞEFTALİ = para / alınabilir fiyat. LİLA-KREM = seçili olan (coin kartı, sekme). TURKUAZ = açık / ilerleme / kilit açma.
+   SOLUK = alınamaz. Turuncu (BAŞLA) %10 daha az doygun. Etiketler telefona hazırlık için büyütüldü (≥28 px sahne).
+   ===================================================================== */
+:root{--k-or:#F59A38;--k-ord:#C06118;--k-pe:#E9B596;--k-ped:#AF7A5C;--k-pel:#F5D0B8;--k-pet:#3A2216;--k-mon:#F0C9A8;
+ --k-li:#CFC7EA;--k-lid:#9890C0;--k-lil:#E4DEF5;--k-lit:#221D3A}
+/* bakiye plakası: para krem (altın değil); hedef satırı ikincil */
+#cnx{top:72px!important;font-size:22px!important;color:var(--k-tx2)!important}
+#cbar{top:56px!important}
+/* katalog sekmeleri: seçili = lila-krem */
+.tb.on,#tabs .tb.on{background:var(--k-li)!important;color:var(--k-lit)!important;box-shadow:0 0 0 3px var(--k-ol),0 6px 0 3px var(--k-ol),inset 0 3px 0 var(--k-lil),inset 0 -5px 0 var(--k-lid)!important}
+/* coin kartları */
+.tk.on,body.soft .tk.on{background:#443D6E!important;box-shadow:0 0 0 4px var(--k-li),0 7px 0 4px var(--k-lid),inset 0 4px 0 #5A5288,inset 0 -6px 0 #312B52!important}
+.tk.boss.on{box-shadow:0 0 0 4px var(--k-li),0 7px 0 4px var(--k-lid),inset 0 4px 0 #5D4166,inset 0 -6px 0 #36243C!important}
+.tn .num,#list .tn .num{font-size:24px!important;color:var(--k-mon)!important}
+#list .tk.poor .num{color:var(--k-tx2)!important}
+.tk.lk.nx,body.soft .tk.lk.nx{background:#332E50!important;box-shadow:0 0 0 3px var(--k-au),0 7px 0 3px var(--k-ol),inset 0 0 0 3px #3B3659!important}
+.tk.lk .tn b,#list .tk.lk .tn b{font-size:24px!important}
+.tk .lkp{gap:10px;margin-top:4px}.tk .lkp .lbar{height:14px}.tk .lkp small{font-size:28px;line-height:1;color:var(--k-tq)}
+.tk.lk:not(.nx) img.lkic{opacity:.6}
+/* seviye noktaları */
+.sg.mid i.f,body.soft .sg.mid i.f{background:var(--k-pe)!important}
+/* mağaza başlıkları ve sekmeleri */
+.shd,#right .shd{font-size:28px!important;letter-spacing:2px!important;margin:14px 4px 4px!important}
+.sbt i{color:var(--k-pe)!important}
+#stabs button{height:46px!important;font-size:17px!important}
+#stabs button.on{background:var(--k-li)!important;color:var(--k-lit)!important;box-shadow:inset 0 -4px 0 var(--k-lid)!important}
+.sm .st,body.soft .sm .st{font-size:20px!important}
+/* fiyat hapları: alınabilir = şeftali (canlı), alınamaz = soluk (mevcut [data-dis] stili) */
+#right .go{height:46px!important;font-size:21px!important;background:var(--k-pe)!important;color:var(--k-pet)!important;box-shadow:0 0 0 3px var(--k-ol),0 6px 0 3px var(--k-ol),inset 0 3px 0 var(--k-pel),inset 0 -5px 0 var(--k-ped)!important}
+#right .go:hover{background:#F0C2A6!important}
+#right .go:not([data-dis]):not(.unl):active,#right .go.sq:not(.unl){box-shadow:0 0 0 3px var(--k-ol),0 2px 0 3px var(--k-ol),inset 0 3px 0 var(--k-pel),inset 0 -3px 0 var(--k-ped)!important}
+#right .go i.up{border-bottom-color:var(--k-pet)!important}
+#right .go[data-dis] i.up{border-bottom-color:#CFC9E3!important}
+#right .go.poor span,#right .go.poor:not([data-dis]) span{color:inherit!important}
+#right .go.unl{background:#3FBFB1!important}
+.mx,#right .mx,body.soft .mx{font-size:16px!important;line-height:30px!important}
+.info{width:28px!important;height:28px!important;font-size:17px!important;line-height:28px!important}
+.sw,#right .sw{height:40px!important;font-size:16px!important;line-height:40px!important}
+.sw i{top:5px!important}
+/* Bobby kartı: etiket tam satır, altında noktalar + buton (telefonda büyük etiket sığsın) */
+.br small,#right .sc.bob .br small,body.soft .br small{font-size:28px!important;line-height:1.1!important}
+#right .sc.bob .br{grid-template-rows:auto auto!important;row-gap:8px!important}
+#right .sc.bob .br small{grid-column:1/-1!important;grid-row:1!important}
+#right .sc.bob .br .sg{grid-column:1!important;grid-row:2!important}
+#right .sc.bob .br>.go,#right .sc.bob .br>.mx,#right .sc.bob .br>.pbtn{grid-column:2!important;grid-row:2!important}
+#right .rcb.on{background:#443D6E!important;box-shadow:0 0 0 3px var(--k-li),inset 0 -3px 0 #312B52!important}#right .rcb.on span{color:var(--k-li)!important}
+/* "daha fazla": paneli örtmez — panelin alt kenarının altında durur; liste altta yumuşakça kaybolur */
+#shint,body.soft #shint{bottom:248px!important;padding:0 16px!important;font:900 18px/28px var(--k-fr)!important;color:var(--k-tx)!important;background:var(--k-ol)!important;box-shadow:0 0 0 3px var(--k-rim)!important}
+#shop,body.soft #shop{padding-bottom:30px!important;-webkit-mask-image:linear-gradient(#000 calc(100% - 26px),transparent);mask-image:linear-gradient(#000 calc(100% - 26px),transparent)}
+/* hayvan alanı etiketleri (BOBBY / KEDİ) */
+.botp .cap,body.soft .botp .cap{font:900 28px/36px var(--k-fr)!important;padding:0 16px!important;top:2px!important}
+/* monitör: altın sayısı bire insin (Ortak tavsiye 1 · madde 2) */
+#hN{color:var(--k-tx)!important}
+.chin span{background:#353052!important;color:var(--k-tx2)!important;box-shadow:0 0 0 3px var(--k-ol),inset 0 -4px 0 #2A2644!important}
+#lvr{font-size:28px!important}#lvr span{line-height:1.1}
+#lvr .pbtn.ac{background:var(--k-li)!important;color:var(--k-lit)!important;box-shadow:0 0 0 2px #0D0B17,0 4px 0 2px #0D0B17,inset 0 -3px 0 var(--k-lid)!important}
+#receipt{box-shadow:0 0 0 4px var(--k-rim),inset 0 -6px 0 #1B1830!important}#receipt h3{color:var(--k-pe)!important}
+#toast div{background:var(--k-pe)!important;color:var(--k-pet)!important}
+#tip{box-shadow:0 0 0 3px var(--k-rim)!important}#tip.sl::after,#tip.sr::after{background:var(--k-rim)!important}
+.tile.add{box-shadow:0 0 0 4px var(--k-pe)!important}
+/* ana düğme: turuncu %10 sakin; SAT kârda nane (▲), zararda nötr kart tonu (▼), alarm yok */
+#main{box-shadow:0 0 0 4px #0D0B17,0 9px 0 4px #0D0B17,inset 0 5px 0 #F8BD75,inset 0 -9px 0 var(--k-ord)!important;text-shadow:0 3px 0 #8E4612,2px 0 0 #8E4612,-2px 0 0 #8E4612,0 -2px 0 #8E4612}
+#main:not(:disabled):active,#main.down{box-shadow:0 0 0 4px #0D0B17,0 3px 0 4px #0D0B17,inset 0 5px 0 #F8BD75,inset 0 -5px 0 var(--k-ord)!important}
+#main.sell{background:#5BC49A!important;color:#0E3326!important;text-shadow:none!important;box-shadow:0 0 0 4px #0D0B17,0 9px 0 4px #0D0B17,inset 0 5px 0 #8EDBBC,inset 0 -9px 0 #2E8C68!important}
+#main.sell.dn{background:#3A345F!important;color:var(--k-tx)!important;text-shadow:none!important;box-shadow:0 0 0 4px #0D0B17,0 9px 0 4px #0D0B17,inset 0 5px 0 #4C4577,inset 0 -9px 0 #29243F!important}
+.mbtn.pri{box-shadow:0 0 0 4px var(--k-ol),0 10px 0 4px var(--k-ol),inset 0 5px 0 #F8BD75,inset 0 -9px 0 var(--k-ord)!important}.mbtn.pri:hover{background:#F6A74E!important}
+/* 6'dan çok seviye: noktalar yerine ince ilerleme hapı (taşma yok, göz daha az sayar) */
+#right .sg:not(.vol):has(>i:nth-child(7)){gap:0!important;height:16px!important;padding:3px!important;border-radius:99px;background:#141224!important;box-shadow:0 0 0 2px var(--k-ol)!important;overflow:hidden;min-width:56px;width:100%;box-sizing:border-box}
+#right .sg:not(.vol):has(>i:nth-child(7)) i{flex:1 1 0!important;height:100%!important;border-radius:0!important;background:transparent!important;box-shadow:none!important}
+#right .sg:not(.vol):has(>i:nth-child(7)) i.f{background:var(--k-tq)!important}
+#right .sg:not(.vol):has(>i:nth-child(7)) i.f:first-child{border-radius:99px 0 0 99px!important}
+#right .sc:not(.bob):not(.rcoin) .sm .sg{min-width:0}
+/* Bobby başlığı: "Katalog 1" kesilmesin */
+#right .sc.bob .bh .st{font-size:18px!important}
+#right .sc.bob .bh .sw{width:104px!important}
+/* sağ panel: eski katmandaki saturate(1.15) doygunluğu gizlice artırıyordu — kapatıldı */
+#right{filter:none!important}
+/* Bobby balonu, büyüyen BOBBY etiketinin altına */
+#bbub{top:46px!important}
+/* "daha fazla" için panelin içinde ayrı alt şerit: hiçbir kartı örtmez */
+#shop,body.soft #shop{margin-bottom:36px!important}
 </style><style>/* === TELEFON: hep yatay oyun (dikeyde 90° döndürülür), sayfa kaymaz, çift dokunuşta büyümez === */
 html,body{position:fixed;inset:0;width:100%;height:100%;overflow:hidden;margin:0;overscroll-behavior:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
 *{touch-action:manipulation}canvas,img{-webkit-user-drag:none}#list,#shop,.modal .mp,#mb{touch-action:pan-x pan-y;-webkit-overflow-scrolling:touch}
@@ -1093,12 +1178,12 @@ function wallCanvas(side,night,soft,tw){   /* Tur 2: gece oyun odası — yuvarl
  const K=2,c=document.createElement('canvas');c.width=336*K;c.height=200*K;const x=c.getContext('2d');x.scale(K,K);
  const R=(a,b,w,h,r)=>{x.beginPath();x.moveTo(a+r,b);x.arcTo(a+w,b,a+w,b+h,r);x.arcTo(a+w,b+h,a,b+h,r);x.arcTo(a,b+h,a,b,r);x.arcTo(a,b,a+w,b,r);x.closePath()};
  const OLW='#100D1D',RIM='#3E3864',RIMH='#4C4577',RIMD='#2A2545';
- if(!side){const fx=214,fy=26,fw=58,fh=46;   /* Bobby köşesi: pati resmi (balonla çakışmaz) */
-  R(fx-3,fy-3,fw+6,fh+6+4,13);x.fillStyle=OLW;x.fill();R(fx,fy,fw,fh,10);x.fillStyle=RIM;x.fill();R(fx,fy,fw,4,2);x.fillStyle=RIMH;x.fill();
-  R(fx+6,fy+6,fw-12,fh-12,6);x.fillStyle='#231E38';x.fill();
-  x.fillStyle='#B9A07E';x.beginPath();x.ellipse(fx+fw/2,fy+fh/2+5,7,6,0,0,7);x.fill();
-  [[-9,-3],[-3.5,-8],[3.5,-8],[9,-3]].forEach(q=>{x.beginPath();x.ellipse(fx+fw/2+q[0],fy+fh/2+q[1],2.6,3.2,0,0,7);x.fill()});return c}
- const wx=196,wy=24,ww=100,wh=76;   /* kedi köşesi: pencere */
+ if(!side){   /* Bobby köşesi: düz renkli aplik lamba (sabit, glow yok); ışık lekesi duvardan bir kademe açık */
+  x.fillStyle='#221D37';x.beginPath();x.ellipse(236,70,50,46,0,0,7);x.fill();
+  R(233,28,7,28,3);x.fillStyle=OLW;x.fill();R(234,29,5,26,2);x.fillStyle=RIM;x.fill();
+  R(212,50,54,28,12);x.fillStyle=OLW;x.fill();R(215,53,48,22,9);x.fillStyle='#C99572';x.fill();R(215,68,48,7,3);x.fillStyle='#A27156';x.fill();
+  return c}
+ const wx=196,wy=36,ww=100,wh=72;   /* kedi köşesi: pencere */
  R(wx-4,wy-4,ww+8,wh+8,18);x.fillStyle=OLW;x.fill();R(wx,wy,ww,wh,14);x.fillStyle=RIM;x.fill();
  const ix=wx+7,iy=wy+7,iw=ww-14,ih=wh-14;x.save();R(ix,iy,iw,ih,9);x.clip();
  x.fillStyle=night?'#1B2440':'#5E7FA6';x.fillRect(ix,iy,iw,ih);x.fillStyle=night?'#243150':'#7896B8';x.fillRect(ix,iy+ih*.6,iw,ih*.4);
@@ -1272,8 +1357,8 @@ function numTip(u){const v=Number(u)/1e4,fr=u%10000n,full=(u/10000n).toLocaleStr
 const KF='ui-rounded, "SF Pro Rounded", "Nunito", "Varela Round", "Arial Rounded MT Bold", "Trebuchet MS", system-ui, sans-serif';
 function ckCash(txt){const cv=$('#cashv'),x=cv.getContext('2d');let fs=84;x.font='900 '+fs+'px '+KF;while(x.measureText(txt).width>440&&fs>40){fs-=4;x.font='900 '+fs+'px '+KF}
  const w=Math.ceil(x.measureText(txt).width)+24,h=104;if(cv.width!==w||cv.height!==h){cv.width=w;cv.height=h}x.clearRect(0,0,w,h);x.font='900 '+fs+'px '+KF;x.textBaseline='middle';x.lineJoin='round';
- const y=h/2-2;x.lineWidth=14;x.strokeStyle='#100D1D';x.strokeText(txt,12,y+6);x.fillStyle='#100D1D';x.fillText(txt,12,y+6);x.strokeText(txt,12,y);x.fillStyle='#FFC83D';x.fillText(txt,12,y);
- x.save();x.beginPath();x.rect(0,0,w,y-fs*.08);x.clip();x.fillStyle='#FFE08A';x.fillText(txt,12,y);x.restore()}
+ const y=h/2-2;x.lineWidth=14;x.strokeStyle='#100D1D';x.strokeText(txt,12,y+6);x.fillStyle='#100D1D';x.fillText(txt,12,y+6);x.strokeText(txt,12,y);x.fillStyle='#EDE5D6';x.fillText(txt,12,y);
+ x.save();x.beginPath();x.rect(0,0,w,y-fs*.08);x.clip();x.fillStyle='#F6F0E6';x.fillText(txt,12,y);x.restore()}
 /* para sayacı: kısa count-up */
 let cashD=null,cashAf=0,cashLast='';
 function cashAnim(){cashAf=0;const t=Number(S.cash);cashD=t;   /* v46: para anında güncellenir */
@@ -1289,8 +1374,8 @@ function renderSide(){const k=G.cat;
  const tabs=[0,1,2,3].map(t=>S.co[t]?`<button class="tb ${t===G.cat?'on':''} ${G.unl===t?'unl':''}" data-cat="${t}">${t+1}</button>`:`<button class="tb lk" disabled aria-label="Kilitli katalog">${icn('lock',2)}</button>`).join('');
  let h='';
  for(let i=k*5;i<k*5+5;i++){const c=COINS[i],op=S.open[i];
-  if(!op){let lp='';if(i===S.open.indexOf(0)&&S.co[c.cat]){const pr=Math.floor(Math.min(100,Number((S.tot||0n)*100000n/(c.p*UNLK[c.cat]))/10));lp=`<span class="lkp"><span class="lbar"><i style="width:${Math.max(4,pr)}%"></i></span><small>%${pr}</small></span>`}
-  h+=`<div class="tk lk ${c.boss?'boss':''}"><img class="ci lkic" src="${ICN.lock}" alt=""><div class="tn"><b>Kilitli</b>${lp}</div></div>`;continue}   /* v52: yalnız kilit + Kilitli */
+  if(!op){let lp='',nx='';if(i===S.open.indexOf(0)&&S.co[c.cat]){nx=' nx';const pr=Math.floor(Math.min(100,Number((S.tot||0n)*100000n/(c.p*UNLK[c.cat]))/10));lp=`<span class="lkp"><span class="lbar"><i style="width:${Math.max(4,pr)}%"></i></span><small>%${pr}</small></span>`}
+  h+=`<div class="tk lk ${c.boss?'boss':''}${nx}"><img class="ci lkic" src="${ICN.lock}" alt=""><div class="tn"><b>Kilitli</b>${lp}</div></div>`;continue}   /* v52: yalnız kilit + Kilitli */
   const mx=S.cl[i]===c.max;
   h+=`<div class="tk ${i===G.ci?'on':''} ${c.boss?'boss':''}" data-i="${i}">${i===G.ci?`<img class="ptr" src="${ICN.arrow}" alt="">`:''}<img class="ci" src="${ICONS[i]}" alt=""><div class="tn"><b>${c.n}${mx?' <img class="ic" src="'+ICN.star+'" width="22" height="22" alt="">':''}</b><span class="num">$ ${cp(c.p)}</span>${seg(S.cl[i],c.max)}</div>${c.boss?'<em class="bb">BOSS</em>':''}</div>`}
  const key=tabs+h+G.ci;if(key!==SD){SD=key;$('#tabs').innerHTML=tabs;$('#list').innerHTML=h;$('#sign').textContent=CATN[k];fitPass()}}
@@ -1618,7 +1703,7 @@ const RSPR={};const rSpr=(i,fr)=>RSPR[i+'_'+fr]||(RSPR[i+'_'+fr]=render(robotGri
 function drawTile(i,now){const cv=$('#tc'+i);if(!cv)return;const tile=cv.parentNode,n=S.rb.length;tile.className='tile'+(i===n?' add':i>n?' lock':'');
  const d=window.devicePixelRatio||1,r=cv.getBoundingClientRect(),W=tile.offsetWidth||200,H=tile.offsetHeight||190,w=Math.max(8,Math.round(r.width*d)),hh=Math.max(8,Math.round(r.height*d));if(cv.width!==w||cv.height!==hh){cv.width=w;cv.height=hh}
  const x=cv.getContext('2d'),k=cv.width/W;x.setTransform(k,0,0,k,0,0);x.fillStyle='#1E1A35';x.fillRect(0,0,W,H);x.textBaseline='middle';x.textAlign='center';
- if(i>=n){if(i===n&&n<RMAX){const ok=afford(RSLOT[n]);x.fillStyle='#FFC83D';x.font='900 46px '+KF;x.fillText('+1',W/2,H/2-26);x.font='900 20px '+KF;x.fillText(TT('ROBOT EKLE'),W/2,H/2+10);x.font='900 20px '+KF;x.fillStyle=ok?'#FFC83D':'#F2A6A0';x.fillText('$'+cp(RSLOT[n]),W/2,H/2+34)}
+ if(i>=n){if(i===n&&n<RMAX){const ok=afford(RSLOT[n]);x.fillStyle='#E9B596';x.font='900 46px '+KF;x.fillText('+1',W/2,H/2-26);x.font='900 20px '+KF;x.fillText(TT('ROBOT EKLE'),W/2,H/2+10);x.font='900 20px '+KF;x.fillStyle=ok?'#F0C9A8':'#BDB6D8';x.fillText('$'+cp(RSLOT[n]),W/2,H/2+34)}
   else{x.fillStyle='#5E5888';x.font='900 16px '+KF;x.fillText(TT('BOŞ BÖLME'),W/2,H/2)}x.textAlign='left';return}
  const R=S.rb[i],rt=RBT[i],c=COINS[R.ci],fr=rt?Math.floor(now/420+i)%2:0;x.textAlign='left';x.imageSmoothingEnabled=false;x.drawImage(rSpr(i%6,fr),4,4,30,30);
  x.fillStyle='#FFC83D';x.font='900 15px '+KF;x.fillText('ROBOT-'+(i+1),38,12);x.fillStyle='#BDB6D8';x.font='800 14px '+KF;x.fillText(TT(c.n)+' · '+2**(R.v-1)+'x',38,27);
@@ -1844,7 +1929,7 @@ const I18N={en:{
  "Bobby'nin kemik süresini uzatır.":"Extends Bobby's bone time.",'Tur bitince yenisini kendisi başlatır.':'Starts a new round when one ends.','Oyunu hızlandırır; istediğin an kapatabilirsin.':'Speeds up the game; turn it off anytime.',
  'Robotların otomatik işlem yaptığı merkezi açar.':'Opens the center where robots trade automatically.','Daha büyük ekranlı yeni bilgisayar (görsel yükseltme).':'A new computer with a bigger screen (visual upgrade).','Final: kedinin kabına sürüklenince oyun biter.':"Final: the game ends when dragged to the cat's bowl.",
  'Otomatik işlem yapan yeni bir robot ekler.':'Adds a new robot that trades automatically.','Kedi maması: kaba sürükle, 4 sn tut, +$2.':'Cat food: drag to the bowl, hold 4 s, +$2.','Kemik ver: tıkla ya da kaba sürükle.':'Give bone: click or drag to the bowl.',
- 'Oyna':'Play',"10$ biriktirince Pebble ile ilk trade'ini yapabilirsin. Devam etmek için tıkla":'Save $10 and you can make your first trade with Pebble. Click to continue',"Pebble coinini almak için 10$'a ihtiyacın var. Beni beslemeye devam et, para biriktir! (Yatırım tavsiyesi değildir, miyav.) Devam etmek için tıkla":'You need $10 to buy the Pebble coin. Keep feeding me and save up! (Not investment advice, meow.) Click to continue','Yaşasın! Artık Pebble coinini alabilirsin.':'Yay! Now you can buy the Pebble coin.',"Ama dikkatli ol, coin piyasası biraz canlıdır! BAŞLA'ya bas; fiyat dipteyken AL, tepedeyken SAT. Devam etmek için tıkla":'But be careful, the coin market is a bit lively! Press START; BUY at the dip, SELL at the top. Click to continue','Merak etme, onu sakinleştirmenin bir yolu var… (Devam etmek için tıkla)':'Don\'t worry, there is a way to calm it down… (Click to continue)','İşte mağaza!':'Here is the shop!','VOLATİLİTE seviyesini artırdıkça grafikteki dönüm noktaları azalır, grafik sakinleşir ve doğru anı yakalamak kolaylaşır. KALDIRAÇ seviyesini artırınca kârın da zararın da kaldıraç katı kadar büyür. Devam etmek için tıkla':'Raising the VOLATILITY level reduces the turning points, so the chart calms down and timing gets easier. Raising LEVERAGE multiplies both profit and loss by the leverage. Click to continue','Seviye arttıkça dönüm noktası azalır, grafik sakinleşir.':'Higher level means fewer turning points, a calmer chart.','Kilitli':'Locked','Burası coin piyasası!':'This is the coin market!','Buradaki coinleri alıp satarak daha çok para kazanabilirsin. (Yatırım tavsiyesi değildir, miyav.) Devam etmek için tıkla':'Buy and sell coins here to grow your in-game cash. (Not investment advice, meow.) Click to continue','Grafik biraz agresif mi geldi?':'Was the chart a bit aggressive?','İşte mağaza! Buradan coinin volatilitesini ve kaldıracını artırabilirsin. Devam etmek için tıkla':'Here is the shop! You can raise the coin\'s volatility and leverage here. Click to continue','Paketi tutup kabımın üstüne sürükle, bırak ve biraz bekle. Her mamada para kazanırsın; 5$ kâr edince bilgisayar düzelir.':'Drag the bag over my bowl, drop it and wait a bit. You earn money each time; at $5 profit the computer gets fixed.','Mama paketini al ve kabıma dök!':'Grab the food bag and pour it into my bowl!','Paketi tutup kabımın üstüne sürükle, bırak ve biraz bekle. Her mamada para kazanırsın; 10$ biriktirince bilgisayarı onarabilirsin.':'Drag the bag over my bowl, drop it and wait a bit. You earn money each time; with $10 you can repair the computer.','BİLGİSAYARI ONAR':'REPAIR COMPUTER','Bozuk ekranı tamir et':'Fix the broken screen','Miyav… Çok açım!':'Meow… I am so hungry!','Karnım guruldiyor… Beni besler misin? (Devam etmek için herhangi bir yere tıkla)':'My tummy is rumbling… Will you feed me? (Click anywhere to continue)','Şu mama paketini al!':'Grab that food bag!','Paketi tut ve sürükle.':'Hold the bag and drag it.','…ve kabıma dök!':'…and pour it into my bowl!','Paketi kabımın üstüne bırak ve biraz bekle. Her mamada para kazanırsın; 10$ biriktirince bilgisayarı onarabilirsin.':'Drop the bag over my bowl and wait a bit. You earn money each time; with $10 you can repair the computer.','Miyav! Bilgisayar düzeldi.':'Meow! The computer is fixed.',"Artık trade yapabilirsin: fiyat dipteyken AL, tepedeyken SAT. Pebble'ı oynamak için 10$ gerekir. Devam etmek için tıkla":'Now you can trade: BUY at the dip, SELL at the top. You need $10 to play Pebble. Click to continue','Miyav! Bilgisayarı açtım.':'Meow! I turned on the computer.',"Pebble ile ilk trade'ini yap: fiyat dipteyken AL, tepedeyken SAT. Devam etmek için tıkla":'Make your first trade with Pebble: BUY at the dip, SELL at the top. Click to continue','Miyav… Karnım çok aç!':'Meow… I am so hungry!','Sol alttaki mama paketini kabıma sürükle. Her mamada kâr edersin; 15$ kâr edince bilgisayarı açarım. Devam etmek için tıkla':'Drag the food bag at the bottom left to my bowl. You profit each time; at $15 profit I will turn on the computer. Click to continue','ANA PC':'MAIN PC','Müzik':'Music','OTO-TUR AÇIK':'AUTO-ROUND ON','OTO-TUR KAPALI':'AUTO-ROUND OFF','DURDURULDU':'STOPPED','ROBOT COİNİ':'ROBOT COIN','Tüm robotlar bu coinde işlem yapar':'All robots trade this coin','Doyan hayvanlar':'Fed animals','Aç hayvanların üstüne mama dök! Basılı tut: daha bol döker.':'Pour food onto hungry animals! Hold to pour more.','Hav hav! Karnımız tok, sağ ol!':'Woof woof! Our bellies are full, thank you!','Teşekkürler! Bütün sokak hayvanlarını doyurdun.':'Thank you! You fed all the street animals.',"Bobby'yi beslemediğin için küstü ve gitti…":'Bobby got upset because you didn\'t feed him, and left…','Mağazadan yeniden sahiplenebilirsin. Devam etmek için tıkla':'You can adopt him again in the shop. Click to continue','OTOMASYON MERKEZİ':'AUTOMATION CENTER','Robot merkezi':'Robot center','Çıkış':'Quit Game','Geri':'Back','Görüşürüz!':'See you!','Menüye dön':'Back to menu','Ses':'Sound','Kedi Maması':'Cat Food','Sabit fiyattan başlar.':'Starts at a fixed price.','Ayarlar ve işlem geçmişi':'Settings and trade history',
+ 'Oyna':'Play','AL ·':'BUY ·','SAT ·':'SELL ·',"10$ biriktirince Pebble ile ilk trade'ini yapabilirsin. Devam etmek için tıkla":'Save $10 and you can make your first trade with Pebble. Click to continue',"Pebble coinini almak için 10$'a ihtiyacın var. Beni beslemeye devam et, para biriktir! (Yatırım tavsiyesi değildir, miyav.) Devam etmek için tıkla":'You need $10 to buy the Pebble coin. Keep feeding me and save up! (Not investment advice, meow.) Click to continue','Yaşasın! Artık Pebble coinini alabilirsin.':'Yay! Now you can buy the Pebble coin.',"Ama dikkatli ol, coin piyasası biraz canlıdır! BAŞLA'ya bas; fiyat dipteyken AL, tepedeyken SAT. Devam etmek için tıkla":'But be careful, the coin market is a bit lively! Press START; BUY at the dip, SELL at the top. Click to continue','Merak etme, onu sakinleştirmenin bir yolu var… (Devam etmek için tıkla)':'Don\'t worry, there is a way to calm it down… (Click to continue)','İşte mağaza!':'Here is the shop!','VOLATİLİTE seviyesini artırdıkça grafikteki dönüm noktaları azalır, grafik sakinleşir ve doğru anı yakalamak kolaylaşır. KALDIRAÇ seviyesini artırınca kârın da zararın da kaldıraç katı kadar büyür. Devam etmek için tıkla':'Raising the VOLATILITY level reduces the turning points, so the chart calms down and timing gets easier. Raising LEVERAGE multiplies both profit and loss by the leverage. Click to continue','Seviye arttıkça dönüm noktası azalır, grafik sakinleşir.':'Higher level means fewer turning points, a calmer chart.','Kilitli':'Locked','Burası coin piyasası!':'This is the coin market!','Buradaki coinleri alıp satarak daha çok para kazanabilirsin. (Yatırım tavsiyesi değildir, miyav.) Devam etmek için tıkla':'Buy and sell coins here to grow your in-game cash. (Not investment advice, meow.) Click to continue','Grafik biraz agresif mi geldi?':'Was the chart a bit aggressive?','İşte mağaza! Buradan coinin volatilitesini ve kaldıracını artırabilirsin. Devam etmek için tıkla':'Here is the shop! You can raise the coin\'s volatility and leverage here. Click to continue','Paketi tutup kabımın üstüne sürükle, bırak ve biraz bekle. Her mamada para kazanırsın; 5$ kâr edince bilgisayar düzelir.':'Drag the bag over my bowl, drop it and wait a bit. You earn money each time; at $5 profit the computer gets fixed.','Mama paketini al ve kabıma dök!':'Grab the food bag and pour it into my bowl!','Paketi tutup kabımın üstüne sürükle, bırak ve biraz bekle. Her mamada para kazanırsın; 10$ biriktirince bilgisayarı onarabilirsin.':'Drag the bag over my bowl, drop it and wait a bit. You earn money each time; with $10 you can repair the computer.','BİLGİSAYARI ONAR':'REPAIR COMPUTER','Bozuk ekranı tamir et':'Fix the broken screen','Miyav… Çok açım!':'Meow… I am so hungry!','Karnım guruldiyor… Beni besler misin? (Devam etmek için herhangi bir yere tıkla)':'My tummy is rumbling… Will you feed me? (Click anywhere to continue)','Şu mama paketini al!':'Grab that food bag!','Paketi tut ve sürükle.':'Hold the bag and drag it.','…ve kabıma dök!':'…and pour it into my bowl!','Paketi kabımın üstüne bırak ve biraz bekle. Her mamada para kazanırsın; 10$ biriktirince bilgisayarı onarabilirsin.':'Drop the bag over my bowl and wait a bit. You earn money each time; with $10 you can repair the computer.','Miyav! Bilgisayar düzeldi.':'Meow! The computer is fixed.',"Artık trade yapabilirsin: fiyat dipteyken AL, tepedeyken SAT. Pebble'ı oynamak için 10$ gerekir. Devam etmek için tıkla":'Now you can trade: BUY at the dip, SELL at the top. You need $10 to play Pebble. Click to continue','Miyav! Bilgisayarı açtım.':'Meow! I turned on the computer.',"Pebble ile ilk trade'ini yap: fiyat dipteyken AL, tepedeyken SAT. Devam etmek için tıkla":'Make your first trade with Pebble: BUY at the dip, SELL at the top. Click to continue','Miyav… Karnım çok aç!':'Meow… I am so hungry!','Sol alttaki mama paketini kabıma sürükle. Her mamada kâr edersin; 15$ kâr edince bilgisayarı açarım. Devam etmek için tıkla':'Drag the food bag at the bottom left to my bowl. You profit each time; at $15 profit I will turn on the computer. Click to continue','ANA PC':'MAIN PC','Müzik':'Music','OTO-TUR AÇIK':'AUTO-ROUND ON','OTO-TUR KAPALI':'AUTO-ROUND OFF','DURDURULDU':'STOPPED','ROBOT COİNİ':'ROBOT COIN','Tüm robotlar bu coinde işlem yapar':'All robots trade this coin','Doyan hayvanlar':'Fed animals','Aç hayvanların üstüne mama dök! Basılı tut: daha bol döker.':'Pour food onto hungry animals! Hold to pour more.','Hav hav! Karnımız tok, sağ ol!':'Woof woof! Our bellies are full, thank you!','Teşekkürler! Bütün sokak hayvanlarını doyurdun.':'Thank you! You fed all the street animals.',"Bobby'yi beslemediğin için küstü ve gitti…":'Bobby got upset because you didn\'t feed him, and left…','Mağazadan yeniden sahiplenebilirsin. Devam etmek için tıkla':'You can adopt him again in the shop. Click to continue','OTOMASYON MERKEZİ':'AUTOMATION CENTER','Robot merkezi':'Robot center','Çıkış':'Quit Game','Geri':'Back','Görüşürüz!':'See you!','Menüye dön':'Back to menu','Ses':'Sound','Kedi Maması':'Cat Food','Sabit fiyattan başlar.':'Starts at a fixed price.','Ayarlar ve işlem geçmişi':'Settings and trade history',
  'Bilgisayar onarıldı · Pebble açıldı':'Computer repaired · Pebble unlocked','Bobby sahiplenildi':'Bobby adopted','Oto-Tur satın alındı':'Auto-Round bought','Bilgisayar Seviye 2':'Computer Level 2','Bilgisayar onarıldı':'Computer repaired','Kedi Maması (Final) satın alındı':'Cat Food (Final) bought','Otomasyon Merkezi':'Automation Center','Bobby Katalog':'Bobby Catalog','Kemik':'Bone','Kapasite':'Capacity','Robot':'Robot','ROBOT DEPOSU':'ROBOT DEPOT','Fiyat':'Price','Volatilite':'Volatility','dönüm noktası':'turning points','Sen ×':'You ×','Bobby ×':'Bobby ×','· Nakit':'· Cash','· Bobby':'· Bobby'},
  pat:[[/^KATALOG (\d+)$/,'CATALOG $1'],[/^Katalog (\d+)$/,'Catalog $1'],[/^SONRAKİ COİN %(\d+)$/,'NEXT COIN %$1'],[/^ZAMAN ×(\d+)$/,'TIME ×$1'],[/^SEVİYE (\d+)\/(\d+)$/,'LEVEL $1/$2'],[/^KALDIRAÇ (\d+)x$/,'LEVERAGE $1x'],
   [/^(\d+) sn \/ kemik · Lv(\d+)$/,'$1 s / bone · Lv$2'],[/^([\d.]+) dk · Lv(\d+)$/,'$1 min · Lv$2'],[/^([\d.]+) sn$/,'$1 s'],[/^(\d+)x açık$/,'$1x on'],[/^(\d+)x kapalı$/,'$1x off'],[/^DOĞRULUK (\d+)\/(\d+)$/,'ACCURACY $1/$2'],[/^KALDIRAÇ (\d+)\/(\d+)$/,'LEVERAGE $1/$2'],
@@ -2211,7 +2296,7 @@ function ui(){if(!S.hintOff&&(S.open[1]||S.tot>=D(50)))S.hintOff=1;if(S.set.test
  if(S.over||G.st==='over'){txt='OYUN BİTTİ';dis=true}
  else if(G.st==='ready'){const ok=S.cash>=c.p;dis=!ok;note=S.cash<c.p?(G.ci===0&&!S.hintOff?'En az $'+cp(c.p)+' gerek. Kedi mamasını kaba götür!':'Yetersiz bakiye · Gerekli: $'+cp(c.p)):'15 sn tur'+(spd()>1?' · oyun saati ×'+spd():'')+'. Sabit fiyattan başlar.'}
  else if(G.st==='active'){if(!G.pt){const ok=S.cash>=stakeOf('player',G.ci);txt='AL · '+fm(G.curU)+(G.lev>1?' ('+G.lev+'x)':'');cls='buy';dis=!ok;note=G.msg||(ok?'Pozisyon: $'+cp(stakeOf('player',G.ci))+' (katalog fiyatı).':'Yeterli nakit yok.')}
-  else{const tr=G.pt,v=eq(tr,G.curU);txt='SAT · '+fm(v)+' ('+pcs(Number(v-tr.st)/Number(tr.st))+')';cls='sell '+(v>=tr.st?'up':'dn');note=(tr.lv>1?'Likidasyon: '+fm(tr.b*BigInt(tr.lv-1)/BigInt(tr.lv))+'. ':'')+"15. sn'de otomatik satılır."}}
+  else{const tr=G.pt,v=eq(tr,G.curU);txt='SAT · '+fm(v)+' ('+(v>=tr.st?'▲ ':'▼ ')+pcs(Number(v-tr.st)/Number(tr.st))+')';cls='sell '+(v>=tr.st?'up':'dn');note=(tr.lv>1?'Likidasyon: '+fm(tr.b*BigInt(tr.lv-1)/BigInt(tr.lv))+'. ':'')+"15. sn'de otomatik satılır."}}
  else{txt='YENİ TUR';note=S.auto&&S.autoOn&&S.cash>=c.p?'Oto-Tur: '+(+(OTD[S.al-1]/spd()).toFixed(2))+' sn sonra yeni tur…':''}
  if(M.className!==cls)M.className=cls;if(lab.textContent!==txt){lab.textContent=txt;let s=36;lab.style.fontSize='';M.style.fontSize='';while(M.scrollWidth>M.clientWidth&&s>18){s--;M.style.fontSize=s+'px'}}M.disabled=dis;
  $('#led').classList.toggle('on',!!(S.auto&&S.autoOn));
@@ -2246,8 +2331,8 @@ function drawChart(now){const cv=$('#cv'),x=cv.getContext('2d'),c=COINS[G.ci];x.
  x.setLineDash([8,8]);x.lineWidth=2;x.strokeStyle='#3A3660';x.beginPath();x.moveTo(L,Y(sp));x.lineTo(R,Y(sp));x.stroke();x.setLineDash([]);
  const pos=G.pt&&G.st==='active'?G.pt:null,ref=pos?pos.bf:null,up=pos?G.cur>=ref:true,cc=pos?(up?'#5FE0B8':'#F08A84'):'#8FD3FF',cg=pos?(up?'95,224,184':'240,138,132'):'143,211,255';
  /* alış fiyatı çizgisi (pozisyon açıkken): kâr/zarar referansı */
- if(pos){const by=Y(ref);x.setLineDash([10,7]);x.lineWidth=2.5;x.strokeStyle='#FFC83D';x.beginPath();x.moveTo(L,by);x.lineTo(R,by);x.stroke();x.setLineDash([]);
-  const lb=LANG==='en'?'BUY':'ALIŞ';x.font='900 14px '+KF;const w=x.measureText(lb).width+18,ly=Math.min(B-12,Math.max(T+12,by));const lx=R-w-8,lyy=ly-30<T?ly+18:ly-18;rr(x,lx,lyy-12,w,24,12);x.fillStyle='#FFC83D';x.fill();x.lineWidth=2.5;x.strokeStyle=OLC;x.stroke();x.fillStyle='#4A2A00';x.fillText(lb,lx+9,lyy+1)}
+ if(pos){const by=Y(ref);x.setLineDash([9,7]);x.lineWidth=2;x.strokeStyle='#A89FC8';x.beginPath();x.moveTo(L,by);x.lineTo(R,by);x.stroke();x.setLineDash([]);
+  const lb=LANG==='en'?'BUY':'ALIŞ';x.font='900 14px '+KF;const w=x.measureText(lb).width+18,ly=Math.min(B-12,Math.max(T+12,by));const lx=R-w-8,lyy=ly-30<T?ly+18:ly-18;rr(x,lx,lyy-12,w,24,12);x.fillStyle='#353052';x.fill();x.lineWidth=2;x.strokeStyle=OLC;x.stroke();x.fillStyle='#D3CCEA';x.fillText(lb,lx+9,lyy+1)}
  let ex=X(0),ey=Y(sp);
  if(act){const pts=ys.map((v,i)=>[X(tn*i/N),Y(v)]);ex=pts[pts.length-1][0];ey=pts[pts.length-1][1];
   const path=()=>{x.beginPath();pts.forEach((p,i)=>i?x.lineTo(p[0],p[1]):x.moveTo(p[0],p[1]))};

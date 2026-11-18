@@ -67,3 +67,45 @@ Plan (adımlar): 1) Koyu arka plan + oda; 2) Sol panel + mağaza kartları; 3) M
 4. BAŞLA/SAT turuncusunda doygunluğu yaklaşık %8-10 azalt; boyut ve konum aynı kalsın, animasyon/yanıp sönme yok.
 5. Telefonda tüm etiketler (KALDIRAÇ, BOBBY, KEDİ, COİN, SEVİYE) en az 12 px, kontrast en az 4.5:1; kilitli kartın "%12" ilerlemesi en az 12 px ve çubuk yüksekliği en az 6 px olsun (A'nın merak isteği).
 6. Odaya düz renkli, sabit, küçük bir lamba lekesi eklenebilir (parlaklığı duvardan en fazla bir kademe açık, glow ve animasyon yok).
+
+## Adım 2 — Tasarımcı: Danışma 2
+
+**Renk dili (her rengin tek bir anlamı var)**
+- **Altın:** yalnızca "sıradaki hedef". Sol listede sıradaki kilitli coin kartının ince (3 px) ve sabit kenarı. Ekrandaki tek altın bu.
+- **Şeftali:** para ve alınabilir fiyat (fiyat hapları, coin fiyat yazısı).
+- **Lila-krem:** seçili olan (coin kartı halkası, katalog sekmesi, ANA PC/OTOMASYON sekmesi, kaldıraç "1x").
+- **Turkuaz:** açık / ilerleme / kilit açma (toggle, ilerleme çubukları, kilit açma hapı).
+- **Soluk:** alınamaz (soluk mor hap, açık gri yazı).
+
+**Ne yaptım**
+- **Sol panel:** Bakiye artık altın değil, krem; hedef satırı ("0 / 1,200") ikincil renkte ve 22 px. Seçili katalog sekmesi ve seçili coin kartı lila-krem. Coin fiyatları şeftali-krem. Sıradaki kilitli kartta ince altın kenar ve büyük turkuaz "%12" (28 px) var; çubuk 14 px (telefonda yaklaşık 6 px). Diğer kilitli kartların kilidi daha soluk.
+- **Mağaza:** Fiyat hapları alınabilirken canlı şeftali (46 px yüksek, 21 px yazı), alınamazken soluk. Hapta mercan "yetersiz" yazısı kalmadı. 6'dan fazla seviyesi olan ürünlerde (Bobby SEVİYE 1/10, KEMİK) noktalar yerine ince turkuaz ilerleme hapı var; noktalar artık fiyat hapının altına taşmıyor. Bobby kartında etiket tam satıra geçti, altında ilerleme ve buton yan yana. "Katalog 1" artık kesilmiyor.
+- **"▼ daha fazla":** Panelin içinde kendi alt şeridine yerleşti, hiçbir kartı örtmüyor. Liste altta yumuşakça soluyor (maske; glow değil). Sona kaydırınca şerit gizleniyor.
+- **Etiketler (telefona hazırlık):** COİN/BOBBY başlıkları, SEVİYE/KALDIRAÇ/ENERJİ satırları, BOBBY/KEDİ etiketleri ve monitördeki KALDIRAÇ 28 px sahne boyutunda. Bugünkü telefon ölçeğinde (0,425) bu yaklaşık 11,9 px ediyor. Adım 4'teki fit() iyileştirmesiyle ≥12 px olacak. Kontrast panele karşı 7,5:1, koyu etiket hapında 9,9:1.
+- **Eski bir doygunluk artırıcı kaldırıldı:** Sağ panelde eski bir katmandan kalma `saturate(1.15)` filtresi vardı ve mağazayı gizlice %15 daha doygun gösteriyordu.
+- **Hata düzeltmesi:** EN'de ana düğme "AL · $9" / "SAT · …" diye Türkçe kalıyordu. Artık "BUY · …" / "SELL · …".
+
+**Ortak tavsiye 1'i nasıl uyguladım**
+1. **Zararda SAT:** Nötr kart tonu (#3A345F, doygunluk %29), krem yazı, yalnız küçük "▼ −%x". Kârda nane yeşili (#5BC49A) ve "▲ +%x". İkisi de altın değil, yanıp sönmüyor.
+2. **Fiyat hapları:** Altın değil. Alınabilirken sakin şeftali (#E9B596, doygunluk ~%62; eski altın %100'dü), alınamazken soluk. Tavsiyedeki "tek parlak sarı = seçili kart" yerine Yönetici'nin ve Tur 1 Ortak Karar'ın kuralını uyguladım: tek altın sıradaki kilitli kartta, seçili kart lila-krem. Monitördeki altınlar da kaldırıldı: coin adı krem, "TRADE-OS 3000" plakası soluk, kaldıraç 1x lila, tur özeti kenarı nötr, "+1 ROBOT EKLE" şeftali.
+3. **ALIŞ çizgisi:** Sönük lila-gri (#A89FC8), 2 px, kesikli. Etiket küçük koyu hap, açık lila yazı.
+4. **Turuncu:** Doygunluk %10 azaldı (#FF9A2E → #F59A38; kenar ve üst ışık da buna göre). Boyut ve konum aynı.
+5. **Telefon etiketleri:** 28 px sahne boyutu (bugün yaklaşık 11,9 px). Kontrast ≥7:1. Kilitli kartın %'si 28 px, çubuğu 14 px (telefonda yaklaşık 6 px). Tam 12 px Adım 4'te fit() ile tamamlanacak.
+6. **Lamba:** Bobby köşesinin duvarında düz renkli, sabit bir aplik. Işık lekesi duvardan tam bir kademe açık (#221D37 / duvar #1C182D); glow ve animasyon yok. Eski pati resmi kaldırıldı; köşe sadeleşti, balonla çakışma da bitti. Kedinin penceresi "daha fazla" hapına yer açmak için biraz aşağı indi.
+
+**Henüz yapılmadı (Adım 3)**
+- Zarardayken büyük yüzde (−%24) ve grafik çizgisi hâlâ mercan. Tur 1'deki karar "zarar = turuncu/kehribar" diyordu.
+- Robot bölmelerindeki "BOŞ BÖLME" yazısı soluk.
+
+**Bakılacak görüntüler**
+- `docs/tasarim/son/desk_tr_ana.png`: tek altın (Kilitli %12), lila seçili, şeftali haplar, lamba, "daha fazla" şeridi
+- `docs/tasarim/son/desk_tr_islem.png` ve `tel_tr_islem.png`: nötr SAT ▼ (zararda), sönük ALIŞ çizgisi
+- `docs/tasarim/son/tel_tr_ana.png`: telefon yatay görünüm
+- `docs/tasarim/son/desk_tr_oto.png`: şeftali "+1 ROBOT EKLE", soluk hap
+- `docs/tasarim/son/desk_en_ana.png`: EN
+
+**Psikologlara sorular**
+1. Kârdaki SAT nane yeşili (▲), AL ise turkuaz. Bu iki ton yeterince ayrışıyor mu, yoksa AL'ı BAŞLA gibi turuncu mu yapalım (BAŞLA → AL aynı birincil renk, SAT kâr nane / zarar nötr)?
+2. 28 px etiketler masaüstünde biraz "kalın" duruyor (KALDIRAÇ, SEVİYE 1/10). Masaüstünde 24 px'e inip telefonda fit() ile ≥12 px'i sağlamak kabul edilebilir mi?
+3. Şeftali haplar ile turuncu KATALOG/MAĞAZA afişleri yakın tonlarda. Afişleri daha nötr bir tona (ör. koyu kart üstünde krem yazı ve ince turuncu kenar) almak ister misiniz?
+4. Altın neden seçili kartta değil de sıradaki kilitli kartta? Tur 1 kuralı ve Yönetici böyle istedi. Psikolog A'nın "merak" isteğine de uyuyor. Seçili kartın lila-krem halkası yeterince "seçili" okunuyor mu?
