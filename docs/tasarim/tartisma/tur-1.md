@@ -95,3 +95,36 @@ Katılımcılar: Psikolog A (oyun hissi ve motivasyon) ve Psikolog B (göz ve zi
 - **Kazanan:** Lofi Akşam.
 - **Alınacak 3 fikir:** (1) Tok'tan squish + tok ana buton (BAŞLA/SAT), hareket azaltmayla kapatılabilir; (2) şerit afiş yalnız KATALOG ve MAĞAZA'da, Lofi renginde; (3) Pastel'den ferah oda zemini ve kâr anındaki kısa "+$X" pop'u.
 - **Bırakılacaklar:** Tok'un doygun moru ve kırmızı zarar butonu, Gece Arcade'in beyaz SAT butonu ve büyük zarar oku, Pastel'in soluk fiyat hapları ve parlak odadaki koyu monitör "deliği". B'nin 5 maddelik düzeltme listesi (12 px yazı, 4.5:1 kontrast, ▲/▼ şekil, tek altın öğe) zorunlu kabul.
+
+## 4. Psikolog B — Son söz
+
+A'nın uzlaşma önerisine büyük ölçüde katılıyorum. Kalıcı ama tek, yanıp sönmeyen altın kenar tamam; hareket azaltma ayarı tamam; zarar butonunda alarm yok, tamam. Şerit afişe de razıyım, şartla: yalnız KATALOG ve MAĞAZA'da, düşük doygunlukta, parlak sarı/turuncu dolgu olmadan ve metin kontrastı 4.5:1'in altına düşmeden. Panel dolgusunun hafiflemesini de destekliyorum; ama "açılma" odada başlasın, panel-oda farkı kademeli olsun (aralarında bir ara ton), yoksa Pastel'deki "koyu delik" sorunu geri gelir. Son şart: "+$X" pop'u kısa (en çok 600 ms), küçük ve tekrar eden yerde sakin kalsın; sürekli hareket (titreyen, nabız atan öğe) olmasın. Bu şartlarla Lofi Akşam'ı ortak kazanan kabul ediyorum.
+
+## Ortak Karar
+
+**Kazanan konsept:** Lofi Akşam.
+
+**Diğerlerinden alınacaklar**
+- Tok Mobil: basma hissi (squish: 90-120 ms, %4-6 küçülme) ve belirgin ana buton (BAŞLA/SAT); şerit afiş yalnız KATALOG ve MAĞAZA'da, Lofi renginde, yumuşak tonlu.
+- Pastel Cozy: ferah oda zemini (arka plan açılır) ve kâr anında kısa "+$X" pop'u.
+- Gece Arcade: ▼/▲ şekil dili ve sade grafik/eksen düzeni; zarar için turuncu/kehribar tonu.
+
+**Bırakılacaklar**
+- Tok'un doygun moru ve zarar anındaki kırmızı-pembe SAT butonu.
+- Gece Arcade'in beyaz SAT butonu ve büyük zarar oku.
+- Pastel'in soluk fiyat hapları ve parlak odadaki koyu monitör "deliği".
+- Aynı anda birden fazla altın vurgu; yanıp sönen/nabız atan her şey.
+
+**Zorunlu düzeltmeler (ölçülebilir)**
+1. Tüm yazılar telefonda en az 12 px; ana değerler (bakiye, fiyat, SAT) en az 16 px. Normal metin kontrastı en az 4.5:1, ikon/kenar/grafik çizgisi en az 3:1.
+2. Kâr/zarar renge ek olarak şekil ve işaretle gösterilir (▲ +, ▼ −); kâr mavi-yeşil, zarar turuncu/kehribar; kırmızı-yeşil çifti yok.
+3. Zararda alarm yok: SAT butonu zarar anında nötr kalır, büyük ok ve yanıp sönme yok; yalnız küçük ▼ ve sayı.
+4. Tam beyaz (#FFF) yok; en parlak yüzey zeminle %90'dan fazla kontrast farkı yaratmaz. Oda ile panel arasında bir ara ton; panel dolgusu bugünkü Lofi'den en az bir kademe açık.
+5. Aynı ekranda en fazla bir altın öğe (sıradaki kilitli kart, ince kenar, yanıp sönmez). Pop/squish 600 ms'yi geçmez, ayarlardan ve sistemin "hareketi azalt" tercihiyle kapatılabilir; kapalıyken renk + sayı değişimi sürer.
+6. TR/EN ve telefon yatayda taşma yok; dokunma hedefi en az 44 px.
+
+**Tur 2: 4 tasarımcıya 4 ayrı iş alanı**
+1. Tasarımcı 1: oda/arka plan (pencere, lamba, bitki, aydınlanan zemin) ve ana menü/tanıtım ekranları.
+2. Tasarımcı 2: sol panel (bakiye, katalog sekmeleri, coin kartları, kilitli kart ve altın kenar) ve sağ mağaza kartları/fiyat hapları, KATALOG/MAĞAZA şerit afişleri.
+3. Tasarımcı 3: monitör çerçevesi, grafik (çizgi, eksenler, ALIŞ etiketi), kâr/zarar göstergesi ve SAT/işlem butonları.
+4. Tasarımcı 4: sprite/ikonlar, ödül ve squish animasyonları (+$X pop, hareket azaltma desteği) ve telefon okunurluğu denetimi (12 px, 44 px, kontrast).
