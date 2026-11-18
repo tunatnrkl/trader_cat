@@ -2,6 +2,7 @@
 
 | Tarih | Karar | Gerekçe | Önceki değer |
 |---|---|---|---|
+| 11-18 | oneri-2 Düzeltme 1 KABUL: UNLK [150,375,400,1300], Kat.1 volatilite maliyeti ⅓, Kat.1 oyuncu kaldıraç fiyatı ×2, Bobby Kat.1 kaldıraç ÷2, RC[0] 800K, Quasar 56M, Vortex 5,12Qa, Pulsar 179Sx; sim varsayılanları PEBCL=2, LEVK=1 | Sim (5×3): ortalama Kat.1 52,4→40,6 dk, toplam 139,7→134,8; iyi Kat.1 25,4→25,0, ilk geçiş 2,5→3,9 dk, toplam 89,9→97,5; tek duvar Boss1→Quasar 17,8→10,7 | UNLK [150,375,330,900] |
 | 11-18 | Oyun tasarımcısı önerisi (oneri-2) kısmen kabul: Kat.1 volatilite maliyeti ½, Bobby Kat.1 kaldıraç ×2 kaldırıldı, RC[0] 800K, Quasar 56M / Vortex 5,12Qa / Pulsar 179Sx, UNLK Kat.4 1300. RET: UNLK Kat.1 150→100 | Kullanıcı kararı "%50 daha yavaş"; iyi oyuncu Kat.1 25,4→19,9 dk hızlanıyordu | UNLK [150,375,330,900] |
 | 11-18 | Ofis akıllandı: yönetici puanları, görevleri, GitHub kayıtlarını, dersleri ve kendi önceki kararlarını okuyor; görevler ölçüt+ölçüm ile kaydediliyor; roller gerçek bağlamla cevaplıyor | Patron: "daha akıllı olsun ofis" | Yalnız durum metni + son 10 konuşma |
 | 11-18 | Sürüm sorumlusu (araclar/surum.sh) işe alındı | Patron: "githuba ekleyen biri de olsun" | Commit Yöneticide elle |

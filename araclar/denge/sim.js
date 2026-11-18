@@ -2,6 +2,7 @@
    Oyunun KENDİ kodunu (index.html içindeki /*PURE-START*\/ ... const BONEC satırı + UNLK/FRV/VSEQ satırları) vm ile çalıştırır:
    genK, ratioAt, botPlan, crashEv, errOf, rD/rF/raErr, tüm fiyat sabitleri doğrudan oyundan gelir.
    Oyuncu davranışı (tepki süresi, eşikler, hata) ve tur arası bekleme süreleri VARSAYIMDIR (tahmin), aşağıda TYPES içinde.
+   Varsayılanlar oyunla eşleşir (2026-11-18 düzeltme): PEBCL=2 (defS'te Pebble Sv.2 başlar), LEVK=1 (Kat.2-4 kaldıraç fiyatında ×2 yok), LEVK1=2 (Kat.1'de ×2 var). Eski ölçümler PEBCL=1 LEVK=2 ile yapılmıştı.
    Kullanım: node sim.js <html> <runs> [etiket]  */
 const fs = require('fs'), vm = require('vm');
 
@@ -35,7 +36,8 @@ const TYPES = {
   iyi: { tau: .25, pace: 2, fmax: .8, err: .05, ovh: 1.5, lev: 'best', H: 600, wA: 1 },
   bobby: { tau: .40, pace: 3, fmax: .6, err: .15, ovh: 2.5, lev: 'best', H: 600, wA: 3 },
 };
-const LEVK = +(process.env.LEVK || 2);
+const LEVK = +(process.env.LEVK || 1);   // oyunda kaldıraç fiyatı = coin fiyatı × hedef kaldıraç (renderShop/lup), ×2 yok
+const LEVK1 = +(process.env.LEVK1 || 2);   // Katalog 1 kaldıraç çarpanı: oyunda Kat.1 kaldıraç fiyatı = coin × hedef kaldıraç × 2 (oneri-2 Düzeltme 1)
 const BUY_OVH = 2, INTRO = 75, MC = 60;   // satın alma başına 2 sn, giriş (bilgisayar onarımı + 10$) 75 sn — tahmin
 
 /* ---------------- tur motorları (sonuçlar 'stake' biriminde: 1 = coin fiyatı) ---------------- */
@@ -78,7 +80,7 @@ function mkCache(G, T) {
 /* ---------------- tek oyun ---------------- */
 function play(G, typeName, maxH = 10) {
   const T = TYPES[typeName], E = mkCache(G, T);
-  const st = { t: INTRO, cash: 7, tot: 7, stp: 0, open: G.COINS.map((_, i) => i === 0 ? 1 : 0), cl: G.COINS.map((_, i) => i === 0 ? +(process.env.PEBCL || 1) : 1), ll: G.COINS.map(() => 1),
+  const st = { t: INTRO, cash: 7, tot: 7, stp: 0, open: G.COINS.map((_, i) => i === 0 ? 1 : 0), cl: G.COINS.map((_, i) => i === 0 ? +(process.env.PEBCL || 2) : 1), ll: G.COINS.map(() => 1),
     rob: 0, rlv: [1, 1, 1, 1], rl: [1, 1, 1, 1], auto: 0, al: 1, tc: 1, spc: 0, rb: [], rci: 0, rclock: 0, rev: {}, food: 0 };
   const log = [], unl = { 0: INTRO / 60 }, buys = [];
   const spd = () => st.tc, val = (o, fin) => fin ? o.n : .5 * o.g + .5 * o.n;
@@ -114,7 +116,7 @@ function play(G, typeName, maxH = 10) {
       if (!st.open[i] || G.COINS[i].boss) continue;
       // zincir: sonraki 1..kalan seviyenin toplamı da değerlendirilir (ilk adım alınır) — tek adımlık miyopluğu önler
       for (let j = 1; st.cl[i] - 1 + j <= G.COINS[i].max - 1; j++) { let cost = 0; for (let q = 0; q < j; q++) cost += G.vcost[i][st.cl[i] - 1 + q]; c.push({ k: 'cup', i, cost, step: G.vcost[i][st.cl[i] - 1], w: 1, ap: s => s.cl[i] += j, ap1: s => s.cl[i]++ }) }
-      for (let j = 1; st.ll[i] + j <= 4; j++) { let cost = 0; for (let q = 0; q < j; q++) cost += G.price[i] * 2 ** (st.ll[i] + q) * LEVK; c.push({ k: 'lup', i, cost, step: G.price[i] * 2 ** st.ll[i] * LEVK, w: 1, ap: s => s.ll[i] += j, ap1: s => s.ll[i]++ }) }
+      for (let j = 1; st.ll[i] + j <= 4; j++) { let cost = 0; for (let q = 0; q < j; q++) cost += G.price[i] * 2 ** (st.ll[i] + q) * (G.COINS[i].cat ? LEVK : LEVK1); c.push({ k: 'lup', i, cost, step: G.price[i] * 2 ** st.ll[i] * (G.COINS[i].cat ? LEVK : LEVK1), w: 1, ap: s => s.ll[i] += j, ap1: s => s.ll[i]++ }) }
     }
     if (!st.rob && revd('rb', G.nROBP)) c.push({ k: 'bobby', cost: G.nROBP, w: T.wA, ap: s => s.rob = 1 });
     if (st.rob) for (let k = 0; k < 4; k++) {
