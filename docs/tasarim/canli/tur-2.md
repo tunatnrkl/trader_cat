@@ -34,3 +34,19 @@ Plan (adımlar): 1) Koyu arka plan + oda; 2) Sol panel + mağaza kartları; 3) M
 2. Koyu zeminde turuncu BAŞLA ile altın fiyat hapları daha çok parlıyor. BAŞLA'yı birincil düğme olarak bu parlaklıkta bırakalım mı, yoksa tüm vurguları (altın, turkuaz, turuncu) %10 kadar mı kısalım?
 3. Pencere: gece görünümü ve soluk gündüz gökyüzü "sakin oda" hissine katkı veriyor mu, yoksa göz için dikkat dağıtıcı mı? Oda için başka bir öğe ister misiniz (ör. yumuşak bir lamba ışığı; glow olmadan düz bir renk lekesi olarak)?
 4. Zarardaki mercan SAT düğmesini ve "aynı ekranda en fazla bir altın öğe" kuralını Adım 2–3'te ele alacağım. Bu adımda öne alınması gereken bir şey var mı?
+
+### Adım 1 — Psikolog A
+
+Önce iyi haber: bu hâl "gece oyun odası" hissini veriyor ve içim daraltmıyor. Panel kademeleri okunuyor, Pebble kartının altın kenarı gözü doğru yere götürüyor. Sorularına sırayla:
+
+1. **Koyuluk:** Bu seviyede kalsın. Daha açık yaparsan "oda" hissi azalır, daha koyu yaparsan paneller yapışık görünür ve oyun ağırlaşır. Panel-duvar ayrımı bana yeterli geldi; son kararı B'nin uzun oturum yorumuna bırakıyorum.
+2. **Vurgular:** BAŞLA parlak kalsın. Oyunun tek "evet, bas!" düğmesi o; onu kısarsan her tur başlangıcındaki istek düşer. Kısılacak olan altın fiyat hapları, özellikle ikisi birden yan yana duruyorsa. Hedef: ekranda tek büyük parlak nokta, o da BAŞLA (ya da SAT).
+3. **Pencere:** Katkısı var, kediye bir "evi" veriyor; soluk tutman doğru. Lamba için evet, ama sadece düz renkli, sabit küçük bir leke olsun. Odaya kişilik katan şey bu.
+4. **Öne alınacak şey:** Zarardaki mercan SAT butonu. Pembe, parlak ve dolu; zarar anında ekranın en gürültülü öğesi o. Bu "pes ettirir" ya da stres yapar. Adım 3'ü beklemeden en azından rengini kısmanı isterim.
+
+**Gözüme çarpanlar**
+- Zarar ekranında üç parlak şey yarışıyor: pembe SAT, sarı kesikli ALIŞ çizgisi ve sarı fiyat hapları.
+- Kilitli kartın ilerleme çubuğu ("%12") küçük ve soluk; merak buradan doğuyor, biraz daha görünür olmalı.
+- Bobby'nin "AÇ!" rozeti turuncu ve küçük ama dikkat çekiyor; güzel, kalsın.
+
+**B'ye sorum:** Koyu zeminde BAŞLA'nın parlaklığı sence 30–45 dakikalık oturumda yorucu olur mu, yoksa tek parlak nokta olduğu sürece sorun yok mu?
