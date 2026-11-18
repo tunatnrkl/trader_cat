@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ekip Ofisi</title>
+<style>
+:root{--bg:#080B1E;--pn:#0F1838;--rim:#3F6BD8;--au:#F2B83C;--tx:#F4EEE3;--tx2:#B4C4F0;--mint:#45D6A0}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:600 14px/1.4 ui-rounded,"Nunito","Trebuchet MS",system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;gap:12px;padding:16px}
+h1{margin:0;font-size:18px;color:var(--au);letter-spacing:.06em}
+.sub{color:var(--tx2);font-size:12px;margin-top:-8px;text-align:center}
+#wrap{position:relative;width:min(960px,100%);aspect-ratio:16/9;border:4px solid var(--rim);border-radius:14px;overflow:hidden;background:#000}
+canvas{width:100%;height:100%;image-rendering:pixelated;display:block;cursor:pointer}
+.bub{position:absolute;transform:translate(-50%,-100%);background:var(--tx);color:#1A1204;font-size:12px;font-weight:800;padding:4px 8px;border-radius:8px;max-width:220px;white-space:normal;text-align:center;pointer-events:none;border:2px solid #0A1030}
+.bub:after{content:"";position:absolute;left:50%;bottom:-7px;margin-left:-5px;border:5px solid transparent;border-top-color:var(--tx)}
+.lbl{position:absolute;transform:translateX(-50%);color:var(--au);font-weight:800;font-size:clamp(10px,1.6vw,15px);letter-spacing:.08em;pointer-events:none}
+.bub.me{background:var(--au)}
+#panel{width:min(960px,100%);display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:640px){#panel{grid-template-columns:1fr}}
+.box{background:var(--pn);border:3px solid var(--rim);border-radius:12px;padding:10px}
+.box b{color:var(--au)}
+#who{color:var(--mint)}
+.row{display:flex;gap:8px;margin-top:8px}
+input{flex:1;min-width:0;background:#070A1A;border:2px solid #2A3F8F;color:var(--tx);border-radius:8px;padding:8px;font:inherit}
+button{background:var(--au);color:#1A1204;border:0;border-radius:8px;padding:8px 12px;font:inherit;font-weight:800;cursor:pointer;min-height:40px}
+button.g{background:#1B2C6B;color:var(--tx2);border:2px solid #6F8FE0}
+#log{max-height:150px;overflow:auto;font-size:12px;color:var(--tx2)}
+#log div{border-bottom:1px solid #18255A;padding:3px 0}
+#log span{color:var(--tx)}
+</style>
+</head>
+<body>
+<h1>EKİP OFİSİ</h1>
+<div class="sub">Yalnız yönetim paneli; oyuna etkisi yok. Bir karaktere tıkla ve ona bir şey söyle.</div>
+<div id="wrap"><canvas id="cv" width="320" height="180"></canvas></div>
+<div id="panel">
+  <div class="box">
+    <div>Konuştuğun: <b id="who">—</b></div>
+    <div class="row"><input id="msg" placeholder="Önce bir karaktere tıkla…" disabled><button id="send" disabled>Söyle</button></div>
+    <div class="row"><button class="g" id="copy">Son mesajı kopyala</button></div>
+    <div class="sub" style="margin-top:6px;text-align:left">Gerçek ekibe iletmek için kopyalayıp Claude sohbetine yapıştır.</div>
+  </div>
+  <div class="box"><b>Ofis kaydı</b><div id="log"></div></div>
+</div>
+<script>
+const cv=document.getElementById('cv'),x=cv.getContext('2d'),W=320,H=180,wrap=document.getElementById('wrap');
+x.imageSmoothingEnabled=false;
+setTimeout(()=>ROOMS.forEach(r=>{const d=document.createElement('div');d.className='lbl';d.textContent=r.n;d.style.left=((r.x+r.w/2)/W*100)+'%';d.style.top=((r.y-12)/H*100)+'%';wrap.appendChild(d)}));
+// --- odalar ---
+const ROOMS=[
+ {n:'YÖNETİCİ',x:6,y:24,w:92,h:66,f:'#1B2C6B'},
+ {n:'TASARIM',x:114,y:24,w:92,h:66,f:'#18255A'},
+ {n:'TARTIŞMA ODASI',x:222,y:24,w:92,h:66,f:'#1F2A5C'}];
+const FLOORY=150;
+// --- karakterler ---
+const P=(n,role,hx,hy,hair,body,acc)=>({n,role,x:hx,y:hy,hx,hy,tx:hx,ty:hy,hair,body,acc,f:0,q:[],say:null,sayT:0,el:null});
+const C={
+ yon:P('Yönetici','yon',40,74,'#3A2214','#2A4FB8','#F2B83C'),
+ tas:P('Tasarımcı','tas',156,74,'#C0453F','#F59A38','#F4EEE3'),
+ pa:P('Psikolog A','pa',248,74,'#2B1D16','#45D6A0','#0F6158'),
+ pb:P('Psikolog B','pb',290,74,'#E9B596','#6EC8F0','#17243f')};
+const ALL=Object.values(C);
+function drawRoom(r){x.fillStyle=r.f;x.fillRect(r.x,r.y,r.w,r.h);x.strokeStyle='#3F6BD8';x.lineWidth=2;x.strokeRect(r.x+1,r.y+1,r.w-2,r.h-2);
+ x.fillStyle='#080B1E';x.fillRect(r.x+r.w/2-8,r.y+r.h-2,16,4); // kapı
+}
+function desk(dx,dy,mon){x.fillStyle='#6B4128';x.fillRect(dx,dy,26,8);x.fillStyle='#3A2214';x.fillRect(dx+2,dy+8,3,6);x.fillRect(dx+21,dy+8,3,6);
+ if(mon){x.fillStyle='#0A1030';x.fillRect(dx+8,dy-10,12,9);x.fillStyle=mon;x.fillRect(dx+9,dy-9,10,6)}}
+function scene(t){x.fillStyle='#080B1E';x.fillRect(0,0,W,H);
+ x.fillStyle='#0D1230';x.fillRect(0,96,W,H-96);x.fillStyle='#131A40';for(let i=0;i<W;i+=20)x.fillRect(i,96,1,H-96);
+ ROOMS.forEach(drawRoom);
+ desk(28,66,'#45D6A0');desk(144,66,(t/400|0)%2?'#F2B83C':'#3F6BD8');
+ x.fillStyle='#6B4128';x.fillRect(254,70,34,10);x.fillStyle='#F4EEE3';x.fillRect(262,72,8,5); // toplantı masası + kâğıt
+ x.fillStyle='#45D6A0';x.fillRect(10,30,6,10);x.fillStyle='#F2B83C';x.fillRect(196,30,6,8); // bitki / dosya
+}
+function person(p,t){const px=Math.round(p.x),py=Math.round(p.y),mv=p.q.length>0,st=mv?((t/90|0)%2):0;
+ x.fillStyle='rgba(0,0,0,.35)';x.fillRect(px-5,py+13,10,2);
+ x.fillStyle='#1A1420';x.fillRect(px-3,py+8,2,5-st);x.fillRect(px+1,py+8,2,4+st); // bacak
+ x.fillStyle=p.body;x.fillRect(px-4,py,8,9);x.fillStyle=p.acc;x.fillRect(px-1,py+1,2,4);
+ x.fillStyle='#F0C9A8';x.fillRect(px-3,py-7,6,7);x.fillStyle=p.hair;x.fillRect(px-3,py-8,6,3);x.fillRect(px-3,py-6,1,3);
+ x.fillStyle='#1A1420';x.fillRect(px-2+(p.fx||0),py-4,1,1);x.fillRect(px+1+(p.fx||0),py-4,1,1);
+ if(sel===p){x.strokeStyle='#F2B83C';x.lineWidth=1;x.strokeRect(px-6,py-10,12,26)}}
+// --- hareket (koridor üzerinden) ---
+function goTo(p,tx,ty,then){const door=r=>({x:r.x+r.w/2,y:r.y+r.h+6});const rFrom=roomOf(p.x),rTo=roomOf(tx);
+ const pts=[];if(rFrom!==rTo){if(rFrom)pts.push(door(rFrom));if(rTo)pts.push(door(rTo))}pts.push({x:tx,y:ty});
+ p.q.push(...pts.map(v=>({...v})));if(then)p.q.push({fn:then})}
+function roomOf(px){return ROOMS.find(r=>px>=r.x&&px<=r.x+r.w)}
+const SPEED=90; // px/sn — hızlı
+function step(p,dt){while(p.q.length&&p.q[0].fn){const f=p.q.shift().fn;f()}if(!p.q.length)return;
+ const g=p.q[0],dx=g.x-p.x,dy=g.y-p.y,d=Math.hypot(dx,dy),s=SPEED*dt;p.fx=Math.sign(dx);
+ if(d<=s){p.x=g.x;p.y=g.y;p.q.shift();while(p.q.length&&p.q[0].fn){const f=p.q.shift().fn;f()}}else{p.x+=dx/d*s;p.y+=dy/d*s}}
+// --- konuşma balonu ---
+function say(p,txt,ms=2600,me=false){if(!p.el){p.el=document.createElement('div');p.el.className='bub';wrap.appendChild(p.el)}
+ p.el.textContent=txt;p.el.classList.toggle('me',me);p.el.style.display='block';p.sayT=performance.now()+ms;log(p.n,txt)}
+function place(){const k=wrap.clientWidth/W;ALL.concat(ME).forEach(p=>{if(!p.el)return;if(performance.now()>p.sayT){p.el.style.display='none';return}
+ p.el.style.left=(p.x*k)+'px';p.el.style.top=((p.y-11)*k)+'px'})}
+const logEl=document.getElementById('log');
+function log(n,t){const d=document.createElement('div');d.innerHTML='<b></b> <span></span>';d.firstChild.textContent=n+':';d.lastChild.textContent=t;logEl.prepend(d)}
+// --- senaryo: kendi kendine dönen günlük işler ---
+const ISLER=['Tur sonu raporunu temaya uydur','Mağazayı masaüstünde sıkılaştır','Bitiş ekranına istatistik ekle','Robot grafiklerini sabitle','Çocuksuluğu 7\'den 6\'ya çek'];
+const TARTISMA=[['pa','Kâr nane yeşili ▲ olsun, ödül gibi hissettirsin.'],['pb','Katılıyorum ama zarar kehribar ▼, alarm yok.'],['pa','Altın sadece fiyat ve başlıkta kalsın.'],['pb','Kontrast en az 4.5:1, yoksa göz yorulur.'],['pa','Bitişte kap taşsın, hayvanlar yesin!'],['pb','Yavaş ve sakin olsun, flaş yok.']];
+let busy=false,ti=0,ji=0;
+function managerTask(txt,fromUser){busy=true;const y=C.yon;
+ say(y,fromUser?'Tamam, hemen tasarımcıya iletiyorum!':'Yeni iş var, tasarımcıya gidiyorum.');
+ setTimeout(()=>goTo(y,C.tas.hx-14,C.tas.hy,()=>{say(y,(fromUser?'Patron diyor ki: ':'')+txt);
+  setTimeout(()=>{say(C.tas,'Anlaşıldı, başlıyorum! Psikologlara da danışırım.');
+   setTimeout(()=>goTo(y,y.hx,y.hy,()=>{busy=false}),1400)},1600)}),700)}
+function psychReport(){busy=true;const a=C.pa;say(a,'Hadi oyunu tartışıp yöneticiye rapor verelim.');
+ setTimeout(()=>{say(C.pb,'Tamam, ortak tavsiyeyi sen götür.');
+  setTimeout(()=>goTo(a,C.yon.hx+14,C.yon.hy,()=>{say(a,'Ortak tavsiye hazır: canlı renk, yormayan kontrast.');
+   setTimeout(()=>{say(C.yon,'Harika, tasarımcıya veriyorum.');setTimeout(()=>goTo(a,a.hx,a.hy,()=>{busy=false}),1000)},1500)}),1200)},1500)}
+setInterval(()=>{if(busy)return;const r=Math.random();
+ if(r<.45){const[k,t]=TARTISMA[ti++%TARTISMA.length];say(C[k],t)}
+ else if(r<.75)managerTask(ISLER[ji++%ISLER.length],false);
+ else psychReport()},4200);
+// --- kullanıcı etkileşimi ---
+let sel=null;const ME={n:'Sen',x:160,y:FLOORY,el:null,sayT:0};
+const who=document.getElementById('who'),inp=document.getElementById('msg'),btn=document.getElementById('send');let last='';
+cv.addEventListener('click',e=>{const r=cv.getBoundingClientRect(),mx=(e.clientX-r.left)/r.width*W,my=(e.clientY-r.top)/r.height*H;
+ sel=ALL.find(p=>Math.abs(p.x-mx)<8&&my>p.y-12&&my<p.y+16)||null;who.textContent=sel?sel.n:'—';inp.disabled=btn.disabled=!sel;
+ inp.placeholder=sel?sel.n+'\'a ne söylemek istersin?':'Önce bir karaktere tıkla…';if(sel)inp.focus()});
+function send(){const t=inp.value.trim();if(!t||!sel)return;inp.value='';last=sel.n+'\'a: '+t;
+ ME.x=sel.x;ME.y=sel.y-14;say(ME,t,2200,true);const p=sel;
+ setTimeout(()=>{if(p===C.yon)managerTask(t,true);
+  else if(p===C.tas)say(p,'Not aldım: "'+t.slice(0,40)+(t.length>40?'…':'')+'". Bir sonraki adımda bakarım.');
+  else{say(p,'İyi soru, diğer psikologla tartışalım.');setTimeout(()=>say(p===C.pa?C.pb:C.pa,'Bence de, raporumuza ekleyelim.'),1800)}},900)}
+btn.onclick=send;inp.addEventListener('keydown',e=>{if(e.key==='Enter')send()});
+document.getElementById('copy').onclick=()=>{if(!last)return;navigator.clipboard&&navigator.clipboard.writeText(last).catch(()=>{});log('Ofis','Kopyalandı: '+last)};
+// --- döngü ---
+let lt=performance.now();function loop(t){const dt=Math.min(.05,(t-lt)/1000);lt=t;ALL.forEach(p=>step(p,dt));scene(t);ALL.forEach(p=>person(p,t));place();requestAnimationFrame(loop)}
+requestAnimationFrame(loop);
+say(C.yon,'Günaydın ekip! Bugün oyunu cilalıyoruz.');
+</script>
+</body>
+</html>
