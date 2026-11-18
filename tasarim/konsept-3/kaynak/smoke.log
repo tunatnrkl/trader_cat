@@ -1,0 +1,79 @@
+GEÇTİ Sayfa yüklenirken konsol hatası yok
+GEÇTİ runTradeTests :: true
+GEÇTİ runBobbyTests :: true
+GEÇTİ runBobbyE2E :: true
+GEÇTİ runRobotE2E :: true
+GEÇTİ Yenileme sonrası para/ilerleme korunuyor :: {"cash":"12340000","snd":0,"mus":0,"rob":1,"fix":1}
+GEÇTİ Ses/müzik kapalı ayarı kayıttan sonra korunuyor :: {"cash":"12340000","snd":0,"mus":0,"rob":1,"fix":1}
+GEÇTİ Eski kayıt: alan silindi -> rb
+GEÇTİ Eski kayıt: alan silindi -> rl
+GEÇTİ Eski kayıt: alan silindi -> rlv
+GEÇTİ Eski kayıt: alan silindi -> set
+GEÇTİ Eski kayıt: alan silindi -> hist
+GEÇTİ Eski kayıt: alan silindi -> co
+GEÇTİ Eski kayıt: alan silindi -> open
+GEÇTİ Eski kayıt: alan silindi -> cl
+GEÇTİ Eski kayıt: alan silindi -> ll
+GEÇTİ Eski kayıt: alan silindi -> tc
+GEÇTİ Eski kayıt: alan silindi -> tcOn
+GEÇTİ Eski kayıt: alan silindi -> al
+GEÇTİ Eski kayıt: alan silindi -> bc
+GEÇTİ Eski kayıt: alan silindi -> bl
+GEÇTİ Eski kayıt: alan silindi -> en
+GEÇTİ Eski kayıt: alan silindi -> enT
+GEÇTİ Eski kayıt: alan silindi -> rev
+GEÇTİ Eski kayıt: alan silindi -> tot
+GEÇTİ Eski kayıt: alan silindi -> lc
+GEÇTİ Eski kayıt: alan silindi -> stp
+GEÇTİ Eski kayıt: alan silindi -> view
+GEÇTİ Eski kayıt: alan silindi -> robOn
+GEÇTİ Eski kayıt: alan silindi -> autoOn
+KALDI Taşma ana ekran 1440x900-tr :: SPAN.st 152>84 "20 sn / kemik · Lv1" ; SPAN.st 143>92 "Yeni turu başlatır" ; B. 265>210 "OTOMASYON MERKEZİ" ; SPAN.st 121>106 "Merkez kurulu"
+GEÇTİ Taşma otomasyon 1440x900-tr
+KALDI Taşma ayarlar 1440x900-tr :: SPAN.st 152>84 "20 sn / kemik · Lv1" ; SPAN.st 143>92 "Yeni turu başlatır" ; B. 265>210 "OTOMASYON MERKEZİ" ; SPAN.st 121>106 "Merkez kurulu"
+GEÇTİ Konsol hatası 1440x900-tr
+KALDI Taşma ana ekran 1440x900-en :: SPAN.st 133>84 "20 s / bone · Lv1" ; SPAN.st 82>80 "1 min · Lv1" ; B. 261>210 "AUTOMATION CENTER"
+GEÇTİ Taşma otomasyon 1440x900-en
+KALDI Taşma ayarlar 1440x900-en :: SPAN.st 133>84 "20 s / bone · Lv1" ; SPAN.st 82>80 "1 min · Lv1" ; B. 261>210 "AUTOMATION CENTER"
+GEÇTİ EN: Türkçe karakterli kalan metin (ayarlar açık)
+GEÇTİ Konsol hatası 1440x900-en
+KALDI Taşma ana ekran 1024x640-tr :: SPAN.st 152>84 "20 sn / kemik · Lv1" ; SPAN.st 143>92 "Yeni turu başlatır" ; B. 265>210 "OTOMASYON MERKEZİ" ; SPAN.st 121>106 "Merkez kurulu"
+GEÇTİ Taşma otomasyon 1024x640-tr
+KALDI Taşma ayarlar 1024x640-tr :: SPAN.st 152>84 "20 sn / kemik · Lv1" ; SPAN.st 143>92 "Yeni turu başlatır" ; B. 265>210 "OTOMASYON MERKEZİ" ; SPAN.st 121>106 "Merkez kurulu"
+GEÇTİ Konsol hatası 1024x640-tr
+KALDI Taşma ana ekran 1024x640-en :: SPAN.st 133>84 "20 s / bone · Lv1" ; SPAN.st 82>80 "1 min · Lv1" ; B. 261>210 "AUTOMATION CENTER"
+GEÇTİ Taşma otomasyon 1024x640-en
+KALDI Taşma ayarlar 1024x640-en :: SPAN.st 133>84 "20 s / bone · Lv1" ; SPAN.st 82>80 "1 min · Lv1" ; B. 261>210 "AUTOMATION CENTER"
+GEÇTİ Konsol hatası 1024x640-en
+KALDI Taşma ana ekran 844x390-tr :: SPAN.st 116>84 "20 sn / kemik · Lv1" ; SPAN.st 110>92 "Yeni turu başlatır"
+GEÇTİ Taşma otomasyon 844x390-tr
+KALDI Taşma ayarlar 844x390-tr :: SPAN.st 116>84 "20 sn / kemik · Lv1" ; SPAN.st 110>92 "Yeni turu başlatır"
+GEÇTİ Konsol hatası 844x390-tr
+KALDI Taşma ana ekran 844x390-en :: SPAN.st 101>84 "20 s / bone · Lv1"
+GEÇTİ Taşma otomasyon 844x390-en
+KALDI Taşma ayarlar 844x390-en :: SPAN.st 101>84 "20 s / bone · Lv1"
+GEÇTİ Konsol hatası 844x390-en
+KALDI Taşma ana ekran 667x375-tr :: SPAN.st 116>84 "20 sn / kemik · Lv1" ; SPAN.st 110>92 "Yeni turu başlatır"
+GEÇTİ Taşma otomasyon 667x375-tr
+KALDI Taşma ayarlar 667x375-tr :: SPAN.st 116>84 "20 sn / kemik · Lv1" ; SPAN.st 110>92 "Yeni turu başlatır"
+GEÇTİ Konsol hatası 667x375-tr
+GEÇTİ Taşma ana ekran 667x375-en
+GEÇTİ Taşma otomasyon 667x375-en
+GEÇTİ Taşma ayarlar 667x375-en
+GEÇTİ Konsol hatası 667x375-en
+
+ÖZET: 49/63 geçti; kalan: 14
+ - Taşma ana ekran 1440x900-tr :: SPAN.st 152>84 "20 sn / kemik · Lv1" ; SPAN.st 143>92 "Yeni turu başlatır" ; B. 265>210 "OTOMASYON MERKEZİ" ; SPAN.st 121>106 "Merkez kurulu"
+ - Taşma ayarlar 1440x900-tr :: SPAN.st 152>84 "20 sn / kemik · Lv1" ; SPAN.st 143>92 "Yeni turu başlatır" ; B. 265>210 "OTOMASYON MERKEZİ" ; SPAN.st 121>106 "Merkez kurulu"
+ - Taşma ana ekran 1440x900-en :: SPAN.st 133>84 "20 s / bone · Lv1" ; SPAN.st 82>80 "1 min · Lv1" ; B. 261>210 "AUTOMATION CENTER"
+ - Taşma ayarlar 1440x900-en :: SPAN.st 133>84 "20 s / bone · Lv1" ; SPAN.st 82>80 "1 min · Lv1" ; B. 261>210 "AUTOMATION CENTER"
+ - Taşma ana ekran 1024x640-tr :: SPAN.st 152>84 "20 sn / kemik · Lv1" ; SPAN.st 143>92 "Yeni turu başlatır" ; B. 265>210 "OTOMASYON MERKEZİ" ; SPAN.st 121>106 "Merkez kurulu"
+ - Taşma ayarlar 1024x640-tr :: SPAN.st 152>84 "20 sn / kemik · Lv1" ; SPAN.st 143>92 "Yeni turu başlatır" ; B. 265>210 "OTOMASYON MERKEZİ" ; SPAN.st 121>106 "Merkez kurulu"
+ - Taşma ana ekran 1024x640-en :: SPAN.st 133>84 "20 s / bone · Lv1" ; SPAN.st 82>80 "1 min · Lv1" ; B. 261>210 "AUTOMATION CENTER"
+ - Taşma ayarlar 1024x640-en :: SPAN.st 133>84 "20 s / bone · Lv1" ; SPAN.st 82>80 "1 min · Lv1" ; B. 261>210 "AUTOMATION CENTER"
+ - Taşma ana ekran 844x390-tr :: SPAN.st 116>84 "20 sn / kemik · Lv1" ; SPAN.st 110>92 "Yeni turu başlatır"
+ - Taşma ayarlar 844x390-tr :: SPAN.st 116>84 "20 sn / kemik · Lv1" ; SPAN.st 110>92 "Yeni turu başlatır"
+ - Taşma ana ekran 844x390-en :: SPAN.st 101>84 "20 s / bone · Lv1"
+ - Taşma ayarlar 844x390-en :: SPAN.st 101>84 "20 s / bone · Lv1"
+ - Taşma ana ekran 667x375-tr :: SPAN.st 116>84 "20 sn / kemik · Lv1" ; SPAN.st 110>92 "Yeni turu başlatır"
+ - Taşma ayarlar 667x375-tr :: SPAN.st 116>84 "20 sn / kemik · Lv1" ; SPAN.st 110>92 "Yeni turu başlatır"

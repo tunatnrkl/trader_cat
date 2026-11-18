@@ -1,0 +1,65 @@
+GEÇTİ Sayfa yüklenirken konsol hatası yok
+GEÇTİ runTradeTests :: true
+GEÇTİ runBobbyTests :: true
+GEÇTİ runBobbyE2E :: true
+GEÇTİ runRobotE2E :: true
+GEÇTİ Yenileme sonrası para/ilerleme korunuyor :: {"cash":"12340000","snd":0,"mus":0,"rob":1,"fix":1}
+GEÇTİ Ses/müzik kapalı ayarı kayıttan sonra korunuyor :: {"cash":"12340000","snd":0,"mus":0,"rob":1,"fix":1}
+GEÇTİ Eski kayıt: alan silindi -> rb
+GEÇTİ Eski kayıt: alan silindi -> rl
+GEÇTİ Eski kayıt: alan silindi -> rlv
+GEÇTİ Eski kayıt: alan silindi -> set
+GEÇTİ Eski kayıt: alan silindi -> hist
+GEÇTİ Eski kayıt: alan silindi -> co
+GEÇTİ Eski kayıt: alan silindi -> open
+GEÇTİ Eski kayıt: alan silindi -> cl
+GEÇTİ Eski kayıt: alan silindi -> ll
+GEÇTİ Eski kayıt: alan silindi -> tc
+GEÇTİ Eski kayıt: alan silindi -> tcOn
+GEÇTİ Eski kayıt: alan silindi -> al
+GEÇTİ Eski kayıt: alan silindi -> bc
+GEÇTİ Eski kayıt: alan silindi -> bl
+GEÇTİ Eski kayıt: alan silindi -> en
+GEÇTİ Eski kayıt: alan silindi -> enT
+GEÇTİ Eski kayıt: alan silindi -> rev
+GEÇTİ Eski kayıt: alan silindi -> tot
+GEÇTİ Eski kayıt: alan silindi -> lc
+GEÇTİ Eski kayıt: alan silindi -> stp
+GEÇTİ Eski kayıt: alan silindi -> view
+GEÇTİ Eski kayıt: alan silindi -> robOn
+GEÇTİ Eski kayıt: alan silindi -> autoOn
+GEÇTİ Taşma ana ekran 1440x900-tr
+GEÇTİ Taşma otomasyon 1440x900-tr
+GEÇTİ Taşma ayarlar 1440x900-tr
+GEÇTİ Konsol hatası 1440x900-tr
+GEÇTİ Taşma ana ekran 1440x900-en
+GEÇTİ Taşma otomasyon 1440x900-en
+GEÇTİ Taşma ayarlar 1440x900-en
+GEÇTİ EN: Türkçe karakterli kalan metin (ayarlar açık)
+GEÇTİ Konsol hatası 1440x900-en
+GEÇTİ Taşma ana ekran 1024x640-tr
+GEÇTİ Taşma otomasyon 1024x640-tr
+GEÇTİ Taşma ayarlar 1024x640-tr
+GEÇTİ Konsol hatası 1024x640-tr
+GEÇTİ Taşma ana ekran 1024x640-en
+GEÇTİ Taşma otomasyon 1024x640-en
+GEÇTİ Taşma ayarlar 1024x640-en
+GEÇTİ Konsol hatası 1024x640-en
+GEÇTİ Taşma ana ekran 844x390-tr
+GEÇTİ Taşma otomasyon 844x390-tr
+GEÇTİ Taşma ayarlar 844x390-tr
+GEÇTİ Konsol hatası 844x390-tr
+GEÇTİ Taşma ana ekran 844x390-en
+GEÇTİ Taşma otomasyon 844x390-en
+GEÇTİ Taşma ayarlar 844x390-en
+GEÇTİ Konsol hatası 844x390-en
+GEÇTİ Taşma ana ekran 667x375-tr
+GEÇTİ Taşma otomasyon 667x375-tr
+GEÇTİ Taşma ayarlar 667x375-tr
+GEÇTİ Konsol hatası 667x375-tr
+GEÇTİ Taşma ana ekran 667x375-en
+GEÇTİ Taşma otomasyon 667x375-en
+GEÇTİ Taşma ayarlar 667x375-en
+GEÇTİ Konsol hatası 667x375-en
+
+ÖZET: 63/63 geçti; kalan: 0
