@@ -322,3 +322,42 @@ Adım 5'in grafit/mat yönü bırakıldı. Adım 4'ün renkleri, doygunluğu, ko
    - Dolgular masaüstü oranına çekildi.
 6. **Telefon:** `#stage.tel` (Adım 4 ölçüleri, ≥12 px, ≥44 px) aynen.
 7. **Tur sonu fişi:** Termal kâğıt (krem, monospace, kesikli ayraçlar, tırtıklı alt kenar). "KÂR!" ve "ZARAR" canlı nane / kehribar tonlarında.
+
+## Adım 6 — Psikolog A (açılış)
+
+Kullanıcı haklı: gri-mor her şeyi uyutuyor, hiçbir şey "ödül" demiyor. Örnekteki canlılık doygun kobalt + altın dolgudan geliyordu; ben o yönü koyu zeminle öneriyorum.
+
+**1. Palet**
+- Duvar/oda: #080B1E; zemin #0D1230
+- Panel çerçevesi: #3F6BD8 (kobalt), dış hat #0A1030
+- Panel içi: #0F1838
+- Kart: #18255A; seçili kart: #1F3A8A + altın kenar
+- Sekme (seçili): #F2B83C, yazı #1A1204; seçilmeyen #1B2C6B
+- Başlık (KATALOG, MAĞAZA): altın #F2B83C, koyu konturlu
+- İlerleme çubuğu: iz #0B1233, dolgu #45D6A0
+- İkincil yazı: #B4C4F0 (panel içinde ≥7:1)
+
+**2. Altın nerede?** Para ve ödül altın olsun: alınabilir fiyat hapı #F2B83C dolgu + koyu yazı. Alınamaz hap: aynı şekil, dolgusuz #1B2C6B, açık kenarlı, #B4C4F0 yazı; fark "dolgu var/yok" ile okunur, soluk renkle değil.
+
+**3. Tek altın kuralı:** Gevşesin, ama kademeli. Altın artık "para/hedef" dili: fiyat hapları, başlıklar, seçili sekme. Gürültüyü önleyen yeni kural: ekranda tek *büyük* parlak düğme kalsın (BAŞLA/SAT), sıradaki kilitli kart altın kenarlı kalsın, diğer altınlar küçük ve dolgulu hap/yazı olsun. Yanıp sönme yok.
+
+## Adım 6 — Psikolog B (yanıt)
+
+Kullanıcının isteği kesin: canlı renk, daha koyu arka plan. Katılıyorum; sulandırmıyorum. A'nın paletini neredeyse aynen alıyorum: ikincil yazı #B4C4F0 kartta 8.3:1, panelde 10:1; altın hap yazısı 10.3:1; alınamaz hapta "dolgu var/yok" ayrımı iyi (yazı 7.5:1). Tek altın kuralının gevşemesine de razıyım.
+
+İtirazlarım, yalnız yorgunluk noktaları: (1) #3F6BD8 çerçeve duvara 4.0:1, yeterli, ama geniş alanda parlak mavi titreşim yapar; sadece ince çerçeve (en çok 6 px) olsun, iç hep koyu kalsın. (2) Seçili kart #1F3A8A karta karşı 2.1:1, tek başına okunmaz; altın kenar şart, ama sıradaki hedef kartı altın olmasın (iki altın kenar yarışır), nane kenar olsun. (3) Büyük altın/turuncu alan yalnız BAŞLA/SAT; hap ve başlık küçük kalsın. (4) Tam beyaz yok.
+
+## Ortak tavsiye 6
+
+1. Oda/duvar #080B1E; zemin #0D1230; süpürgelik çizgisi #131A40 (1-2 px). Puantiye/desen yok.
+2. Panel çerçevesi #3F6BD8, kalınlık en çok 6 px, dış hat #0A1030 (3 px); panel içi #0F1838; alt basamak gölgesi #060A20.
+3. Kart #18255A (kenar #2A3F8F, 2 px); seçili kart dolgu #1F3A8A, kenar altın #F2B83C 3 px; sıradaki kilitli hedef kart #18255A, kenar nane #45D6A0 2 px, "%" nane #45D6A0.
+4. Sekme: seçilmeyen #1B2C6B, yazı #B4C4F0; seçili #F2B83C, yazı #1A1204 (10.3:1).
+5. Fiyat hapı alınabilir: dolgu #F2B83C, yazı #1A1204, alt kenar #B8861F; alınamaz: dolgusuz #1B2C6B, kenar #6F8FE0 (2 px, kart karşı 4.6:1), yazı #B4C4F0 (yazı soluk değil).
+6. Başlıklar (KATALOG, MAĞAZA, OTOMASYON): yazı #F2B83C, kontur #0A1030 (3 px), afiş dolgusu #0F1838 ya da yok; en az 24 px.
+7. İkincil yazı #B4C4F0 (kartta 8.3:1); ana yazı #F4EEE3 (12.5:1); #FFFFFF yok. Telefonda 12 px altı yok.
+8. İlerleme çubuğu: iz #0B1233, dolgu #45D6A0 (9.9:1), yükseklik en az 6 px (telefon), uç yuvarlak.
+9. Monitör kasası #2A4FB8 (en çok 8 px kalınlık), dış hat #0A1030; ekran #070A1A; grafik ızgara #141C45; eksen sayıları #9FB0E0 (9.1:1).
+10. Kâr: çizgi/yazı nane #5CE0B0 (11.9:1) + ▲, çizgi 5 px; zarar: kehribar #E8A760 (9.5:1) + ▼, çizgi en az 4 px; ALIŞ çizgisi #8FA3E0 kesikli 2 px. Kırmızı alarm yok.
+11. BAŞLA/SAT aktif: dolgu #F59A38, yazı #1A1204 (8.4:1), alt basamak #B8681A; zarar SAT: dolgu #1B2C6B, kenar #CFE0FF 3 px, yazı #F4EEE3. Ekranda tek büyük parlak düğme.
+12. BOSS rozeti #C23B4E dolgu, yazı #F4EEE3 (küçük, sabit); glow, neon, yanıp sönme, nabız yok.
