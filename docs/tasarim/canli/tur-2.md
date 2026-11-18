@@ -126,3 +126,20 @@ Plan (adımlar): 1) Koyu arka plan + oda; 2) Sol panel + mağaza kartları; 3) M
 - Kâr anı çok güzel (nane SAT + ▲), ama ödül hissi hâlâ sadece renk; kapanışta kısa "+$X" pop'u eksik.
 
 **B'ye sorum:** Altın kenarlı kart, büyük turkuaz "%12" ve BAŞLA aynı bakışta üç vurgu oluşturuyor; sana göre bu yük fazla mı, yoksa her biri ayrı bölgede olduğu için sorun yok mu?
+
+### Adım 2 — Psikolog B
+
+**A'nın sorusuna net cevap:** Üçü aynı bakışta görünse de yük fazla değil, çünkü farklı bölgelerde ve farklı işlevde: altın kenar sol altta sessiz, turkuaz "%12" onun içinde (aynı öğenin parçası sayılır), BAŞLA monitörde. Asıl şart: yanıp sönme yok ve "%12" 28 px'ten büyümesin. Tur başlayınca BAŞLA kaybolduğu için çatışma zaten kısa sürüyor.
+
+**Tasarımcıya:** (1) AL/SAT: A'ya katılıyorum, AL turuncu olmasın. Ayrım yalnız renkle değil ▲ ve metinle de sürüyor; renk körlüğü açısından nane/turkuaz çifti tek başına zayıf, o yüzden ▲ ve "SAT/AL" yazısı kalmalı. (2) 24 px masaüstü: kabul. (3) Afişler: A'yla aynı; koyu, nötr, turuncu ince kenar. (4) Seçili kart: lila-krem halka okunuyor. Altın = hedef sapması: katılıyorum, hatta Tur 1 kararından daha doğru.
+
+**Gözüme çarpan:** Tur 1'de zararda turuncu/kehribar demiştik; sen nötr yaptın, bence daha iyi. Büyük zarar yüzdesi de aynı nötr kalsın; kehribar yalnız çizgide, ince kalsın. Telefonda alınamaz fiyat hapları ($25 soluk gri) kontrastı sınırda; fiyat bilgisi olduğu için okunmalı. Yeni saturate temizliği için teşekkürler, iyi yakalama.
+
+#### Ortak tavsiye 2
+
+1. Zarar anında büyük yüzde (−%2.4) mercan olmasın: krem veya sönük kehribar (#D9A66B civarı, doygunluk en çok %45), yanında ▼; grafik çizgisi zararda ince (2-3 px) kehribar, kârda nane; ikisi arasında şekil/işaret farkı kalsın.
+2. Alınamaz fiyat hapları dahil tüm fiyat yazısı en az 4.5:1 kontrast, hap kenarı en az 3:1; soluk yalnız dolgu olsun, yazı değil.
+3. AL turkuaz, SAT kârda nane, zararda nötr; her ikisinde ▲/▼ ve yazı sabit. Yeni renk ekleme; BAŞLA/SAT/AL aynı anda en fazla bir tanesi ekranda.
+4. KATALOG/MAĞAZA/OTOMASYON afişleri koyu nötr dolgu + ince turuncu kenar; dolgu doygunluğu en çok %35.
+5. Masaüstünde etiketler 24 px, telefonda fit() sonrası en az 12 px; grafik eksen sayıları (10.2, 0s...) da en az 12 px ve 4.5:1.
+6. "+$X" kâr pop'u: en çok 600 ms, tek bir hareket, "hareketi azalt" tercihinde yalnız renk+sayı; zararda hiçbir animasyon (titreme, kırmızı flaş) olmasın.
