@@ -36,3 +36,46 @@ Katılımcılar: Psikolog A (oyun hissi ve motivasyon) ve Psikolog B (göz ve zi
 1. Lofi çok mu karanlık? Sence uzun oyunda (30–60 dk) bu düşük kontrast göz yorar mı, yoksa tam tersine Gece Arcade'in parlak lacivert-beyaz kontrastı mı daha yorucu?
 2. Tok Mobil'in kalın koyu konturları ve yoğun mor tonu sence bilişsel yük mü yaratır, yoksa "okunaklı" mı sayarsın? Ben "basma hissi" için konturu savunuyorum.
 3. Ödül anı (kâr "+$X" pop'u) ve zarar anının sönük tutulması: sence zararı bu kadar nötr göstermek oyuncuyu öğrenmeden mi uzaklaştırır, yoksa stres azaltma açısından doğru mu? Ben "az kaldı" merakı için kilitli kartı altın kenarlı tutmayı istiyorum; bunun dikkat dağıtıcı olduğunu düşünüyor musun?
+
+## 2. Psikolog B — Yanıt ve itiraz
+
+**A'nın sorularına**
+
+1. **Lofi çok mu karanlık?** Karanlık olması sorun değil; asıl yorucu olan parlak ile koyu arasındaki sıçrama. Uzun oturumda Gece Arcade'in beyaz-lacivert keskin kontrastı (beyaz SAT butonu, parlak başlıklar) daha çok yorar. Lofi'nin sorunu başka: ikincil yazılar (SİRADAKİ COİN, "tur %0.1", küçük etiketler) mor zemin üstünde soluk ve telefonda çok küçük. Yani sorun karanlık değil, küçük ve soluk yazı. Arka planı biraz açmak, yazıyı büyütmek yeter; "içim daralıyor" hissini asıl koyu, yoğun panel dolgusu verir, ona dikkat.
+2. **Tok Mobil konturları.** Kalın kontur tek başına yük değil, hatta tıklanabilirliği netleştiriyor. Ama mor zemin + mor panel + mor monitör + turuncu şerit + kırmızı/sarı buton aynı anda: gözün dinleneceği nötr bir alan yok. Bu bilişsel yük ve 45 dakikada yorgunluk. Konturu savunurum, mor yoğunluğunu değil.
+3. **Zarar anı.** Zararı nötr tutmak stres için doğru; ama tamamen gizlemek öğretmez. Orta yol: zararda sakin bir renk, küçük bir ▼ ve sayı; kâr "+$X" pop'unu sevinçle, zarar için ses/titreşim/kırmızı yanıp sönme yok. Kilitli kartın altın kenarı: dikkat dağıtmıyor, tek bir tane olduğu sürece. İki üç altın öğe olursa gürültü olur.
+
+**Konseptler (göz ve zihin açısından)**
+
+- **1 Gece Arcade:** Tutarlı ama keskin: beyaz SAT butonu parlakta göz çeker, zararda büyük kırmızı ok + yüzde stres veriyor. Turuncu zarar/yeşil olmayan çizgi ilginç biçimde renk körlüğüne dost, ▼ şekli de var.
+- **2 Pastel Cozy:** Ferah ama içindeki koyu lacivert monitör parlak odanın ortasında bir "delik" gibi; gözü sürekli parlak-koyu arasında gidip getirir. Fiyat hapları gri-yeşil üstüne gri, neredeyse görünmez; telefonda en kötü kontrast burada.
+- **3 Tok Mobil:** En okunaklı butonlar ve en net ALIŞ etiketi; ama doygun mor her yerde ve zarar anında kırmızı-pembe SAT butonu alarm gibi.
+- **4 Lofi Akşam:** En düşük parlaklık sıçraması, tek tonlu sıcak palet, ▲ şekli var. Zayıf: küçük soluk metinler, grafik ekseni etiketleri.
+
+**Puan (1–10; yüksek = iyi)**
+
+| Ölçüt | 1 Gece | 2 Pastel | 3 Tok | 4 Lofi |
+|---|---|---|---|---|
+| Göz yorgunluğu (az yorar) | 5 | 5 | 4 | 8 |
+| Stres/kaygı (az tetikler) | 5 | 8 | 5 | 8 |
+| Okunurluk (telefon dahil) | 7 | 4 | 8 | 6 |
+| Bilişsel yük (sade) | 7 | 7 | 4 | 7 |
+| Renk körlüğü uyumu | 7 | 5 | 5 | 6 |
+| **Toplam /50** | 31 | 29 | 26 | 35 |
+
+**Sıralamam:** 1. Lofi Akşam, 2. Gece Arcade, 3. Pastel Cozy, 4. Tok Mobil.
+
+**A ile ayrıldığım yer:** Lofi'de birleşiyoruz, ama Tok Mobil'i ikinci yapmıyorum; onu sondan başlatırım. Tok'tan yalnız "squish" ve ana buton fikrini alalım, şerit afişleri ve mor yoğunluğunu değil. Ayrıca "oda biraz açılsın" önerine katılıyorum, ama şu sınırla: açılan yer arka plan olsun, paneller değil; yoksa Pastel'deki parlak-koyu sıçrama Lofi'ye de gelir. "Oyun hissi" uğruna doygunluğu artırmak "içim daralıyor" şikâyetini geri getirir.
+
+**Kazanan önerim: Lofi Akşam (+ Tok'tan yalnız buton hissi).**
+
+**Mutlaka düzelmeli (en fazla 5)**
+1. Tüm ikincil yazılar telefonda en az 12 px ve zeminle en az 4.5:1 kontrast (SİRADAKİ COİN, etiketler, eksen sayıları).
+2. Kâr/zarar yalnız renkle değil şekille de ayrılsın (▲/▼, +/−); yeşil-kırmızı yerine mavi-yeşil / turuncu eşleşmesi.
+3. Zararda alarm yok: büyük ok, kırmızı yanıp sönme, SAT butonunda kırmızı dolgu kaldırılsın.
+4. Parlak lekeleri azalt: tam beyaz yok, SAT butonu ve sarı başlıklar tek bir yumuşak vurguyla sınırlı; aynı anda en fazla bir altın öğe.
+5. Panel zemin ile monitör zemini arasında çok keskin fark olmasın; grafik alanı oda kadar koyu/parlak tonda tutulsun.
+
+**A'ya sorularım**
+1. "Az kaldı" merakı için ilerleme çubuğu yeterli değil mi; altın kenar zorunlu mu? Sadece bir kez, ilk açılışta mı parlasın?
+2. Squish ve pop animasyonlarını hareket azaltma ayarıyla kapatılabilir yapmayı kabul eder misin? Sık tekrarlanan hareket bazı oyuncularda baş dönmesi yaratır.
