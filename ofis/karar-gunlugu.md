@@ -2,6 +2,7 @@
 
 | Tarih | Karar | Gerekçe | Önceki değer |
 |---|---|---|---|
+| 11-18 | Öncelik: 1) Kat.1 ritmi (tek büyük denge değişikliği), 2) iflas kapanı + açılış metni, 3) aktif-otomatik (yalnız öneri) | Teşhis 1: ölçüt 3,4,5,6 = 3 puan; Kat.1 56,7 dk | — |
 | 11-18 | Yaşayan ofis düzeni: 8 ölçüt, teşhis→öncelik→çözüm→uygulama→ölçüm döngüsü | Kullanıcı promptu | Adım adım görsel turlar |
 | 11-18 | Ekip: Oyun tasarımcısı (Opus high), Görsel (Opus med), Yazılımcı (Opus med), Ses (Sonnet), Metin (Sonnet), Testçi (Sonnet), Kod araştırmacısı (Haiku); psikologlar görsel işlerde danışman; Rakip Analisti işi bitti, ayrıldı | Kullanıcı promptu + verimlilik | Tasarımcı, Yazılımcı(Sonnet), Psikolog A/B, Rakip Analisti |
 | 11-18 | Robot ekleme fiyatları: 1. aynı, sonrakiler öncekinin +%8'i (sig2 yuvarlama) | Kullanıcı isteği | ×6 coin fiyatı: $1.92Qa / $184Qi / $61Sx / $1.72Sp |

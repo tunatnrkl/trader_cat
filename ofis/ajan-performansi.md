@@ -8,3 +8,4 @@
 | Ekonomi/Yazılımcı (Sonnet) | Robot +%8, UNLK ×1,5 | — | Sim 20 koşuyu bitiremedi; 2 koşu |
 | Rakip Analisti (Sonnet) | rakip-analizi.md | — | Veri az ama dürüst ("bilinmiyor") |
 | Tur 1 konsept tasarımcıları (4×Opus) | Konsept 3 seçildi | 1,2,4 | Pahalı; tek tasarımcı + danışma daha verimli |
+| Testçi (Sonnet) | Teşhis 1 | — | Dürüst sınırlar yazdı; gerçek oynanış 4–5 dk kaldı (hedef 10–15), bot coin değiştirmedi |
