@@ -29,6 +29,7 @@
 - Limit hatası alan ajan yeniden başlatılmaz; limit yenilenince SendMessage ile devam ettirilir.
 
 ## Günlük (en yeni üstte)
+- Adım 6: kullanıcı "soluk mor, canlı renk yok, arkası daha koyu" → Psikolog A/B tartışması + Ortak tavsiye 6 → kobalt/lacivert + altın + nane palet, oda #080B1E (smoke 63/63).
 - Adım 5 "cansız" bulundu (kullanıcı) → geri alındı. Adım 5b: Adım 4 canlılığı + masaüstü ölçüleri, odometre bakiye, mama ease-out, termal fiş (smoke 63/63).
 - Adım 5 bitti (ce98dd7, smoke 63/63). Döngü limit nedeniyle duraklatıldı. Kalanlar: 'HAZIR' hapı yuvarlak, bakiye ikonu gerçek para hissi değil, masa nesneleri yok, ana menü + final sahnesi yeni malzeme diline geçmedi.
 - Sabah: kullanıcı yeni tasarımı sitede gördü, beğendi; Adım 5 brifi yazıldı (olgunlaştırma).

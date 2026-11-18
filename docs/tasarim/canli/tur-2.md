@@ -361,3 +361,12 @@ Kullanıcının isteği kesin: canlı renk, daha koyu arka plan. Katılıyorum; 
 10. Kâr: çizgi/yazı nane #5CE0B0 (11.9:1) + ▲, çizgi 5 px; zarar: kehribar #E8A760 (9.5:1) + ▼, çizgi en az 4 px; ALIŞ çizgisi #8FA3E0 kesikli 2 px. Kırmızı alarm yok.
 11. BAŞLA/SAT aktif: dolgu #F59A38, yazı #1A1204 (8.4:1), alt basamak #B8681A; zarar SAT: dolgu #1B2C6B, kenar #CFE0FF 3 px, yazı #F4EEE3. Ekranda tek büyük parlak düğme.
 12. BOSS rozeti #C23B4E dolgu, yazı #F4EEE3 (küçük, sabit); glow, neon, yanıp sönme, nabız yok.
+
+## Adım 6 — Tasarımcı: Notlar
+
+1. **Soluk mor kalktı.** K3 katmanındaki 69 gri-mor/lavanta ton rol ve parlaklığına göre Ortak tavsiye 6 paletine eşlendi. Canvas'taki grafik, ızgara, robot bölmesi, duvar süsleri, ikonlar ve bakiye konturu da aynı palette. Değişenler: oda #080B1E, zemin #0D1230, süpürgelik #131A40, panel içi #0F1838 + kobalt #3F6BD8 çerçeve, kart #18255A (kenar #2A3F8F), monitör kasası #2A4FB8, ekran #070A1A, ızgara #141C45, eksen #9FB0E0, ikincil yazı #B4C4F0. Menü ve ayarlar penceresi de yeni palette.
+2. **Altın #F2B83C:** seçili katalog sekmesi, ANA PC / OTOMASYON sekmeleri, kaldıraç seçimi, seçili coin kartının 3 px kenarı, alınabilir fiyat hapları (koyu #1A1204 yazı) ve KATALOG / MAĞAZA / OTOMASYON başlıkları (altın yazı, 3 px koyu kontur; masaüstünde 24 px).
+3. **Nane #45D6A0:** bütün ilerleme çubukları (iz #0B1233), sıradaki kilitli hedef kartın kenarı ve "%" yazısı, açık anahtarlar, kilit açma hapı. Kâr çizgisi/yazısı #5CE0B0 ▲, zarar #E8A760 ▼ (çizgi 4 px). ALIŞ çizgisi #8FA3E0.
+4. **Alınabilir/alınamaz ayrımı:** Koddaki mevcut `data-dis` özniteliği kullanıldı; yeni mantık eklenmedi. Alınabilir hap altın dolgulu. Alınamaz hap dolgusuz koyu lacivert (#1B2C6B), #6F8FE0 kenarlı, yazısı #B4C4F0 (yazı soluk değil).
+5. **Ana düğme:** BAŞLA ve kârdaki SAT turuncu (#F59A38, koyu yazı, #B8681A alt kenar). Zarardaki SAT lacivert #1B2C6B, #CFE0FF kenar, krem yazı. AL turkuaz. BOSS rozeti, boss hapı ve "SON DAKİKA" kırmızı #C23B4E, sabit. Glow, neon, yanıp sönme yok.
+6. **Değişmeyenler:** Adım 5b masaüstü ölçüleri, telefon (`#stage.tel`) ölçüleri, odometre, mama ease-out ve termal fiş aynen. Mantık, sayı, kayıt, id ve data-* değişmedi. Smoke 63/63, konsol temiz.
