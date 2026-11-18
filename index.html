@@ -1867,10 +1867,10 @@ $('#tabs').onclick=e=>{const t=e.target.closest('[data-cat]');if(t&&S.co[+t.data
 $('#list').onclick=e=>{const dz=e.target.closest('[data-dis]');if(dz){nope(dz);return}const inf=e.target.closest('[data-info]');if(inf){G.mod='i';G.im=+inf.dataset.info;renderMod();return}
  const c=e.target.closest('[data-i]');if(!c||G.st==='active'||S.over)return;const i=+c.dataset.i;if(!S.open[i])return;G.ci=i;G.lev=Math.pow(2,(S.ll[i]||1)-1);LH='';SH='';SD='';ready()   /* v46: açılan coinin en yüksek kaldıracı */};
 /* ---------- kaldıraç seçimi: monitör alt çubuğu ---------- */
-function renderLev(){const ci=G.ci,c=COINS[ci],L=Math.pow(2,S.ll[ci]-1);if(G.lev>L)G.lev=1;const lk=G.st==='active'&&G.pt;
- const h=c.boss?`<span>KALDIRAÇ</span><small class="lvh">Boss coininde kaldıraç kullanılamaz</small>`:`<span>KALDIRAÇ</span>${[1,2,4,8,16,32,64].filter(v=>v<=L).map(v=>`<button class="pbtn ${v===G.lev?'ac':''}" data-l="${v}" ${lk?'disabled':''}>${v}x</button>`).join('')}`;
+function renderLev(){const ci=G.ci,c=COINS[ci],L=Math.pow(2,S.ll[ci]-1);if(G.lev>L)G.lev=1;const lk=G.st==='active'&&G.pt,rs=!lk&&G.st!=='over'&&rescueOk(),sl=lk?G.pt.lv:rs?1:G.lev;   /* kurtarma turu: 1x gösterilir, üstü pasif; G.lev (tercih) değişmez */
+ const h=c.boss?`<span>KALDIRAÇ</span><small class="lvh">Boss coininde kaldıraç kullanılamaz</small>`:`<span>KALDIRAÇ</span>${[1,2,4,8,16,32,64].filter(v=>v<=L).map(v=>`<button class="pbtn ${v===sl?'ac':''}" data-l="${v}" ${lk||rs&&v>1?'disabled':''}>${v}x</button>`).join('')}`;
  if(h!==LH){LH=h;$('#lvr').innerHTML=h}}
-$('#lvr').onclick=e=>{const l=e.target.closest('[data-l]');if(l&&!(G.st==='active'&&G.pt)){G.lev=+l.dataset.l;ui()}};
+$('#lvr').onclick=e=>{const l=e.target.closest('[data-l]');if(l&&!l.disabled&&!(G.st==='active'&&G.pt)){G.lev=+l.dataset.l;ui()}};
 /* ---------- mağaza (mantar pano) ---------- */
 const card=(k,ic,title,state,sg2,btn,tp,cls)=>`<div class="sc ${cls||''}${btn&&btn.includes('data-dis')?' poor':''}" data-k="${k}">${INFOT[k]&&!(cls||'').includes('lk')?`<button class="info" data-tip="${esc(INFOT[k])}" aria-label="i">i</button>`:''}${cls==='na'?`<img class="nal" src="${ICN.lock}" alt="">`:''}<div class="si">${ic}</div><div class="sm"><b>${title}</b><span class="st">${state}</span>${sg2}</div><div class="sb">${btn}</div></div>`;
 const go=(a,cost,ok)=>`<button class="go" data-a="${a}" ${ok?'':'data-dis="1"'} data-cost="${cost}"><i class="up"></i><span>$${cp(cost)}</span></button>`;
@@ -1884,7 +1884,7 @@ function renderShop(){const ci=G.ci,c=COINS[ci],k=G.cat,act=G.st==='active',cl=S
  const key=[S.set.bobC,Object.keys(S.rev||{}).length,S.view,S.food,S.pc2,S.spc,S.co[2],afford(PC2P),afford(SPCP),ci,k,cl,ll,act,afford(cc),afford(lc),S.rob,S.robOn,afford(ROBP),S.auto,S.autoOn,al,afford(AUTOP),afford(oc),tc,S.tcOn,afford(tcc),S.food,S.over,afford(FOOD),bl,bc,afford(bkc),afford(cpc),rl,rk,afford(ru),afford(rlc)].join('|');if(key===SH)return;SH=key;
  let hb='',ho='',hz='';const mx='<span class="mx">MAKS</span>',cI=`<img class="ic" src="${ICONS[ci]}" width="48" height="48" alt="">`,lev=Math.pow(2,rk-1);
  let h=c.boss?card('cup',cI,'VOLATİLİTE',c.n,'','<span class="mx">SABİT</span>','Boss coinin volatilitesi sabittir: 64 dönüm noktası.',''):card('cup',cI,'VOLATİLİTE',c.n,vseg(ci,cl),cl<c.max?go('cup',cc,!act&&afford(cc)):mx,`Volatilite = grafikteki tepe + dip (dönüm noktası) sayısı.\nHer seviye yarıya indirir (en az 8). Daha az dönüm noktası: zamanlaması daha kolay hareketler.\nŞimdi ${NPT(ci)}${cl<c.max?', sonraki seviyede '+VSEQ(ci)[cl]:''} dönüm noktası.`,cl<c.max&&!act&&afford(cc)?'can':'');
- h+=card('lup',icn('bolt',3),'KALDIRAÇ',`${c.n} · ${L}x`,c.boss?'':seg(ll,LMAX(ci)),c.boss?'<span class="mx">SABİT</span>':ll<LMAX(ci)?go('lup',lc,!act&&afford(lc)):mx,'Kaldıraç: kâr ve zarar kaldıraç katı kadar büyür. Fiyat = coin fiyatı × hedef kaldıraç.',ll<LMAX(ci)&&!act&&afford(lc)?'can':'');
+ h+=card('lup',icn('bolt',3),'KALDIRAÇ',`${c.n} · ${L}x`,c.boss?'':seg(ll,LMAX(ci)),c.boss?'<span class="mx">SABİT</span>':ll<LMAX(ci)?go('lup',lc,!act&&afford(lc)):mx,c.cat?'Kaldıraç: kâr ve zarar kaldıraç katı kadar büyür. Fiyat = coin fiyatı × hedef kaldıraç.':'Kaldıraç: kâr ve zarar kaldıraç katı kadar büyür. Fiyat = coin fiyatı × hedef kaldıraç (Katalog 1\'de × 2).',ll<LMAX(ci)&&!act&&afford(lc)?'can':'');
  if(!S.open[ci])h=lockN('cup','VOLATİLİTE')+lockN('lup','KALDIRAÇ');   /* v49: coin kilitliyken seviyeleri de kilitli */
  /* BOBBY: satın alma, anahtar, seviye, kaldıraç ve enerji barı tek kartta */
  hb+=!rev('rb',ROBP,S.rob)?lockN('rb','BOBBY'):`<div class="sc bob ${!S.rob&&afford(ROBP)?'can':''}" data-k="rb"><div class="bh"><div class="si">${icn('dog',3)}</div><div class="sm"><b>BOBBY</b><span class="st">${S.rob?'Katalog '+(k+1):'Köpek yavrusu'}</span></div><div class="sb">${S.rob?tg('rt',S.robOn):goU('rb',ROBP,afford(ROBP))}</div></div>
@@ -1961,7 +1961,7 @@ putc($('#foodbag'),sackCanvas2(1));putc($('#sackc'),sackCanvas(5));{const cv=$('
 ['#gear','#gear2'].forEach(id=>{const gc=document.createElement('canvas');gearVec(gc);$(id).appendChild(gc)});
 $('#mc').innerHTML=icn('x',2);setBowl(0);
 const flsh=document.createElement('div');flsh.id='flsh';document.body.appendChild(flsh);
-$('#foodw').dataset.tipx='1';$('#foodw').dataset.tip='Kedi maması: kaba sürükle, 4 sn tut, +$2.';
+$('#foodw').dataset.tipx='1';$('#foodw').dataset.tip='Mama paketi $1. Kabın üstüne bırak, 4 sn bekle: +$2 (net +$1).';
 
 /* ---------- Bobby: besleme (ücretsiz). Enerji barı mağaza kartında ---------- */
 function feedOld(e){if(!S.rob){toast("Önce Bobby'yi sahiplen",1);return}updEn();const cap=CB[S.bc-1],E=EB[S.bl-1],add=Math.min(E,cap-S.en);
@@ -2404,7 +2404,7 @@ NUMOBS.observe(document.body,{subtree:true,childList:true,characterData:true});n
 const I18N={en:{
  'Kaldıraç: kâr ve zarar kaldıraç katı kadar büyür. Fiyat = coin fiyatı × hedef kaldıraç.':'Leverage: profit and loss grow by the leverage multiple. Price = coin price × target leverage.','MAĞAZA':'SHOP','KEDİ':'CAT','KEMİK VER':'GIVE BONE','AÇ!':'HUNGRY!','ANA PC':'MAIN PC','OTOMASYON MERKEZİ':'AUTOMATION CENTER','HAZIR':'READY','TUR':'ROUND','POZİSYON':'POSITION','ALIŞ':'BUY','BİTTİ':'DONE','FİNAL':'FINAL',
  'SON DAKİKA':'BREAKING','Tebrikler!':'Congratulations!','Bütün sokak hayvanlarını besledin!':'You fed all the street animals!','Yeniden Oyna':'Play Again','Emin misin? Kayıt silinecek':'Are you sure? Your save will be deleted.',
- '▼ daha fazla':'▼ more','MAXED':'MAXED','BAŞLA':'START','YENİ TUR':'NEW ROUND','OYUN BİTTİ':'GAME OVER','KALDIRAÇ':'LEVERAGE','En az':'At least','gerek. Kedi mamasını kaba götür!':'needed. Bring the cat food to the bowl!',
+ '▼ daha fazla':'▼ more','MAXED':'MAXED','BAŞLA':'START','YENİ TUR':'NEW ROUND','OYUN BİTTİ':'GAME OVER','KALDIRAÇ':'LEVERAGE','En az':'At least','gerek. Kedi mamasını kaba götür!':'needed. Bring the cat food to the bowl!','En az $10 gerek. Mama paketini kediye dök: $1 öde, $2 kazan.':'At least $10 needed. Pour a food pack for the cat: pay $1, get $2.','(tüm nakit, 1x).':'(all cash, 1x).','Kaldıraç: kâr ve zarar kaldıraç katı kadar büyür. Fiyat = coin fiyatı × hedef kaldıraç (Katalog 1\'de × 2).':'Leverage: profit and loss grow by the leverage multiple. Price = coin price × target leverage (× 2 in Catalog 1).','Mama paketi $1. Kabın üstüne bırak, 4 sn bekle: +$2 (net +$1).':'Food pack costs $1. Drop it on the bowl, wait 4 s: +$2 (net +$1).','Paketi kabımın üstüne bırak ve biraz bekle. Paket $1, kedi yiyince $2 verir; 10$ biriktirince bilgisayarı onarabilirsin.':'Drop the bag over my bowl and wait a bit. A pack costs $1 and pays $2 when the cat eats; save $10 to fix the computer.',
  'Yetersiz bakiye · Gerekli:':'Not enough cash · Needed:','Pozisyon:':'Position:','(katalog fiyatı).':'(catalog price).','Yeterli nakit yok.':'Not enough cash.',"15. sn'de otomatik satılır.":'Auto-sells at 15 s.','Likidasyon:':'Liquidation:',
  'COİN':'COIN','OTOMASYON':'AUTOMATION','ÖZEL':'SPECIAL','VOLATİLİTE':'VOLATILITY','SABİT':'FIXED','Köpek yavrusu':'Puppy','ENERJİ':'ENERGY','KEMİK':'BONE','KAPASİTE':'CAPACITY','OTO-TUR':'AUTO-ROUND','Yeni turu başlatır':'Next round',
  'OTO-TUR SÜRE':'AUTO-ROUND DELAY','Önce Oto-Tur':'Auto-round first','ZAMAN KAPSÜLÜ':'TIME CAPSULE','BİLGİSAYAR SV.2':'COMPUTER LV.2','Daha büyük ekran':'Bigger screen','KURULU':'INSTALLED','Merkez kurulu':'Installed',
@@ -2432,7 +2432,7 @@ const I18N={en:{
   [/^Bobby kaldıracı (\d+)x$/,'Bobby leverage $1x'],[/^Kemik Seviyesi (\d+)$/,'Bone Level $1'],[/^Kapasite Seviyesi (\d+)$/,'Capacity Level $1'],[/^Zaman Kapsülü (\d+)x$/,'Time Capsule $1x'],[/^Oyun saati (\d+)x hızlı$/,'Game clock $1x faster'],
   [/^ROBOT-(\d+) sapma %(.*)$/,'ROBOT-$1 deviation $2%'],[/^ROBOT-(\d+) kaldıraç (\d+)x$/,'ROBOT-$1 leverage $2x'],[/^(.*) maksimum seviye$/,'$1 max level'],[/^(.*) kaldıraç (\d+)x$/,'$1 leverage $2x'],[/^Toplam oyun süresi: (\d+) sa (\d+) dk$/,'Total play time: $1 h $2 min'],
   [/^Toplam oyun süresi: (\d+) dk$/,'Total play time: $1 min'],[/^Oto-Tur: ([\d.]+) sn sonra yeni tur…$/,'Auto-round: new round in $1 s…'],[/^15 sn tur · oyun saati ×(\d+)\. Sabit fiyattan başlar\.$/,'15 s round · game clock ×$1. Starts at a fixed price.'],
-  [/^15 sn tur\. Sabit fiyattan başlar\.$/,'15 s round. Starts at a fixed price.'],[/^(\d+) dönüm$/,'$1 turning points'],[/^Satıldı:$/,'Sold:'],[/^(.*) Coin Lv(\d+)$/,'$1 Coin Lv$2'],[/^(.*) Kaldıraç (\d+)x$/,'$1 Leverage $2x'],[/^Bobby Katalog (\d+) Lv(\d+)$/,'Bobby Catalog $1 Lv$2'],[/^Oto-Tur Lv(\d+)$/,'Auto-Round Lv$1'],[/^Zaman Kapsülü Lv(\d+) \((\d+)x\)$/,'Time Capsule Lv$1 ($2x)'],[/^Robot (\d+) eklendi$/,'Robot $1 added'],[/^Robot-(\d+) doğruluk Lv(\d+)$/,'Robot-$1 accuracy Lv$2'],[/^Bobby kemik seviyesi (\d+)$/,'Bobby bone level $1'],[/^Bobby kapasite seviyesi (\d+)$/,'Bobby capacity level $1'],[/^(.*) coini açıldı$/,'$1 coin unlocked'],[/^Pozisyon: (.*) \(katalog fiyatı\)\.$/,'Position: $1 (catalog price).'],[/^Satıldı: (.*)$/,'Sold: $1'],[/^Süre doldu, satıldı: (.*)$/,"Time's up, sold: $1"],[/^Likidasyon! (.*)$/,'Liquidated! $1'],[/^Süre doldu, satıldı:$/,"Time's up, sold:"],[/^Bobby Lv(\d+)$/,'Bobby Lv$1'],[/^Katalog (\d+) · (.*)$/,'Catalog $1 · $2'],
+  [/^15 sn tur\. Sabit fiyattan başlar\.$/,'15 s round. Starts at a fixed price.'],[/^(\d+) dönüm$/,'$1 turning points'],[/^Satıldı:$/,'Sold:'],[/^(.*) Coin Lv(\d+)$/,'$1 Coin Lv$2'],[/^(.*) Kaldıraç (\d+)x$/,'$1 Leverage $2x'],[/^Bobby Katalog (\d+) Lv(\d+)$/,'Bobby Catalog $1 Lv$2'],[/^Oto-Tur Lv(\d+)$/,'Auto-Round Lv$1'],[/^Zaman Kapsülü Lv(\d+) \((\d+)x\)$/,'Time Capsule Lv$1 ($2x)'],[/^Robot (\d+) eklendi$/,'Robot $1 added'],[/^Robot-(\d+) doğruluk Lv(\d+)$/,'Robot-$1 accuracy Lv$2'],[/^Bobby kemik seviyesi (\d+)$/,'Bobby bone level $1'],[/^Bobby kapasite seviyesi (\d+)$/,'Bobby capacity level $1'],[/^(.*) coini açıldı$/,'$1 coin unlocked'],[/^Pozisyon: (.*) \(katalog fiyatı\)\.$/,'Position: $1 (catalog price).'],[/^Pozisyon: (.*) \(tüm nakit, 1x\)\.$/,'Position: $1 (all cash, 1x).'],[/^Kurtarma turu: tüm nakitle \((.*)\) 1x oyna\. Ya da kediye mama dök\.$/,'Rescue round: all your cash ($1) at 1x. Or pour food for the cat.'],[/^En az (.*) gerek\. Mama paketini kediye dök: (.*) öde, (.*) kazan\.$/,'At least $1 needed. Pour a food pack for the cat: pay $2, get $3.'],[/^Satıldı: (.*)$/,'Sold: $1'],[/^Süre doldu, satıldı: (.*)$/,"Time's up, sold: $1"],[/^Likidasyon! (.*)$/,'Liquidated! $1'],[/^Süre doldu, satıldı:$/,"Time's up, sold:"],[/^Bobby Lv(\d+)$/,'Bobby Lv$1'],[/^Katalog (\d+) · (.*)$/,'Catalog $1 · $2'],
   [/^BOBBY · KATALOG (\d+)$/,'BOBBY · CATALOG $1'],[/^Tümü · %(.*)$/,'All · %$1'],[/^Tümü · Lv(\d+)$/,'All · Lv$1']]};
 const _orig=new WeakMap();
 function L(s){if(LANG==='tr'||s==null)return s;const str=String(s),m=str.match(/^(\s*)([\s\S]*?)(\s*)$/),core=m[2];if(!core)return str;const D=I18N.en;
@@ -2601,7 +2601,7 @@ function crtOn(){const sc=$('#screen');sc.classList.remove('pre');sc.classList.r
 function introCat(){if(S.fix||S.introDone||S.over||PAUSED||new URLSearchParams(location.search).has('nomenu'))return;S.introDone=1;save();
  setTimeout(()=>{sfx2('meow');const st=[[()=>$('#catp'),L('Miyav… Çok açım!')+'<br><small>'+L('Karnım guruldiyor… Beni besler misin? (Devam etmek için herhangi bir yere tıkla)')+'</small>'],
   [()=>$('#foodw'),L('Şu mama paketini al!')+'<br><small>'+L('Paketi tut ve sürükle.')+'</small>'],
-  [()=>$('#catp'),L('…ve kabıma dök!')+'<br><small>'+L('Paketi kabımın üstüne bırak ve biraz bekle. Her mamada para kazanırsın; 10$ biriktirince bilgisayarı onarabilirsin.')+'</small>']];
+  [()=>$('#catp'),L('…ve kabıma dök!')+'<br><small>'+L('Paketi kabımın üstüne bırak ve biraz bekle. Paket $1, kedi yiyince $2 verir; 10$ biriktirince bilgisayarı onarabilirsin.')+'</small>']];
   SPQ.unshift(...st.map(([get,msg])=>({get,strong:true,msg})));spotClear();SPON=0;spotNext()},600)}
 {const mh=menuHide;menuHide=function(){const r=mh.apply(this,arguments);introCat();return r};window.menuHide=menuHide}
 /* v51: giriş yalnız 'Oyna' ile (ve sıfırlamada) başlar */
@@ -2736,11 +2736,13 @@ const STAKE={player:1,bobby:1,robot:1};
 const stakeOf=(w,ci)=>COINS[ci].p*BigInt(Math.round(STAKE[w]*1e4))/10000n;
 const eq=(tr,u)=>calculateTradeResult(tr.b,u,tr.lv,tr.st).value;
 const liqd=(tr,u)=>!tr.free&&tr.lv>1&&calculateTradeResult(tr.b,u,tr.lv,tr.st).liq;
-function openTrade(w,lv,t,u,ll){const free=ll!==undefined,st=stakeOf(free?'bobby':'player',G.ci);if(!free){if(S.cash<st)return null;S.cash-=st}const tr={w,b:u,bf:Number(u)/1e4,lv:free?ll:lv,st,free,ll,t0:t,t1:0,s:0n,sf:0,pl:0n,pp:0,open:true};G.tl.push(tr);return tr}
+function openTrade(w,lv,t,u,ll){const free=ll!==undefined;let st=stakeOf(free?'bobby':'player',G.ci);if(!free&&rescueOk()){st=S.cash;lv=1}if(!free){if(S.cash<st)return null;S.cash-=st}const tr={w,b:u,bf:Number(u)/1e4,lv:free?ll:lv,st,free,ll,t0:t,t1:0,s:0n,sf:0,pl:0n,pp:0,open:true};G.tl.push(tr);return tr}
 function settle(tr,why,t,u){if(!tr.open)return;t=t===undefined?G.tn:t;u=u===undefined?G.curU:u;let v,pl;const RES=calculateTradeResult(tr.b,u,tr.lv,tr.st);pl=RES.delta;v=RES.value;if(tr.free){S.cash=S.cash+pl<0n?0n:S.cash+pl}else S.cash+=v;tr.res=RES;tr.open=false;tr.s=u;tr.sf=Number(u)/1e4;tr.t1=t;tr.pl=pl;tr.pp=RES.pct;tr.liq=RES.liq;
  S.hist.unshift({k:'t',w:tr.w,c:COINS[G.ci].n,b:tr.b,s:u,pl:tr.pl,lv:tr.free?tr.ll:tr.lv});if(S.hist.length>60)S.hist.pop();
  if(tr.w==='Sen'){G.pt=null;G.rp+=tr.pl;G.trades++;G.msg=({liq:'Likidasyon! ',manual:'Satıldı: ',time:'Süre doldu, satıldı: '}[why]||'')+sg(tr.pl);notifyPL(tr.pl);sfx('A')}else{G.rbp=null;G.bpl+=tr.pl;G.bn++;setBob(tr.pl>=0n?'happy':'sad',1700)}
  save();if(G.mod==='s')renderMod()}
+/* oneri-2 Sorun 2a: kurtarma turu — yalnız Pebble (ci 0), nakit 1$ ≤ nakit < coin fiyatı: tüm nakit, 1x, yalnız elle (Oto-Tur koşulu S.cash>=c.p değişmedi) */
+function rescueOk(){return G.ci===0&&S.cash<COINS[0].p&&S.cash>=D(1)}
 function buy(){if(G.st!=='active'||G.pt)return;const tr=openTrade('Sen',G.lev,G.tn,G.curU);if(tr){G.pt=tr;G.msg='';sfx('A');ui()}}
 /* ---------- Bobby: enerji (kemik ücretsiz, Bobby'ye tıkla), gizli sapma payı ---------- */
 /* v17: kemik barı yalnızca Bobby açıkken ve tur oynanırken azalır */
@@ -2756,7 +2758,7 @@ function botStep(){while(G.ev.length&&G.ev[0].t<=G.tn){const e=G.ev.shift();if(!
 function ready(){cancelAnimationFrame(G.raf);clearTimeout(G.tm);clearTimeout(G.at);const c=COINS[G.ci];
  Object.assign(G,{st:S.over?'over':'ready',pt:null,rbp:null,p0:c.p,curU:c.p,cur:c.pf,pts:[],tl:[],y0:null,y1:null,tn:0,gt:0,msg:''});
  hideReceipt(1);ui();draw()}
-function start(){const c=COINS[G.ci];if(G.st!=='ready'||S.over||!S.open[G.ci]||S.cash<c.p)return;clearTimeout(G.at);
+function start(){const c=COINS[G.ci];if(G.st!=='ready'||S.over||!S.open[G.ci]||S.cash<(G.ci===0?D(1):c.p))return;clearTimeout(G.at);
  Object.assign(G,{st:'active',rp:0n,trades:0,bpl:0n,bn:0,msg:'',K:genK(G.ci,NPT(G.ci),S.cl[G.ci]),p0:c.p,curU:c.p,cur:c.pf,pts:[{t:0,p:c.pf}],tl:[],pt:null,rbp:null,tn:0,gt:0,news:0,sp:spd(),last:performance.now(),y0:null,y1:null});
  G.ev=robotPlan();clearTimeout(G.tm);G.tm=setTimeout(finish,15000/G.sp);G.raf=requestAnimationFrame(frame);ui()}
 function frame(){G.raf=0;if(G.st!=='active')return;if(PAUSED){G.last=performance.now();G.raf=requestAnimationFrame(frame);return}const now=performance.now();G.gt+=(now-G.last)/1000*G.sp;G.last=now;
@@ -2789,8 +2791,8 @@ function ui(){if(!S.hintOff&&(S.open[1]||S.tot>=D(50)))S.hintOff=1;if(S.set.test
  $('#sackw').classList.remove('on');
  const M=$('#main'),lab=$('#mlab'),c=COINS[G.ci];let cls='',txt='BAŞLA',dis=false,note='';
  if(S.over||G.st==='over'){txt='OYUN BİTTİ';dis=true}
- else if(G.st==='ready'){const ok=S.cash>=c.p;dis=!ok;note=S.cash<c.p?(G.ci===0&&!S.hintOff?'En az $'+cp(c.p)+' gerek. Kedi mamasını kaba götür!':'Yetersiz bakiye · Gerekli: $'+cp(c.p)):'15 sn tur'+(spd()>1?' · oyun saati ×'+spd():'')+'. Sabit fiyattan başlar.'}
- else if(G.st==='active'){if(!G.pt){const ok=S.cash>=stakeOf('player',G.ci);txt='AL · '+fm(G.curU)+(G.lev>1?' ('+G.lev+'x)':'');cls='buy';dis=!ok;note=G.msg||(ok?'Pozisyon: $'+cp(stakeOf('player',G.ci))+' (katalog fiyatı).':'Yeterli nakit yok.')}
+ else if(G.st==='ready'){const rs=rescueOk(),ok=S.cash>=c.p||rs;dis=!ok;note=rs?L('Kurtarma turu: tüm nakitle ($'+cp(S.cash)+') 1x oyna. Ya da kediye mama dök.'):S.cash<c.p?(G.ci===0&&!S.hintOff?L('En az $'+cp(c.p)+' gerek. Mama paketini kediye dök: $1 öde, $2 kazan.'):'Yetersiz bakiye · Gerekli: $'+cp(c.p)):'15 sn tur'+(spd()>1?' · oyun saati ×'+spd():'')+'. Sabit fiyattan başlar.'}
+ else if(G.st==='active'){if(!G.pt){const rs=rescueOk(),ok=S.cash>=stakeOf('player',G.ci)||rs;txt='AL · '+fm(G.curU)+(G.lev>1&&!rs?' ('+G.lev+'x)':'');cls='buy';dis=!ok;note=G.msg||(rs?'Pozisyon: $'+cp(S.cash)+' (tüm nakit, 1x).':ok?'Pozisyon: $'+cp(stakeOf('player',G.ci))+' (katalog fiyatı).':'Yeterli nakit yok.')}
   else{const tr=G.pt,v=eq(tr,G.curU);txt=satTxt(tr);cls='sell '+(v>=tr.st?'up':'dn');note=(tr.lv>1?'Likidasyon: '+fm(tr.b*BigInt(tr.lv-1)/BigInt(tr.lv))+'. ':'')+"15. sn'de otomatik satılır."}}
  else{txt='YENİ TUR';note=S.auto&&S.autoOn&&S.cash>=c.p?'Oto-Tur: '+(+(OTD[S.al-1]/spd()).toFixed(2))+' sn sonra yeni tur…':''}
  if(M.className!==cls)M.className=cls;setMainLab(txt);M.disabled=dis;if(G.pt&&G.st==='active'&&typeof hud==='function')hud();   /* başlık yüzdesi ile SAT aynı anda, aynı fiyattan */
