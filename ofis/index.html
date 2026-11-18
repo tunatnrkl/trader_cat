@@ -11,13 +11,14 @@
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--tx);font:600 14px/1.4 ui-rounded,"Nunito","Trebuchet MS",system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;gap:12px;padding:16px}
 h1{margin:0;font-size:18px;color:var(--au);letter-spacing:.06em}
-.sub{color:var(--tx2);font-size:12px;margin-top:-8px;text-align:center}
+.sub{color:var(--tx2);font-size:12px;text-align:center}
 #wrap{position:relative;width:min(960px,100%);aspect-ratio:16/9;border:4px solid var(--rim);border-radius:14px;overflow:hidden;background:#000}
 canvas{width:100%;height:100%;image-rendering:pixelated;display:block;cursor:pointer}
-.bub{position:absolute;transform:translate(-50%,-100%);background:var(--tx);color:#1A1204;font-size:12px;font-weight:800;padding:4px 8px;border-radius:8px;max-width:220px;white-space:normal;text-align:center;pointer-events:none;border:2px solid #0A1030}
+.bub{position:absolute;transform:translate(-50%,-100%);background:var(--tx);color:#1A1204;font-size:12px;font-weight:800;padding:4px 8px;border-radius:8px;max-width:240px;text-align:center;pointer-events:none;border:2px solid #0A1030;z-index:2}
 .bub:after{content:"";position:absolute;left:50%;bottom:-7px;margin-left:-5px;border:5px solid transparent;border-top-color:var(--tx)}
-.lbl{position:absolute;transform:translateX(-50%);color:var(--au);font-weight:800;font-size:clamp(10px,1.6vw,15px);letter-spacing:.08em;pointer-events:none}
-.bub.me{background:var(--au)}
+.bub.me{background:var(--au)}.bub.me:after{border-top-color:var(--au)}
+.lbl{position:absolute;transform:translateX(-50%);color:var(--au);font-weight:800;font-size:clamp(9px,1.4vw,13px);letter-spacing:.08em;pointer-events:none}
+.nm{position:absolute;transform:translateX(-50%);color:var(--tx2);font-size:clamp(8px,1.1vw,11px);font-weight:700;pointer-events:none;white-space:nowrap}
 #panel{width:min(960px,100%);display:grid;grid-template-columns:1fr 1fr;gap:12px}
 @media(max-width:640px){#panel{grid-template-columns:1fr}}
 .box{background:var(--pn);border:3px solid var(--rim);border-radius:12px;padding:10px}
@@ -26,112 +27,121 @@ canvas{width:100%;height:100%;image-rendering:pixelated;display:block;cursor:poi
 .row{display:flex;gap:8px;margin-top:8px}
 input{flex:1;min-width:0;background:#070A1A;border:2px solid #2A3F8F;color:var(--tx);border-radius:8px;padding:8px;font:inherit}
 button{background:var(--au);color:#1A1204;border:0;border-radius:8px;padding:8px 12px;font:inherit;font-weight:800;cursor:pointer;min-height:40px}
-button.g{background:#1B2C6B;color:var(--tx2);border:2px solid #6F8FE0}
-#log{max-height:150px;overflow:auto;font-size:12px;color:var(--tx2)}
+#log{max-height:170px;overflow:auto;font-size:12px;color:var(--tx2)}
 #log div{border-bottom:1px solid #18255A;padding:3px 0}
 #log span{color:var(--tx)}
+#note{font-size:12px;color:var(--tx2);margin-top:6px}
 </style>
 </head>
 <body>
 <h1>EKİP OFİSİ</h1>
-<div class="sub">Yalnız yönetim paneli; oyuna etkisi yok. Bir karaktere tıkla ve ona bir şey söyle.</div>
+<div class="sub">Yönetim paneli, oyuna etkisi yok. Bir karaktere tıkla ve konuş. Yönetici kendi karar verir: cevaplar, iletir, işe alır ya da çıkarır.</div>
 <div id="wrap"><canvas id="cv" width="320" height="180"></canvas></div>
 <div id="panel">
   <div class="box">
     <div>Konuştuğun: <b id="who">—</b></div>
     <div class="row"><input id="msg" placeholder="Önce bir karaktere tıkla…" disabled><button id="send" disabled>Söyle</button></div>
-    <div class="row"><button class="g" id="copy">Son mesajı kopyala</button></div>
-    <div class="sub" style="margin-top:6px;text-align:left">Gerçek ekibe iletmek için kopyalayıp Claude sohbetine yapıştır.</div>
+    <div id="note">Yazdıkların gerçek ekip için not olarak kaydedilir; Claude sohbetinde "ofisi kontrol et" de.</div>
   </div>
   <div class="box"><b>Ofis kaydı</b><div id="log"></div></div>
 </div>
 <script>
-const cv=document.getElementById('cv'),x=cv.getContext('2d'),W=320,H=180,wrap=document.getElementById('wrap');
-x.imageSmoothingEnabled=false;
-setTimeout(()=>ROOMS.forEach(r=>{const d=document.createElement('div');d.className='lbl';d.textContent=r.n;d.style.left=((r.x+r.w/2)/W*100)+'%';d.style.top=((r.y-12)/H*100)+'%';wrap.appendChild(d)}));
-// --- odalar ---
-const ROOMS=[
- {n:'YÖNETİCİ',x:6,y:24,w:92,h:66,f:'#1B2C6B'},
- {n:'TASARIM',x:114,y:24,w:92,h:66,f:'#18255A'},
- {n:'TARTIŞMA ODASI',x:222,y:24,w:92,h:66,f:'#1F2A5C'}];
-const FLOORY=150;
-// --- karakterler ---
-const P=(n,role,hx,hy,hair,body,acc)=>({n,role,x:hx,y:hy,hx,hy,tx:hx,ty:hy,hair,body,acc,f:0,q:[],say:null,sayT:0,el:null});
-const C={
- yon:P('Yönetici','yon',40,74,'#3A2214','#2A4FB8','#F2B83C'),
- tas:P('Tasarımcı','tas',156,74,'#C0453F','#F59A38','#F4EEE3'),
- pa:P('Psikolog A','pa',248,74,'#2B1D16','#45D6A0','#0F6158'),
- pb:P('Psikolog B','pb',290,74,'#E9B596','#6EC8F0','#17243f')};
-const ALL=Object.values(C);
-function drawRoom(r){x.fillStyle=r.f;x.fillRect(r.x,r.y,r.w,r.h);x.strokeStyle='#3F6BD8';x.lineWidth=2;x.strokeRect(r.x+1,r.y+1,r.w-2,r.h-2);
- x.fillStyle='#080B1E';x.fillRect(r.x+r.w/2-8,r.y+r.h-2,16,4); // kapı
-}
-function desk(dx,dy,mon){x.fillStyle='#6B4128';x.fillRect(dx,dy,26,8);x.fillStyle='#3A2214';x.fillRect(dx+2,dy+8,3,6);x.fillRect(dx+21,dy+8,3,6);
- if(mon){x.fillStyle='#0A1030';x.fillRect(dx+8,dy-10,12,9);x.fillStyle=mon;x.fillRect(dx+9,dy-9,10,6)}}
-function scene(t){x.fillStyle='#080B1E';x.fillRect(0,0,W,H);
- x.fillStyle='#0D1230';x.fillRect(0,96,W,H-96);x.fillStyle='#131A40';for(let i=0;i<W;i+=20)x.fillRect(i,96,1,H-96);
- ROOMS.forEach(drawRoom);
- desk(28,66,'#45D6A0');desk(144,66,(t/400|0)%2?'#F2B83C':'#3F6BD8');
- x.fillStyle='#6B4128';x.fillRect(254,70,34,10);x.fillStyle='#F4EEE3';x.fillRect(262,72,8,5); // toplantı masası + kâğıt
- x.fillStyle='#45D6A0';x.fillRect(10,30,6,10);x.fillStyle='#F2B83C';x.fillRect(196,30,6,8); // bitki / dosya
-}
-function person(p,t){const px=Math.round(p.x),py=Math.round(p.y),mv=p.q.length>0,st=mv?((t/90|0)%2):0;
+const cv=document.getElementById('cv'),x=cv.getContext('2d'),W=320,H=180,wrap=document.getElementById('wrap');x.imageSmoothingEnabled=false;
+const CORY=86;
+const ROOMS={'Yönetici':{x:6,y:16,w:96,h:56,f:'#1B2C6B'},'Tasarım':{x:112,y:16,w:96,h:56,f:'#18255A'},'Tartışma':{x:218,y:16,w:96,h:56,f:'#1F2A5C'},
+ 'Yazılım':{x:6,y:100,w:96,h:56,f:'#162257'},'Analiz':{x:112,y:100,w:96,h:56,f:'#1A2660'},'Test':{x:218,y:100,w:96,h:56,f:'#14204F'}};
+const DEFAULT=[{ad:'Yönetici',rol:'Ekibi yönetir, işi böler, kabul eder',oda:'Yönetici'},{ad:'Tasarımcı',rol:'Yalnız görsel tasarım',oda:'Tasarım'},
+ {ad:'Psikolog A',rol:'Oyun hissi ve motivasyon',oda:'Tartışma'},{ad:'Psikolog B',rol:'Göz sağlığı ve ergonomi',oda:'Tartışma'},
+ {ad:'Yazılımcı',rol:'Mantık, ekonomi, hata düzeltme',oda:'Yazılım'},{ad:'Rakip Analisti',rol:'Rakip idle oyunları analiz eder',oda:'Analiz'},
+ {ad:'Test Robotu',rol:'Otomatik testler (63 kontrol)',oda:'Test',bot:1}];
+const PAL=[['#3A2214','#2A4FB8','#F2B83C'],['#C0453F','#F59A38','#F4EEE3'],['#2B1D16','#45D6A0','#0F6158'],['#E9B596','#6EC8F0','#17243f'],['#1A1420','#8E6CF0','#F4EEE3'],['#6B4128','#E5484D','#F4EEE3'],['#B07A4A','#62CDAA','#0F1838']];
+const did=s=>String(s).normalize('NFD').replace(/[^A-Za-z0-9]+/g,'-').slice(0,60)||'x';
+const hash=s=>[...s].reduce((a,c)=>(a*31+c.charCodeAt(0))>>>0,7);
+let people=[],sel=null,busy=false;
+function slot(oda,n){const r=ROOMS[oda]||ROOMS['Analiz'];return{x:r.x+18+(n%4)*20,y:r.y+r.h-14}}
+function makePerson(m,enter){const n=people.filter(p=>p.oda===m.oda).length,s=slot(m.oda,n),pal=PAL[hash(m.ad)%PAL.length];
+ const p={...m,hx:s.x,hy:s.y,x:enter?160:s.x,y:enter?H+10:s.y,hair:pal[0],body:pal[1],acc:pal[2],q:[],el:null,nm:null,sayT:0};
+ people.push(p);if(enter)goTo(p,s.x,s.y);return p}
+function roster(list){people.forEach(p=>{p.el&&p.el.remove();p.nm&&p.nm.remove()});people=[];list.forEach(m=>makePerson(m,false))}
+const byName=n=>{n=String(n||'').toLowerCase();return people.find(p=>p.ad.toLowerCase()===n)||people.find(p=>n&&p.ad.toLowerCase().includes(n.split(' ')[0]))};
+// ---- çizim ----
+function scene(t){x.fillStyle='#080B1E';x.fillRect(0,0,W,H);x.fillStyle='#0D1230';x.fillRect(0,CORY-10,W,20);
+ for(const[n,r]of Object.entries(ROOMS)){x.fillStyle=r.f;x.fillRect(r.x,r.y,r.w,r.h);x.strokeStyle='#3F6BD8';x.lineWidth=2;x.strokeRect(r.x+1,r.y+1,r.w-2,r.h-2);
+  x.fillStyle='#0D1230';x.fillRect(r.x+r.w/2-8,r.y<CORY?r.y+r.h-2:r.y-2,16,4);
+  x.fillStyle='#6B4128';x.fillRect(r.x+r.w-34,r.y+16,26,7);x.fillStyle='#0A1030';x.fillRect(r.x+r.w-26,r.y+7,10,8);
+  x.fillStyle=n==='Test'?((t/300|0)%2?'#45D6A0':'#F2B83C'):'#3F6BD8';x.fillRect(r.x+r.w-25,r.y+8,8,5)}}
+function person(p,t){const px=Math.round(p.x),py=Math.round(p.y),st=p.q.length?((t/90|0)%2):0;
  x.fillStyle='rgba(0,0,0,.35)';x.fillRect(px-5,py+13,10,2);
- x.fillStyle='#1A1420';x.fillRect(px-3,py+8,2,5-st);x.fillRect(px+1,py+8,2,4+st); // bacak
- x.fillStyle=p.body;x.fillRect(px-4,py,8,9);x.fillStyle=p.acc;x.fillRect(px-1,py+1,2,4);
- x.fillStyle='#F0C9A8';x.fillRect(px-3,py-7,6,7);x.fillStyle=p.hair;x.fillRect(px-3,py-8,6,3);x.fillRect(px-3,py-6,1,3);
- x.fillStyle='#1A1420';x.fillRect(px-2+(p.fx||0),py-4,1,1);x.fillRect(px+1+(p.fx||0),py-4,1,1);
+ if(p.bot){x.fillStyle='#B4C4F0';x.fillRect(px-4,py-6,8,7);x.fillStyle='#45D6A0';x.fillRect(px-2,py-4,1,1);x.fillRect(px+1,py-4,1,1);x.fillStyle='#6F8FE0';x.fillRect(px-4,py+1,8,8);x.fillRect(px-3,py+9,2,4);x.fillRect(px+1,py+9,2,4)}
+ else{x.fillStyle='#1A1420';x.fillRect(px-3,py+8,2,5-st);x.fillRect(px+1,py+8,2,4+st);x.fillStyle=p.body;x.fillRect(px-4,py,8,9);x.fillStyle=p.acc;x.fillRect(px-1,py+1,2,4);
+  x.fillStyle='#F0C9A8';x.fillRect(px-3,py-7,6,7);x.fillStyle=p.hair;x.fillRect(px-3,py-8,6,3);x.fillRect(px-3,py-6,1,3);x.fillStyle='#1A1420';x.fillRect(px-2,py-4,1,1);x.fillRect(px+1,py-4,1,1)}
  if(sel===p){x.strokeStyle='#F2B83C';x.lineWidth=1;x.strokeRect(px-6,py-10,12,26)}}
-// --- hareket (koridor üzerinden) ---
-function goTo(p,tx,ty,then){const door=r=>({x:r.x+r.w/2,y:r.y+r.h+6});const rFrom=roomOf(p.x),rTo=roomOf(tx);
- const pts=[];if(rFrom!==rTo){if(rFrom)pts.push(door(rFrom));if(rTo)pts.push(door(rTo))}pts.push({x:tx,y:ty});
- p.q.push(...pts.map(v=>({...v})));if(then)p.q.push({fn:then})}
-function roomOf(px){return ROOMS.find(r=>px>=r.x&&px<=r.x+r.w)}
-const SPEED=90; // px/sn — hızlı
-function step(p,dt){while(p.q.length&&p.q[0].fn){const f=p.q.shift().fn;f()}if(!p.q.length)return;
- const g=p.q[0],dx=g.x-p.x,dy=g.y-p.y,d=Math.hypot(dx,dy),s=SPEED*dt;p.fx=Math.sign(dx);
- if(d<=s){p.x=g.x;p.y=g.y;p.q.shift();while(p.q.length&&p.q[0].fn){const f=p.q.shift().fn;f()}}else{p.x+=dx/d*s;p.y+=dy/d*s}}
-// --- konuşma balonu ---
-function say(p,txt,ms=2600,me=false){if(!p.el){p.el=document.createElement('div');p.el.className='bub';wrap.appendChild(p.el)}
- p.el.textContent=txt;p.el.classList.toggle('me',me);p.el.style.display='block';p.sayT=performance.now()+ms;log(p.n,txt)}
-function place(){const k=wrap.clientWidth/W;ALL.concat(ME).forEach(p=>{if(!p.el)return;if(performance.now()>p.sayT){p.el.style.display='none';return}
- p.el.style.left=(p.x*k)+'px';p.el.style.top=((p.y-11)*k)+'px'})}
-const logEl=document.getElementById('log');
-function log(n,t){const d=document.createElement('div');d.innerHTML='<b></b> <span></span>';d.firstChild.textContent=n+':';d.lastChild.textContent=t;logEl.prepend(d)}
-// --- senaryo: kendi kendine dönen günlük işler ---
-const ISLER=['Tur sonu raporunu temaya uydur','Mağazayı masaüstünde sıkılaştır','Bitiş ekranına istatistik ekle','Robot grafiklerini sabitle','Çocuksuluğu 7\'den 6\'ya çek'];
-const TARTISMA=[['pa','Kâr nane yeşili ▲ olsun, ödül gibi hissettirsin.'],['pb','Katılıyorum ama zarar kehribar ▼, alarm yok.'],['pa','Altın sadece fiyat ve başlıkta kalsın.'],['pb','Kontrast en az 4.5:1, yoksa göz yorulur.'],['pa','Bitişte kap taşsın, hayvanlar yesin!'],['pb','Yavaş ve sakin olsun, flaş yok.']];
-let busy=false,ti=0,ji=0;
-function managerTask(txt,fromUser){busy=true;const y=C.yon;
- say(y,fromUser?'Tamam, hemen tasarımcıya iletiyorum!':'Yeni iş var, tasarımcıya gidiyorum.');
- setTimeout(()=>goTo(y,C.tas.hx-14,C.tas.hy,()=>{say(y,(fromUser?'Patron diyor ki: ':'')+txt);
-  setTimeout(()=>{say(C.tas,'Anlaşıldı, başlıyorum! Psikologlara da danışırım.');
-   setTimeout(()=>goTo(y,y.hx,y.hy,()=>{busy=false}),1400)},1600)}),700)}
-function psychReport(){busy=true;const a=C.pa;say(a,'Hadi oyunu tartışıp yöneticiye rapor verelim.');
- setTimeout(()=>{say(C.pb,'Tamam, ortak tavsiyeyi sen götür.');
-  setTimeout(()=>goTo(a,C.yon.hx+14,C.yon.hy,()=>{say(a,'Ortak tavsiye hazır: canlı renk, yormayan kontrast.');
-   setTimeout(()=>{say(C.yon,'Harika, tasarımcıya veriyorum.');setTimeout(()=>goTo(a,a.hx,a.hy,()=>{busy=false}),1000)},1500)}),1200)},1500)}
-setInterval(()=>{if(busy)return;const r=Math.random();
- if(r<.45){const[k,t]=TARTISMA[ti++%TARTISMA.length];say(C[k],t)}
- else if(r<.75)managerTask(ISLER[ji++%ISLER.length],false);
- else psychReport()},4200);
-// --- kullanıcı etkileşimi ---
-let sel=null;const ME={n:'Sen',x:160,y:FLOORY,el:null,sayT:0};
-const who=document.getElementById('who'),inp=document.getElementById('msg'),btn=document.getElementById('send');let last='';
+// ---- hareket: oda kapısı → koridor → hedef ----
+function roomAt(px,py){return Object.values(ROOMS).find(r=>px>=r.x&&px<=r.x+r.w&&py>=r.y&&py<=r.y+r.h)}
+function goTo(p,tx,ty,then){const a=roomAt(p.x,p.y),b=roomAt(tx,ty),pts=[];
+ if(a!==b||!a){pts.push({x:a?a.x+a.w/2:p.x,y:CORY});pts.push({x:b?b.x+b.w/2:tx,y:CORY})}
+ pts.push({x:tx,y:ty});p.q.push(...pts);if(then)p.q.push({fn:then})}
+function step(p,dt){const run=()=>{while(p.q.length&&p.q[0].fn)p.q.shift().fn()};run();if(!p.q.length)return;
+ const g=p.q[0],dx=g.x-p.x,dy=g.y-p.y,d=Math.hypot(dx,dy),s=110*dt;if(d<=s){p.x=g.x;p.y=g.y;p.q.shift();run()}else{p.x+=dx/d*s;p.y+=dy/d*s}}
+const wait=ms=>new Promise(r=>setTimeout(r,ms)),walk=(p,tx,ty)=>new Promise(r=>goTo(p,tx,ty,r));
+// ---- balon ve kayıt ----
+const ME={ad:'Sen',x:0,y:0,el:null,sayT:0};
+function say(p,txt,ms){txt=String(txt||'');ms=ms||Math.min(6500,1800+txt.length*45);if(!p.el){p.el=document.createElement('div');p.el.className='bub';wrap.appendChild(p.el)}
+ p.el.textContent=txt;p.el.classList.toggle('me',p===ME);p.el.style.display='block';p.sayT=performance.now()+ms;log(p.ad,txt)}
+function place(){const k=wrap.clientWidth/W,now=performance.now();people.concat(ME).forEach(p=>{if(p.el){if(now>p.sayT)p.el.style.display='none';else{p.el.style.left=(p.x*k)+'px';p.el.style.top=((p.y-11)*k)+'px'}}
+ if(p!==ME){if(!p.nm){p.nm=document.createElement('div');p.nm.className='nm';wrap.appendChild(p.nm)}p.nm.textContent=p.ad;p.nm.style.left=(p.x*k)+'px';p.nm.style.top=((p.y+15)*k)+'px'}})}
+const logEl=document.getElementById('log');function log(n,t){const d=document.createElement('div');d.innerHTML='<b></b> <span></span>';d.firstChild.textContent=n+':';d.lastChild.textContent=t;logEl.prepend(d)}
+// ---- yetenekler (varsa) ----
+let sample=null,db=null;
+(async()=>{try{sample=await claude.use('sample')}catch(e){}})();
+(async()=>{try{db=await claude.use('db');if(!db)return;db.collection('ekip').onSnapshot(s=>{const l=s.docs.map(d=>d.data()).filter(m=>m&&m.ad&&m.aktif!==false);if(l.length&&!busy)roster(l)},()=>{})}catch(e){}})();
+async function kaydet(kime,metin,karar){if(!db)return;try{await db.collection('mesajlar').add({kime,metin,karar:karar||'',t:Date.now(),durum:'yeni'})}catch(e){}}
+// ---- yönetici beyni ----
+const kadroText=()=>people.map(p=>`- ${p.ad} (${p.oda}): ${p.rol}`).join('\n');
+const sonKayit=()=>[...logEl.children].slice(0,6).map(d=>d.textContent).reverse().join('\n');
+async function yoneticiKarar(metin){const prompt=`Sen "Trading Idle" adlı pixel art idle trading oyunu geliştiren küçük bir yapay zekâ ekibinin YÖNETİCİSİSİN. Kullanıcı patronun. Ekibi yönetme yetkin var: işe alabilir, çıkarabilir, ekipleri bölebilirsin; en verimli düzeni hedefle.
+Kadro:\n${kadroText()}\nOdalar: ${Object.keys(ROOMS).join(', ')}.\nSon konuşmalar:\n${sonKayit()}\n
+Patronun sana mesajı: "${metin}"\n
+Kural: Mesaj organizasyon, yetki, ekip ya da sana soru ise KENDİN cevapla, kimseye iletme. Yalnız gerçekten bir role ait somut iş ise o role ilet ve işi o rolün diliyle kısaca anlat. Gerekirse işe al (yeni rol, uygun oda) ya da çıkar (Yönetici çıkarılamaz). Doğal, kısa, Türkçe konuş (en çok 2 cümle).
+Yalnız şu JSON'u döndür: {"cevap":"patrona söyleyeceğin","eylem":"yok|ilet|ise_al|cikar","kime":"kadrodaki ad (ilet/cikar için)","iletilecek":"o kişiye söyleyeceğin","yeni":{"ad":"","rol":"","oda":""}}`;
+ return await sample.json(prompt,{modelTier:'quick',cache:false})}
+async function rolCevap(p,metin){if(!sample)return null;try{const r=await sample(`Sen "Trading Idle" oyununu geliştiren ekipte ${p.ad}sın; görevin: ${p.rol}. Biri sana şunu dedi: "${metin}". Kendi rolünle, doğal ve kısa (1-2 cümle) Türkçe cevap ver. Yetkin dışındaysa yöneticiye yönlendir. Yalnız cevabı yaz.`,{modelTier:'quick',cache:false});return r.text.trim()}catch(e){return null}}
+async function yoneticiyeSoyle(metin){const y=byName('Yönetici');busy=true;let k=null;
+ if(sample){say(y,'Hmm, düşünüyorum…',1500);try{k=await yoneticiKarar(metin)}catch(e){k=null}}
+ if(!k||!k.cevap)k={cevap:'Not aldım; gerçek ekiple konuşunca uygularım.',eylem:'yok'};
+ kaydet('Yönetici',metin,JSON.stringify(k));say(y,k.cevap);await wait(2400);
+ try{if(k.eylem==='ilet'){const h=byName(k.kime);if(h&&h!==y){await walk(y,h.x+(h.x>y.hx?-12:12),h.y);say(y,k.iletilecek||metin);await wait(2600);
+   const c=await rolCevap(h,k.iletilecek||metin);say(h,c||'Anlaşıldı, başlıyorum!');await wait(2200);await walk(y,y.hx,y.hy)}}
+  else if(k.eylem==='ise_al'&&k.yeni&&k.yeni.ad){const m={ad:k.yeni.ad,rol:k.yeni.rol||'Yeni rol',oda:ROOMS[k.yeni.oda]?k.yeni.oda:'Analiz'};
+   const p=makePerson(m,true);await wait(1800);say(p,'Merhaba! Ben '+m.ad+'. Göreve hazırım.');if(db)try{await db.collection('ekip').doc(did(m.ad)).set({...m,aktif:true,kaynak:'ofis'})}catch(e){}}
+  else if(k.eylem==='cikar'){const h=byName(k.kime);if(h&&h.ad!=='Yönetici'){say(h,'Anlaşıldı, eşyalarımı topluyorum.');await wait(1500);await walk(h,160,H+20);
+   people=people.filter(p=>p!==h);h.el&&h.el.remove();h.nm&&h.nm.remove();if(db)try{await db.collection('ekip').doc(did(h.ad)).set({ad:h.ad,rol:h.rol,oda:h.oda,aktif:false,kaynak:'ofis'})}catch(e){}}}}catch(e){}
+ busy=false}
+// ---- kendi kendine ofis hayatı ----
+const TARTISMA=[['Psikolog A','Kâr anında ödül hissi şart: nane yeşili ▲.'],['Psikolog B','Katılıyorum, ama zararda alarm yok; kehribar ▼ yeter.'],['Psikolog A','Bitiş ekranı kutlama gibi olmalı!'],['Psikolog B','Olsun, ama flaş yok, sakin.'],['Rakip Analisti','Rakiplerde maliyet çarpanı 1,07–1,15 arası.'],['Yazılımcı','Tur başına kâr tavanını simülasyonda deneyelim mi?']];
+const ISLER=[['Tasarımcı','Bitiş ekranına son rötuşları yap.'],['Yazılımcı','Coin geçişini yavaşlatmayı simülasyonla dene.'],['Rakip Analisti','Rakip idle oyunların temposunu çıkar.'],['Test Robotu','63 kontrolü çalıştır.']];
+let ti=0,ji=0;
+async function rapor(){busy=true;const a=byName('Psikolog A'),b=byName('Psikolog B'),y=byName('Yönetici');if(!a||!b||!y){busy=false;return}
+ say(a,'Hadi oyunu tartışıp yöneticiye rapor verelim.');await wait(1800);say(b,'Tamam, ortak tavsiyeyi sen götür.');await wait(1500);
+ await walk(a,y.hx+14,y.hy);say(a,'Ortak tavsiye hazır: canlı renk, yormayan kontrast.');await wait(2200);say(y,'Harika, ilgili kişiye veriyorum.');await wait(1200);await walk(a,a.hx,a.hy);busy=false}
+async function isVer(){busy=true;const[n,t]=ISLER[ji++%ISLER.length],h=byName(n),y=byName('Yönetici');if(!h||!y){busy=false;return}
+ await walk(y,h.hx+(h.hx>y.hx?-12:12),h.hy);say(y,t);await wait(2200);say(h,h.bot?'BİP. 63/63 GEÇTİ.':'Tamamdır!');await wait(1400);await walk(y,y.hx,y.hy);busy=false}
+setInterval(()=>{if(busy)return;const r=Math.random();if(r<.5){const[n,t]=TARTISMA[ti++%TARTISMA.length],p=byName(n);if(p)say(p,t)}else if(r<.78)isVer();else rapor()},4500);
+// ---- kullanıcı ----
+const who=document.getElementById('who'),inp=document.getElementById('msg'),btn=document.getElementById('send');
 cv.addEventListener('click',e=>{const r=cv.getBoundingClientRect(),mx=(e.clientX-r.left)/r.width*W,my=(e.clientY-r.top)/r.height*H;
- sel=ALL.find(p=>Math.abs(p.x-mx)<8&&my>p.y-12&&my<p.y+16)||null;who.textContent=sel?sel.n:'—';inp.disabled=btn.disabled=!sel;
- inp.placeholder=sel?sel.n+'\'a ne söylemek istersin?':'Önce bir karaktere tıkla…';if(sel)inp.focus()});
-function send(){const t=inp.value.trim();if(!t||!sel)return;inp.value='';last=sel.n+'\'a: '+t;
- ME.x=sel.x;ME.y=sel.y-14;say(ME,t,2200,true);const p=sel;
- setTimeout(()=>{if(p===C.yon)managerTask(t,true);
-  else if(p===C.tas)say(p,'Not aldım: "'+t.slice(0,40)+(t.length>40?'…':'')+'". Bir sonraki adımda bakarım.');
-  else{say(p,'İyi soru, diğer psikologla tartışalım.');setTimeout(()=>say(p===C.pa?C.pb:C.pa,'Bence de, raporumuza ekleyelim.'),1800)}},900)}
+ sel=people.find(p=>Math.abs(p.x-mx)<8&&my>p.y-12&&my<p.y+16)||null;who.textContent=sel?sel.ad:'—';inp.disabled=btn.disabled=!sel;
+ inp.placeholder=sel?sel.ad+' ile konuş…':'Önce bir karaktere tıkla…';if(sel)inp.focus()});
+let waitMine=null;
+async function send(){const t=inp.value.trim();if(!t||!sel)return;while(busy)await wait(200);inp.value='';const p=sel;ME.x=p.x;ME.y=p.y-16;say(ME,t);await wait(700);
+ if(p.ad==='Yönetici')return yoneticiyeSoyle(t);
+ busy=true;kaydet(p.ad,t);const c=await rolCevap(p,t);say(p,c||(p.bot?'BİP. Ben yalnız test çalıştırırım.':'Not aldım, yöneticiyle konuşurum.'));busy=false}
 btn.onclick=send;inp.addEventListener('keydown',e=>{if(e.key==='Enter')send()});
-document.getElementById('copy').onclick=()=>{if(!last)return;navigator.clipboard&&navigator.clipboard.writeText(last).catch(()=>{});log('Ofis','Kopyalandı: '+last)};
-// --- döngü ---
-let lt=performance.now();function loop(t){const dt=Math.min(.05,(t-lt)/1000);lt=t;ALL.forEach(p=>step(p,dt));scene(t);ALL.forEach(p=>person(p,t));place();requestAnimationFrame(loop)}
+setTimeout(()=>{for(const[n,r]of Object.entries(ROOMS)){const d=document.createElement('div');d.className='lbl';d.textContent=n.toLocaleUpperCase('tr');d.style.left=((r.x+r.w/2)/W*100)+'%';d.style.top=((r.y+2)/H*100)+'%';wrap.appendChild(d)}});
+roster(DEFAULT);
+let lt=performance.now();function loop(t){const dt=Math.min(.05,(t-lt)/1000);lt=t;people.forEach(p=>step(p,dt));scene(t);people.forEach(p=>person(p,t));place();requestAnimationFrame(loop)}
 requestAnimationFrame(loop);
-say(C.yon,'Günaydın ekip! Bugün oyunu cilalıyoruz.');
+setTimeout(()=>{const y=byName('Yönetici');if(y)say(y,'Günaydın ekip! Yeni kadroyla devam: Yazılımcı ve Rakip Analisti aramızda.')},400);
 </script>
 </body>
 </html>
