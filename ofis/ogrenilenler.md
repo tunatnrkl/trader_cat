@@ -12,3 +12,5 @@
 - Oyun tasarımcısı Kat.1 eşiğini 150→100 indirdi, iyi oyuncu hızlandı; kullanıcının "%50 daha yavaş" kararına ters → kullanıcı kararlarını brifte "DEĞİŞMEZ" diye yaz, iyi oyuncu için "hiçbir geçiş hızlanmaz" kuralı → kesin
 - sim.js varsayılanları oyundan sapmıştı (Pebble Sv.1 / kaldıraç ×2; oyunda Sv.2 / ×1), teşhis süreleri ~%6 şişti → ölçmeden önce sim varsayımlarını oyunla karşılaştır → kesin
 - Testçi botu Pebble'da kaldı, coin değiştirmedi → teşhiste bot coin geçişi de yapsın → deneme
+- Sim'de Kat.1 %23 kısaldı ama Testçi puanı değişmedi: botlar mağazadan hiç almadı ve 1–5 ölçeği küçük gelişmeyi göstermiyor → teşhis botu mağaza alımı da yapsın; puanla birlikte ölçülebilir göstergeler (dk, mama dönüşü) de raporlansın → deneme
+- Kurtarma turu bilgisayar onarılmadan önce de açılıyordu (S.fix kontrolü yoktu); Testçinin "açılışta mama gerekmedi" notundan yakalandı → oyuna yeni kapı eklerken açılış (S.fix=0) durumunu da test et → kesin

@@ -2742,7 +2742,7 @@ function settle(tr,why,t,u){if(!tr.open)return;t=t===undefined?G.tn:t;u=u===unde
  if(tr.w==='Sen'){G.pt=null;G.rp+=tr.pl;G.trades++;G.msg=({liq:'Likidasyon! ',manual:'Satıldı: ',time:'Süre doldu, satıldı: '}[why]||'')+sg(tr.pl);notifyPL(tr.pl);sfx('A')}else{G.rbp=null;G.bpl+=tr.pl;G.bn++;setBob(tr.pl>=0n?'happy':'sad',1700)}
  save();if(G.mod==='s')renderMod()}
 /* oneri-2 Sorun 2a: kurtarma turu — yalnız Pebble (ci 0), nakit 1$ ≤ nakit < coin fiyatı: tüm nakit, 1x, yalnız elle (Oto-Tur koşulu S.cash>=c.p değişmedi) */
-function rescueOk(){return G.ci===0&&S.cash<COINS[0].p&&S.cash>=D(1)}
+function rescueOk(){return !!S.fix&&G.ci===0&&S.cash<COINS[0].p&&S.cash>=D(1)}
 function buy(){if(G.st!=='active'||G.pt)return;const tr=openTrade('Sen',G.lev,G.tn,G.curU);if(tr){G.pt=tr;G.msg='';sfx('A');ui()}}
 /* ---------- Bobby: enerji (kemik ücretsiz, Bobby'ye tıkla), gizli sapma payı ---------- */
 /* v17: kemik barı yalnızca Bobby açıkken ve tur oynanırken azalır */
@@ -2758,7 +2758,7 @@ function botStep(){while(G.ev.length&&G.ev[0].t<=G.tn){const e=G.ev.shift();if(!
 function ready(){cancelAnimationFrame(G.raf);clearTimeout(G.tm);clearTimeout(G.at);const c=COINS[G.ci];
  Object.assign(G,{st:S.over?'over':'ready',pt:null,rbp:null,p0:c.p,curU:c.p,cur:c.pf,pts:[],tl:[],y0:null,y1:null,tn:0,gt:0,msg:''});
  hideReceipt(1);ui();draw()}
-function start(){const c=COINS[G.ci];if(G.st!=='ready'||S.over||!S.open[G.ci]||S.cash<(G.ci===0?D(1):c.p))return;clearTimeout(G.at);
+function start(){const c=COINS[G.ci];if(G.st!=='ready'||S.over||!S.open[G.ci]||S.cash<(G.ci===0&&S.fix?D(1):c.p))return;clearTimeout(G.at);
  Object.assign(G,{st:'active',rp:0n,trades:0,bpl:0n,bn:0,msg:'',K:genK(G.ci,NPT(G.ci),S.cl[G.ci]),p0:c.p,curU:c.p,cur:c.pf,pts:[{t:0,p:c.pf}],tl:[],pt:null,rbp:null,tn:0,gt:0,news:0,sp:spd(),last:performance.now(),y0:null,y1:null});
  G.ev=robotPlan();clearTimeout(G.tm);G.tm=setTimeout(finish,15000/G.sp);G.raf=requestAnimationFrame(frame);ui()}
 function frame(){G.raf=0;if(G.st!=='active')return;if(PAUSED){G.last=performance.now();G.raf=requestAnimationFrame(frame);return}const now=performance.now();G.gt+=(now-G.last)/1000*G.sp;G.last=now;

@@ -11,3 +11,4 @@
 | Testçi (Sonnet) | Teşhis 1 | — | Dürüst sınırlar yazdı; gerçek oynanış 4–5 dk kaldı (hedef 10–15), bot coin değiştirmedi |
 | Oyun tasarımcısı (Opus high) | oneri-2 Düzeltme 1 | oneri-2 ilk hali (UNLK Kat.1 100: kullanıcı kararına ters) | Ölçümü titiz, sim hatasını kendisi buldu; kullanıcı kararını brifte daha açık yazmak gerek |
 | Yazılımcı (Opus medium) | Kurtarma turu + kaldıraç seçici düzeltmesi | — | Tasarımdan gerekçeli sapma (telefonda taşan metni kısalttı); görünmeyen ipucu bulgusu yararlı |
+| Testçi (Sonnet) | Teşhis 2 | — | Coin geçişi ve kurtarma ölçüldü; açılış açığını dolaylı yakaladı; botlar mağaza almıyor (sonraki: alım ekle) |

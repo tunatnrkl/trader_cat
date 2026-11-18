@@ -16,3 +16,4 @@
 | 11-18 | Robot ekleme fiyatı öncekinin %8 fazlası; coine geçiş hâlâ çok hızlı | +%8 zincir; UNLK ×1,5 (etkisi küçük: +%4–9 süre). Hâlâ açık. |
 | 11-18 | Ofis: yönetici "ekip dengeli" deyip hiçbir şey yapmadı, mesajı saçma iletti | Pasif yönetici istemiyor; yönetici düşünsün, karar versin. |
 | 11-18 | Yaşayan ofis promptu: tek amaç oynanış zevki, 8 ölçüt, ölçerek ilerle | Bu oturumdan itibaren çalışma biçimi. |
+| 11-18 | "Daha akıllı olsun ofis ve GitHub'a ekleyen biri de olsun" | Ofis gerçek veriyi okuyor (puan, görev, GitHub, ders, önceki karar); Sürüm sorumlusu (araclar/surum.sh) işe alındı. |
