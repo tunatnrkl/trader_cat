@@ -18,9 +18,9 @@
 4. Yeni tur: 4 tasarımcı kazanan üzerinden 4 farklı iyileştirme varyantı/alan yapar → tekrar tartışma → birleştir. Kullanıcı durdurana kadar.
 
 ## Şu an
-- Tur 1: 4 konsept yapılıyor (1 Gece Arcade—örneğe yakın, 2 Pastel Cozy Gündüz, 3 Tok Mobil Oyun, 4 Lofi Akşam Odası). Sonra psikolog tartışması.
-- Nabız: send_later 90 dk (bekleyen: trig_01PBqfhmEKX9u723Xk65Ddwu). Yeni nabız kurmadan önce eskisini delete_trigger ile sil, id'yi buraya yaz.
-- Konsept 3 bitti (63/63). Konsept 1, 2, 4 saat 03:xx'te 5 saatlik limite takıldı; 04:58'de SendMessage ile devam ettirildi.
+- Tur 1 bitti: 4 konsept + psikolog tartışması (docs/tasarim/tartisma/tur-1.md; psikologlar Lofi'yi seçti). **Kullanıcı Konsept 3 (Tok Mobil) ile devam dedi, arka plan daha koyu.** index.html = konsept-3 (smoke 63/63).
+- **Tur 2 yeni süreç (kullanıcı):** tek tasarımcı (Opus high) kök index.html üzerinde adım adım; her adım sonunda danışır; 2 psikolog (A, B) o adımı tartışır, B ortak tavsiye yazar; tasarımcı uygular. Canlı kayıt: docs/tasarim/canli/tur-2.md. Psikologların Tur 1 ortak kararındaki ölçülebilir kurallar (telefon ≥12 px, dokunma ≥44 px, kontrast 4.5:1, zararda alarm yok, ▲/▼, tek altın vurgu, animasyon ≤600 ms + hareket azaltma) geçerli.
+- Nabız: send_later 90 dk (bekleyen: trig_01PBqfhmEKX9u723Xk65Ddwu).
 
 ## Limit tasarrufu (kullanıcı: "haftalık limit çok bitmeyecek şekilde ayarla")
 - Tur 1 (4 konsept, Opus high) bitince sonraki turlarda: 4 tasarımcı ama her biri DAR bir alanda (tam yeniden tasarım değil), Opus **medium**; psikologlar Sonnet **medium**, tartışma en fazla 4 mesaj; testleri Yönetici script ile çalıştırır (ayrı testçi ajanı yok).
@@ -28,6 +28,7 @@
 - Limit hatası alan ajan yeniden başlatılmaz; limit yenilenince SendMessage ile devam ettirilir.
 
 ## Günlük (en yeni üstte)
+- 05:40 Kullanıcı: Konsept 3 + koyu arka plan; tek tasarımcı + eş zamanlı psikolog tartışması. index.html konsept-3'e geçti.
 - 04:58 Limit yenilendi; konsept 1/2/4 devam ettirildi; tasarruf kuralları eklendi.
 - 01:30 Kullanıcı itirazı → yeni süreç (4 tasarımcı + 2 psikolog tartışması). A1 geri alındı.
 - 01:07 Döngü kuruldu. Önceki görünüm `docs/tasarim/once/`.
