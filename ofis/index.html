@@ -37,6 +37,12 @@ label{color:var(--tx2);font-size:12px;display:flex;gap:6px;align-items:center}
 #log div{border-bottom:1px solid #18255A;padding:3px 0}
 #log span{color:var(--tx)}
 #note{font-size:12px;color:var(--tx2);margin-top:6px}
+.sc{display:grid;grid-template-columns:1fr auto auto;gap:3px 8px;font-size:12px;align-items:center;margin-top:6px}
+.sc .ad{color:var(--tx2)}.sc .bar{display:flex;gap:2px}.sc .bar i{width:12px;height:9px;border-radius:2px;background:#18255A}.sc .bar i.on{background:var(--mint)}
+.sc .v{color:var(--tx);font-variant-numeric:tabular-nums;min-width:44px;text-align:right}
+.lst{font-size:12px;color:var(--tx2);margin-top:6px;max-height:190px;overflow:auto}
+.lst div{border-bottom:1px solid #18255A;padding:3px 0}.lst code{color:var(--au);font:700 11px ui-monospace,monospace}.lst span{color:var(--tx)}
+.st{font-size:11px;font-weight:800;padding:1px 6px;border-radius:6px;background:#18255A;color:var(--tx2)}.st.yap{background:#2A4FB8;color:var(--tx)}.st.bit{background:#0F6158;color:var(--tx)}.st.ret{background:#6B4128;color:var(--tx)}
 </style>
 </head>
 <body>
@@ -50,9 +56,12 @@ label{color:var(--tx2);font-size:12px;display:flex;gap:6px;align-items:center}
     <div class="row"><button id="meet">Yönetici düşünsün (toplantı)</button><label><input type="checkbox" id="auto"> Otomatik yönetim (15 dk'da bir)</label></div>
     <div id="brain">Yönetici beyni: <i id="model">claude-opus-5-5 · yüksek efor</i> · <span id="state">hazır</span></div>
     <div id="thought"></div>
-    <div id="note">Ofisteki kararlar ve mesajlar kaydedilir. Gerçek ekibin uygulaması için Claude sohbetinde "ofisi kontrol et" de. Her düşünme senin Claude kullanımından harcar.</div>
+    <div id="note">Yönetici gerçek puanları, görevleri, GitHub kayıtlarını ve kendi önceki kararlarını okuyarak düşünür. Ofisteki kararlar ve mesajlar kaydedilir; gerçek ekibin uygulaması için Claude sohbetinde "ofisi kontrol et" de. Her düşünme senin Claude kullanımından harcar.</div>
   </div>
   <div class="box"><b>Ofis kaydı</b><div id="log"></div></div>
+  <div class="box"><b>Oynanış ölçütleri</b> <span id="pkay" class="nm" style="position:static;transform:none"></span><div class="sc" id="puan"><span class="ad">Henüz ölçüm yok</span></div></div>
+  <div class="box"><b>Görevler</b> <span class="nm" style="position:static;transform:none">ofisin verdiği işler ve gerçek ekipteki durumu</span><div class="lst" id="gorev"><div>Açık görev yok</div></div></div>
+  <div class="box"><b>GitHub</b> <span class="nm" style="position:static;transform:none">Sürüm sorumlusunun son kayıtları</span><div class="lst" id="gh"><div>Kayıt yok</div></div></div>
 </div>
 <script>
 const cv=document.getElementById('cv'),x=cv.getContext('2d'),W=320,H=180,wrap=document.getElementById('wrap');x.imageSmoothingEnabled=false;
@@ -66,6 +75,7 @@ const DEFAULT=[{ad:'Yönetici',rol:'Tek amaç oynanış zevki; 8 ölçütle kara
  {ad:'Yazılımcı',rol:'Kod, mekanik uygulama, hata düzeltme (Opus medium)',oda:'Yazılım'},
  {ad:'Metin',rol:'Oyun içi mesajlar, ipuçları, TR/EN (Sonnet)',oda:'Yazılım'},
  {ad:'Kod Araştırmacısı',rol:'Kodda yer bulma, basit kontroller (Haiku)',oda:'Yazılım'},
+ {ad:'Sürüm Sorumlusu',rol:'Testleri geçen her adımı GitHub\'a kaydeder (geliştirme dalı); testler kırmızıysa kaydetmez; main ve PR yalnız patron izniyle',oda:'Yazılım'},
  {ad:'Psikolog A',rol:'Danışman: oyun hissi ve motivasyon',oda:'Tartışma'},{ad:'Psikolog B',rol:'Danışman: göz sağlığı ve ergonomi',oda:'Tartışma'},
  {ad:'Testçi',rol:'Oyunu oynar, 8 ölçüte 1-5 puan verir (Sonnet)',oda:'Test'},
  {ad:'Test Robotu',rol:'Otomatik testler (63 kontrol), ajan değil',oda:'Test',bot:1}];
@@ -80,7 +90,7 @@ const cnt=oda=>people.filter(p=>p.oda===oda).length;
 function pickRoom(oda){if(ROOMS[oda]&&cnt(oda)<4)return oda;return Object.keys(ROOMS).filter(k=>k!=='Yönetici').sort((a,b)=>cnt(a)-cnt(b))[0]}
 function makePerson(m,enter){m={...m,oda:pickRoom(m.oda)};const n=cnt(m.oda),r=ROOMS[m.oda],pal=PAL[hash(m.ad)%PAL.length];
  const s={x:r.x+16+(n%4)*20,y:r.y+r.h-14};
- const p={...m,hx:s.x,hy:s.y,x:enter?160:s.x,y:enter?H+10:s.y,hair:pal[0],body:pal[1],acc:pal[2],q:[],el:null,nm:null,sayT:0};
+ const p={...m,sl:n,hx:s.x,hy:s.y,x:enter?160:s.x,y:enter?H+10:s.y,hair:pal[0],body:pal[1],acc:pal[2],q:[],el:null,nm:null,sayT:0};
  people.push(p);if(enter)goTo(p,s.x,s.y);return p}
 function roster(list){people.forEach(p=>{p.el&&p.el.remove();p.nm&&p.nm.remove()});people=[];list.forEach(m=>makePerson(m,false))}
 const byName=n=>{n=String(n||'').toLowerCase().trim();if(!n)return null;return people.find(p=>p.ad.toLowerCase()===n)||people.find(p=>p.ad.toLowerCase().includes(n))||people.filter(p=>n.includes(p.ad.toLowerCase())).sort((a,b)=>b.ad.length-a.ad.length)[0]};
@@ -112,15 +122,40 @@ const ME={ad:'Sen',x:0,y:0,el:null,sayT:0};
 function say(p,txt,ms){txt=String(txt||'');ms=ms||Math.min(7000,1800+txt.length*45);if(!p.el){p.el=document.createElement('div');p.el.className='bub';wrap.appendChild(p.el)}
  p.el.textContent=txt;p.el.classList.toggle('me',p===ME);p.el.style.display='block';p.sayT=performance.now()+ms;log(p.ad,txt);return wait(Math.min(ms,4200))}
 function place(){const k=wrap.clientWidth/W,now=performance.now();people.concat(ME).forEach(p=>{if(p.el){if(now>p.sayT)p.el.style.display='none';else{p.el.style.left=(p.x*k)+'px';p.el.style.top=((p.y-11)*k)+'px'}}
- if(p!==ME){if(!p.nm){p.nm=document.createElement('div');p.nm.className='nm';wrap.appendChild(p.nm)}p.nm.textContent=p.ad;p.nm.style.left=(p.x*k)+'px';p.nm.style.top=((p.y+15)*k)+'px'}})}
+ if(p!==ME){if(!p.nm){p.nm=document.createElement('div');p.nm.className='nm';wrap.appendChild(p.nm)}p.nm.textContent=p.ad;p.nm.style.left=(p.x*k)+'px';p.nm.style.top=((p.y+15+(p.sl%2)*8)*k)+'px'}})}
 const logEl=document.getElementById('log');function log(n,t){const d=document.createElement('div');d.innerHTML='<b></b> <span></span>';d.firstChild.textContent=n+':';d.lastChild.textContent=t;logEl.prepend(d)}
 // ---- yetenekler (varsa) ----
 let sample=null,db=null;
 (async()=>{try{sample=await claude.use('sample')}catch(e){}})();
 (async()=>{try{db=await claude.use('db');if(!db)return;
  db.collection('ekip').onSnapshot(s=>{const l=s.docs.map(d=>d.data()).filter(m=>m&&m.ad&&m.aktif!==false);if(l.length&&!busy)roster(l)},()=>{});
- db.doc('durum/genel').onSnapshot(d=>{const v=d&&d.data&&d.data();if(v&&v.metin)DURUM=String(v.metin)},()=>{})}catch(e){}})();
+ db.doc('durum/genel').onSnapshot(d=>{const v=d&&d.data&&d.data();if(v&&v.metin)DURUM=String(v.metin)},()=>{});
+ db.doc('durum/puanlar').onSnapshot(d=>{const v=d&&d.data&&d.data();if(v&&Array.isArray(v.liste)){PUAN=v;drawPuan()}},()=>{});
+ db.doc('durum/simdi').onSnapshot(d=>{const v=d&&d.data&&d.data();if(v&&v.kisiler&&typeof v.kisiler==='object')SIMDI=v.kisiler},()=>{});
+ db.doc('durum/dersler').onSnapshot(d=>{const v=d&&d.data&&d.data();if(v&&v.metin)DERS=String(v.metin)},()=>{});
+ db.doc('durum/github').onSnapshot(d=>{const v=d&&d.data&&d.data();if(v&&Array.isArray(v.liste))ghGeldi(v.liste)},()=>{});
+ db.collection('gorevler').orderBy('t','desc').limit(30).onSnapshot(s=>{GOREV=s.docs.map(x=>({id:x.id,...x.data()}));drawGorev()},()=>{})}catch(e){}})();
 async function kaydet(col,obj){if(!db)return;try{await db.collection(col).add({...obj,t:Date.now(),durum:'yeni'})}catch(e){}}
+// ---- gerçek ekipten gelen veri: puanlar, görevler, GitHub, şu anki işler, dersler ----
+let PUAN=null,SIMDI={},DERS='',GOREV=[],GH=[];
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const once=t=>{const m=Math.round((Date.now()-t)/60000);return !t?'':m<1?'şimdi':m<60?m+' dk önce':m<1440?Math.round(m/60)+' sa önce':Math.round(m/1440)+' gün önce'};
+function drawPuan(){const el=document.getElementById('puan');if(!PUAN)return;el.innerHTML='';document.getElementById('pkay').textContent=PUAN.kaynak?'· '+PUAN.kaynak:'';
+ PUAN.liste.slice(0,8).forEach(r=>{const s=+r.simdi||0;const a=document.createElement('span');a.className='ad';a.textContent=(r.n||'')+' '+(r.ad||'');
+  const b=document.createElement('span');b.className='bar';for(let i=1;i<=5;i++){const q=document.createElement('i');if(i<=s)q.className='on';b.appendChild(q)}
+  const v=document.createElement('span');v.className='v';v.textContent=(r.once==null||r.once===''?'—':r.once)+' → '+(s||'—');el.append(a,b,v)})}
+const STN={yeni:['yeni',''],'yapılıyor':['yapılıyor','yap'],bitti:['bitti','bit'],ret:['reddedildi','ret']};
+function drawGorev(){const el=document.getElementById('gorev');if(!GOREV.length){el.innerHTML='<div>Açık görev yok</div>';return}
+ el.innerHTML=GOREV.slice(0,12).map(g=>{const s=STN[g.durum]||STN.yeni;return `<div><span class="st ${s[1]}">${esc(s[0])}</span> <b>${esc(g.kime)}</b>: <span>${esc(g.metin)}</span>${g.olcut?' · ölçüt '+esc(g.olcut):''}${g.not?'<br>↳ '+esc(g.not):''}</div>`}).join('')}
+function drawGh(){const el=document.getElementById('gh');el.innerHTML=GH.length?GH.slice(0,8).map(c=>`<div><code>${esc(String(c.h||'').slice(0,7))}</code> <span>${esc(c.m)}</span> · ${esc(once(c.t))}</div>`).join(''):'<div>Kayıt yok</div>'}
+let ghIlk=true;async function ghGeldi(l){const yeni=!ghIlk&&l[0]&&(!GH[0]||l[0].h!==GH[0].h);GH=l;ghIlk=false;drawGh();
+ if(yeni){const s=byName('Sürüm Sorumlusu'),y=byName('Yönetici');if(s&&y&&!busy){busy=true;try{await walkTo(s,y);await say(s,'GitHub\'a gönderdim: '+String(l[0].m||'').slice(0,80));await home(s)}finally{busy=false}}}}
+const puanText=()=>PUAN?PUAN.liste.map(r=>`${r.n} ${r.ad}: ${r.once==null?'—':r.once} → ${r.simdi}`).join('; ')+(PUAN.kaynak?' (kaynak: '+PUAN.kaynak+')':''):'(henüz ölçüm yok)';
+const gorevText=()=>GOREV.length?GOREV.slice(0,10).map(g=>`- [${(STN[g.durum]||STN.yeni)[0]}] ${g.kime}: ${g.metin}${g.not?' → '+g.not:''}`).join('\n'):'(yok)';
+const ghText=()=>GH.length?GH.slice(0,6).map(c=>`- ${String(c.h||'').slice(0,7)} ${c.m} (${once(c.t)})`).join('\n'):'(yok)';
+const simdiText=()=>{const e=Object.entries(SIMDI);return e.length?e.map(([k,v])=>`- ${k}: ${v}`).join('\n'):'(bilgi yok)'};
+async function oncekiKararlar(){if(!db)return'(yok)';try{const s=await db.collection('kararlar').orderBy('t','desc').limit(5).get();
+ const l=s.docs.map(d=>d.data()).filter(v=>v&&(v.cevap||v.ozet)).map(v=>`- ${once(v.t)}: ${v.cevap||v.ozet}${v.kararlar&&v.kararlar!=='[]'?' | kararlar: '+String(v.kararlar).slice(0,300):''}`);return l.length?l.join('\n'):'(yok)'}catch(e){return'(okunamadı)'}}
 // ---- yönetici beyni (Opus 5.5, yüksek efor) ----
 let thinking=false,lastModel='';
 const stateEl=document.getElementById('state'),thoughtEl=document.getElementById('thought'),modelEl=document.getElementById('model');
@@ -129,11 +164,24 @@ const sonKayit=()=>[...logEl.children].slice(0,10).map(d=>d.textContent).reverse
 function parseJSON(t){try{return JSON.parse(t)}catch(e){}const m=String(t).match(/```(?:json)?\s*([\s\S]*?)```/);if(m)try{return JSON.parse(m[1])}catch(e){}
  const a=t.indexOf('{'),b=t.lastIndexOf('}');if(a>=0&&b>a)try{return JSON.parse(t.slice(a,b+1))}catch(e){}return null}
 async function yoneticiDusun(patron){
+ const gecmis=await oncekiKararlar();
  const prompt=`Sen "Trading Idle" oyununu geliştiren yapay zekâ ekibinin YÖNETİCİSİSİN. Tek amacın: oyunun OYNANIŞ ZEVKİNİ artırmak — keyifli, tatmin edici, bağımlılık yapmadan tekrar oynanabilir. Patron (kullanıcı) sana tam yetki verdi: sayılar, fiyatlar, coin/katalog yapısı, boss, Bobby, robot, ekonomi, arayüz, ses, metin; işe al, çıkar, ekipleri böl/birleştir, görev ver, tartışma başlat. Sayı değişikliğini Oyun Tasarımcısına yaptırırsın.\n${OLCUT} Verimli ol: her rolün net katkısı olsun, işsiz kalan rolü çıkar, eksik uzmanlığı işe al (ör. ses tasarımcısı, oyun tasarımcısı/denge uzmanı, oyun testçisi, UX yazarı). Ekip yapay zekâ ajanlarından oluşur ve kullanım limiti kısıtlıdır.
 
 OYUN:\n${OYUN}
 
 GERÇEK EKİPTEN GÜNCEL DURUM:\n${DURUM}
+
+ÖLÇÜT PUANLARI (Testçinin son ölçümü, önceki → şimdi, 1-5):\n${puanText()}
+
+GERÇEK EKİPTE ŞU AN KİM NE YAPIYOR:\n${simdiText()}
+
+OFİSİN VERDİĞİ GÖREVLER VE GERÇEK DURUMLARI:\n${gorevText()}
+
+SON GITHUB KAYITLARI (Sürüm Sorumlusu):\n${ghText()}
+
+ÖĞRENİLEN DERSLER (tekrarlama):\n${DERS||'(yok)'}
+
+SENİN ÖNCEKİ KARARLARIN (aynısını tekrar verme; sonuçlarına bak):\n${gecmis}
 
 KADRO:\n${kadroText()}
 Odalar: ${Object.keys(ROOMS).join(', ')} (oda başına en çok 4 kişi).
@@ -142,20 +190,32 @@ OFİSTE SON KONUŞMALAR:\n${sonKayit()||'(yok)'}
 
 ${patron?`PATRONUN SANA MESAJI: "${patron}"\nMesaj organizasyon, yetki ya da sana soru ise kendin cevapla; yalnız gerçekten bir role ait somut iş varsa görev ver.`:'Patron mesaj yazmadı: bu bir YÖNETİM TOPLANTISI. Durumu değerlendir ve oynanış keyfi için en değerli sonraki adımları seç.'}
 
-İyice düşün, sonra YALNIZ şu JSON'u döndür (Türkçe):
-{"cevap":"patrona 1-3 cümle","dusunce":"kararlarının kısa gerekçesi, en çok 3 cümle","kararlar":[
+Düşünme sırası: (1) puanlardan en zayıf ve en etkili ölçütü bul; (2) açık ya da reddedilmiş görevlere ve önceki kararlarına bak, aynı işi yeniden verme, reddedilenin nedeninden ders al; (3) şu an çalışan role aynı dosyada paralel iş verme; (4) en çok değer/maliyet oranlı 1-3 adımı seç. Kanıtsız iddiada bulunma; sayı bilmiyorsan "ölçülmeli" de.
+
+YALNIZ şu JSON'u döndür (Türkçe):
+{"teshis":"en zayıf ölçüt ve nedeni, 1 cümle","cevap":"patrona 1-3 cümle","dusunce":"kararlarının kısa gerekçesi, en çok 3 cümle","kararlar":[
  {"eylem":"ise_al","yeni":{"ad":"kısa rol adı","rol":"ne yapacak","oda":"oda adı"},"neden":"..."},
  {"eylem":"cikar","kime":"kadrodaki ad","neden":"..."},
- {"eylem":"gorev","kime":"kadrodaki ad","metin":"somut görev, 1-2 cümle"},
+ {"eylem":"gorev","kime":"kadrodaki ad","metin":"somut görev, 1-2 cümle","olcut":"1-8 arası hedef ölçüt","olcum":"başarıyı nasıl ölçeceğiz (sim/testçi/puan)"},
  {"eylem":"tartisma","kimler":["ad1","ad2"],"konu":"tartışma konusu"}]}
-En çok 4 karar; gerek yoksa "kararlar": []. Yönetici çıkarılamaz. Görev metninde hedef ölçütü (1-8) ve beklenen etkiyi yaz. Emin olmadığını kesin diye sunma: önce ölç.`;
+En çok 4 karar; gerek yoksa "kararlar": []. Yönetici çıkarılamaz, Sürüm Sorumlusu GitHub dışında iş almaz.`;
  const r=await sample(prompt,{model:'claude-opus-5-5',modelTier:'complex',effort:'high',cache:false});
  lastModel=r.modelApplied?r.modelApplied+' · yüksek efor':'('+r.modelTierApplied+' modeli; Opus 5.5 bu görünümde yok)';modelEl.textContent=lastModel;
  return parseJSON(r.text)}
 async function quick(prompt){if(!sample)return null;try{const r=await sample(prompt,{modelTier:'quick',cache:false});return r.text.trim()}catch(e){return null}}
-const rolCevap=(p,metin)=>quick(`Sen "Trading Idle" oyununu geliştiren ekipte ${p.ad}sın; görevin: ${p.rol}. Ekibin hedefi oynanış keyfini en yükseğe çıkarmak. Sana şunu söylediler: "${metin}". Kendi rolünle, somut ve kısa (1-2 cümle) Türkçe cevap ver; ne yapacağını söyle. Yalnız cevabı yaz.`);
+async function rolCevap(p,metin){if(!sample)return null;
+ const ben=GOREV.filter(g=>g.kime===p.ad).slice(0,4).map(g=>`- [${(STN[g.durum]||STN.yeni)[0]}] ${g.metin}${g.not?' → '+g.not:''}`).join('\n')||'(yok)';
+ const ek=p.ad==='Sürüm Sorumlusu'?`\nSON GITHUB KAYITLARI:\n${ghText()}`:p.ad==='Testçi'||p.ad==='Oyun Tasarımcısı'?`\nÖLÇÜT PUANLARI: ${puanText()}`:'';
+ const prompt=`Sen "Trading Idle" oyununu geliştiren yapay zekâ ekibinde ${p.ad}sın; görevin: ${p.rol}. Ekibin tek hedefi oynanış keyfi.
+OYUN: ${OYUN}
+GÜNCEL DURUM: ${DURUM}
+SEN ŞU AN (gerçek ekipte): ${SIMDI[p.ad]||'bilgi yok'}
+SANA VERİLEN GÖREVLER:\n${ben}${ek}
+Sana şunu söylediler: "${metin}"
+Kendi rolünle, bu bilgilere dayanarak somut ve kısa (1-3 cümle) Türkçe cevap ver. Bilmediğin sonucu uydurma; gerçek işi gerçek ekip yapar, sen ne yapacağını ya da neye bakacağını söyle. Yalnız cevabı yaz.`;
+ try{const r=await sample(prompt,{modelTier:'default',cache:false});return r.text.trim()}catch(e){return null}}
 async function tartisma(a,b,konu){await walkTo(a,b);let lines=null;
- if(sample){try{lines=await sample.json(`"Trading Idle" oyun ekibinde ${a.ad} (${a.rol}) ile ${b.ad} (${b.rol}) şu konuyu kısaca tartışıyor: "${konu}". Hedef oynanış keyfi. 4 replik yaz, ${a.ad} başlasın, sırayla konuşsunlar, her replik en çok 18 kelime, son replik ortak karar olsun. Yalnız JSON dizi döndür: [{"kim":"ad","soz":"..."}]`,{modelTier:'quick',cache:false})}catch(e){}}
+ if(sample){try{lines=await sample.json(`"Trading Idle" oyun ekibinde ${a.ad} (${a.rol}) ile ${b.ad} (${b.rol}) şu konuyu kısaca tartışıyor: "${konu}". Hedef oynanış keyfi. 4 replik yaz, ${a.ad} başlasın, sırayla konuşsunlar, her replik en çok 18 kelime, son replik ortak karar olsun. Yalnız JSON dizi döndür: [{"kim":"ad","soz":"..."}]`,{modelTier:'default',cache:false})}catch(e){}}
  if(!Array.isArray(lines))lines=[{kim:a.ad,soz:konu+' hakkında ne düşünüyorsun?'},{kim:b.ad,soz:'Önce oyuncunun hissine bakalım.'},{kim:a.ad,soz:'Katılıyorum, küçük bir deneme yapalım.'},{kim:b.ad,soz:'Tamam, sonucu yöneticiye raporlarız.'}];
  for(const l of lines.slice(0,5)){const p=byName(l.kim)||a;await say(p,l.soz)}
  kaydet('kararlar',{eylem:'tartisma_sonucu',kimler:[a.ad,b.ad],konu,ozet:lines.map(l=>l.kim+': '+l.soz).join(' | ')});await home(a)}
@@ -166,7 +226,8 @@ async function uygula(k,y){try{
  else if(k.eylem==='cikar'){const h=byName(k.kime);if(h&&h.ad!=='Yönetici'){await walkTo(y,h);await say(y,'Seninle yollarımızı ayırıyoruz'+(k.neden?': '+k.neden:'.'));await say(h,'Anlaşıldı, eşyalarımı topluyorum.');
   await Promise.all([walk(h,160,H+20),home(y)]);people=people.filter(p=>p!==h);h.el&&h.el.remove();h.nm&&h.nm.remove();
   if(db)try{await db.collection('ekip').doc(did(h.ad)).set({ad:h.ad,rol:h.rol,oda:h.oda,aktif:false,kaynak:'ofis'})}catch(e){}}}
- else if(k.eylem==='gorev'){const h=byName(k.kime);if(h&&h!==y){await walkTo(y,h);await say(y,k.metin);const c=await rolCevap(h,k.metin);await say(h,c||(h.bot?'BİP. Çalıştırıyorum.':'Anlaşıldı, başlıyorum!'));await home(y)}}
+ else if(k.eylem==='gorev'){const h=byName(k.kime);if(h&&h!==y){await walkTo(y,h);await say(y,k.metin);
+  if(db)try{await db.collection('gorevler').add({kime:h.ad,metin:String(k.metin||'').slice(0,400),olcut:String(k.olcut||'').slice(0,20),olcum:String(k.olcum||'').slice(0,200),durum:'yeni',t:Date.now(),kaynak:'ofis'})}catch(e){}const c=await rolCevap(h,k.metin);await say(h,c||(h.bot?'BİP. Çalıştırıyorum.':'Anlaşıldı, başlıyorum!'));await home(y)}}
  else if(k.eylem==='tartisma'){const[a,b]=(k.kimler||[]).map(byName);if(a&&b&&a!==b)await tartisma(a,b,k.konu||'oynanış keyfi')}
  }catch(e){}}
 async function yonet(patron){if(thinking)return;const y=byName('Yönetici');if(!y)return;
@@ -176,7 +237,7 @@ async function yonet(patron){if(thinking)return;const y=byName('Yönetici');if(!
  let k=null,err='';try{k=await yoneticiDusun(patron)}catch(e){err=e&&e.code||'hata'}
  clearInterval(tick);thinking=false;stateEl.textContent='hazır';
  if(!k){await say(y,err==='rate_limited'?'Kullanım limiti doldu, biraz sonra tekrar düşünürüm.':'Düşüncemi toparlayamadım, tekrar dener misin?');busy=false;return}
- thoughtEl.textContent=k.dusunce?'Gerekçe: '+k.dusunce:'';
+ thoughtEl.textContent=(k.teshis?'Teşhis: '+k.teshis+' ':'')+(k.dusunce?'Gerekçe: '+k.dusunce:'');
  kaydet(patron?'mesajlar':'kararlar',{kime:'Yönetici',metin:patron||'(toplantı)',cevap:k.cevap||'',dusunce:k.dusunce||'',kararlar:JSON.stringify(k.kararlar||[])});
  await say(y,k.cevap||'Tamam.');
  for(const c of (k.kararlar||[]).slice(0,4))await uygula(c,y);
@@ -184,8 +245,9 @@ async function yonet(patron){if(thinking)return;const y=byName('Yönetici');if(!
 document.getElementById('meet').onclick=()=>{if(!busy)yonet(null)};
 let autoT=null;document.getElementById('auto').onchange=e=>{clearInterval(autoT);if(e.target.checked){autoT=setInterval(()=>{if(!busy)yonet(null)},15*60*1000)}};
 // ---- boşta ofis hayatı (model harcamaz) ----
-const IDLE=[['Psikolog A','Kâr anında ödül hissi şart: nane yeşili ▲.'],['Psikolog B','Zararda alarm yok; kehribar ▼ yeter.'],['Testçi','Oyunu baştan oynuyorum; 8 ölçüte puan vereceğim.'],['Oyun Tasarımcısı','Coin geçişi hızlı: eşik tek başına yetmedi, kâr tavanını ölçmeliyiz.'],['Görsel Tasarımcı','Kâr anı net görünüyor mu, testçiye soracağım.'],['Ses ve Müzik','Kârlı satışa kısa, tatlı bir ses lazım.'],['Test Robotu','BİP. 63/63 GEÇTİ.']];
-let ii=0;setInterval(()=>{if(busy)return;const[n,t]=IDLE[ii++%IDLE.length],p=byName(n);if(p)say(p,t,3200)},6000);
+const IDLE=[['Psikolog A','Kâr anında ödül hissi şart: nane yeşili ▲.'],['Psikolog B','Zararda alarm yok; kehribar ▼ yeter.'],['Testçi','Her değişiklikten sonra 8 ölçüte yeniden puan veririm.'],['Oyun Tasarımcısı','Önce ölçerim, sonra sayıya dokunurum.'],['Görsel Tasarımcı','Kâr anı net görünüyor mu, testçiye soracağım.'],['Ses ve Müzik','Kârlı satışa kısa, tatlı bir ses lazım.'],['Sürüm Sorumlusu','Testler yeşilse GitHub\'a kaydederim, kırmızıysa beklerim.'],['Test Robotu','BİP. Kontroller hazır.']];
+// gerçek ekipte şu an çalışanlar kendi gerçek işlerini söyler; bilgi yoksa kısa hazır replikler
+let ii=0;setInterval(()=>{if(busy)return;const gs=Object.entries(SIMDI).filter(([n,t])=>t&&byName(n)&&exists(n));const L=gs.length?gs:IDLE;const[n,t]=L[ii++%L.length],p=byName(n);if(p)say(p,String(t).slice(0,140),3600)},6000);
 // ---- kullanıcı ----
 const who=document.getElementById('who'),inp=document.getElementById('msg'),btn=document.getElementById('send');
 cv.addEventListener('click',e=>{const r=cv.getBoundingClientRect(),mx=(e.clientX-r.left)/r.width*W,my=(e.clientY-r.top)/r.height*H;
