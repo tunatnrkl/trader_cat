@@ -222,3 +222,53 @@ Kâr anı artık gerçekten tatmin edici: nane çizgi, ▲, nane SAT ve kısa "+
 4. Boss: ince sönük kenar + coin adının yanında sabit "BOSS" hapı (dolgu doygunluğu en çok %35, animasyon yok); "KALDIRAÇ kullanılamaz" için tek satır ipucu, en az 12 px.
 5. Telefonda (Adım 4) tüm yazı en az 12 px, normal metin 4.5:1, ikon/kenar 3:1; dokunma hedefleri en az 44 px; "daha fazla" şeridi hiçbir kartı örtmesin.
 6. Afiş turuncu kenarı bir ton sönük (#B9824A civarı); ekranda tek parlak turuncu BAŞLA kalsın; ikonlar (coin, şimşek, kemik) en fazla iki renk ve soluk kontur, altın yalnız hedef kartta.
+
+## Adım 4 — Tasarımcı: Danışma 4
+
+**Ne yaptım**
+- **Telefon kipi (TEL):** fit(), ölçeğin 0,6'nın altına düştüğü yatay telefonlarda telefon kipine geçiyor:
+  - Ekran 16:9'dan genişse sahne yatayda genişliyor (konsept-2 yaklaşımı).
+  - Monitör alanı daralıyor, yan sütunlar genişliyor (667'de 340 → 400 px, 844'te 480 px).
+  - Sahnedeki tüm yazıların tabanı 30 px; yazı küçültme yok.
+  - İkincil bilgi gizlendi: monitör çenesindeki "TRADE-OS 3000" yazısı, sistem çubuğundaki "TRADE-OS" etiketi, "POZİSYON · TUR" alt satırı.
+  - Alt şerit ızgaraya alındı (kaldıraç üstte, not altta, ana düğme sağda). SAT etiketi telefonda iki satır: fiyat / (▲▼ yüzde).
+  - Grafik ve robot bölmesi yazıları da telefonda 30 px.
+  - Masaüstü (1440x900, 1024x640) düzeni değişmedi.
+- **Ölçüm (gerçek piksel = computed font-size × sahne ölçeği):**
+
+  | Ekran | Ölçek | 12 px altı yazı |
+  |---|---|---|
+  | 667x375 | 0,400 | 0/46 (ana), 0/47 (işlem), EN 0/46 |
+  | 844x390 | 0,425 | 0/46 (ana), 0/37 (otomasyon) |
+
+  En küçük sahne yazısı 30 px, yani 667'de 12,0 px, 844'te 12,75 px. Canvas yazıları (eksen, ALIŞ, fiyat etiketi, robot bölmesi) da telefonda 30 px.
+- **Dokunma hedefleri:** Gerçek dokunulabilir alan merkezden dört yöne `elementFromPoint` ile ölçüldü. Görünmez genişletme kullanıldı (`::after`; kapatma düğmesinde şeffaf kenarlık). 44 px altında kalanlar:
+  - Mağazadaki ilk fiyat hapı: 39 px (667) / 42 px (844).
+  - Kilitli katalog sekmeleri: devre dışı, dokunulmaz.
+  - Kedi kabı (`#bowl`): sürükle-bırak hedefi, düğme değil.
+  - Diğer tüm düğmeler ≥44 px.
+- **İki hata:**
+  1. Başlıktaki yüzde ile SAT yüzdesi artık aynı fonksiyondan (`satTxt`), aynı fiyatla ve aynı anda yazılıyor. Daha önce başlık her karede, SAT fiyat değişince güncelleniyordu; arada bir fiyat adımı kayıyordu. Doğrulama: masaüstü ve 667x375'te 120 örnek, fark 0.
+  2. "daha fazla" şeridi panelin kendi alt şeridinde, hiçbir kartı örtmüyor. Şeridin üstündeki yarım kart artık 70 px'lik yumuşak bir geçişle soluyor; "kesik" değil "devamı var" diye okunuyor.
+- **Adım 3'te fark ettiğim iki sorun:** Güncel fiyat noktası ve kesikli çizgisi grafik alanına sıkıştırıldı, eksen yazılarının üstünden geçmiyor. Tur sonu fişi eksen sayılarından uzaklaştırıldı (sağdan 86 px; telefonda 140 px).
+
+**Ortak tavsiye 3'ü nasıl uyguladım**
+1. Aktif SAT (kâr ve zarar): 3 px lila-krem kenar ve 6 px alt basamak. Zararda krem yazı (kârda nane zeminde koyu yazı, okunurluk için). Pasif ana düğme yassı: kenar ve gölge yok. Yeni renk yok.
+2. Zarar çizgisi 4 px, kâr çizgisi 5 px. Çizgi ve alan dolgusu grafik alanına kırpılıyor.
+3. Yüzde eşitliği: yukarıdaki 1. hata.
+4. Boss: coin adının yanında sabit, sönük "BOSS" hapı (#4E3A55; telefonda "TUR" satırında). Kaldıraç alanında tek satır ipucu: "Boss coininde kaldıraç kullanılamaz" (EN çevirisi var; telefonda 30 px = 12 px).
+5. Telefon: yazı ≥12 px ve dokunma alanı ≥44 px (istisnalar yukarıda). Kontrast Adım 2–3 değerlerinde (≥4,5:1).
+6. Afiş kenarı #B9824A. Turuncu yalnız BAŞLA'da; Bobby'nin enerji düğmesi şeftali, "AÇ!" etiketi sönük kehribar.
+
+**Not (ikonlar):** Yönetici'nin "ikonlara girme" mesajı geldiğinde şunlar zaten yapılmıştı:
+- coin ikonları ve mağaza ikonları (iki renk + sönük kontur, SVG)
+- Bobby'nin grafik işaretlerindeki neon yeşil/kırmızı → nane/kehribar
+- Bobby kabının kademe renklerinde doygunluk %40 az
+
+Yeni yön gelirse bunları geri alabilirim: `ICONS` / `ICN` vektör bloğu ve `BOWLC`.
+
+**Bakılacak görüntüler:** `docs/tasarim/son/tel_tr_ana.png`, `tel_tr_islem.png` (844x390), `desk_tr_ana.png`, `desk_tr_islem.png`, `desk_tr_oto.png`, `desk_tr_ayar.png`, `desk_en_ana.png`.
+
+**Psikologlara sorular**
+1. Telefonda yazılar büyüdü, buna karşılık listede aynı anda daha az kart görünüyor (solda yaklaşık 2,5 kart, mağazada 2 kart). Bu takas kabul edilebilir mi?
+2. Telefonda SAT etiketinin iki satır olması (fiyat / yüzde) okunuyor mu, yoksa telefonda yalnız yüzde mi gösterilsin?
