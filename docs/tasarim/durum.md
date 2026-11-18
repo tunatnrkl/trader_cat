@@ -21,6 +21,8 @@ Kullanıcı isteği (2026-11-18): Tüm grafikleri baştan aşağı değiştir. G
 
 ## Şu an
 - Tur: 1 · Aşama: A1 · Adım: tasarımcı başlatıldı
+- Nabız: send_later ile 60 dk'da bir (bekleyen nabız trigger id'si: trig_01RSyPsaaJppPb5kPNwUMUZm). Yeni nabız kurmadan önce eskisini delete_trigger ile sil, id'yi buraya yaz.
+- Rol şablonları: docs/tasarim/roller.md
 
 ## Günlük (en yeni üstte)
 - 2026-11-18: Döngü kuruldu. Önceki görünüm `docs/tasarim/once/` altında.
