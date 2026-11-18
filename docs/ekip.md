@@ -14,9 +14,13 @@ Kullanıcı (2026-11-18): Yönetici kendi kararıyla işe alabilir, çıkarabili
 | Testçi (oyuncu) | Sonnet · medium | Oyunu oynar, 8 ölçüte puan verir |
 | Kod araştırmacısı | Haiku · low | Kodda yer bulma, basit kontroller |
 | Psikolog A / B (danışman) | Sonnet · medium | Yalnız görsel kararlarda kısa tartışma |
+| Sürüm sorumlusu (GitHub) | script `araclar/surum.sh` | Kabul edilen adımı geliştirme dalına commit + push eder; index.html değiştiyse önce smoke; kırmızıysa kaydetmez; main ve PR yalnız patron izniyle; son kayıtları ofise yollar |
 | Test robotu | script | smoke.js 63 kontrol + goruntu.js |
 
 Kural: aynı dosyaya dokunan roller (Yazılımcı, Görsel, Ses) paralel çalışmaz.
+
+## İşe alınanlar
+- Sürüm sorumlusu (11-18, patron isteği "githuba ekleyen biri de olsun"): ajan değil script; limit harcamaz.
 
 ## Çıkarılanlar / birleştirilenler
 - Rakip Analisti: ilk işi (docs/rakip-analizi.md) bitti, ayrıldı; gerekirse yeniden alınır.
