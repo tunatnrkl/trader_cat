@@ -439,6 +439,173 @@ body.nobar #cbar,body.nobar #cnx{display:none!important}body.nobar #cashv{top:30
 @keyframes hop{50%{transform:translateY(-12px)}}@keyframes flash{50%{filter:brightness(1.6)}}@keyframes bnin{from{transform:translateY(-30px);opacity:0}}@keyframes bnout{to{opacity:0}}@keyframes msin{from{transform:translate(-50%,-50%) scale(.4);opacity:0}}
 @keyframes rise2{from{transform:translateY(0);opacity:1}to{transform:translateY(-90px);opacity:0}}@keyframes fall{to{transform:translateY(110vh)}}@keyframes cfly{from{transform:translate(0,0)}to{transform:translate(var(--dx),var(--dy));opacity:0}}@keyframes flsh{50%{opacity:.35}}
 body.rm *{animation:none!important;transition:none!important}
+/* =====================================================================
+   A1 (Tur 1): SAKİN ODA — palet, oda, paneller, butonlar, monitör, katmanlar.
+   Rehber: docs/tasarim/sanat-yonu.md. Renkler yalnız --k-* değişkenlerinden; eski adlar yeni palete bağlı.
+   Işık sol üstten: üst/sol iç kenar açık, alt/sağ iç kenar koyu; gölge sağ-alta, düz (bulanık değil).
+   ===================================================================== */
+:root{
+ --k-ink:#3B2F2A;--k-tx:#4A3B32;--k-tx2:#6E5C4D;
+ --k-paper:#F6EDDA;--k-paper2:#E8DCC2;--k-paperL:#FFF8EA;--k-line:#D6C7A8;--k-trough:#9C8A73;
+ --k-wall:#C9D6C0;--k-wall2:#C2D0B9;--k-board:#B3C6AC;--k-boardL:#C6D5BF;--k-boardD:#94AA8D;
+ --k-wood:#B47D50;--k-woodL:#D29E6C;--k-woodD:#8A5A38;
+ --k-teal:#7DB8AE;--k-tealL:#A9D3CA;--k-tealD:#3F7D77;
+ --k-gold:#E8B655;--k-goldL:#F3D08A;--k-goldD:#B8853A;
+ --k-up:#7FC29B;--k-upT:#2F7A4E;--k-dn:#E58E7C;--k-dnT:#A4473A;--k-warn:#E39A4A;
+ --k-boss:#A34F5E;--k-bossL:#F2DEDA;
+ --k-scr:#1E2B33;--k-scr2:#26363F;--k-scrL:#3A4E57;--k-stx:#DCE6E0;--k-stx2:#8FA7A8;
+ --k-bez:#E3D8C0;--k-bezL:#F3EBD8;--k-bezD:#C4B699;
+ --k-sh:rgba(59,47,42,.22);
+ --bg:var(--k-wall);--cl:var(--k-wall);--cl2:var(--k-wall2);--wd:var(--k-wood);--wd2:var(--k-woodD);--wd3:var(--k-woodL);
+ --pn:var(--k-paper);--pnd:var(--k-paper2);--pnl:var(--k-paperL);--pnh:#FFFDF6;--ol:var(--k-ink);
+ --ac:var(--k-gold);--acl:var(--k-goldL);--acd:var(--k-goldD);--up:var(--k-up);--upd:var(--k-upT);--dn:var(--k-dn);--dnd:var(--k-dnT);--dnl:var(--k-dn);
+ --tx:var(--k-tx);--tx2:var(--k-tx2)}
+/* --- oda: sakin adaçayı duvar (seyrek ince çizgi, damalı gürültü yok), alçak lambri, bal rengi ahşap zemin --- */
+html,body{background:var(--k-wall) repeating-linear-gradient(90deg,var(--k-wall) 0 46px,var(--k-wall2) 46px 48px)!important}
+.floor{background:var(--k-wood)!important;box-shadow:inset 0 -6px 0 var(--k-woodD)!important;background-image:repeating-linear-gradient(90deg,transparent 0 158px,var(--k-woodD) 158px 160px)!important}
+.floor::before{top:-6px!important;height:6px!important;background:var(--k-woodL)!important;box-shadow:inset 0 2px 0 #E2B886}
+.floor::after{content:'';position:absolute;left:0;right:0;top:-118px;height:112px;pointer-events:none;background:var(--k-board);box-shadow:inset 0 4px 0 var(--k-woodL),inset 0 6px 0 var(--k-woodD),inset 0 -2px 0 var(--k-boardD);
+ background-image:repeating-linear-gradient(90deg,transparent 0 78px,var(--k-boardD) 78px 80px)}
+#stage:not(.portrait) .floor.f1{background-position:6000px 0!important}
+.botp .cap{color:var(--k-tx)!important}
+/* --- sütun grup panoları: duvardan bir ton koyu adaçayı, 2 px mürekkep kenar, sol üst açık / sağ alt koyu --- */
+#left::before,#right::before{background:var(--k-board)!important;box-shadow:0 -2px 0 var(--k-ink),0 2px 0 var(--k-ink),-2px 0 0 var(--k-ink),2px 0 0 var(--k-ink),inset 3px 3px 0 var(--k-boardL),inset -3px -3px 0 var(--k-boardD),4px 4px 0 var(--k-sh)!important}
+#left,#right{filter:saturate(1)!important}
+.tk,.sc,.rc,#cashp,.sign,.tb,#mon{filter:drop-shadow(3px 3px 0 var(--k-sh))!important}
+.sc.na{filter:grayscale(1) drop-shadow(3px 3px 0 var(--k-sh))!important}
+/* --- kartlar (katalog, mağaza, robot): krem kâğıt, 2 px mürekkep kenar, kesik köşe --- */
+/* kenar gölgeleri !important DEĞİL: .sc.glow/.sc.fin gibi animasyonlar üstüne yazabilsin */
+.tk,.sc,.rc{background:var(--k-paper)!important}
+#stage .tk,#stage .sc,#stage .rc,#stage .sc.can{box-shadow:0 -2px 0 var(--k-ink),0 2px 0 var(--k-ink),-2px 0 0 var(--k-ink),2px 0 0 var(--k-ink),inset 3px 3px 0 var(--k-paperL),inset -3px -3px 0 var(--k-paper2)}
+.sc::before{display:none!important}
+.tk{margin:7px 10px!important}
+.tk:hover{background:var(--k-paperL)!important}
+.tk.on{background:var(--k-paperL)!important}
+#stage .tk.on{box-shadow:0 -3px 0 var(--k-tealD),0 3px 0 var(--k-tealD),-3px 0 0 var(--k-tealD),3px 0 0 var(--k-tealD),inset 3px 3px 0 #FFFFFF,inset -3px -3px 0 var(--k-paper2)}
+.tn b,.sm b,.rc .rh b{color:var(--k-tx)!important;text-shadow:none!important}
+.tk.on .tn b{color:var(--k-tealD)!important}
+.tn .num{color:var(--k-tx2)!important;text-shadow:none!important}
+.sm .st,.rc .rs,.br small,.rr small,.rc .rlt small{color:var(--k-tx2)!important}.rc .rs b{color:var(--k-tx)!important}
+.tk.lk,.sc.lk{background:var(--k-paper2)!important;opacity:.9!important}.tk.lk .tn b,#right .sc.lk .sm b{color:var(--k-tx2)!important}
+#list .tk.poor .num{color:var(--k-dnT)!important}
+.tk.boss{background:var(--k-bossL)!important;animation:none!important}
+#stage .tk.boss{box-shadow:0 -2px 0 var(--k-boss),0 2px 0 var(--k-boss),-2px 0 0 var(--k-boss),2px 0 0 var(--k-boss),inset 3px 3px 0 #FBF0EC,inset -3px -3px 0 #E6C9C3}
+#stage .tk.boss.on{box-shadow:0 -3px 0 var(--k-boss),0 3px 0 var(--k-boss),-3px 0 0 var(--k-boss),3px 0 0 var(--k-boss),inset 3px 3px 0 #FBF0EC,inset -3px -3px 0 #E6C9C3}
+.tk.boss .tn b{color:var(--k-boss)!important}.tk .bb{background:var(--k-boss)!important;color:var(--k-paperL)!important;font-size:14px!important;padding:1px 6px!important}
+.tk.boss.lk{background:var(--k-paper2)!important}
+#stage .tk.boss.lk{box-shadow:0 -2px 0 #B98F96,0 2px 0 #B98F96,-2px 0 0 #B98F96,2px 0 0 #B98F96,inset 3px 3px 0 var(--k-paper),inset -3px -3px 0 var(--k-line)}.tk.boss.lk .tn b{color:#8C6A70!important}
+.rp{background:var(--k-bossL)!important;box-shadow:0 -2px 0 var(--k-boss),0 2px 0 var(--k-boss),-2px 0 0 var(--k-boss),2px 0 0 var(--k-boss)!important}.rp b{color:var(--k-boss)!important}
+#stage .sc.fin{box-shadow:0 -3px 0 var(--k-gold),0 3px 0 var(--k-gold),-3px 0 0 var(--k-gold),3px 0 0 var(--k-gold),inset 3px 3px 0 var(--k-paperL),inset -3px -3px 0 var(--k-paper2)}
+/* --- çubuklar (seviye, enerji): orta kahve oluk, krem boş hücre, dolu = altın / kâr / zarar --- */
+.sg{background:var(--k-trough)!important;padding:2px!important;gap:2px!important}.sg i{background:var(--k-paper2)!important}.sg i.f{background:var(--k-gold)!important}
+.sg.hp i.f{background:var(--k-up)!important}.sg.lo i.f{background:var(--k-dn)!important}.sg.mid i.f{background:var(--k-goldL)!important}
+.sg.vol i{color:var(--k-tx2)!important}.sg.vol i.f{color:var(--k-ink)!important}
+#cbar{background:#5E3D26!important}#cbar i{background:#7A5236!important}#cbar i.f{background:var(--k-gold)!important}
+.rc .rhist i{background:var(--k-paper2)!important;box-shadow:0 0 0 2px var(--k-trough)!important}.rc .rhist i.u{background:var(--k-up)!important}.rc .rhist i.d{background:var(--k-dn)!important}
+/* --- para plakası (ahşap) --- */
+#cashp{background:var(--k-wood)!important;box-shadow:0 -2px 0 var(--k-ink),0 2px 0 var(--k-ink),-2px 0 0 var(--k-ink),2px 0 0 var(--k-ink),inset 3px 3px 0 var(--k-woodL),inset -3px -3px 0 var(--k-woodD)!important}
+#cashp::before,#cashp::after{background:var(--k-woodD)!important;box-shadow:1px 1px 0 var(--k-woodL)}
+#cnx{color:#FFF3D6!important;text-shadow:2px 2px 0 var(--k-ink)!important}
+/* --- başlık tabelaları (KATALOG, MAĞAZA): koyu çam yeşili tabela, krem yazı --- */
+.sign,body.soft .sign{background:var(--k-tealD)!important;color:#FFF3D6!important;text-shadow:2px 2px 0 var(--k-ink)!important;box-shadow:0 -2px 0 var(--k-ink),0 2px 0 var(--k-ink),-2px 0 0 var(--k-ink),2px 0 0 var(--k-ink),inset 3px 3px 0 #5E9C95,inset -3px -3px 0 #2F5F5A!important}
+/* --- katalog sekmeleri --- */
+.tb{background:var(--k-paper2)!important;color:var(--k-tx2)!important;box-shadow:0 -2px 0 var(--k-ink),-2px 0 0 var(--k-ink),2px 0 0 var(--k-ink),inset 3px 3px 0 var(--k-paper)!important}
+.tb.on{background:var(--k-paperL)!important;color:var(--k-tealD)!important;box-shadow:0 -2px 0 var(--k-ink),-2px 0 0 var(--k-ink),2px 0 0 var(--k-ink),inset 3px 3px 0 #FFFFFF!important}
+.tb.lk{background:#D9CCB0!important;opacity:.8!important}
+/* --- mağaza bölüm başlıkları, kaydırma ipucu, kaydırma çubukları --- */
+.shd{color:var(--k-tx)!important}.sbt i{color:var(--k-woodD)!important}
+#shint{background:var(--k-tealD)!important;color:#FFF3D6!important;font-size:15px!important;padding:0 8px!important;box-shadow:0 0 0 2px var(--k-ink)!important}
+#list,#shop{scrollbar-color:var(--k-tealD) var(--k-boardD)!important}
+#list::-webkit-scrollbar-thumb,#shop::-webkit-scrollbar-thumb{background:var(--k-tealD)!important;box-shadow:none!important}#list::-webkit-scrollbar-track,#shop::-webkit-scrollbar-track{background:var(--k-boardD)!important}
+/* --- satın alma butonları: altın = alınabilir, krem = parası yetmiyor, yeşil = kilit aç --- */
+#right .go,body.soft #right .go{background:var(--k-gold)!important;color:var(--k-ink)!important;box-shadow:inset 0 -3px 0 var(--k-goldD),inset 2px 2px 0 var(--k-goldL),0 0 0 2px var(--k-ink)!important}
+#right .go:hover{background:var(--k-goldL)!important}
+#right .go:active{box-shadow:inset 0 2px 0 var(--k-goldD),0 0 0 2px var(--k-ink)!important}
+#right .go[data-dis],#right .go.lockb,#right .go.unl[data-dis]{background:var(--k-paper2)!important;color:var(--k-tx2)!important;box-shadow:inset 0 -3px 0 var(--k-line),0 0 0 2px var(--k-trough)!important}
+#right .go.nope{box-shadow:inset 0 -3px 0 var(--k-line),0 0 0 2px var(--k-dnT)!important}
+#right .go.unl{background:var(--k-teal)!important;color:var(--k-ink)!important;box-shadow:inset 0 -3px 0 var(--k-tealD),inset 2px 2px 0 var(--k-tealL),0 0 0 2px var(--k-ink)!important}#right .go.unl:hover{background:var(--k-tealL)!important}
+#right .go.poor span,#right .go.poor:not([data-dis]) span{color:var(--k-dnT)!important}
+#right .go:focus-visible,.info:focus-visible,#stabs button:focus-visible,#autob:focus-visible,#right .rcb:focus-visible,.pbtn:focus-visible{outline:2px solid var(--k-tealD)!important;outline-offset:2px}
+#right .mx,body.soft .mx{background:var(--k-up)!important;color:var(--k-ink)!important}
+.info{background:var(--k-tealD)!important;color:var(--k-paperL)!important}.info:hover{background:var(--k-teal)!important}
+/* --- anahtar, seçim kutusu, robot coin ızgarası --- */
+.sw{background:var(--k-paper2)!important;color:var(--k-tx2)!important;box-shadow:0 0 0 2px var(--k-ink)!important}.sw i{background:var(--k-trough)!important}
+.sw.on{background:var(--k-teal)!important;color:var(--k-ink)!important}.sw.on i{background:var(--k-tealD)!important}
+.rc select,#right .sc.rcoin select{background:var(--k-paperL)!important;color:var(--k-tx)!important;border:0!important;box-shadow:0 0 0 2px var(--k-ink)!important}
+#right .rcb{background:var(--k-paper2)!important;box-shadow:inset 0 -2px 0 var(--k-line),0 0 0 2px var(--k-trough)!important}#right .rcb span{color:var(--k-tx2)!important}
+#right .rcb:hover{background:var(--k-paperL)!important}#right .rcb.on{background:var(--k-paperL)!important;box-shadow:inset 0 -2px 0 var(--k-tealL),0 0 0 2px var(--k-tealD)!important}#right .rcb.on span{color:var(--k-tealD)!important}
+/* --- mağaza sekmeleri (ANA PC / OTOMASYON) ve oto-tur düğmesi --- */
+#stabs button{background:var(--k-paper2)!important;color:var(--k-tx2)!important;box-shadow:inset 0 -2px 0 var(--k-line),0 0 0 2px var(--k-ink)!important}
+#stabs button.on{background:var(--k-teal)!important;color:var(--k-ink)!important;box-shadow:inset 0 -2px 0 var(--k-tealD),inset 2px 2px 0 var(--k-tealL),0 0 0 2px var(--k-ink)!important}
+#autob{background:var(--k-paperL)!important;color:var(--k-tx)!important;box-shadow:inset 0 -2px 0 var(--k-paper2),0 0 0 2px var(--k-ink)!important}#autob .led{background:#C99A8F!important;box-shadow:0 0 0 1px var(--k-ink)!important}
+#autob.on{background:var(--k-up)!important;color:var(--k-ink)!important;box-shadow:inset 0 -2px 0 #5E9C7A,0 0 0 2px var(--k-ink)!important}#autob.on .led{background:#EFFFF4!important}
+/* --- genel piksel buton (modal, final) --- */
+.pbtn{background:var(--k-paperL);color:var(--k-tx);box-shadow:0 -2px 0 var(--k-ink),0 2px 0 var(--k-ink),-2px 0 0 var(--k-ink),2px 0 0 var(--k-ink),inset 0 -3px 0 var(--k-paper2),inset 2px 2px 0 #FFFFFF}
+.pbtn:hover{transform:translateY(-1px);background:#FFFCF3}
+.pbtn:active{transform:translateY(1px);box-shadow:0 -2px 0 var(--k-ink),0 2px 0 var(--k-ink),-2px 0 0 var(--k-ink),2px 0 0 var(--k-ink),inset 0 2px 0 var(--k-paper2)}
+.pbtn.on{background:var(--k-teal);color:var(--k-ink);box-shadow:0 -2px 0 var(--k-ink),0 2px 0 var(--k-ink),-2px 0 0 var(--k-ink),2px 0 0 var(--k-ink),inset 0 -3px 0 var(--k-tealD),inset 2px 2px 0 var(--k-tealL)}
+.pbtn.ac{background:var(--k-gold);color:var(--k-ink);box-shadow:0 -2px 0 var(--k-ink),0 2px 0 var(--k-ink),-2px 0 0 var(--k-ink),2px 0 0 var(--k-ink),inset 0 -3px 0 var(--k-goldD),inset 2px 2px 0 var(--k-goldL)}
+.pbtn:disabled,.pbtn[data-dis]{opacity:.55;transform:none}
+/* --- monitör: krem retro plastik kasa, yumuşak koyu arduvaz ekran --- */
+#mon{background:var(--k-bez)!important;box-shadow:0 -3px 0 var(--k-ink),0 3px 0 var(--k-ink),-3px 0 0 var(--k-ink),3px 0 0 var(--k-ink),inset 4px 4px 0 var(--k-bezL),inset -4px -4px 0 var(--k-bezD)!important}
+#mon .sc4{background:var(--k-bezD)!important;box-shadow:inset 2px 2px 0 #A99C80!important}
+.swrap{background:var(--k-scr)!important;box-shadow:0 0 0 3px var(--k-ink),0 0 0 6px var(--k-bezD)!important}
+.screen{background:var(--k-scr)!important;color:var(--k-stx)!important}
+.screen.pre{background:#182228!important}
+.chin span{background:var(--k-bezL)!important;color:var(--k-tx2)!important;box-shadow:0 0 0 2px var(--k-bezD)!important}
+.pled{background:var(--k-up)!important;box-shadow:0 0 0 2px var(--k-ink)!important}
+.stand{background:var(--k-bez)!important;box-shadow:0 -3px 0 var(--k-ink),3px 0 0 var(--k-ink),-3px 0 0 var(--k-ink),0 3px 0 var(--k-ink),inset 3px 3px 0 var(--k-bezL),inset -3px 0 0 var(--k-bezD)!important}
+#mon.pc2{background:#3A464C!important;box-shadow:0 -2px 0 var(--k-ink),0 2px 0 var(--k-ink),-2px 0 0 var(--k-ink),2px 0 0 var(--k-ink),inset 0 2px 0 var(--k-teal),inset 0 -2px 0 #263035!important}
+#mon.pc2 .swrap{box-shadow:0 0 0 2px #182228!important}#mon.pc2 .chin span.l2{color:var(--k-tealL)!important}#mon.pc2 .chin::before,#mon.pc2 .chin::after{background:var(--k-teal)!important}
+#scene.pc2 .stand.n,#scene.pc2 .stand.f{background:var(--k-bezD)!important;box-shadow:0 0 0 2px var(--k-ink),inset 0 2px 0 var(--k-bezL)!important}
+/* ekran içi: tarama çizgisi çok hafif, kenar karartması yok */
+.scan{background:repeating-linear-gradient(0deg,rgba(0,0,0,.05) 0 1px,transparent 1px 3px)!important}.vig{display:none!important}
+.osbar{background:#17222A!important;border-bottom:1px solid var(--k-scrL)!important}.osbar .os{color:var(--k-tealL)!important}
+.osbar .tabs button{border-color:var(--k-scrL)!important;color:var(--k-stx2)!important}.osbar .tabs button:hover{color:var(--k-stx)!important}
+.osbar .tabs button.on{background:var(--k-teal)!important;border-color:var(--k-teal)!important;color:var(--k-ink)!important}
+.osbar .gearb,#gear{background:rgba(220,230,224,.08)!important;border:1px solid var(--k-scrL)!important}.osbar .gearb:hover,#gear:hover{background:rgba(125,184,174,.28)!important}
+.tstrip,.bstrip{background:rgba(38,54,63,.9)!important}.tstrip{border-bottom:1px solid var(--k-scrL)!important}.bstrip{border-top:1px solid var(--k-scrL)!important}
+#lcdT{color:var(--k-tealL)!important;border-color:var(--k-tealD)!important}#lcdS{color:var(--k-stx2)!important}
+#lvr{color:var(--k-stx2)!important}#lvr .pbtn{background:rgba(220,230,224,.08)!important;border:1px solid var(--k-scrL)!important;color:var(--k-stx)!important}
+#lvr .pbtn.ac{background:var(--k-gold)!important;color:var(--k-ink)!important;border-color:var(--k-goldL)!important}#lvr .pbtn:hover{border-color:var(--k-goldL)!important}
+#note{color:var(--k-stx2)!important}
+/* ana düğme: parlama (bulanık hale) yok, düz 5 px alt gölge */
+#main{background:var(--k-gold)!important;border-color:var(--k-goldL)!important;color:var(--k-ink)!important;box-shadow:0 5px 0 var(--k-goldD)!important}
+#main:active,#main.down{box-shadow:0 1px 0 var(--k-goldD)!important}
+#main.buy{background:var(--k-up)!important;border-color:#A9D9BC!important;color:var(--k-ink)!important;box-shadow:0 5px 0 #4E9070!important}#main.buy:active,#main.buy.down{box-shadow:0 1px 0 #4E9070!important}
+#main.sell{background:var(--k-dn)!important;border-color:#F3B8AB!important;color:var(--k-ink)!important;box-shadow:0 5px 0 #B0604F!important}#main.sell:active,#main.sell.down{box-shadow:0 1px 0 #B0604F!important}
+#main:disabled{background:var(--k-scrL)!important;border-color:#4F6670!important;color:var(--k-stx2)!important;box-shadow:0 5px 0 #142026!important}
+#led{background:var(--k-scr2)!important}#led.on{background:var(--k-up)!important;box-shadow:0 0 0 2px rgba(127,194,155,.35)!important}
+#receipt{background:rgba(30,43,51,.96)!important;border-color:var(--k-tealD)!important;box-shadow:none!important;color:var(--k-stx)}
+#receipt .up{color:var(--k-up)!important}#receipt .dn{color:var(--k-dn)!important}#receipt .strip{color:var(--k-stx2)!important}
+#news{background:#5A2C35!important;border-bottom-color:var(--k-boss)!important;color:var(--k-stx)!important}#news b{background:var(--k-dn)!important;color:var(--k-ink)!important}
+.screen.bossin::before{box-shadow:inset 0 0 0 3px var(--k-dn),inset 0 0 0 5px rgba(229,142,124,.25),inset 0 0 0 7px rgba(229,142,124,.12),inset 0 0 0 9px rgba(229,142,124,.06)!important}
+.fl2{background:var(--k-dn)!important}
+/* otomasyon merkezi zemini ve bölmeler */
+#auto{background:var(--k-scr)!important;background-image:repeating-linear-gradient(0deg,transparent 0 31px,rgba(220,230,224,.04) 31px 32px)!important}
+.tile{box-shadow:0 0 0 2px var(--k-ink),0 0 0 4px var(--k-tealD)!important}.tile:nth-child(odd){box-shadow:0 0 0 2px var(--k-ink),0 0 0 4px #7A6E96!important}
+.tile.add{box-shadow:0 0 0 2px var(--k-ink),0 0 0 4px var(--k-gold)!important}
+/* --- katmanlar: ayarlar penceresi, ipucu, bildirim, başarı afişi, eğitim balonu --- */
+#modal,.modal{background:rgba(44,36,32,.62)!important}
+.mp,#scene .mp{background:var(--k-paper)!important;color:var(--k-tx)!important;border:0!important;border-radius:0!important;box-shadow:0 0 0 3px var(--k-ink),inset 3px 3px 0 var(--k-paperL),inset -3px -3px 0 var(--k-paper2),8px 8px 0 rgba(44,36,32,.35)!important;padding:16px 18px!important}
+.mh,#scene .mh{color:var(--k-tealD)!important}
+.it,#scene .it,.hr,#scene .hr{border-top:2px solid var(--k-line)!important}
+.mp p,#scene .mp p{color:var(--k-tx2)!important}.mp p b{color:var(--k-tx)!important}.mp h4,#scene .mp h4{color:var(--k-tealD)!important}.hr small,#scene .hr small{color:var(--k-tx2)!important}
+.bd,#scene .bd{background:var(--k-paper2)!important}.bd.r{background:var(--k-woodL)!important}
+.mp .pbtn,#scene .mp .pbtn{border:0!important;border-radius:0!important;background:var(--k-paperL)!important;color:var(--k-tx)!important;box-shadow:0 0 0 2px var(--k-ink),inset 0 -3px 0 var(--k-paper2)!important;margin:2px!important}
+.mp .pbtn:hover,#scene .mp .pbtn:hover{background:#FFFCF3!important}
+.mp .pbtn.on,#scene .mp .pbtn.on{background:var(--k-teal)!important;color:var(--k-ink)!important;box-shadow:0 0 0 2px var(--k-ink),inset 0 -3px 0 var(--k-tealD)!important}
+#tip{background:var(--k-paperL)!important;color:var(--k-tx)!important;box-shadow:0 0 0 2px var(--k-ink),3px 3px 0 var(--k-sh)!important}#tip.sl::after,#tip.sr::after{background:var(--k-ink)!important}
+#toast div{background:var(--k-paperL);color:var(--k-tx);box-shadow:0 0 0 2px var(--k-ink),inset 4px 0 0 var(--k-gold),3px 3px 0 var(--k-sh);padding:6px 16px 6px 20px}
+.bn{background:var(--k-paperL)!important;box-shadow:0 0 0 2px var(--k-ink),inset 0 4px 0 var(--k-gold),4px 4px 0 var(--k-sh)!important}.bn b{color:var(--k-tealD)!important}.bn small{color:var(--k-tx2)!important}
+.ms{background:var(--k-paperL)!important;box-shadow:0 0 0 3px var(--k-ink),0 0 0 7px var(--k-gold),0 0 0 9px var(--k-ink),6px 6px 0 9px var(--k-sh)!important}.ms b{color:var(--k-tealD)!important;text-shadow:none!important}.ms small{color:var(--k-tx)!important}
+#spot .hole{outline-color:var(--k-gold)!important}#spot .msg{background:var(--k-paperL)!important;color:var(--k-tx)!important;box-shadow:0 0 0 3px var(--k-ink)!important}
+#sil .sb{background:var(--k-paperL)!important;color:var(--k-tx)!important;box-shadow:0 0 0 3px var(--k-ink),5px 5px 0 rgba(44,36,32,.35)!important}#sil .sb b{color:var(--k-tealD)!important}#sil .sb small{color:var(--k-tx)!important}
+#sil .sb i{border-top-color:var(--k-ink)!important}
+#bigsack .hint{background:var(--k-paperL)!important;color:var(--k-tx)!important;box-shadow:0 0 0 3px var(--k-ink)!important}
+#endt p{color:var(--k-paper)!important}#endt small{color:#C9BBA5!important}
+@keyframes pulse{50%{color:var(--k-tealD)}}
+body.rm *{animation:none!important;transition:none!important}
 </style><style>/* === TELEFON: hep yatay oyun (dikeyde 90° döndürülür), sayfa kaymaz, çift dokunuşta büyümez === */
 html,body{position:fixed;inset:0;width:100%;height:100%;overflow:hidden;margin:0;overscroll-behavior:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
 *{touch-action:manipulation}canvas,img{-webkit-user-drag:none}#list,#shop,.modal .mp,#mb{touch-action:pan-x pan-y;-webkit-overflow-scrolling:touch}
@@ -911,7 +1078,7 @@ const KEY='trading-idle-save';let S=defS();
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S,(k,v)=>typeof v==='bigint'?v+'n':v))}catch(e){}};
 const VSEQ=i=>i%5===4?[64]:i%5===0?[32,16,8]:[64,32,16,8];const NPT=i=>{const q=VSEQ(i);return q[Math.min(q.length,S.cl[i]||1)-1]};
 const G={st:'ready',ci:0,cat:0,unl:-1,mod:'',im:0,fx:'',K:[],ev:[],pts:[],tl:[],rbp:null,pt:null,lev:1,p0:0n,curU:0n,cur:0,tn:0,gt:0,last:0,sp:1,y0:null,y1:null,raf:0,tm:0,at:0,msg:'',rp:0n,trades:0,bpl:0n,bn:0,drag:null,drink:null,bobS:'idle',bobU:0};
-function toast(t,bad){const d=document.createElement('div');d.textContent=t;if(bad)d.style.cssText='background:#ff5a6e;color:#fff;border-color:#7d1423';$('#toast').appendChild(d);setTimeout(()=>d.remove(),bad?1600:2800)}
+function toast(t,bad){const d=document.createElement('div');d.textContent=t;if(bad)d.style.cssText='background:#F2DEDA;color:#7A2F28;box-shadow:0 0 0 2px #3B2F2A,inset 4px 0 0 #E58E7C,3px 3px 0 rgba(59,47,42,.22)';$('#toast').appendChild(d);setTimeout(()=>d.remove(),bad?1600:2800)}
 /* ---------- ödül sınıfları: A küçük, B önemli, C kilometre taşı. Hiçbiri etkileşimi engellemez. ---------- */
 let AC=null;
 function tone(f,d,t,v,dl){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();const o=AC.createOscillator(),g=AC.createGain(),s=AC.currentTime+(dl||0);o.type=t||'square';o.frequency.value=f;g.gain.setValueAtTime(v||.04,s);g.gain.exponentialRampToValueAtTime(.0001,s+d);o.connect(g).connect(AC.destination);o.start(s);o.stop(s+d)}catch(e){}}
@@ -1285,7 +1452,7 @@ $('#agrid').addEventListener('click',e=>{const tl=e.target.closest('[data-tile]'
 const RSPR={};const rSpr=(i,fr)=>RSPR[i+'_'+fr]||(RSPR[i+'_'+fr]=render(robotGrid(i,fr),1));
 function drawTile(i,now){const cv=$('#tc'+i);if(!cv)return;const tile=cv.parentNode,n=S.rb.length;tile.className='tile'+(i===n?' add':i>n?' lock':'');
  const d=window.devicePixelRatio||1,r=cv.getBoundingClientRect(),W=tile.offsetWidth||200,H=tile.offsetHeight||190,w=Math.max(8,Math.round(r.width*d)),hh=Math.max(8,Math.round(r.height*d));if(cv.width!==w||cv.height!==hh){cv.width=w;cv.height=hh}
- const x=cv.getContext('2d'),k=cv.width/W;x.setTransform(k,0,0,k,0,0);x.fillStyle='#070B16';x.fillRect(0,0,W,H);x.textBaseline='middle';x.textAlign='center';
+ const x=cv.getContext('2d'),k=cv.width/W;x.setTransform(k,0,0,k,0,0);x.fillStyle='#18232A';x.fillRect(0,0,W,H);x.textBaseline='middle';x.textAlign='center';
  if(i>=n){if(i===n&&n<RMAX){const ok=afford(RSLOT[n]);x.fillStyle='#FFD45E';x.font='700 44px TIDig, "Pixelify Sans", monospace';x.fillText('+1',W/2,H/2-26);x.font='22px TIDig, VT323, monospace';x.fillText(TT('ROBOT EKLE'),W/2,H/2+10);x.font='20px TINum, TIDig, VT323, monospace';x.fillStyle=ok?'#FFD45E':'#E5484D';x.fillText('$'+cp(RSLOT[n]),W/2,H/2+34)}
   else{x.fillStyle='rgba(143,160,189,.3)';x.font='700 16px "Pixelify Sans", monospace';x.fillText(TT('BOŞ BÖLME'),W/2,H/2)}x.textAlign='left';return}
  const R=S.rb[i],rt=RBT[i],c=COINS[R.ci],fr=rt?Math.floor(now/420+i)%2:0;x.textAlign='left';x.imageSmoothingEnabled=false;x.drawImage(rSpr(i%6,fr),4,4,30,30);
@@ -1897,7 +2064,7 @@ function fitF(x,t,mw,px){let s=px;do{x.font=s+'px TINum, TIDig, VT323, monospace
 function rr(x,a,b,w,h,r){x.beginPath();x.moveTo(a+r,b);x.arcTo(a+w,b,a+w,b+h,r);x.arcTo(a+w,b+h,a,b+h,r);x.arcTo(a,b+h,a,b,r);x.arcTo(a,b,a+w,b,r);x.closePath()}
 function drawChart(now){const cv=$('#cv'),x=cv.getContext('2d'),c=COINS[G.ci];x.setTransform(CVS,0,0,CVS,0,0);x.shadowBlur=0;x.setLineDash([]);
  const L=18,R=SW-72,T=118,B=SH2-128,PW=R-L,PH=B-T,sp=c.pf,act=(G.st==='active'||G.st==='done')&&G.K&&G.K.length,tn=act?G.tn:0;
- x.fillStyle=c.boss?'#150E19':'#0B1322';x.fillRect(0,0,SW,SH2);
+ x.fillStyle=c.boss?'#2A2230':'#1E2B33';x.fillRect(0,0,SW,SH2);
  const N=Math.max(2,Math.round(PW*Math.max(tn,.05)/15/1.2)),ys=[];let mn=sp,mx=sp;
  if(act){for(let i=0;i<=N;i++){const v=sp*ratioAt(G.K,tn*i/N);ys.push(v);if(v<mn)mn=v;if(v>mx)mx=v}}
  const rg=Math.max(mx-mn,sp*.1),pad=rg*.18,t0=Math.max(0,mn-pad),t1=mx+pad;
