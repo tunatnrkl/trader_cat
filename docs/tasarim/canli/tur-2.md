@@ -50,3 +50,20 @@ Plan (adımlar): 1) Koyu arka plan + oda; 2) Sol panel + mağaza kartları; 3) M
 - Bobby'nin "AÇ!" rozeti turuncu ve küçük ama dikkat çekiyor; güzel, kalsın.
 
 **B'ye sorum:** Koyu zeminde BAŞLA'nın parlaklığı sence 30–45 dakikalık oturumda yorucu olur mu, yoksa tek parlak nokta olduğu sürece sorun yok mu?
+
+### Adım 1 — Psikolog B
+
+**A'nın sorusuna net cevap:** BAŞLA'nın parlaklığı 30-45 dakikada yormaz; çünkü yorgunluğu parlak bir nokta değil, birçok parlak noktanın aynı anda yarışması yapar. Şartlar: tek olması, boyutunun büyümemesi ve yanıp sönmemesi. Tur başlayınca BAŞLA'nın yerini SAT aldığı için ekranda zaten tek ana düğme kalıyor; bu iyi bir tasarım.
+
+**A ile katıldığım yerler:** Koyuluk seviyesi doğru (duvar %14 civarı, kontrast panelde yeterli); pencere ve düz renkli lamba lekesi sakinleştirir; mercan SAT acilen kısılmalı. Küçük bir itirazım: A "BAŞLA hiç kısılmasın" diyor, ben turuncuyu doygunlukta bir kademe (yaklaşık %8-10) indirmeyi öneririm; parlaklığı değil, doygunluğu. Düğme yine ekranın en çıkıntılı öğesi olur, ama koyu zeminde gözde iz bırakmaz.
+
+**Zarar ekranına bakınca:** Sarı kesikli ALIŞ çizgisi, sarı başlık "Pebble", sarı fiyat hapları ve pembe SAT aynı anda parlıyor; bu ekranın asıl stres kaynağı. Telefonda KALDIRAÇ, BOBBY, KEDİ, COİN gibi küçük etiketler soluk ve 12 px altında görünüyor. Tasarımcının 4. sorusu: bu adımda SAT'ın rengi ve altın/sarı öğe sayısı öne alınsın.
+
+#### Ortak tavsiye 1
+
+1. Zarardaki SAT düğmesi mercan/pembe yerine nötr kart tonu (panel #3A345F civarı, yazı krem) olsun; yalnız küçük ▼ ve sayı kalsın. Dolgu doygunluğu en çok %35.
+2. Altın fiyat hapları ($25, $20, $2,400) dolgusunu mat/sönük yap (doygunluk yaklaşık %30-40 azalt) ve yalnızca alınabilir olduğunda canlansın; böylece aynı anda en fazla bir parlak sarı öğe (Pebble seçili kart kenarı) kalır.
+3. ALIŞ kesikli çizgisi sarıdan sönük krem/açık gri-mora geçsin; kalınlık 1.5-2 px, etiketi (ALIŞ) küçük kalsın.
+4. BAŞLA/SAT turuncusunda doygunluğu yaklaşık %8-10 azalt; boyut ve konum aynı kalsın, animasyon/yanıp sönme yok.
+5. Telefonda tüm etiketler (KALDIRAÇ, BOBBY, KEDİ, COİN, SEVİYE) en az 12 px, kontrast en az 4.5:1; kilitli kartın "%12" ilerlemesi en az 12 px ve çubuk yüksekliği en az 6 px olsun (A'nın merak isteği).
+6. Odaya düz renkli, sabit, küçük bir lamba lekesi eklenebilir (parlaklığı duvardan en fazla bir kademe açık, glow ve animasyon yok).
