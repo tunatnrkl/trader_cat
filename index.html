@@ -530,8 +530,8 @@ const DEF=[
 [['Aurora','20T','15T 40T 100T'],['Vortex','1Qa','750T 2Qa 5Qa 12Qa'],['Nebula','40Qa','30Qa 80Qa 200Qa 480Qa 1.2Qi'],['Cosmos','2Qi','1.5Qi 4Qi 10Qi 24Qi 60Qi 150Qi'],['Kedi Maması','100Qi','']],
 [['Eclipse','10Sx','7.5Sx 20Sx 50Sx'],['Pulsar','1Sp','750Sx 2Sp 5Sp 12Sp'],['Singularity','100Sp','75Sp 200Sp 500Sp 1.2Oc 3Oc'],['Infinity','10Oc','7.5Oc 20Oc 50Oc 120Oc 300Oc 750Oc'],['Kedi Maması','1No','']]];
 const COL=['#ffd24a','#ff9a3d','#c77dff','#ff6fae','#ff4d4d','#4dffb8','#ffe14d','#7ee0ff','#ff8f5a','#ff6a3a','#9be15d','#6aa8ff','#e07cff','#ffb3c7','#ff3a6a','#8be8d0','#f2c14e','#b0b8ff','#ffffff','#ff2a2a'];
-const CF=2000000n,CM=[1n,4n,16n,64n],VOLN=[4,8,16,32,64],VCM=[15n,40n,100n];
-const COINS=[];DEF.forEach((cat,k)=>cat.forEach((r,j)=>{const boss=j===4,P0=P(DEF[0][j][1])*[1n,2000000n,8000000000000n,64000000000000000000n][k],PP=(k===0&&j===0)?P0:P0*4n*(k===2&&j>0?(j===4?48n:24n):k===3?(j>0?112n:40n):10n)/10n,costs=(boss?[]:j===0?VCM.slice(0,2):VCM).map(m=>PP*m/10n);
+const CF=2000000n,CM=[1n,4n,16n,64n],VOLN=[4,8,16,32,64],VCM=[10n,25n,60n];
+const COINS=[];DEF.forEach((cat,k)=>cat.forEach((r,j)=>{const boss=j===4,P0=P(DEF[0][j][1])*[1n,2000000n,8000000000000n,64000000000000000000n][k],PP=k===0?P0:P0*4n*(k===2&&j>0?(j===4?48n:24n):k===3?(j>0?112n:40n):10n)/10n,costs=(boss?[]:j===0?VCM.slice(0,2):VCM).map(m=>PP*m/10n);
  COINS.push({i:COINS.length,cat:k,k:j,n:r[0],boss,p:PP,p0:P0,pf:Number(PP)/1e4,costs,max:costs.length+1,base:boss?32:[32,64,128,256][j],c:COL[COINS.length]})}));
 const FLOOR=Math.log(.003);
 /* Fiyat yolu: tam N dönüm noktası. N+1 bacak; her bacak tek yönlü, yön sırayla değişir, geçişler smoothstep.
@@ -893,7 +893,7 @@ function sirenGrid2(fr){const g=new Grid(26,15),cx=13;g.rect(7,0,12,2,'S2');g.re
  return g}
 
 /* ---------- kayıt ---------- */
-const defS=()=>({v:49,rci:null,rbOn:1,hintOff:0,tot:0n,lc:D(2),introDone:0,rev:{},finG:0,bl:1,bc:1,en:0,enT:0,cash:D(2),open:COINS.map(()=>0),co:[1,0,0,0],cl:COINS.map(()=>1),ll:COINS.map(()=>1),rob:0,robOn:1,rlv:[1,1,1,1],rl:[1,1,1,1],tc:1,tcOn:1,ptm:0,pc2:0,spc:0,rb:[],rerr:0,rlvl:0,view:'main',auto:0,autoOn:1,al:1,food:0,over:0,done:0,bottles:0,hist:[],set:{mk:1,lb:1,snd:1}});
+const defS=()=>({v:49,rci:null,rbOn:1,hintOff:0,tot:0n,lc:D(2),introDone:0,rev:{},finG:0,bl:1,bc:1,en:0,enT:0,cash:D(2),open:COINS.map(()=>0),co:[1,0,0,0],cl:COINS.map((c,i)=>i===0?2:1),ll:COINS.map(()=>1),rob:0,robOn:1,rlv:[1,1,1,1],rl:[1,1,1,1],tc:1,tcOn:1,ptm:0,pc2:0,spc:0,rb:[],rerr:0,rlvl:0,view:'main',auto:0,autoOn:1,al:1,food:0,over:0,done:0,bottles:0,hist:[],set:{mk:1,lb:1,snd:1}});
 const KEY='trading-idle-save';let S=defS();
 (function loadSave(){const rv=(k,v)=>typeof v==='string'&&/^-?\d+n$/.test(v)?BigInt(v.slice(0,-1)):v;
  try{let j=JSON.parse(localStorage.getItem(KEY)||'null',rv),mig=0;if(!j)j=JSON.parse(localStorage.getItem('ti-v11')||'null',rv);if(!j){j=JSON.parse(localStorage.getItem('ti-v10')||'null',rv);mig=1}if(!j){j=JSON.parse(localStorage.getItem('ti-v9')||'null',rv);mig=1}
@@ -924,7 +924,7 @@ const afford=v=>S.cash>=v,pctOf=v=>v>0n?Math.min(100,Number(S.cash*100n/v)):100;
 function logU(x,cost){S.hist.unshift({k:'u',x,cost});if(S.hist.length>60)S.hist.pop()}
 function pay(v,txt){if(S.cash<v)return false;S.cash-=v;S.lc-=v;if(txt)logU(txt,v);return true}
 /* v28: katalog geçiş eşikleri (x100): bir coin, toplam kazanç >= eşik x fiyat olunca açılır */
-const UNLK=[150n,150n,150n,150n];   /* v49: coin, fiyatının %150'si kadar NET kâr edilince açılır */   /* kalibre: her katalog ~33 dk */
+const UNLK=[100n,250n,220n,600n];   /* v49: coin, fiyatının %150'si kadar NET kâr edilince açılır */   /* kalibre: her katalog ~33 dk */
 const FRV=51800n;   /* final kartı toplam kazanç >= 518 x final fiyatı olunca görünür (x100) */
 function checkOpen(){syncTot();let ch=0;COINS.forEach(c=>{if(!S.open[c.i]&&S.tot*100n>=c.p*UNLK[c.cat]){spotCoin(c.i);S.open[c.i]=1;ch=1;S.hist.unshift({k:'u',x:c.n+' coini açıldı',cost:0n});const nc=!S.co[c.cat];
  if(nc){S.co[c.cat]=1;G.unl=c.cat;setTimeout(()=>{G.unl=-1;SD='';renderSide()},1500)}
@@ -979,11 +979,11 @@ const goU=(a,cost,ok)=>`<button class="go unl" data-a="${a}" ${ok?'':'data-dis="
 const INFOT={cup:'Seviye arttıkça dönüm noktası azalır, grafik sakinleşir.',lup:'Kâr ve zarar kaldıraç katı kadar büyür.',bup:"Bobby'yi besler; süre bitince küser.",cpup:"Bobby'nin kemik süresini uzatır.",au:'Tur bitince yenisini kendisi başlatır.',tc:'Oyunu hızlandırır; istediğin an kapatabilirsin.',spc:'Robotların otomatik işlem yaptığı merkezi açar.',pc2:'Sv.2 daha büyük ekran; Sv.3 robot Otomasyon Merkezini açar.',fb:'Final: kedinin kabına sürüklenince oyun biter.',radd:'Otomatik işlem yapan yeni bir robot ekler.'};
 const tg=(a,on)=>`<button class="sw ${on?'on':''}" data-a="${a}"><i></i>${on?'AÇIK':'KAPALI'}</button>`;
 function renderShop(){const ci=G.ci,c=COINS[ci],k=G.cat,act=G.st==='active',cl=S.cl[ci],ll=S.ll[ci],L=Math.pow(2,ll-1),al=S.al,tc=S.tc,bl=S.bl,bc=S.bc,rl=S.rlv[k],rk=S.rl[k],ML=BMAXL[k],MR=BMAXR[k];
- const cc=cl<c.max?c.costs[cl-1]:0n,lc=c.p*BigInt(Math.pow(2,ll)*2),oc=al<5?OTC[al-1]:0n,tcc=tc<6?TCC[tc+1]:0n,bkc=bl<10?BONEC[bl-1]:0n,cpc=bc<10?CAPC[bc-1]:0n,ru=rl<ML?RC[k][rl-1]:0n,rlc=rk<MR?rlcost(k,rk):0n;
+ const cc=cl<c.max?c.costs[cl-1]:0n,lc=c.p*BigInt(Math.pow(2,ll)),oc=al<5?OTC[al-1]:0n,tcc=tc<6?TCC[tc+1]:0n,bkc=bl<10?BONEC[bl-1]:0n,cpc=bc<10?CAPC[bc-1]:0n,ru=rl<ML?RC[k][rl-1]:0n,rlc=rk<MR?rlcost(k,rk):0n;
  const key=[S.set.bobC,Object.keys(S.rev||{}).length,S.view,S.food,S.pc2,S.spc,S.co[2],afford(PC2P),afford(SPCP),ci,k,cl,ll,act,afford(cc),afford(lc),S.rob,S.robOn,afford(ROBP),S.auto,S.autoOn,al,afford(AUTOP),afford(oc),tc,S.tcOn,afford(tcc),S.food,S.over,afford(FOOD),bl,bc,afford(bkc),afford(cpc),rl,rk,afford(ru),afford(rlc)].join('|');if(key===SH)return;SH=key;
  let hb='',ho='',hz='';const mx='<span class="mx">MAKS</span>',cI=`<img class="ic" src="${ICONS[ci]}" width="48" height="48" alt="">`,lev=Math.pow(2,rk-1);
  let h=c.boss?card('cup',cI,'VOLATİLİTE',c.n,'','<span class="mx">SABİT</span>','Boss coinin volatilitesi sabittir: 64 dönüm noktası.',''):card('cup',cI,'VOLATİLİTE',c.n,vseg(ci,cl),cl<c.max?go('cup',cc,!act&&afford(cc)):mx,`Volatilite = grafikteki tepe + dip (dönüm noktası) sayısı.\nHer seviye yarıya indirir (en az 8). Daha az dönüm noktası: zamanlaması daha kolay hareketler.\nŞimdi ${NPT(ci)}${cl<c.max?', sonraki seviyede '+VSEQ(ci)[cl]:''} dönüm noktası.`,cl<c.max&&!act&&afford(cc)?'can':'');
- h+=card('lup',icn('bolt',3),'KALDIRAÇ',`${c.n} · ${L}x`,c.boss?'':seg(ll,LMAX(ci)),c.boss?'<span class="mx">SABİT</span>':ll<LMAX(ci)?go('lup',lc,!act&&afford(lc)):mx,'Kaldıraç: kâr ve zarar kaldıraç katı kadar büyür. Fiyat = coin fiyatı × hedef kaldıraç × 2.',ll<LMAX(ci)&&!act&&afford(lc)?'can':'');
+ h+=card('lup',icn('bolt',3),'KALDIRAÇ',`${c.n} · ${L}x`,c.boss?'':seg(ll,LMAX(ci)),c.boss?'<span class="mx">SABİT</span>':ll<LMAX(ci)?go('lup',lc,!act&&afford(lc)):mx,'Kaldıraç: kâr ve zarar kaldıraç katı kadar büyür. Fiyat = coin fiyatı × hedef kaldıraç.',ll<LMAX(ci)&&!act&&afford(lc)?'can':'');
  if(!S.open[ci])h=lockN('cup','VOLATİLİTE')+lockN('lup','KALDIRAÇ');   /* v49: coin kilitliyken seviyeleri de kilitli */
  /* BOBBY: satın alma, anahtar, seviye, kaldıraç ve enerji barı tek kartta */
  hb+=!rev('rb',ROBP,S.rob)?lockN('rb','BOBBY'):`<div class="sc bob ${!S.rob&&afford(ROBP)?'can':''}" data-k="rb"><div class="bh"><div class="si">${icn('dog',3)}</div><div class="sm"><b>BOBBY</b><span class="st">${S.rob?'Katalog '+(k+1):'Köpek yavrusu'}</span></div><div class="sb">${S.rob?tg('rt',S.robOn):goU('rb',ROBP,afford(ROBP))}</div></div>
@@ -1004,7 +1004,7 @@ function renderShop(){const ci=G.ci,c=COINS[ci],k=G.cat,act=G.st==='active',cl=S
 $('#shop').onclick=e=>{if(e.target.closest('[data-bobc]')){S.set.bobC=S.set.bobC?0:1;save();SH='';ui();return}if(e.target.closest('[data-feed]')){feed(e);return}
  const t=e.target.closest('[data-a]');if(!t)return;   /* v33: kart gövdesine tıklamak satın almaz; yalnız buton */if(t.dataset.dis){nope(t);return}const a=t.dataset.a,ci=G.ci,c=COINS[ci],k=G.cat,key=(t.closest('.sc')||{dataset:{}}).dataset.k||'';let tier='',t1='',t2='';
  if(a==='cup'){if(G.st!=='active'&&S.cl[ci]<c.max&&pay(c.costs[S.cl[ci]-1],c.n+' Coin Lv'+(S.cl[ci]+1))){S.cl[ci]++;tier=S.cl[ci]===c.max?'B':'A';t1=c.n+' maksimum seviye'}}
- else if(a==='lup'){if(G.st!=='active'&&S.ll[ci]<LMAX(ci)&&pay(c.p*BigInt(Math.pow(2,S.ll[ci])*2),c.n+' Kaldıraç '+Math.pow(2,S.ll[ci])+'x')){S.ll[ci]++;G.lev=Math.pow(2,S.ll[ci]-1);tier=S.ll[ci]===LMAX(ci)?'B':'A';t1=c.n+' kaldıraç '+Math.pow(2,S.ll[ci]-1)+'x'}}
+ else if(a==='lup'){if(G.st!=='active'&&S.ll[ci]<LMAX(ci)&&pay(c.p*BigInt(Math.pow(2,S.ll[ci])),c.n+' Kaldıraç '+Math.pow(2,S.ll[ci])+'x')){S.ll[ci]++;G.lev=Math.pow(2,S.ll[ci]-1);tier=S.ll[ci]===LMAX(ci)?'B':'A';t1=c.n+' kaldıraç '+Math.pow(2,S.ll[ci]-1)+'x'}}
  else if(a==='rb'){if(pay(ROBP,'Bobby sahiplenildi')){S.rob=1;S.en=CB[0]/2;S.enT=Date.now();tier='B';t1='Bobby artık senin!';t2='Enerji barına tıklayarak besle'}}else if(a==='rt')S.robOn^=1;
  else if(a==='rlup'){const l=S.rlv[k];if(S.rob&&l<BMAXL[k]&&pay(RC[k][l-1],'Bobby Katalog '+(k+1)+' Lv'+(l+1))){S.rlv[k]++;tier=l+1===BMAXL[k]?'C':l+1===5?'B':'A';t1=l+1===BMAXL[k]?'BOBBY MAKSİMUM SEVİYE':'Bobby Lv'+(l+1);t2='Katalog '+(k+1)}}
  else if(a==='rlev'){const l=S.rl[k];if(S.rob&&l<BMAXR[k]&&pay(rlcost(k,l),'Bobby Katalog '+(k+1)+' kaldıraç '+Math.pow(2,l)+'x')){S.rl[k]++;tier=l+1===BMAXR[k]?'B':'A';t1='Bobby kaldıracı '+Math.pow(2,l)+'x';t2='Katalog '+(k+1)}}
@@ -1490,7 +1490,7 @@ NUMOBS.observe(document.body,{subtree:true,childList:true,characterData:true});n
    Coin adları ve "BOSS" sabit; "Kedi Maması" EN'de "Cat Food". Sayı biçimi dilden bağımsız.
    ===================================================================== */
 const I18N={en:{
- 'MAĞAZA':'SHOP','KEDİ':'CAT','KEMİK VER':'GIVE BONE','AÇ!':'HUNGRY!','ANA PC':'MAIN PC','OTOMASYON MERKEZİ':'AUTOMATION CENTER','HAZIR':'READY','TUR':'ROUND','BİTTİ':'DONE','FİNAL':'FINAL',
+ 'Kaldıraç: kâr ve zarar kaldıraç katı kadar büyür. Fiyat = coin fiyatı × hedef kaldıraç.':'Leverage: profit and loss grow by the leverage multiple. Price = coin price × target leverage.','MAĞAZA':'SHOP','KEDİ':'CAT','KEMİK VER':'GIVE BONE','AÇ!':'HUNGRY!','ANA PC':'MAIN PC','OTOMASYON MERKEZİ':'AUTOMATION CENTER','HAZIR':'READY','TUR':'ROUND','BİTTİ':'DONE','FİNAL':'FINAL',
  'SON DAKİKA':'BREAKING','Tebrikler!':'Congratulations!','Bütün sokak hayvanlarını besledin!':'You fed all the street animals!','Yeniden Oyna':'Play Again','Emin misin? Kayıt silinecek':'Are you sure? Your save will be deleted.',
  '▼ daha fazla':'▼ more','MAXED':'MAXED','BAŞLA':'START','YENİ TUR':'NEW ROUND','OYUN BİTTİ':'GAME OVER','KALDIRAÇ':'LEVERAGE','En az':'At least','gerek. Kedi mamasını kaba götür!':'needed. Bring the cat food to the bowl!',
  'Yetersiz bakiye · Gerekli:':'Not enough cash · Needed:','Pozisyon:':'Position:','(katalog fiyatı).':'(catalog price).','Yeterli nakit yok.':'Not enough cash.',"15. sn'de otomatik satılır.":'Auto-sells at 15 s.','Likidasyon:':'Liquidation:',
