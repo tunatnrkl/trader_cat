@@ -36,6 +36,7 @@ Not: test ortamında (Linux) yuvarlak font yok, görüntülerde Inter görünüy
 - Kilitli kartlar: soluk kesik kenar; **sıradaki coin** nane kenarlı ve hedefe ilerleme çubuğu + yüzde gösterir (kilitli içerik adı sızdırılmaz).
 - Mağaza kartları: yuvarlak ikon tabağı, kalın başlık, nokta seviyeler, hap fiyat butonu (▲ + $), kilit açma = nane hap, parası yetmeyen = soluk krem hap (kırmızı yok), MAKS = nane rozet, "i" = gök mavisi yuvarlak rozet.
 - Toggle: gerçek hap anahtar (beyaz yuvarlak topuz, açıkken nane).
+- Mağaza kart başlığı/alt yazısı gerekirse iki satıra kayar (dar telefon ve EN'de taşma yok).
 - Bobby kartı satırları: etiket + noktalar solda üst üste, fiyat hapı sağda (10 nokta artık taşmıyor).
 - Monitör: yuvarlak kalın gök mavisi kasa, yuvarlak ekran, çene hapı "TRADE-OS 3000", yuvarlak ışıklar, yuvarlak ayak; ekranda tarama çizgisi/vinyet kaldırıldı.
 - Ekran içi: hap sekmeler, yuvarlak ayar düğmesi, hap kaldıraç seçimi, tok BAŞLA (iç açık kenar + 8 px alt gölge, basınca iner); AL = nane, SAT = **kârdaysa nane-yeşil, zarardaysa mercan** (alım fiyatına göre).
@@ -64,3 +65,8 @@ Not: test ortamında (Linux) yuvarlak font yok, görüntülerde Inter görünüy
 - Telefon 667x375 (16:9) oranında sahne genişlemez; oradaki küçük etiketler (~7–8 px) hâlâ küçük.
 - 667x375/844x390'da sol listede 3. kart yarım görünür (liste kaydırılır).
 - Eski CSS katmanları silinmedi, üstüne yazıldı (çok sayıda `!important`); seçilirse sadeleştirme turu gerekir.
+- Ekran üst çubuğunun hemen altında (sekmelerin altı) zaman zaman 1 px'lik soluk kesikli bir iz görünüyor; kaynağı bulunamadı (zararsız, görsel).
+
+## Doğrulama
+- `smoke.js` (TI_URL=konsept-2, TI_SHOTS=tasarim/konsept-2/shots): **63/63 geçti**, konsol temiz.
+- `goruntu.js` → `tasarim/konsept-2/goruntu/` (8 standart görüntü), konsol temiz.

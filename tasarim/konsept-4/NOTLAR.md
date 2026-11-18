@@ -36,3 +36,8 @@ Sistem yuvarlak yığını (brif): `ui-rounded, "SF Pro Rounded", "Nunito", "Var
 - Sprite/ikonlar (coin, kilit, kemik, robot, kedi/köpek, kaplar, mama) eski pixel art; renkleri yeni palete uyarlanmadı (öncelik 4). Final sahnesi animasyonu dokunulmadı (yalnız yazı/buton stili).
 - Eski CSS katmanları silinmedi, yeni blok (`<style id="k4">`) en sonda onları eziyor; kalıcı geçişte eski görsel katmanlar temizlenmeli.
 - Robot bölmelerinde çok işlem olunca yüzde etiketleri üst üste binebiliyor (eskisinde de vardı).
+
+## Doğrulama
+- `smoke.js` (TI_URL=konsept-4, TI_SHOTS=tasarim/konsept-4/shots): **63/63 geçti**, konsol temiz, TR/EN ve 4 ekran boyutunda taşma yok.
+- `goruntu.js` → `tasarim/konsept-4/goruntu/` 8 standart görüntü, konsol temiz. Ek kontrol (boss + haber bandı, mağaza aşağı kaydırılmış, 2 robot çalışırken, ödül/toast, telefon menü/mağaza) gözle incelendi.
+- Telefon işlem anında başlıktaki yüzde ile SAT düğmesindeki yüzde aynı (`ui` sonrası `hud` aynı karede çağrılıyor).
