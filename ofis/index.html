@@ -6,6 +6,8 @@
 <title>Ekip Ofisi</title>
 <style>
 :root{--bg:#080B1E;--pn:#0F1838;--rim:#3F6BD8;--au:#F2B83C;--tx:#F4EEE3;--tx2:#B4C4F0;--mint:#45D6A0}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#080B1E;--pn:#0F1838;--rim:#3F6BD8;--au:#F2B83C;--tx:#F4EEE3;--tx2:#B4C4F0;--mint:#45D6A0}}
+:root[data-theme="dark"]{--bg:#080B1E;--pn:#0F1838;--rim:#3F6BD8;--au:#F2B83C;--tx:#F4EEE3;--tx2:#B4C4F0;--mint:#45D6A0}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--tx);font:600 14px/1.4 ui-rounded,"Nunito","Trebuchet MS",system-ui,sans-serif;display:flex;flex-direction:column;align-items:center;gap:12px;padding:16px}
 h1{margin:0;font-size:18px;color:var(--au);letter-spacing:.06em}

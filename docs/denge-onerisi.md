@@ -231,3 +231,10 @@ Notlar:
 - Kayıt göçü gerekmez; `S.v` artırmaya gerek yok (karar 5-B seçilirse gerekir).
 - Yorum güncellemesi (isteğe bağlı): satır 927 yorumundaki "%150" ve "her katalog ~33 dk" → yeni değerler; satır 526 maliyet yorumu.
 - Uygulama sonrası: `runTradeTests()`, `runBobbyTests()` konsolda GEÇTİ olmalı; eski kayıt açılmalı; `?lang=en` ile kaldıraç kartı metni kontrol edilmeli.
+
+## Kullanıcı kararı (2026-11-18)
+- Robot ekleme fiyatları (`RSLOT`): eski `[COINS[10].p,[14],[15],[16]]×6`; yeni: 1. robot aynı, sonraki her robot öncekinin %8 fazlası (sig2 ile yuvarlanır).
+- Coin açılma eşiği (`UNLK`): eski `[100n,250n,220n,600n]` → yeni `[150n,375n,330n,900n]` (%50 artış).
+- Kayıt formatı değişmedi; `checkOpen` yalnız yeni coin açar, eski kayıtta açık coinler açık kalır.
+- Sim (2 koşu, orta oyuncu): toplam 141.3 → 146.8 dk; katalog 52.1/29.8/31.2/27.0 → 55.3/30.6/29.8/29.9 dk.
+- Sim "iyi" oyuncu: toplam 94.7 → 103.3 dk; katalog 32.1/17.6/20.5/23.1 → 34.6/18.3/24.5/24.7 dk.
