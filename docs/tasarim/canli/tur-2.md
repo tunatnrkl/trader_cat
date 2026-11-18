@@ -370,3 +370,16 @@ Kullanıcının isteği kesin: canlı renk, daha koyu arka plan. Katılıyorum; 
 4. **Alınabilir/alınamaz ayrımı:** Koddaki mevcut `data-dis` özniteliği kullanıldı; yeni mantık eklenmedi. Alınabilir hap altın dolgulu. Alınamaz hap dolgusuz koyu lacivert (#1B2C6B), #6F8FE0 kenarlı, yazısı #B4C4F0 (yazı soluk değil).
 5. **Ana düğme:** BAŞLA ve kârdaki SAT turuncu (#F59A38, koyu yazı, #B8681A alt kenar). Zarardaki SAT lacivert #1B2C6B, #CFE0FF kenar, krem yazı. AL turkuaz. BOSS rozeti, boss hapı ve "SON DAKİKA" kırmızı #C23B4E, sabit. Glow, neon, yanıp sönme yok.
 6. **Değişmeyenler:** Adım 5b masaüstü ölçüleri, telefon (`#stage.tel`) ölçüleri, odometre, mama ease-out ve termal fiş aynen. Mantık, sayı, kayıt, id ve data-* değişmedi. Smoke 63/63, konsol temiz.
+
+## Adım 7 — Psikolog A (açılış)
+
+Adım 6'nın canlılığı çok iyi; 7/10 "iyi çocuksu" demek, 6/10 için yalnız yüzeyi biraz toparlayacağız.
+
+**(a) İşlem raporu kartı.** Kâr: tek büyük şey "+$X" olsun (nane ▲, altın "KÂR!" başlık); altında küçük satırlar. Oyuncu bir saniyede "kazandım" hissini alsın. Zarar: büyük sayı yok; küçük kehribar "−$X" ve sakin "ZARAR" başlığı, hemen altında "Yeniden dene" gibi bir çıkış. Zarar kartı cezalandırmamalı, tur başlatmaya yönlendirmeli. Kart ≤450 ms girsin.
+
+**(b) 7→6 için üç ince ayar.**
+1. Başlık konturu 3 px'ten 2 px'e.
+2. Büyük yuvarlak köşeler 2 px küçülsün (28→26).
+3. İkincil yazı 800→700. Renklere dokunma.
+
+**(c) Bitiş.** Mama dökülünce kap taşsın, birkaç tane yere düşsün; kedi ve Bobby yerken yavaş, yumuşak piksel hareketi olsun (yanıp sönme yok). Sonra sakin bir bitiş ekranı: büyük başlık "Karnı doydu", altında gururlandıran sayılar: toplam oyun süresi, toplam işlem sayısı, toplam kâr, en iyi işlem (yüzdesiyle). En büyük ödül hissi "en iyi işlem" ve "toplam mama" olur; oyuncu kendi hikâyesini görür. Altta tek altın düğme: devam/yeni oyun.
