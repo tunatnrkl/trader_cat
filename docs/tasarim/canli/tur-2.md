@@ -302,3 +302,23 @@ Yön: "Gece yarısı trader masası". Düzen ve koyu oda korundu; olgunlaştır�
 - Bakiye ikonu hâlâ çizilmiş coin; gerçek madeni para ya da banknot hissi verilmedi.
 - Masada klavye gibi küçük nesneler yok.
 - Ana menü ve final sahnesi yeni malzeme diline geçmedi.
+
+## Adım 5b — Tasarımcı: Notlar
+
+Adım 5'in grafit/mat yönü bırakıldı. Adım 4'ün renkleri, doygunluğu, kontrastı ve kişiliği aynen duruyor. Smoke 63/63, konsol temiz.
+
+1. **Mama çubuğu:** Dolma gösterimi ease-out (1−(1−p)³): başta hızlı, sonra yavaş. Toplam süre (4 sn) ve mantık aynı.
+2. **Bakiye odometresi:** Değişen haneler sayaç gibi kayıyor (450 ms, ease-out); haneler sabit genişlikte. Hareket azaltmada (ayar veya sistem tercihi) anında. Renk ve kontur Adım 4'teki gibi krem / koyu. Sayfa genelinde tabular rakam.
+3. **Masaüstü ölçüleri** (yalnız `#stage:not(.tel)`), 1440x900'de gerçek boyut:
+   - kart başlığı ~17 px, fiyat ~15 px, ikincil yazı ~13 px
+   - coin kartı 96 → 76 px
+   - fiyat hapı 46 → 32 px
+   - BAŞLA 300x80 → 270x68
+   - grafik eksen yazısı 17 px
+4. **Ağırlık:** Masaüstünde 900 → 800 (ikincil yazılarda 700). Ağır yazı gölgeleri 2 px'ten 1 px'e indi. Başlık plakalarında hafif harf aralığı var.
+5. **Oran** (renkler aynı):
+   - Kartlar, fiyat hapları, sekmeler ve tuşlarda kalın alt basamak 6–9 px'ten 3–5 px'e indi; kontur 3 px'ten 2 px'e indi.
+   - Köşe yarıçapları küçüldü: panel 28 → 18, monitör 34 → 24, kart 20 → 12, fiyat hapı yuvarlak hap → 10, BAŞLA 26 → 16.
+   - Dolgular masaüstü oranına çekildi.
+6. **Telefon:** `#stage.tel` (Adım 4 ölçüleri, ≥12 px, ≥44 px) aynen.
+7. **Tur sonu fişi:** Termal kâğıt (krem, monospace, kesikli ayraçlar, tırtıklı alt kenar). "KÂR!" ve "ZARAR" canlı nane / kehribar tonlarında.
