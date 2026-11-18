@@ -1038,6 +1038,134 @@ body.rm .pl{animation:none!important;transform:translate(-50%,-50%)!important}
 #stage.tel .info{top:12px!important;right:18px!important}#stage.tel #right .go{height:80px!important}#stage.tel #right .sc:not(.bob):not(.rcoin) .sm b{padding-right:60px!important}
 #stage.tel #right .go{z-index:2}#stage.tel .info{z-index:3}
 #cico{image-rendering:auto!important}
+
+/* =====================================================================
+   TUR 2 / ADIM 5 — "Gece yarısı trader masası": olgun malzeme, ince gölge, sıkı tipografi
+   Grafit kasa paneller · cam yeşili terminal ekranı · koyu ceviz masa · kâğıt fiyat etiketi · termal fiş.
+   Köşeler 6–10 px, konturlar 1 px, gölgeler ince (bulanık kısa gölge; glow yok). Masaüstü ölçüleri küçük; telefon (#stage.tel) büyük kalır.
+   ===================================================================== */
+:root{--k-fr:"Inter","SF Pro Text","Segoe UI",system-ui,Roboto,"Helvetica Neue",Arial,sans-serif;
+ --k-hd:"Bahnschrift SemiBold SemiConden","Bahnschrift","DIN Condensed","Avenir Next Condensed","Roboto Condensed","Arial Narrow",var(--k-fr);
+ --k-mono:"JetBrains Mono","SF Mono","Cascadia Mono","Roboto Mono",ui-monospace,Menlo,Consolas,monospace;
+ --k-pn:#24212C;--k-cd:#2E2A37;--k-cdl:#3A3545;--k-cde:#1E1B25;--k-rim:#3A3646;--k-ol:#0B0A10;--k-scr:#0F1615;
+ --m-sh:0 0 0 1px #0B0A10,0 2px 0 #0B0A10,0 6px 14px rgba(0,0,0,.35);--m-hi:inset 0 1px 0 rgba(255,255,255,.06);
+ --m-paper:#E6DDC8;--m-paperd:#B9AE95;--m-ink:#2A2218}
+body{font-variant-numeric:tabular-nums}
+/* paneller: grafit kasa */
+#left::before,#right::before{border-radius:12px!important;background:var(--k-pn)!important;box-shadow:0 0 0 1px #3A3646,0 0 0 2px #0B0A10,0 10px 24px rgba(0,0,0,.45),var(--m-hi)!important}
+#cashp{border-radius:8px!important;background:#15131A!important;box-shadow:inset 0 0 0 1px #0B0A10,inset 0 2px 6px rgba(0,0,0,.5),0 1px 0 rgba(255,255,255,.05)!important}
+#cbar,#ebar,.br.en .sg,#pbs,.tk .lkp .lbar{border-radius:3px!important}
+/* başlık plakaları: gravürlü metal plaka, condensed büyük harf */
+.sign,#sign,#msign,body.soft .sign,#robsec .rsign{border-radius:6px!important;background:#1A1820!important;font-family:var(--k-hd)!important;letter-spacing:3px!important;text-shadow:0 1px 0 #000!important;
+ box-shadow:inset 0 0 0 1px #8E6A42,inset 0 0 0 2px #1A1820,inset 0 0 0 3px #4A3A2C,0 1px 0 rgba(255,255,255,.05)!important}
+.shd,#right .shd{font-family:var(--k-hd)!important;letter-spacing:2.5px!important}
+/* kartlar */
+.tk,body.soft .tk,.sc,body.soft .sc,.rc,body.soft .rc{border-radius:8px!important;background:var(--k-cd)!important;box-shadow:var(--m-sh),var(--m-hi)!important}
+.tk.on,body.soft .tk.on,.tk.boss.on{background:#383344!important;box-shadow:0 0 0 2px var(--k-li),0 2px 0 #0B0A10,0 6px 14px rgba(0,0,0,.35)!important}
+.tk.lk,body.soft .tk.lk,.sc.lk,body.soft .sc.lk{background:#211E28!important;box-shadow:0 0 0 1px #0B0A10,inset 0 0 0 1px #2E2A37!important}
+.tk.lk.nx,body.soft .tk.lk.nx{background:#26222E!important;box-shadow:0 0 0 2px var(--k-au),0 6px 14px rgba(0,0,0,.35)!important}
+.tk.boss,body.soft .tk.boss{background:#33262E!important}
+.tk .bb,body.soft .tk .bb{border-radius:4px!important;transform:none!important;background:#5A3D48!important;color:#EBD3DA!important;text-shadow:none!important;box-shadow:0 0 0 1px #0B0A10!important}
+.sc.can,body.soft .sc.can{box-shadow:0 0 0 1px #5A5470,0 2px 0 #0B0A10,0 6px 14px rgba(0,0,0,.35)!important}
+.tk .ci,.sc .si{background:#1B1921!important;box-shadow:inset 0 1px 3px rgba(0,0,0,.6)!important}
+.tn b,body.soft .tn b,.sm b,body.soft .sm b,.rc .rh b{font-family:var(--k-hd)!important;letter-spacing:.5px!important;text-shadow:none!important}
+/* sekmeler: fiziksel tuş */
+.tb,#tabs .tb{border-radius:6px!important;box-shadow:0 0 0 1px #0B0A10,0 3px 0 #0B0A10,var(--m-hi)!important;background:var(--k-cd)!important}
+.tb.on,#tabs .tb.on{background:var(--k-li)!important;box-shadow:0 0 0 1px #0B0A10,0 1px 0 #0B0A10,inset 0 2px 3px rgba(0,0,0,.25)!important;transform:translateY(2px)}
+.tb.lk,#tabs .tb.lk{background:#1E1B25!important;box-shadow:0 0 0 1px #0B0A10!important}
+#stabs{border-radius:8px!important;background:#15131A!important;box-shadow:inset 0 0 0 1px #0B0A10!important}
+#stabs button,#stabs button.on,.osbar .tabs button{border-radius:5px!important}
+/* fiyat: kâğıt fiyat etiketi (alınabilir) / soluk metal (alınamaz) */
+#right .go{border-radius:4px!important;background:var(--m-paper)!important;color:var(--m-ink)!important;box-shadow:0 0 0 1px #0B0A10,0 2px 0 #0B0A10,0 4px 8px rgba(0,0,0,.3),inset 0 -2px 0 var(--m-paperd)!important;font-family:var(--k-fr)!important}
+#right .go:hover{background:#EFE7D4!important}
+#right .go i.up{border-bottom-color:var(--m-ink)!important}
+#right .go:not([data-dis]):not(.unl):active,#right .go.sq:not(.unl){transform:translateY(2px)!important;box-shadow:0 0 0 1px #0B0A10,0 0 0 #0B0A10,inset 0 -1px 0 var(--m-paperd)!important}
+#right .go[data-dis],#right .go.unl[data-dis]{background:#3A3646!important;color:#DDD7EC!important;box-shadow:0 0 0 1px #8A84AA,0 0 0 2px #0B0A10!important}
+#right .go.unl{border-radius:4px!important;background:#3FA79C!important;box-shadow:0 0 0 1px #0B0A10,0 2px 0 #0B0A10,inset 0 -2px 0 #1E6E66!important}
+.mx,#right .mx,body.soft .mx{border-radius:4px!important}
+.info{box-shadow:0 0 0 1px #0B0A10!important}
+.sw,#right .sw{border-radius:6px!important;box-shadow:inset 0 0 0 1px #0B0A10,inset 0 2px 4px rgba(0,0,0,.4)!important}
+.sw i{border-radius:4px!important;box-shadow:0 0 0 1px #0B0A10,0 1px 2px rgba(0,0,0,.4)!important}
+.br .pbtn,.br.en .pbtn{border-radius:6px!important;box-shadow:0 0 0 1px #0B0A10,0 2px 0 #0B0A10!important}
+/* monitör: mat siyah-grafit kasa, cam ekran */
+#mon{border-radius:14px!important;background:#1F1D25!important;box-shadow:0 0 0 1px #3A3646,0 0 0 2px #0B0A10,0 14px 30px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.07)!important}
+.swrap{border-radius:8px!important;box-shadow:0 0 0 2px #0B0A10,0 0 0 3px #2E2B36!important}
+.screen{clip-path:inset(0 round 8px)!important}
+.osbar{background:#131A19!important;box-shadow:inset 0 -1px 0 #22302E!important}
+.osbar .tabs button{background:#1C2624!important}
+.osbar .gearb,#gear,#gear2{border-radius:6px!important;background:#1C2624!important}
+.bstrip{background:#121918!important;box-shadow:inset 0 1px 0 #22302E!important}
+#lcdT{border-radius:4px!important;background:#123331!important}
+#lvr .pbtn{border-radius:5px!important;background:#1C2624!important;box-shadow:0 0 0 1px #0B0A10,0 2px 0 #0B0A10!important}
+#lvr .pbtn.ac{background:var(--k-li)!important;box-shadow:0 0 0 1px #0B0A10,inset 0 2px 3px rgba(0,0,0,.25)!important}
+#main{border-radius:10px!important;font-family:var(--k-hd)!important;letter-spacing:1px!important;text-shadow:0 1px 0 rgba(0,0,0,.35)!important;box-shadow:0 0 0 1px #0B0A10,0 4px 0 #0B0A10,0 8px 16px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.25)!important}
+#main:not(:disabled):active,#main.down{transform:translateY(3px)!important;box-shadow:0 0 0 1px #0B0A10,0 1px 0 #0B0A10,inset 0 1px 0 rgba(255,255,255,.2)!important}
+#main.buy{box-shadow:0 0 0 1px #0B0A10,0 4px 0 #0B0A10,0 8px 16px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.25)!important}
+#main.sell,#main.sell.dn{box-shadow:0 0 0 2px var(--k-li),0 4px 0 2px #0B0A10,0 8px 16px rgba(0,0,0,.35)!important}
+#main.sell.dn{background:#36323F!important}
+#main:disabled{background:#1C2321!important;box-shadow:none!important;color:#8E9A97!important}
+.chin span{border-radius:4px!important;background:#2A2832!important;box-shadow:0 0 0 1px #0B0A10!important;font-family:var(--k-mono)!important}
+.pled{box-shadow:0 0 0 1px #0B0A10!important}
+.stand{background:#1F1D25!important;box-shadow:0 0 0 1px #3A3646,0 0 0 2px #0B0A10!important}.stand.f{border-radius:6px!important}
+#news{background:#152120!important}#news b{border-radius:4px!important}
+.tile,.tile:nth-child(odd){border-radius:8px!important;background:#131C1B!important;box-shadow:0 0 0 1px #22302E!important}
+.tile.add{box-shadow:0 0 0 1px var(--k-pe)!important}
+#auto{background:var(--k-scr)!important}
+/* masa: koyu ceviz tabla (monitör üstünde durur) */
+#scene .tedge{display:block!important;top:842px!important;height:38px!important;z-index:0;border-radius:4px 4px 0 0;background:#3A2A22!important;background-image:repeating-linear-gradient(90deg,rgba(0,0,0,.08) 0 2px,transparent 2px 46px)!important;
+ box-shadow:inset 0 2px 0 #5A4234,inset 0 -6px 0 #2A1E18,0 -1px 0 #0B0A10!important}
+/* hayvan alanı etiketleri, ipucu, fiş */
+.botp .cap,body.soft .botp .cap{border-radius:4px!important;font-family:var(--k-hd)!important;letter-spacing:2px!important}
+#shint,body.soft #shint{border-radius:6px!important;box-shadow:0 0 0 1px #3A3646!important}
+#scene .mp,.mp{border-radius:10px!important;box-shadow:0 0 0 1px #3A3646,0 0 0 2px #0B0A10,0 16px 40px rgba(0,0,0,.55)!important}
+#scene .mp .pbtn,.mp .pbtn{border-radius:6px!important;box-shadow:0 0 0 1px #0B0A10,0 2px 0 #0B0A10!important}
+/* tur sonu fişi: termal kâğıt */
+#receipt{background:#ECE6D8!important;color:#2A2520!important;font-family:var(--k-mono)!important;font-weight:600!important;border-radius:0!important;padding:12px 16px 18px!important;
+ box-shadow:0 6px 16px rgba(0,0,0,.45)!important;-webkit-mask-image:linear-gradient(135deg,transparent 4px,#000 0) bottom left/8px 8px repeat-x,linear-gradient(#000,#000) top/100% calc(100% - 6px) no-repeat;mask-image:linear-gradient(135deg,transparent 4px,#000 0) bottom left/8px 8px repeat-x,linear-gradient(#000,#000) top/100% calc(100% - 6px) no-repeat}
+#receipt h3,#receipt h3.up,#receipt h3.dn{font-family:var(--k-mono)!important;color:#2A2520!important;letter-spacing:2px!important;text-align:center;border-bottom:2px dashed #9A9284}
+#receipt .rw,#receipt .strip{border-top:1px dashed #B5AD9C!important;color:#2A2520!important}
+#receipt .up{color:#1F6B55!important}#receipt .dn{color:#8A5A2E!important}#receipt .strip{color:#5A5248!important}
+/* ---------- MASAÜSTÜ ölçüleri: zarif, küçük (telefon #stage.tel kuralları ayrı ve büyük kalır) ---------- */
+#stage:not(.tel) .tk,#stage:not(.tel) body.soft .tk{height:78px!important;margin:4px 8px 10px!important;gap:10px!important}
+#stage:not(.tel) .tk .ci{width:48px!important;height:48px!important;padding:4px}
+#stage:not(.tel) .tn b{font-size:19px!important}#stage:not(.tel) .tn .num,#stage:not(.tel) #list .tn .num{font-size:17px!important;margin:0 0 3px!important}
+#stage:not(.tel) .tk.lk .tn b{font-size:18px!important}#stage:not(.tel) .tk .lkp small{font-size:17px}#stage:not(.tel) .tk .lkp .lbar{height:8px}
+#stage:not(.tel) .tk.lk img.lkic{width:32px!important;height:32px!important}
+#stage:not(.tel) .tk .bb{font-size:12px!important;line-height:20px!important;top:-10px!important}
+#stage:not(.tel) .sg i{flex-basis:9px!important;height:9px!important}
+#stage:not(.tel) .tb,#stage:not(.tel) #tabs .tb{height:38px!important;font-size:18px!important}#stage:not(.tel) #tabs{height:50px!important}
+#stage:not(.tel) .sign,#stage:not(.tel) #sign,#stage:not(.tel) #msign{height:38px!important;line-height:38px!important;font-size:19px!important;margin:8px 8px 6px!important}
+#stage:not(.tel) #robsec .rsign{height:36px!important;line-height:36px!important;font-size:15px!important}
+#stage:not(.tel) #cnx{font-size:16px!important}
+#stage:not(.tel) .shd,#stage:not(.tel) #right .shd{font-size:15px!important;margin:10px 4px 2px!important}
+#stage:not(.tel) #stabs button{height:36px!important;font-size:13px!important}
+#stage:not(.tel) .sc{min-height:0!important;padding:10px 12px 12px!important}
+#stage:not(.tel) .sc .si{width:44px!important;height:44px!important}#stage:not(.tel) .sc .si img{width:32px!important;height:32px!important}
+#stage:not(.tel) #right .sc:not(.bob):not(.rcoin){grid-template-columns:44px minmax(0,1fr) auto!important}
+#stage:not(.tel) .sm b,#stage:not(.tel) #right .sm b{font-size:17px!important}
+#stage:not(.tel) .sm .st{font-size:15px!important}
+#stage:not(.tel) #right .go{height:32px!important;font-size:16px!important;min-width:84px!important;padding:0 10px!important}
+#stage:not(.tel) .mx,#stage:not(.tel) #right .mx{font-size:13px!important;line-height:24px!important}
+#stage:not(.tel) .info{width:22px!important;height:22px!important;font-size:13px!important;line-height:22px!important}
+#stage:not(.tel) .sw,#stage:not(.tel) #right .sw{width:92px!important;height:32px!important;font-size:13px!important;line-height:32px!important;padding:0 8px 0 34px!important}
+#stage:not(.tel) .sw.on,#stage:not(.tel) #right .sw.on{padding:0 34px 0 8px!important}
+#stage:not(.tel) .sw i{width:24px!important;height:24px!important;top:4px!important}
+#stage:not(.tel) .br small,#stage:not(.tel) #right .sc.bob .br small{font-size:15px!important}
+#stage:not(.tel) #right .sc.bob .bh .st{font-size:14px!important}
+#stage:not(.tel) .br .pbtn{width:40px!important;height:32px!important}#stage:not(.tel) .br .pbtn img{width:22px!important;height:22px!important}
+#stage:not(.tel) .rc .rh b{font-size:17px!important}
+#stage:not(.tel) .botp .cap{font-size:15px!important;line-height:24px!important;padding:0 10px!important}
+#stage:not(.tel) #bbub{top:34px!important}
+#stage:not(.tel) #shint{font-size:14px!important;line-height:24px!important}
+#stage:not(.tel) .osbar .tabs button{font-size:13px!important;height:26px!important}
+#stage:not(.tel) #hT{font-size:40px!important}#stage:not(.tel) #hN{font-size:22px!important}#stage:not(.tel) #lcdS{font-size:13px!important}#stage:not(.tel) #lcdT{font-size:13px!important}
+#stage:not(.tel) #hP{font-size:38px!important}#stage:not(.tel) #hPs{font-size:13px!important}#stage:not(.tel) #hP[data-d]::before{font-size:20px}
+#stage:not(.tel) #lvr{font-size:14px!important}#stage:not(.tel) #lvr .pbtn{height:32px!important;min-width:48px!important;font-size:16px!important}#stage:not(.tel) #lvr .lvh{font-size:14px}
+#stage:not(.tel) #note{font-size:16px!important}
+#stage:not(.tel) #main{width:270px!important;height:68px!important;font-size:28px}
+#stage:not(.tel) #receipt{font-size:15px!important}#stage:not(.tel) #receipt h3{font-size:18px!important}#stage:not(.tel) #receipt .strip{font-size:13px!important}
+#stage:not(.tel) #news{font-size:17px!important}
+#stage:not(.tel) .screen.bossin #hN::after{font-size:12px;line-height:20px}
 </style><style>/* === TELEFON: hep yatay oyun (dikeyde 90° döndürülür), sayfa kaymaz, çift dokunuşta büyümez === */
 html,body{position:fixed;inset:0;width:100%;height:100%;overflow:hidden;margin:0;overscroll-behavior:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
 *{touch-action:manipulation}canvas,img{-webkit-user-drag:none}#list,#shop,.modal .mp,#mb{touch-action:pan-x pan-y;-webkit-overflow-scrolling:touch}
@@ -1580,11 +1708,20 @@ function numTip(u){const v=Number(u)/1e4,fr=u%10000n,full=(u/10000n).toLocaleStr
  e=v>=1?Math.floor(Math.log10(v)+1e-9):0,e3=Math.floor(e/3)*3,nm=NAMES[e3];return `<b>$ ${cp(u)}</b><br>${full}${nm?'<br>≈ '+(+(v/Math.pow(10,e3)).toPrecision(4))+' '+nm:''}`}
 /* v33: eski kart/sayı hover ipuçları kaldırıldı; yeni sistem view_i (yalnız 'i' ikonları) */
 /* K3: para yazısı — yuvarlak kalın yazı, koyu kontur + alt gölge (2x çözünürlük) */
-const KF='ui-rounded, "SF Pro Rounded", "Nunito", "Varela Round", "Arial Rounded MT Bold", "Trebuchet MS", system-ui, sans-serif';
-function ckCash(txt){const cv=$('#cashv'),x=cv.getContext('2d');let fs=84;x.font='900 '+fs+'px '+KF;while(x.measureText(txt).width>440&&fs>40){fs-=4;x.font='900 '+fs+'px '+KF}
- const w=Math.ceil(x.measureText(txt).width)+24,h=104;if(cv.width!==w||cv.height!==h){cv.width=w;cv.height=h}x.clearRect(0,0,w,h);x.font='900 '+fs+'px '+KF;x.textBaseline='middle';x.lineJoin='round';
- const y=h/2-2;x.lineWidth=14;x.strokeStyle='#100D1D';x.strokeText(txt,12,y+6);x.fillStyle='#100D1D';x.fillText(txt,12,y+6);x.strokeText(txt,12,y);x.fillStyle='#EDE5D6';x.fillText(txt,12,y);
- x.save();x.beginPath();x.rect(0,0,w,y-fs*.08);x.clip();x.fillStyle='#F6F0E6';x.fillText(txt,12,y);x.restore()}
+const KF='"Inter", "SF Pro Text", "Segoe UI", system-ui, Roboto, "Helvetica Neue", Arial, sans-serif';
+/* Tur 2/Adım 5: bakiye odometresi — değişen hane eskisi yukarı kayarken yenisi alttan gelir (450 ms, ease-out);
+   haneler sabit genişlikte (tabular), hareket azaltmada anında. */
+const ODO={cur:'',from:'',to:'',t0:0,raf:0};
+function odoDraw(a,b,k){const cv=$('#cashv'),x=cv.getContext('2d'),n=Math.max(a.length,b.length);a=a.padStart(n,' ');b=b.padStart(n,' ');
+ let fs=80;const F=f=>'800 '+f+'px '+KF;x.font=F(fs);const cw=c=>/[0-9 ]/.test(c)?x.measureText('0').width:x.measureText(c).width;
+ const wid=()=>{let w=0;for(let i=0;i<n;i++)w+=Math.max(cw(a[i]),cw(b[i]));return w};while(wid()>440&&fs>40){fs-=4;x.font=F(fs)}
+ const W=Math.ceil(wid())+24,H=104;if(cv.width!==W||cv.height!==H){cv.width=W;cv.height=H}x.clearRect(0,0,W,H);x.font=F(fs);x.textBaseline='middle';x.textAlign='center';x.lineJoin='round';
+ const y=H/2-2,D=fs*.95;let px=12;
+ const put=(c,yy)=>{if(c===' ')return;x.lineWidth=6;x.strokeStyle='#0B0A10';x.strokeText(c,cx,yy+2);x.fillStyle='#0B0A10';x.fillText(c,cx,yy+3);x.fillStyle='#EFE7D6';x.fillText(c,cx,yy)};let cx=0;
+ for(let i=0;i<n;i++){const w=Math.max(cw(a[i]),cw(b[i]));cx=px+w/2;if(a[i]===b[i]||k>=1)put(b[i],y);else{put(a[i],y-D*k);put(b[i],y+D*(1-k))}px+=w}}
+function ckCash(txt){const rm=(S.set&&S.set.rm)||(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches),prev=ODO.cur;ODO.cur=txt;cancelAnimationFrame(ODO.raf);
+ if(rm||!prev||prev===txt){odoDraw(txt,txt,1);return}ODO.from=prev;ODO.to=txt;ODO.t0=performance.now();
+ const step=now=>{const k=Math.min(1,(now-ODO.t0)/450);odoDraw(ODO.from,ODO.to,1-Math.pow(1-k,3));if(k<1)ODO.raf=requestAnimationFrame(step)};ODO.raf=requestAnimationFrame(step)}
 /* para sayacı: kısa count-up */
 let cashD=null,cashAf=0,cashLast='';
 function cashAnim(){cashAf=0;const t=Number(S.cash);cashD=t;   /* v46: para anında güncellenir */
@@ -1732,7 +1869,7 @@ function dropEnd(e){if(!G.drag)return;const k=G.drag;G.drag=null;$('#bowl').clas
  else{fl.style.display='none';fl.className='';flsh.style.display='none';if(k==='water'){S.bottles=1;save();ui()}}}
 document.addEventListener('pointerup',dropEnd);document.addEventListener('pointercancel',dropEnd);
 function startDrink(e){if(G.drink)return;const r=$('#bowl').getBoundingClientRect();G.drink={t0:performance.now(),pt:e.pointerType,raf:0};fl.className='pour';flsh.style.display='none';{const T=POURA*Math.PI/180,a=FBW*stK()/2,b=FBH*stK()/2,ox=a*Math.cos(T)-b*Math.sin(T),oy=a*Math.sin(T)+b*Math.cos(T);moveFl(r.left+r.width*.45+ox,r.top-16*stK()+oy)}   /* v42: paketin sol üst köşesi kabın üstünde; gövde sağda */$('#dbar').classList.add('on');pourStart();drinkTick()}
-function drinkTick(){const d=G.drink;if(!d)return;const p=Math.min(1,(performance.now()-d.t0)/4000);setSeg($('#dbar'),Math.floor(p*10),10);BOWL.fill=Math.max(BOWL.fill,p*.95);setBowl(BOWL.fill);if(p>=1)finishDrink();else d.raf=requestAnimationFrame(drinkTick)}
+function drinkTick(){const d=G.drink;if(!d)return;const p=Math.min(1,(performance.now()-d.t0)/4000);setSeg($('#dbar'),Math.floor((1-Math.pow(1-p,3))*10),10);BOWL.fill=Math.max(BOWL.fill,p*.95);setBowl(BOWL.fill);if(p>=1)finishDrink();else d.raf=requestAnimationFrame(drinkTick)}
 function endDrinkUI(){fl.style.display='none';fl.className='';flsh.style.display='none';$('#dbar').classList.remove('on')}
 function cancelDrink(){const d=G.drink;if(!d)return;cancelAnimationFrame(d.raf);G.drink=null;endDrinkUI();S.bottles=1;save();ui()}
 function finishDrink(){const d=G.drink;if(!d)return;G.drink=null;cancelAnimationFrame(d.raf);endDrinkUI();S.cash+=D(2);floatText('+$2',PX,PY,'#4CD08A');BOWL.fill=1;setBowl(1);CAT.eatUntil=performance.now()+7000;save();ui()}
@@ -1928,12 +2065,12 @@ $('#agrid').addEventListener('click',e=>{const tl=e.target.closest('[data-tile]'
 const RSPR={};const rSpr=(i,fr)=>RSPR[i+'_'+fr]||(RSPR[i+'_'+fr]=render(robotGrid(i,fr),1));
 function drawTile(i,now){const cv=$('#tc'+i);if(!cv)return;const tile=cv.parentNode,n=S.rb.length;tile.className='tile'+(i===n?' add':i>n?' lock':'');
  const d=window.devicePixelRatio||1,r=cv.getBoundingClientRect(),W=tile.offsetWidth||200,H=tile.offsetHeight||190,w=Math.max(8,Math.round(r.width*d)),hh=Math.max(8,Math.round(r.height*d));if(cv.width!==w||cv.height!==hh){cv.width=w;cv.height=hh}
- const x=cv.getContext('2d'),k=cv.width/W;x.setTransform(k,0,0,k,0,0);x.fillStyle='#1E1A35';x.fillRect(0,0,W,H);x.textBaseline='middle';x.textAlign='center';
+ const x=cv.getContext('2d'),k=cv.width/W;x.setTransform(k,0,0,k,0,0);x.fillStyle='#131C1B';x.fillRect(0,0,W,H);x.textBaseline='middle';x.textAlign='center';
  if(i>=n){if(i===n&&n<RMAX){const ok=afford(RSLOT[n]);const TF=TEL?30:20;x.fillStyle='#E9B596';x.font='900 46px '+KF;x.fillText('+1',W/2,H/2-30);x.font='900 '+TF+'px '+KF;x.fillText(TT('ROBOT EKLE'),W/2,H/2+10);x.font='900 '+TF+'px '+KF;x.fillStyle=ok?'#F0C9A8':'#BDB6D8';x.fillText('$'+cp(RSLOT[n]),W/2,H/2+10+TF*1.2)}
-  else{rr(x,10,10,W-20,H-20,14);x.setLineDash([8,8]);x.lineWidth=2;x.strokeStyle='#3E3864';x.stroke();x.setLineDash([]);x.fillStyle='#A39DC0';x.font='900 '+(TEL?30:20)+'px '+KF;x.fillText(TT('BOŞ BÖLME'),W/2,H/2)}x.textAlign='left';return}
+  else{rr(x,10,10,W-20,H-20,14);x.setLineDash([8,8]);x.lineWidth=2;x.strokeStyle='#2E3D3A';x.stroke();x.setLineDash([]);x.fillStyle='#A39DC0';x.font='900 '+(TEL?30:20)+'px '+KF;x.fillText(TT('BOŞ BÖLME'),W/2,H/2)}x.textAlign='left';return}
  const R=S.rb[i],rt=RBT[i],c=COINS[R.ci],fr=rt?Math.floor(now/420+i)%2:0;x.textAlign='left';x.imageSmoothingEnabled=false;const IS=TEL?56:30,F1=TEL?30:17,F2=TEL?30:15;x.drawImage(rSpr(i%6,fr),4,4,IS,IS);
  x.fillStyle='#F4EEE3';x.font='900 '+F1+'px '+KF;x.fillText('ROBOT-'+(i+1),IS+8,TEL?18:12);x.fillStyle='#BDB6D8';x.font='800 '+F2+'px '+KF;x.fillText(TT(c.n)+' · '+2**(R.v-1)+'x',IS+8,TEL?48:27);
- const L=6,Rr=W-6,T=TEL?70:40,B=H-(TEL?42:26),PW=Rr-L,PH=B-T;x.strokeStyle='#2A2645';x.lineWidth=1;x.beginPath();for(let j=0;j<=2;j++){const y=Math.round(T+PH*j/2)+.5;x.moveTo(L,y);x.lineTo(Rr,y)}x.stroke();
+ const L=6,Rr=W-6,T=TEL?70:40,B=H-(TEL?42:26),PW=Rr-L,PH=B-T;x.strokeStyle='#22302E';x.lineWidth=1;x.beginPath();for(let j=0;j<=2;j++){const y=Math.round(T+PH*j/2)+.5;x.moveTo(L,y);x.lineTo(Rr,y)}x.stroke();
  if(!rt){x.fillStyle='#A39DC0';x.font='900 '+(TEL?30:17)+'px '+KF;x.textAlign='center';x.fillText(TT(S.rbOn===0?'DURDURULDU':'YENİ TUR…'),W/2,(T+B)/2);x.textAlign='left';return}
  const t=Math.min(15,(now-rt.t0)/1000*rt.sp),N=Math.max(2,Math.round(PW*Math.max(t,.05)/15/1.5)),vs=[];let mn=1,mx=1;for(let j=0;j<=N;j++){const v=ratioAt(rt.K,t*j/N);vs.push(v);if(v<mn)mn=v;if(v>mx)mx=v}
  const rg=Math.max(mx-mn,.1),y0=mn-rg*.15,y1=mx+rg*.15,X=s=>L+PW*s/15,Y=v=>B-(v-y0)/(y1-y0)*PH,up=vs[vs.length-1]>=1,cc='#8CC8EE',cg='140,200,238';
@@ -2539,9 +2676,9 @@ function rr(x,a,b,w,h,r){x.beginPath();x.moveTo(a+r,b);x.arcTo(a+w,b,a+w,b+h,r);
    Renk: pozisyon açıkken oyuncunun ALIŞ fiyatına göre (üstü nane ▲, altı kehribar ▼); pozisyon yokken nötr gök mavisi.
    Tur 2/Adım 3: kırmızı-yeşil yok, nabız/nefes yok, ızgara sade. */
 function drawChart(now){const cv=$('#cv'),x=cv.getContext('2d'),c=COINS[G.ci];x.setTransform(CVS,0,0,CVS,0,0);x.shadowBlur=0;x.setLineDash([]);
- const L=26,R=SW-(TEL?136:84),T=TEL?178:128,B=SH2-(TEL?222:148),PW=R-L,PH=B-T,sp=c.pf,AF=TEL?30:22,act=(G.st==='active'||G.st==='done')&&G.K&&G.K.length,tn=act?G.tn:0,OLC='#0D0B17';
- x.fillStyle=c.boss?'#1F1529':'#17142A';x.fillRect(0,0,SW,SH2);
- rr(x,L-14,T-16,SW-L+2,PH+58,22);x.fillStyle=c.boss?'#281C38':'#1D1A33';x.fill();
+ const L=26,R=SW-(TEL?136:84),T=TEL?178:128,B=SH2-(TEL?222:148),PW=R-L,PH=B-T,sp=c.pf,AF=TEL?30:17,act=(G.st==='active'||G.st==='done')&&G.K&&G.K.length,tn=act?G.tn:0,OLC='#0D0B17';
+ x.fillStyle=c.boss?'#1A1316':'#0F1615';x.fillRect(0,0,SW,SH2);
+ rr(x,L-14,T-16,SW-L+2,PH+58,22);x.fillStyle=c.boss?'#21181C':'#131C1B';x.fill();
  const N=Math.max(2,Math.round(PW*Math.max(tn,.05)/15/1.2)),ys=[];let mn=sp,mx=sp;
  if(act){for(let i=0;i<=N;i++){const v=sp*ratioAt(G.K,tn*i/N);ys.push(v);if(v<mn)mn=v;if(v>mx)mx=v}}
  if(G.pt){mn=Math.min(mn,G.pt.bf);mx=Math.max(mx,G.pt.bf)}
@@ -2549,17 +2686,17 @@ function drawChart(now){const cv=$('#cv'),x=cv.getContext('2d'),c=COINS[G.ci];x.
  if(G.y0===null||G.y0===undefined){G.y0=t0;G.y1=t1}else{G.y0+=(t0-G.y0)*.1;G.y1+=(t1-G.y1)*.1}
  const X=t=>L+PW*t/15,Y=v=>B-(v-G.y0)/(G.y1-G.y0)*PH;
  /* ızgara: yumuşak, kalın ama silik */
- x.lineWidth=2;x.strokeStyle=c.boss?'#3A2A44':'#2A2645';x.beginPath();for(let i=0;i<=4;i++){const y=Math.round(T+PH*i/4);x.moveTo(L,y);x.lineTo(R,y)}x.stroke();
- x.lineWidth=1;x.strokeStyle=c.boss?'#30223A':'#24203C';x.beginPath();for(let s=3;s<15;s+=3){const xx=Math.round(X(s))+.5;x.moveTo(xx,T);x.lineTo(xx,B)}x.stroke();
+ x.lineWidth=2;x.strokeStyle=c.boss?'#35262C':'#22302E';x.beginPath();for(let i=0;i<=4;i++){const y=Math.round(T+PH*i/4);x.moveTo(L,y);x.lineTo(R,y)}x.stroke();
+ x.lineWidth=1;x.strokeStyle=c.boss?'#2C2026':'#1B2725';x.beginPath();for(let s=3;s<15;s+=3){const xx=Math.round(X(s))+.5;x.moveTo(xx,T);x.lineTo(xx,B)}x.stroke();
  x.textBaseline='middle';x.fillStyle='#A39DC0';x.textAlign='left';
  const tagY=Math.min(B-12,Math.max(T+12,act?Y(G.cur):Y(sp)));for(let i=0;i<=4;i++){const v=G.y0+(G.y1-G.y0)*(4-i)/4,tx=fa(Math.max(0,v));if(Math.abs(T+PH*i/4-tagY)<(TEL?40:24))continue;x.font=fitF(x,tx,SW-R-16,AF);x.fillText(tx,R+10,T+PH*i/4)}
  x.font='800 '+AF+'px '+KF;x.textAlign='center';for(let s=0;s<=15;s+=3)x.fillText(s+'s',X(s),B+(TEL?32:24));x.textAlign='left';
  /* başlangıç fiyatı */
- x.setLineDash([8,8]);x.lineWidth=2;x.strokeStyle='#3A3660';x.beginPath();x.moveTo(L,Y(sp));x.lineTo(R,Y(sp));x.stroke();x.setLineDash([]);
+ x.setLineDash([8,8]);x.lineWidth=2;x.strokeStyle='#33433F';x.beginPath();x.moveTo(L,Y(sp));x.lineTo(R,Y(sp));x.stroke();x.setLineDash([]);
  const pos=G.pt&&G.st==='active'?G.pt:null,ref=pos?pos.bf:null,up=pos?G.cur>=ref:true,cc=pos?(up?'#62CDAA':'#C9A07A'):'#8CC8EE',cg=pos?(up?'98,205,170':'201,160,122'):'140,200,238';
  /* alış fiyatı çizgisi (pozisyon açıkken): kâr/zarar referansı */
  if(pos){const by=Y(ref);x.setLineDash([9,7]);x.lineWidth=2;x.strokeStyle='#A89FC8';x.beginPath();x.moveTo(L,by);x.lineTo(R,by);x.stroke();x.setLineDash([]);
-  const lb=LANG==='en'?'BUY':'ALIŞ',lh=TEL?40:24;x.font='900 '+(TEL?30:14)+'px '+KF;const w=x.measureText(lb).width+(TEL?28:18),ly=Math.min(B-12,Math.max(T+12,by));const lx=R-w-8,lyy=ly-lh-6<T?ly+lh/2+6:ly-lh/2-6;rr(x,lx,lyy-lh/2,w,lh,lh/2);x.fillStyle='#353052';x.fill();x.lineWidth=2;x.strokeStyle=OLC;x.stroke();x.fillStyle='#D3CCEA';x.fillText(lb,lx+(TEL?14:9),lyy+1)}
+  const lb=LANG==='en'?'BUY':'ALIŞ',lh=TEL?40:24;x.font='900 '+(TEL?30:14)+'px '+KF;const w=x.measureText(lb).width+(TEL?28:18),ly=Math.min(B-12,Math.max(T+12,by));const lx=R-w-8,lyy=ly-lh-6<T?ly+lh/2+6:ly-lh/2-6;rr(x,lx,lyy-lh/2,w,lh,6);x.fillStyle='#22302E';x.fill();x.lineWidth=2;x.strokeStyle=OLC;x.stroke();x.fillStyle='#D3CCEA';x.fillText(lb,lx+(TEL?14:9),lyy+1)}
  let ex=X(0),ey=Y(sp);
  if(act){x.save();x.beginPath();x.rect(L-8,T-14,R-L+16,B-T+14);x.clip();const pts=ys.map((v,i)=>[X(tn*i/N),Y(v)]);ex=pts[pts.length-1][0];ey=pts[pts.length-1][1];
   const path=()=>{x.beginPath();pts.forEach((p,i)=>i?x.lineTo(p[0],p[1]):x.moveTo(p[0],p[1]))};
@@ -2585,7 +2722,7 @@ function drawChart(now){const cv=$('#cv'),x=cv.getContext('2d'),c=COINS[G.ci];x.
  {const th=TEL?42:26,ty=Math.min(B-12,Math.max(T+12,ey)),tx=fa(G.cur),tw=SW-R-12;rr(x,R+4,ty-th/2+3,tw,th,th/2);x.fillStyle=OLC;x.fill();rr(x,R+4,ty-th/2,tw,th,th/2);x.fillStyle=cc;x.fill();x.lineWidth=2.5;x.strokeStyle=OLC;x.stroke();
   x.fillStyle='#0D0B17';x.font=fitF(x,tx,tw-14,TEL?30:18).replace('800','900');x.textAlign='center';x.fillText(tx,R+4+tw/2,ty+1);x.textAlign='left'}
  if(G.st==='ready'||G.st==='over'){const msg=G.st==='over'?'':LANG==='en'?'READY! PRESS START':'HAZIR! BAŞLA’YA BAS';if(msg){x.font='900 30px '+KF;const w=x.measureText(msg).width+48,cx=(L+R)/2,cy=(T+B)/2-34;
-  rr(x,cx-w/2,cy-26+5,w,52,26);x.fillStyle=OLC;x.fill();rr(x,cx-w/2,cy-26,w,52,26);x.fillStyle='#353052';x.fill();x.lineWidth=3;x.strokeStyle='#4A4570';x.stroke();x.fillStyle='#DDD7EC';x.textAlign='center';x.fillText(msg,cx,cy+1);x.textAlign='left'}}}
+  rr(x,cx-w/2,cy-26+5,w,52,26);x.fillStyle=OLC;x.fill();rr(x,cx-w/2,cy-26,w,52,26);x.fillStyle='#1B2624';x.fill();x.lineWidth=2;x.strokeStyle='#34433F';x.stroke();x.fillStyle='#DDD7EC';x.textAlign='center';x.fillText(msg,cx,cy+1);x.textAlign='left'}}}
 /* Tur 2/Adım 4: SAT etiketi ve başlıktaki büyük yüzde aynı fonksiyondan, aynı karede (fark 0) */
 function satTxt(tr){const v=eq(tr,G.curU);return 'SAT · '+fm(v)+(TEL?'\n':' ')+'('+(v>=tr.st?'▲ ':'▼ ')+pcs(Number(v-tr.st)/Number(tr.st))+')'}
 function setMainLab(txt){const lab=$('#mlab'),M=$('#main');if(lab.dataset.t===txt&&lab.textContent)return;lab.dataset.t=txt;lab.textContent=txt;let s=36;lab.style.fontSize='';M.style.fontSize='';if(!TEL)while(M.scrollWidth>M.clientWidth&&s>18){s--;M.style.fontSize=s+'px'}}

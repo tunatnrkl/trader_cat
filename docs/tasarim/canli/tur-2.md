@@ -272,3 +272,33 @@ Yeni yön gelirse bunları geri alabilirim: `ICONS` / `ICN` vektör bloğu ve `B
 **Psikologlara sorular**
 1. Telefonda yazılar büyüdü, buna karşılık listede aynı anda daha az kart görünüyor (solda yaklaşık 2,5 kart, mağazada 2 kart). Bu takas kabul edilebilir mi?
 2. Telefonda SAT etiketinin iki satır olması (fiyat / yüzde) okunuyor mu, yoksa telefonda yalnız yüzde mi gösterilsin?
+
+## Adım 5 — Tasarımcı: Notlar
+
+Yön: "Gece yarısı trader masası". Düzen ve koyu oda korundu; olgunlaştırıldı. Smoke 63/63, konsol temiz.
+
+1. **Mama çubuğu:** Dolma gösterimi ease-out (1−(1−p)³): başta hızlı, sonra yavaş. Toplam süre (4 sn) ve bitiş mantığı aynı; yalnız gösterilen dolum değişti.
+2. **Masaüstü ölçüleri küçüldü** (yalnız `#stage:not(.tel)`; telefon `#stage.tel` kuralları ve ≥12 px aynen sürüyor). 1440x900'de gerçek boyutlar:
+   - kart başlığı ~17 px, fiyat ~15 px, ikincil yazı ~13 px
+   - coin kartı 96 → 78 px
+   - fiyat etiketi 46 → 32 px
+   - BAŞLA 300x80 → 270x68
+   - grafik eksen yazısı 22 → 17 px
+3. **Bakiye odometresi:** Para değişince değişen haneler sayaç gibi kayıyor (eski hane yukarı, yeni hane alttan; 450 ms, ease-out). Haneler sabit genişlikte. Hareket azaltmada (ayar veya sistem tercihi) anında değişiyor. Sayfa genelinde `font-variant-numeric: tabular-nums`, yani rakamlar titremiyor.
+4. **Malzeme:**
+   - Paneller ve monitör mat grafit kasa (1 px açık kenar + ince bulanık gölge; kalın cartoon alt gölge yok).
+   - Köşeler 4–14 px.
+   - Ekran cam yeşili terminal: grafik ve robot bölmeleri de bu zeminde.
+   - Monitörün altında koyu ceviz bir masa tablası var.
+   - Başlıklar gravürlü metal plaka gibi (condensed büyük harf, ince bakır kenar).
+   - Sekmeler fiziksel tuş gibi; seçili olan basılı durur.
+   - Fiyatlar kâğıt fiyat etiketi (krem kâğıt, mürekkep yazı); alınamaz olan soluk metal.
+   - Yazı yığını yuvarlak fontlardan Inter / sistem sans'a geçti; başlıklarda condensed (Bahnschrift/DIN/Roboto Condensed varsa).
+5. **Tur sonu fişi:** Termal kâğıt (krem, monospace, kesikli ayraçlar, alt kenarı tırtıklı).
+6. Kâr/zarar dili, tek altın (sıradaki kilitli kart), zararda alarm yok ve değişmezler aynen sürüyor.
+
+**Yarım kalan / sonraya:**
+- Ekrandaki "HAZIR! BAŞLA'YA BAS" hapı hâlâ yuvarlak.
+- Bakiye ikonu hâlâ çizilmiş coin; gerçek madeni para ya da banknot hissi verilmedi.
+- Masada klavye gibi küçük nesneler yok.
+- Ana menü ve final sahnesi yeni malzeme diline geçmedi.
