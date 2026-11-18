@@ -79,3 +79,19 @@ Katılımcılar: Psikolog A (oyun hissi ve motivasyon) ve Psikolog B (göz ve zi
 **A'ya sorularım**
 1. "Az kaldı" merakı için ilerleme çubuğu yeterli değil mi; altın kenar zorunlu mu? Sadece bir kez, ilk açılışta mı parlasın?
 2. Squish ve pop animasyonlarını hareket azaltma ayarıyla kapatılabilir yapmayı kabul eder misin? Sık tekrarlanan hareket bazı oyuncularda baş dönmesi yaratır.
+
+## 3. Psikolog A — Yanıt
+
+**B'nin sorularına**
+
+1. **Altın kenar zorunlu mu?** Bence kalıcı olmalı ama tek bir tane ve sakin: yalnız sıradaki kilitli kart, hep aynı kalın değil, ince bir kenar. Sadece ilk açılışta parlayıp sönerse hedef "kaybolur"; idle oyuncusu günler sonra döndüğünde "sırada ne var?" sorusunun cevabını görmeli. Ama senin tek altın öğe kuralını kabul ediyorum: o kart aktifken başka altın vurgu (fiyat hapı vb.) soluklaştırılsın. Kenar yanıp sönmeyecek, ilerleme çubuğu içi dolacak.
+2. **Hareket azaltma:** Evet, tamamen katılıyorum. Squish ve "+$X" pop'u ayarlardan kapanabilsin; sistemin "hareketi azalt" tercihini de otomatik izlesin. Kapalıyken geri bildirim renk + sayı değişimiyle sürer, ödül hissi kaybolmaz.
+
+**Tok Mobil itirazın.** Büyük ölçüde ikna oldum. Mor yoğunluğu konusunda haklısın: "her şey bağırıyor" derken aynı şeyi kastetmiştim, sen buna "dinlenecek nötr alan yok" ile ad koydun. Zarar anındaki pembe-kırmızı SAT butonu da kabul: öğrenmeyi bozmadan alarmı kaldırırız, ▼ ve sayı yeter. Direndiğim yer şerit afiş: sadece iki yerde (KATALOG, MAĞAZA) ve Lofi paletinde, yumuşak tonlu, yani sakin bir tabela olarak kalsın. Çünkü kullanıcı "oyun gibi olsun" dedi; düz yazı başlıklar tekrar "araç paneli" hissi verir. Mor boyama değil, sadece biçim.
+
+**"Oda aydınlansın, paneller koyu kalsın."** Katılıyorum, ama bir ekle: panellerin dolgusu da bir tık hafiflesin (daha az yoğun), yoksa "daralma" duygusu panellerde yaşamaya devam eder. Oda aydınlanırsa pencere ışığı, lamba, bitki daha çok görünür; karakter hissi artar. Parlak-koyu sıçramasını yumuşatmak için panel-oda farkı kademeli olsun.
+
+**Uzlaşma önerim**
+- **Kazanan:** Lofi Akşam.
+- **Alınacak 3 fikir:** (1) Tok'tan squish + tok ana buton (BAŞLA/SAT), hareket azaltmayla kapatılabilir; (2) şerit afiş yalnız KATALOG ve MAĞAZA'da, Lofi renginde; (3) Pastel'den ferah oda zemini ve kâr anındaki kısa "+$X" pop'u.
+- **Bırakılacaklar:** Tok'un doygun moru ve kırmızı zarar butonu, Gece Arcade'in beyaz SAT butonu ve büyük zarar oku, Pastel'in soluk fiyat hapları ve parlak odadaki koyu monitör "deliği". B'nin 5 maddelik düzeltme listesi (12 px yazı, 4.5:1 kontrast, ▲/▼ şekil, tek altın öğe) zorunlu kabul.
