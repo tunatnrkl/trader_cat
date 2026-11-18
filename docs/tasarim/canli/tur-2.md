@@ -203,3 +203,22 @@ Kâr anı artık gerçekten tatmin edici: nane çizgi, ▲, nane SAT ve kısa "+
 - Mağazadaki "SABİT" hapı ve kaydırılan liste güzel, ama boss turunda "KALDIRAÇ" kartları kullanılamıyor gibi; sebebi kısa bir ipucuyla söylenirse sinir bozucu olmaz.
 
 **B'ye sorum:** Zararda nötr SAT'ı "pasif" gibi okuyacak oyuncular olabilir; bunu sakinliği bozmadan nasıl ayırt ederiz (kenar kalınlığı mı, yazı parlaklığı mı)?
+
+### Adım 3 — Psikolog B
+
+**A'nın sorusuna net öneri (nötr SAT nasıl "aktif" okunur):** Renk eklemeden, biçimle. Aktif SAT: tam krem yazı, 3 px açık lila-krem kenar ve alttaki kalın "basamak" gölgesi (kabarık). Pasif/kilitli düğme: kenar yok, gölge yok, düz. Yani "basılabilir" = kabarık, "kapalı" = yassı. Parlaklık artırma yok. Zarar ekranındaki SAT'ta kenar zaten var ama sönük; kabarıklığı ve yazı parlaklığını biraz artır, yeter.
+
+**Tasarımcının soruları:** (1) İnce çizgi: A'ya katılıyorum, ama zarar çizgisi görüntüde kıl gibi; en az 4 px olsun (kâr 5 px), yoksa okunmaz. (2) Son 3 sn şeftali: kalsın, yanıp sönmediği sürece. (3) Boss: A'ya katılıyorum, kenar kalsın, yanına belirgin ama sakin "BOSS" hapı. (4) Afiş kenarı: bir ton sönük, kabul.
+
+**Yönetici'nin iki hatası:** Büyük yüzde (−%9.1) ile SAT'taki (−%9.9) farklı; oyuncu kendine güvenmez, kaygı yaratır. Aynı sayı, aynı yuvarlama. "Daha fazla" şeridi kartı örtmesin.
+
+**Ek gözlem:** Grafikte zarar dibi çizgiyi eksen sayılarının altına taşırıyor; çizgi grafik alanına kırpılsın.
+
+#### Ortak tavsiye 3
+
+1. Aktif SAT (zarar dahil): 3 px açık lila-krem kenar, krem yazı, 6 px alt basamak gölgesi; pasif düğme yassı (kenar ve gölge yok). Yeni renk yok.
+2. Zarar çizgisi en az 4 px (kâr 5 px), çizgi grafik alanına kırpılsın; eksen sayılarının üstüne taşmasın.
+3. Büyük yüzde ile SAT düğmesindeki yüzde aynı kaynaktan, aynı yuvarlamayla gösterilsin (fark 0).
+4. Boss: ince sönük kenar + coin adının yanında sabit "BOSS" hapı (dolgu doygunluğu en çok %35, animasyon yok); "KALDIRAÇ kullanılamaz" için tek satır ipucu, en az 12 px.
+5. Telefonda (Adım 4) tüm yazı en az 12 px, normal metin 4.5:1, ikon/kenar 3:1; dokunma hedefleri en az 44 px; "daha fazla" şeridi hiçbir kartı örtmesin.
+6. Afiş turuncu kenarı bir ton sönük (#B9824A civarı); ekranda tek parlak turuncu BAŞLA kalsın; ikonlar (coin, şimşek, kemik) en fazla iki renk ve soluk kontur, altın yalnız hedef kartta.
