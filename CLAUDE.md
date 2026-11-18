@@ -15,7 +15,8 @@ Ayrıntılı kod haritası: `docs/kod-haritasi.md` (satır numaraları yaklaşı
 - **Para BigInt:** 1 $ = 10000 birim (`D()`, `P()`, `cp()`). Para hesabında float kullanma.
 - **Tek işlem formülü:** `calculateTradeResult` — oyuncu, Bobby ve robot hepsi bunu kullanır.
 - **Yeni metin:** Türkçe yazılır, İngilizcesi `I18N.en`'e eklenir, gösterimde `L()` kullanılır. Not: bazı fonksiyonlarda yerel `const L` global `L()`'yi gölgeler.
-- Oyun mantığı, sayılar, fiyatlar, denge ve kayıt formatı kullanıcı onayı olmadan değiştirilmez. Denge önerileri: `docs/denge-onerisi.md`.
+- Kayıt formatı ve anahtarı asla bozulmaz. Sayı/fiyat/denge değişikliği: kullanıcı (2026-11-18) Yöneticiye yetki verdi; değişikliği Oyun tasarımcısı yapar, önce yedek, sonra ölçüm (sim + testçi), oturumda en fazla bir büyük denge değişikliği. Günlük: `ofis/karar-gunlugu.md`. Denge notları: `docs/denge-onerisi.md`.
+- Yönetici çalışma düzeni ve hafıza: `ofis/` (hafiza, ogrenilenler, karar-gunlugu, oyuncu-geri-bildirimi, ajan-performansi). Oturum başında oku.
 - Görsel: kullanıcı modern, yuvarlak, "oyun gibi" bir arayüz istiyor (örnek: `docs/tasarim/ornek/`); arayüz pixel art olmak zorunda değil, hayvan sprite'ları pixel kalabilir. Göz yormayan, glow/neon yok, emoji yok. Süren yeniden tasarım: `docs/tasarim/durum.md`.
 
 ## Test

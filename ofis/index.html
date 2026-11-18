@@ -41,7 +41,7 @@ label{color:var(--tx2);font-size:12px;display:flex;gap:6px;align-items:center}
 </head>
 <body>
 <h1>EKİP OFİSİ</h1>
-<div class="sub">Yönetim paneli, oyuna etkisi yok. Yönetici (Opus 5.5, yüksek efor) tek hedefle çalışır: oyunun oynanış keyfini en yükseğe çıkarmak. Kendi kararıyla işe alır, çıkarır, görev verir, tartışma başlatır.</div>
+<div class="sub">Yönetim paneli, oyuna etkisi yok. Yönetici (Opus 5.5, yüksek efor) tek amaçla çalışır: oynanış zevki (8 ölçüt). Kendi kararıyla işe alır, çıkarır, görev verir, tartışma başlatır.</div>
 <div id="wrap"><canvas id="cv" width="320" height="180"></canvas></div>
 <div id="panel">
   <div class="box">
@@ -59,10 +59,17 @@ const cv=document.getElementById('cv'),x=cv.getContext('2d'),W=320,H=180,wrap=do
 const CORY=86;
 const ROOMS={'Yönetici':{x:6,y:16,w:96,h:56,f:'#1B2C6B'},'Tasarım':{x:112,y:16,w:96,h:56,f:'#18255A'},'Tartışma':{x:218,y:16,w:96,h:56,f:'#1F2A5C'},
  'Yazılım':{x:6,y:100,w:96,h:56,f:'#162257'},'Analiz':{x:112,y:100,w:96,h:56,f:'#1A2660'},'Test':{x:218,y:100,w:96,h:56,f:'#14204F'}};
-const DEFAULT=[{ad:'Yönetici',rol:'Ekibi yönetir; oynanış keyfini en yükseğe çıkarmak için karar verir',oda:'Yönetici'},{ad:'Tasarımcı',rol:'Yalnız görsel tasarım (CSS, çizim, animasyon)',oda:'Tasarım'},
- {ad:'Psikolog A',rol:'Oyun hissi ve motivasyon',oda:'Tartışma'},{ad:'Psikolog B',rol:'Göz sağlığı ve ergonomi',oda:'Tartışma'},
- {ad:'Yazılımcı',rol:'Mantık, ekonomi sabitleri, hata düzeltme, simülasyon',oda:'Yazılım'},{ad:'Rakip Analisti',rol:'Rakip idle oyunların tempo ve maliyet eğrilerini analiz eder',oda:'Analiz'},
+const DEFAULT=[{ad:'Yönetici',rol:'Tek amaç oynanış zevki; 8 ölçütle karar verir',oda:'Yönetici'},
+ {ad:'Oyun Tasarımcısı',rol:'Ekonomi, sayılar, süre, katalog ritmi, boss, kaldıraç, Bobby/robot dengesi (Opus high)',oda:'Analiz'},
+ {ad:'Görsel Tasarımcı',rol:'Arayüz netliği, animasyon, okunurluk (Opus medium)',oda:'Tasarım'},
+ {ad:'Ses ve Müzik',rol:'Geri bildirim sesleri, müzik, tempo (Sonnet)',oda:'Tasarım'},
+ {ad:'Yazılımcı',rol:'Kod, mekanik uygulama, hata düzeltme (Opus medium)',oda:'Yazılım'},
+ {ad:'Metin',rol:'Oyun içi mesajlar, ipuçları, TR/EN (Sonnet)',oda:'Yazılım'},
+ {ad:'Kod Araştırmacısı',rol:'Kodda yer bulma, basit kontroller (Haiku)',oda:'Yazılım'},
+ {ad:'Psikolog A',rol:'Danışman: oyun hissi ve motivasyon',oda:'Tartışma'},{ad:'Psikolog B',rol:'Danışman: göz sağlığı ve ergonomi',oda:'Tartışma'},
+ {ad:'Testçi',rol:'Oyunu oynar, 8 ölçüte 1-5 puan verir (Sonnet)',oda:'Test'},
  {ad:'Test Robotu',rol:'Otomatik testler (63 kontrol), ajan değil',oda:'Test',bot:1}];
+const OLCUT=`8 ölçüt (her kararı bunlarla değerlendir): 1 Anlamlı karar (bariz tek doğru yok), 2 Beceri ödülü (iyi zamanlayan belirgin çok kazanır), 3 Risk-getiri (kaldıraç/volatilite/boss cazip ama bedelli; kayıp öğretir), 4 İlerleme ritmi (kısa/orta/uzun hedef aynı anda ve görünür), 5 Zorluk eğrisi (katalog ~30 dk, toplam 2-2,5 sa, takılma/sıkılma yok), 6 Aktif-otomatik dengesi (Bobby/robot manueli gereksiz kılmaz, sürekli tıklama da şart değil), 7 Geri bildirim netliği (her eylemin sonucu anında, net, tatmin edici), 8 Çeşitlilik (her katalog/coin farklı düşünme). Çalışma döngüsü: Testçi teşhis eder ve puanlar → en düşük 3 sorun → Oyun tasarımcısı çözüm (eski→yeni, gerekçe) → küçük adımlarla uygula → Testçi yeniden ölçer → puanı artıranı tut, düşüreni geri al. Oturumda en fazla bir büyük denge değişikliği. Sahte aciliyet ve kumar benzeri döngü yok. Aynı dosyaya dokunan roller (Yazılımcı, Görsel, Ses) paralel çalışmaz. Kolay işi Haiku'ya ver.`;
 const OYUN=`Trading Idle: tek dosyalık, TR/EN, pixel art hayvanlı idle trading oyunu (bilgisayarda oynanır, telefon da desteklenir). Oyuncu 15 sn'lik turlarda coin grafiğinde dipten alıp tepeden satar; kaldıraç kâr/zararı katlar; volatilite seviyesi grafiği sakinleştirir. 4 katalog × 5 coin; her kataloğun 5. coini boss (ani çöküş). Net kâr eşiğe ulaşınca sonraki coin açılır. Bobby (köpek, beslenir) ve en fazla 4 robot otomatik işlem yapar. Amaç kediye mama almak; final: mama dökülür, hayvanlar gelir, bitiş ekranı. Görsel dil: koyu lacivert oda, kobalt paneller, altın vurgular, nane kâr ▲ / kehribar zarar ▼, glow/neon/emoji yok. Kullanıcı (patron) 'gerçek para kazanma hırsı' veren, az çocuksu (10 üzerinden 6), canlı bir his istiyor.`;
 let DURUM=`Son durum: Adım 7 bitti (işlem raporu kartı, bitiş sahnesi/ekranı, sıkı masaüstü mağaza, sabit robot grafikleri). Ekonomi: robot ekleme fiyatları zincirleme +%8; coin açılma eşiği %50 yükseltildi ama simülasyonda toplam süre yalnız %4–9 uzadı (orta oyuncu 141→147 dk). Patron hâlâ coin geçişini hızlı buluyor. Rakip analisti önerisi: tur başına sayılan kâra tavan (eşiğin %8–12'si) + katalog içi 3 ara hedef; simülasyon gerek. Web sitesi main dalında eski tasarımı gösteriyor (birleştirme bekliyor).`;
 const PAL=[['#3A2214','#2A4FB8','#F2B83C'],['#C0453F','#F59A38','#F4EEE3'],['#2B1D16','#45D6A0','#0F6158'],['#E9B596','#6EC8F0','#17243f'],['#1A1420','#8E6CF0','#F4EEE3'],['#6B4128','#E5484D','#F4EEE3'],['#B07A4A','#62CDAA','#0F1838']];
@@ -122,7 +129,7 @@ const sonKayit=()=>[...logEl.children].slice(0,10).map(d=>d.textContent).reverse
 function parseJSON(t){try{return JSON.parse(t)}catch(e){}const m=String(t).match(/```(?:json)?\s*([\s\S]*?)```/);if(m)try{return JSON.parse(m[1])}catch(e){}
  const a=t.indexOf('{'),b=t.lastIndexOf('}');if(a>=0&&b>a)try{return JSON.parse(t.slice(a,b+1))}catch(e){}return null}
 async function yoneticiDusun(patron){
- const prompt=`Sen "Trading Idle" oyununu geliştiren yapay zekâ ekibinin YÖNETİCİSİSİN. Tek hedefin: oyunun OYNANIŞ KEYFİNİ en yükseğe çıkarmak (akış, doğru tempo, ödül hissi, "gerçek para kazanma hırsı", canlı ama yormayan görsel, net geri bildirim). Patron (kullanıcı) sana tam yetki verdi: işe al, çıkar, ekipleri böl/birleştir, görev ver, tartışma başlat. Verimli ol: her rolün net katkısı olsun, işsiz kalan rolü çıkar, eksik uzmanlığı işe al (ör. ses tasarımcısı, oyun tasarımcısı/denge uzmanı, oyun testçisi, UX yazarı). Ekip yapay zekâ ajanlarından oluşur ve kullanım limiti kısıtlıdır.
+ const prompt=`Sen "Trading Idle" oyununu geliştiren yapay zekâ ekibinin YÖNETİCİSİSİN. Tek amacın: oyunun OYNANIŞ ZEVKİNİ artırmak — keyifli, tatmin edici, bağımlılık yapmadan tekrar oynanabilir. Patron (kullanıcı) sana tam yetki verdi: sayılar, fiyatlar, coin/katalog yapısı, boss, Bobby, robot, ekonomi, arayüz, ses, metin; işe al, çıkar, ekipleri böl/birleştir, görev ver, tartışma başlat. Sayı değişikliğini Oyun Tasarımcısına yaptırırsın.\n${OLCUT} Verimli ol: her rolün net katkısı olsun, işsiz kalan rolü çıkar, eksik uzmanlığı işe al (ör. ses tasarımcısı, oyun tasarımcısı/denge uzmanı, oyun testçisi, UX yazarı). Ekip yapay zekâ ajanlarından oluşur ve kullanım limiti kısıtlıdır.
 
 OYUN:\n${OYUN}
 
@@ -141,7 +148,7 @@ ${patron?`PATRONUN SANA MESAJI: "${patron}"\nMesaj organizasyon, yetki ya da san
  {"eylem":"cikar","kime":"kadrodaki ad","neden":"..."},
  {"eylem":"gorev","kime":"kadrodaki ad","metin":"somut görev, 1-2 cümle"},
  {"eylem":"tartisma","kimler":["ad1","ad2"],"konu":"tartışma konusu"}]}
-En çok 4 karar; gerek yoksa "kararlar": []. Yönetici çıkarılamaz. Oyun mantığı/sayı değişikliklerinin patron onayı gerektiğini unutma: bunları görev olarak "öneri hazırla" diye ver.`;
+En çok 4 karar; gerek yoksa "kararlar": []. Yönetici çıkarılamaz. Görev metninde hedef ölçütü (1-8) ve beklenen etkiyi yaz. Emin olmadığını kesin diye sunma: önce ölç.`;
  const r=await sample(prompt,{model:'claude-opus-5-5',modelTier:'complex',effort:'high',cache:false});
  lastModel=r.modelApplied?r.modelApplied+' · yüksek efor':'('+r.modelTierApplied+' modeli; Opus 5.5 bu görünümde yok)';modelEl.textContent=lastModel;
  return parseJSON(r.text)}
@@ -177,7 +184,7 @@ async function yonet(patron){if(thinking)return;const y=byName('Yönetici');if(!
 document.getElementById('meet').onclick=()=>{if(!busy)yonet(null)};
 let autoT=null;document.getElementById('auto').onchange=e=>{clearInterval(autoT);if(e.target.checked){autoT=setInterval(()=>{if(!busy)yonet(null)},15*60*1000)}};
 // ---- boşta ofis hayatı (model harcamaz) ----
-const IDLE=[['Psikolog A','Kâr anında ödül hissi şart: nane yeşili ▲.'],['Psikolog B','Zararda alarm yok; kehribar ▼ yeter.'],['Rakip Analisti','Rakiplerde maliyet çarpanı 1,07–1,15 arası.'],['Yazılımcı','Tur başına kâr tavanını simülasyonda denemeliyiz.'],['Tasarımcı','Bitiş ekranı daha kutlama gibi olabilir.'],['Test Robotu','BİP. 63/63 GEÇTİ.']];
+const IDLE=[['Psikolog A','Kâr anında ödül hissi şart: nane yeşili ▲.'],['Psikolog B','Zararda alarm yok; kehribar ▼ yeter.'],['Testçi','Oyunu baştan oynuyorum; 8 ölçüte puan vereceğim.'],['Oyun Tasarımcısı','Coin geçişi hızlı: eşik tek başına yetmedi, kâr tavanını ölçmeliyiz.'],['Görsel Tasarımcı','Kâr anı net görünüyor mu, testçiye soracağım.'],['Ses ve Müzik','Kârlı satışa kısa, tatlı bir ses lazım.'],['Test Robotu','BİP. 63/63 GEÇTİ.']];
 let ii=0;setInterval(()=>{if(busy)return;const[n,t]=IDLE[ii++%IDLE.length],p=byName(n);if(p)say(p,t,3200)},6000);
 // ---- kullanıcı ----
 const who=document.getElementById('who'),inp=document.getElementById('msg'),btn=document.getElementById('send');
