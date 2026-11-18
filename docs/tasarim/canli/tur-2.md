@@ -383,3 +383,20 @@ Adım 6'nın canlılığı çok iyi; 7/10 "iyi çocuksu" demek, 6/10 için yaln�
 3. İkincil yazı 800→700. Renklere dokunma.
 
 **(c) Bitiş.** Mama dökülünce kap taşsın, birkaç tane yere düşsün; kedi ve Bobby yerken yavaş, yumuşak piksel hareketi olsun (yanıp sönme yok). Sonra sakin bir bitiş ekranı: büyük başlık "Karnı doydu", altında gururlandıran sayılar: toplam oyun süresi, toplam işlem sayısı, toplam kâr, en iyi işlem (yüzdesiyle). En büyük ödül hissi "en iyi işlem" ve "toplam mama" olur; oyuncu kendi hikâyesini görür. Altta tek altın düğme: devam/yeni oyun.
+
+## Adım 7 — Psikolog B (yanıt)
+
+A'nın üç ince ayarına katılıyorum: kontur 3→2 px, köşe 28→26, ikincil yazı 800→700; renk aynı kaldığı için kontrast değişmez (#B4C4F0 kartta 8.3:1) ve fark zor görülür; tam istenen bu. Zarar kartında "büyük sayı yok" kısmına kısmen itiraz ediyorum: sayı küçük ama net olmalı (en az 24 px, 9.5:1), saklanırsa oyuncu belirsizlikten kaygılanır. Bitiş ekranında A'nın "sakin" dediğine katılıyorum; ekstra şart: hayvan hareketi yavaş, saniyede 3 kareden fazla değişim ve flaş yok, hareket azaltmada tek sabit kare. Bitiş ekranı bir kez okunacak, zorla bekletmesin.
+
+## Ortak tavsiye 7
+
+1. Rapor kartı: dolgu #0F1838, çerçeve #3F6BD8 (en çok 6 px), dış hat #0A1030; giriş en çok 450 ms tek hareket (yumuşak yükselme), hareket azaltmada anında; kapanışta animasyon yok.
+2. Başlık: "KÂR!" altın #F2B83C, "ZARAR" krem #F4EEE3 (zarar kartında altın yok), kontur #0A1030 2 px, en az 24 px.
+3. Kâr satırı: "▲ +$X" nane #5CE0B0 (11.9:1), en az 32 px; zarar satırı: "▼ −$X" kehribar #E8A760 (9.5:1), en az 24 px. Rakamlar tabular, sabit genişlik.
+4. Ara satırlar (giriş, çıkış, yüzde) #B4C4F0, en az 16 px, ince kesikli ayraç #2A3F8F 1 px. Zarar kartında tek düğme "Yeniden dene" (aktif düğme dili: dolgu #1B2C6B, kenar #CFE0FF 3 px).
+5. 7→6: başlık konturu 3→2 px; alt basamak gölgesi 1 px az; büyük köşeler 28→26, küçük köşeler 2 px az; ikincil yazı ağırlığı 800→700. Hiçbir renk, boyut ya da konum değişmez.
+6. Kap: mama bitince tepe taşar (en az 2 sıra tane, yatay en çok kap genişliğinin %110'u); yere en çok 6 tane düşer, düşme 300-500 ms ease-out, sonra durur; yanıp sönen/parlayan parçacık yok.
+7. Hayvanlar: yeme döngüsü en az 600 ms/kare, en çok 2-3 kare, kalp/emoji yok; yemek bitince sabit mutlu poz. Hareket azaltmada yalnız sabit kare.
+8. Bitiş ekranı: zemin #080B1E %85 örtü, kart #0F1838 + çerçeve #3F6BD8; 600 ms içinde yumuşak belirme (hareket azaltmada anında). Başlık altın #F2B83C en az 32 px.
+9. İçerik yalnız var olan veriden: toplam süre, işlem sayısı, toplam kâr (nane ▲), en iyi işlem (yüzdeyle). Her satır etiket #B4C4F0 en az 16 px + değer krem #F4EEE3 en az 24 px, tabular; yeni kayıt alanı yok.
+10. Tek altın düğme (dolgu #F2B83C, yazı #1A1204, 10.3:1, en az 48 px yükseklik) mevcut devam/yeni oyun işlevine bağlı; ekran zorla bekletmesin (düğme ilk andan aktif), aynı anda başka altın düğme yok.
