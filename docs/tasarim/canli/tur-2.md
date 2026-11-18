@@ -143,3 +143,48 @@ Plan (adımlar): 1) Koyu arka plan + oda; 2) Sol panel + mağaza kartları; 3) M
 4. KATALOG/MAĞAZA/OTOMASYON afişleri koyu nötr dolgu + ince turuncu kenar; dolgu doygunluğu en çok %35.
 5. Masaüstünde etiketler 24 px, telefonda fit() sonrası en az 12 px; grafik eksen sayıları (10.2, 0s...) da en az 12 px ve 4.5:1.
 6. "+$X" kâr pop'u: en çok 600 ms, tek bir hareket, "hareketi azalt" tercihinde yalnız renk+sayı; zararda hiçbir animasyon (titreme, kırmızı flaş) olmasın.
+
+## Adım 3 — Tasarımcı: Danışma 3
+
+**Renk dili (Adım 2'ye eklenenler)**
+- **Kâr:** nane (#62CDAA çizgi, #7FD8BC yazı) ve ▲.
+- **Zarar:** sönük kehribar (#C9A07A çizgi, #C9A27E yazı; doygunluk %41–42, ≤%45) ve ▼.
+- **Pozisyon yokken:** nötr gök mavisi (#8CC8EE).
+- Kırmızı-yeşil yok, mercan yok, nabız ya da nefes animasyonu yok. Kâr/zarar her yerde renk ve şekille gösteriliyor; ikisinin de çizgi kalınlığı ayrıca farklı.
+
+**Ne yaptım**
+- **Grafik:** Kârda kalın (5 px) nane çizgi, zararda ince (3 px) kehribar çizgi. Böylece fark renge bakmadan da okunuyor. Izgara sade ve silik. Eksen sayıları 22 px (eskiden 17–18 px), kontrast 6,5:1. Fiyat etiketi hapı artık eksen sayısının üstüne binmiyor; çakışan sayı atlanıyor. Son fiyat noktasındaki "nefes" kaldırıldı, nokta sabit. Al/sat rozetleri ve kâr etiketleri nane ▲ / kehribar ▼. ALIŞ çizgisi sönük lila-gri, 2 px. Likidasyon çizgisi pembe yerine koyu kehribar ve kesikli.
+- **Üst bilgi:** Büyük yüzde kârda nane, zararda sönük kehribar. Önünde küçük ▲/▼ şekli var (26 px, yüzdenin kendisi 44 px). Sayaç rengi saf beyaz yerine krem; son 3 saniyede yanıp sönmeden şeftaliye geçiyor. Coin adı krem; boss'ta sönük gül rengi.
+- **İşlem düğmeleri:** BAŞLA turuncu (Adım 2'deki gibi %10 sakin). AL turkuaz, bir ton sakin. SAT kârda nane ve "▲ +%x", zararda nötr kart tonu ve "▼ −%x". Ekranda her zaman tek ana düğme var. Kaldıraç seçimi 40 px yüksek, 20 px yazı, seçili olan lila-krem.
+- **Monitör:** Sistem çubuğundaki seçili sekme lila-krem. "TRADE-OS 3000" plakası soluk; mercan LED şeftaliye döndü.
+- **Haber bandı:** Mor-pembe yerine nötr koyu zemin; "SON DAKİKA" küçük lila bir hap. Yanıp sönme yok.
+- **Boss:** Ekranın içinde ince (4 px), sabit, sönük gül-mor bir kenar. Grafik zemini hafif mürdüm. Siren yok, nabız yok. Kendi betiğimle kontrol ettim (aşağıdaki görüntü).
+- **Otomasyon Merkezi:**
+  - "BOŞ BÖLME" 20 px, kontrastı yüksek (#A39DC0) ve kesikli yuvarlak bir çerçeve içinde. Kilitli bölmeler artık %60 saydam değil.
+  - Robot başlığı krem, 17 px. Alttaki süre sayısı pixel font yerine yuvarlak font.
+  - Kâr/zarar yazısı neon yeşil/kırmızı (#4CD08A/#E5484D) yerine nane ▲ / kehribar ▼.
+  - Bitiş noktasındaki hızlı nabız (yaklaşık 3 Hz) kaldırıldı.
+- **Tur sonu fişi:** Kenar nötr. "KÂR!" nane, "ZARAR" kehribar. Değişim satırında ▲/▼ var.
+- **"+$X" kâr pop'u:** Tek hareket (yumuşakça biraz yükselip kayboluyor), toplam 600 ms; 650 ms'de sayfadan da kalkıyor (ölçtüm: 500 ms'de var, 700 ms'de yok). Rengi nane. Zararda animasyon yok, yalnız sabit soluk "−$X" görünüyor. Ayarlardaki "Animasyonları azalt" ile ve artık sistemin "hareketi azalt" tercihiyle (`prefers-reduced-motion`) pop, squish ve kayma kapanıyor; renk ve sayı kalıyor.
+
+**Ortak tavsiye 2'yi nasıl uyguladım**
+1. Zararda büyük yüzde sönük kehribar (#C9A27E, doygunluk %41) ve küçük ▼. Grafik çizgisi zararda 3 px kehribar, kârda 5 px nane.
+2. Alınamaz haplarda yazı #DDD7EC (dolguya karşı 5,6:1'in üstünde). Hapın kenarına açık bir halka eklendi (#8A84AA, karta karşı 3,25:1). Soluk olan yalnız dolgu.
+3. AL turkuaz, SAT kârda nane / zararda nötr. ▲/▼ ve yazı sabit, yeni renk eklenmedi. Ekranda tek ana düğme var.
+4. KATALOG / MAĞAZA / OTOMASYON afişleri koyu nötr dolgulu (#221E38, doygunluk %29), 3 px ince turuncu kenarlı, krem yazılı. Şerit uçları kaldırıldı.
+5. Masaüstünde etiketler 24 px (BOBBY, KEDİ, COİN, SEVİYE, KALDIRAÇ). Grafik eksen sayıları 22 px. Telefonda ≥12 px Adım 4'teki fit() ile gelecek. Eksen kontrastı 6,5:1.
+6. Kâr pop'u 600 ms ve tek hareket. Hareket azaltmada yalnız renk ve sayı kalıyor. Zararda animasyon yok.
+
+**Bakılacak görüntüler**
+- `docs/tasarim/son/desk_tr_zarar.png`: zarar (▼ kehribar yüzde, ince kehribar çizgi, nötr SAT)
+- `docs/tasarim/son/desk_tr_islem.png`, `tel_tr_islem.png`: kâr (▲ nane, nane SAT)
+- `docs/tasarim/son/desk_tr_boss.png`: boss ekranı (sakin kenar)
+- `docs/tasarim/son/desk_tr_fis.png`: tur sonu fişi
+- `docs/tasarim/son/desk_tr_robot.png`: çalışan iki robot, +1 ve boş bölme
+- `docs/tasarim/son/desk_tr_oto.png`, `desk_tr_ana.png`, `desk_en_ana.png`, `tel_tr_ana.png`
+
+**Psikologlara sorular**
+1. Kâr çizgisi kalın, zarar çizgisi ince. Renk körlüğünde de fark okunsun diye yaptım. Zararda inceltmek "kaybı küçük gösterme" gibi yanlış bir mesaj veriyor mu, yoksa sakinleştirici mi?
+2. Son 3 saniyede sayacın şeftaliye dönmesi hafif bir hatırlatma. Bunu da aciliyet baskısı sayıp tamamen kaldıralım mı?
+3. Boss ekranının ince gül-mor kenarı "özel tur" duygusunu veriyor mu, yoksa daha da sade mi olsun (yalnız coin adının yanındaki "BOSS" yazısı)?
+4. Turuncu kenarlı koyu afişler ile turuncu BAŞLA düğmesi aynı turuncuyu paylaşıyor. Afiş kenarı bir ton daha sönük (#B9824A gibi) mi olsun?
