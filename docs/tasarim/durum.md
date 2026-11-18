@@ -21,6 +21,7 @@
 - Tur 1 bitti: 4 konsept + psikolog tartışması (docs/tasarim/tartisma/tur-1.md; psikologlar Lofi'yi seçti). **Kullanıcı Konsept 3 (Tok Mobil) ile devam dedi, arka plan daha koyu.** index.html = konsept-3 (smoke 63/63).
 - **Tur 2 yeni süreç (kullanıcı):** tek tasarımcı (Opus high) kök index.html üzerinde adım adım; her adım sonunda danışır; 2 psikolog (A, B) o adımı tartışır, B ortak tavsiye yazar; tasarımcı uygular. Canlı kayıt: docs/tasarim/canli/tur-2.md. Psikologların Tur 1 ortak kararındaki ölçülebilir kurallar (telefon ≥12 px, dokunma ≥44 px, kontrast 4.5:1, zararda alarm yok, ▲/▼, tek altın vurgu, animasyon ≤600 ms + hareket azaltma) geçerli.
 - Nabız: send_later 90 dk (bekleyen: trig_01PBqfhmEKX9u723Xk65Ddwu).
+- Tur 2 ajanları (SendMessage ile devam ettir): Tasarımcı a22b9c9486af1dbe6, Psikolog A a432f9ac8d661aba8, Psikolog B ad9f8ed00eca1c624. Şu an: Adım 1 (koyu arka plan) tasarımcıda.
 
 ## Limit tasarrufu (kullanıcı: "haftalık limit çok bitmeyecek şekilde ayarla")
 - Tur 1 (4 konsept, Opus high) bitince sonraki turlarda: 4 tasarımcı ama her biri DAR bir alanda (tam yeniden tasarım değil), Opus **medium**; psikologlar Sonnet **medium**, tartışma en fazla 4 mesaj; testleri Yönetici script ile çalıştırır (ayrı testçi ajanı yok).
