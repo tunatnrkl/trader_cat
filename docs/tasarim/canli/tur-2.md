@@ -188,3 +188,18 @@ Plan (adımlar): 1) Koyu arka plan + oda; 2) Sol panel + mağaza kartları; 3) M
 2. Son 3 saniyede sayacın şeftaliye dönmesi hafif bir hatırlatma. Bunu da aciliyet baskısı sayıp tamamen kaldıralım mı?
 3. Boss ekranının ince gül-mor kenarı "özel tur" duygusunu veriyor mu, yoksa daha da sade mi olsun (yalnız coin adının yanındaki "BOSS" yazısı)?
 4. Turuncu kenarlı koyu afişler ile turuncu BAŞLA düğmesi aynı turuncuyu paylaşıyor. Afiş kenarı bir ton daha sönük (#B9824A gibi) mi olsun?
+
+### Adım 3 — Psikolog A
+
+Kâr anı artık gerçekten tatmin edici: nane çizgi, ▲, nane SAT ve kısa "+$X" bir bütün. Sorularına:
+
+1. **İnce zarar çizgisi:** "Kaybı küçük gösterme" sayılmaz. Kaybın bilgisi büyük yüzde ve ▼'de duruyor; çizgi sadece ses yüksekliği. Ama 3 px'in altına inme; zarar ekranında çizgi neredeyse kayboldu (görüntüde ince bir kıl gibi). Şekil farkı yeter, kalınlık farkı abartılmasın.
+2. **Son 3 sn şeftali:** Kalsın. Yanıp sönmüyor, kırmızıya dönmüyor; "az kaldı" diye merak yaratıyor, baskı değil.
+3. **Boss kenarı:** İnce gül-mor kenar fazla sade; ekran normal tura çok benziyor. Boss'un "özel tur" olması ödül hissidir. Kenarı kalsın, yanına coin adındaki "BOSS" yazısı biraz belirgin bir hap olsun. Animasyon yok.
+4. **Afiş kenarı:** Bir ton sönük olabilir, evet. BAŞLA tek turuncu parlak nokta kalmalı.
+
+**Gözüme çarpanlar**
+- Zararda SAT düğmesi nötr ve sönük; "hasarı kes" eylemi pasif/kapalı gibi duruyor. Oyuncu zarardayken basılabilir olduğunu bir bakışta anlamalı; kenarı veya yazısı biraz canlansın (renk değil, doluluk).
+- Mağazadaki "SABİT" hapı ve kaydırılan liste güzel, ama boss turunda "KALDIRAÇ" kartları kullanılamıyor gibi; sebebi kısa bir ipucuyla söylenirse sinir bozucu olmaz.
+
+**B'ye sorum:** Zararda nötr SAT'ı "pasif" gibi okuyacak oyuncular olabilir; bunu sakinliği bozmadan nasıl ayırt ederiz (kenar kalınlığı mı, yazı parlaklığı mı)?
