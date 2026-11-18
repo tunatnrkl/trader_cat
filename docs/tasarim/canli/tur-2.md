@@ -400,3 +400,28 @@ A'nın üç ince ayarına katılıyorum: kontur 3→2 px, köşe 28→26, ikinci
 8. Bitiş ekranı: zemin #080B1E %85 örtü, kart #0F1838 + çerçeve #3F6BD8; 600 ms içinde yumuşak belirme (hareket azaltmada anında). Başlık altın #F2B83C en az 32 px.
 9. İçerik yalnız var olan veriden: toplam süre, işlem sayısı, toplam kâr (nane ▲), en iyi işlem (yüzdeyle). Her satır etiket #B4C4F0 en az 16 px + değer krem #F4EEE3 en az 24 px, tabular; yeni kayıt alanı yok.
 10. Tek altın düğme (dolgu #F2B83C, yazı #1A1204, 10.3:1, en az 48 px yükseklik) mevcut devam/yeni oyun işlevine bağlı; ekran zorla bekletmesin (düğme ilk andan aktif), aynı anda başka altın düğme yok.
+
+## Adım 7 — Tasarımcı: Notlar
+
+1. **Robot bölmeleri sabit:** Kayma DOM'dan değil, canvas çiziminden geliyordu. `drawTile` her karede örnek sayısını değiştirdiği için bütün çizgi noktaları yatayda kayıyordu; y ölçeği de her karede min/max'a sıçrıyordu. Artık sabit zaman ızgarası var (noktalar yerinde, yalnız uç ilerliyor). Ölçek ana grafik gibi yumuşak uyum sağlıyor ve her yeni turda sıfırlanıyor. Ekonomiye dokunulmadı.
+2. **Masaüstü mağaza dikeyde sıkı** (yalnız `#stage:not(.tel)`): kart arası boşluk 10 → 6 px, kart iç dolgusu 10/12 → 7/8 px, başlık–içerik aralığı 10 → 6 px, satır aralıkları sıkı. Telefon aynen.
+3. **İşlem raporu kartı** (termal fiş yerine):
+   - Lacivert #0F1838, kobalt #3F6BD8 çerçeve.
+   - Başlık "KÂR!" altın, "ZARAR" krem (24 px).
+   - Büyük net sonuç satırı: ▲ +$X nane 32 px / ▼ −$X kehribar 26 px; tabular rakamlar.
+   - Ara satırlar #B4C4F0, ince #22336E kesikli ayraç.
+   - Giriş 400 ms tek yumuşak yükselme; kapanışta animasyon yok; hareket azaltmada anında. Zarardaki ekran flaşı kapatıldı.
+   - Rapora "Yeniden dene" düğmesi eklenmedi (yeni etkileşim olurdu); alttaki "YENİ TUR" düğmesi aynı işi görüyor.
+4. **Ciddiyet 7 → 6 (fark zor):** Başlık konturu 3 → 2 px, kart alt basamağı 4 → 3 px, masaüstünde kart köşeleri 12 → 10 ve panel köşeleri 18 → 16, ikincil yazılar 800 → 700. Renk, boyut ve konum değişmedi.
+5. **Bitiş sahnesi:**
+   - Kedinin kabı döküm sırasında gerçekten doluyor, taşınca tam dolu duruyor.
+   - Kalp yok; yerken küçük mama kırıntısı sıçrıyor.
+   - Hayvanların yeme karesi 650 ms; hareket azaltmada sabit kare.
+   - Konuşma balonu tema dilinde (lacivert, kobalt kenar, krem yazı).
+6. **Bitiş ekranı:**
+   - %85 #080B1E örtü üstünde kobalt çerçeveli kart, 600 ms yumuşak belirme.
+   - Altın başlık.
+   - İstatistikler yalnız mevcut veriden (yeni kayıt alanı yok): oyun süresi (`S.ptm`), son işlemler, son işlemlerdeki kâr, açılan coin, en iyi işlem (yüzdeyle). İşlem sayısı ve kâr kaydın tuttuğu son ≤60 kayıttan hesaplanıyor; etiket bu yüzden "Son işlemler".
+   - Tek altın düğme: mevcut "Yeniden Oyna".
+   - Görüntü: `docs/tasarim/son/desk_tr_final.png`.
+   - Smoke 63/63, konsol temiz.
