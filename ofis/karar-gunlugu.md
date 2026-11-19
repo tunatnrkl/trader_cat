@@ -2,6 +2,7 @@
 
 | Tarih | Karar | Gerekçe | Önceki değer |
 |---|---|---|---|
+| 11-19 | Adım 9 (Yönetici kendisi, iPhone 15 Pro taklidiyle doğruladı): telefonda mağaza kartı 2 satır (148→~100 iç px), i rozeti ikon köşesinde, uzun başlık sığdırma; Bobby aç/kapa düğmesi kart içinde; bitiş kartı kısa ekranda iki sütun + piksel kedi/Bobby | Kullanıcı: Adım 8 telefonda mağazayı sıkıştırmadı, bitiş ekranı kötü (gerçekte iPhone'da kart taşıyordu) | Adım 8 |
 | 11-19 | Seviye fiyatları (Testçi, kullanıcı isteği): Kat.1 volatilite /30→/27 (~%11 pahalı, Pebble $8,3→$9,3); Bobby kaldıracı Kat.2–4 ×2 | Bobby kaldıraç 2–17 sn'de geri ödüyordu (karar değil); sim ortalama 134,8→139,3, iyi 97,5→99,1, Kat.1 geçişleri hızlanmadı | /30, ×1 |
 | 11-19 | Adım 8 kabul: iPhone güvenli alan, telefonda sıkı mağaza, 13 düzen düzeltmesi | Kullanıcı: ada kataloğa denk geliyor, mağaza boşluklu | — |
 | 11-19 | Ofis kendi kendine yönetiyor: yeni veri gelince (görev sonucu, döngü, uzun sessizlik) Opus yönetici kendisi toplanır (en çok 30 dk'da bir, sayfa başına 4); öncelik listesi koyar, görev (öncelik+tür+ölçüm) verir, gereksiz görevi iptal eder, geri alma önerir; plan/oyun sayıları/döngü bilgisini okur. Gerçek ekip ofis görevlerini döngüde uygular, son karar Claude Code'daki Yönetici. Günlük otomatik döngü (zamanlanmış görev) izin sisteminde reddedildi, patron kararı bekliyor | Patron: "kendi kendine yönetici karar versin her şeye, amaç daha oynanabilir" | Elle toplantı + 15 dk zamanlayıcı |

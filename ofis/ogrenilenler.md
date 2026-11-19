@@ -14,3 +14,4 @@
 - Testçi botu Pebble'da kaldı, coin değiştirmedi → teşhiste bot coin geçişi de yapsın → deneme
 - Sim'de Kat.1 %23 kısaldı ama Testçi puanı değişmedi: botlar mağazadan hiç almadı ve 1–5 ölçeği küçük gelişmeyi göstermiyor → teşhis botu mağaza alımı da yapsın; puanla birlikte ölçülebilir göstergeler (dk, mama dönüşü) de raporlansın → deneme
 - Kurtarma turu bilgisayar onarılmadan önce de açılıyordu (S.fix kontrolü yoktu); Testçinin "açılışta mama gerekmedi" notundan yakalandı → oyuna yeni kapı eklerken açılış (S.fix=0) durumunu da test et → kesin
+- Görsel tasarımcı "telefonda sıkıştırdım" dedi ama gerçek iPhone boyutunda kartlar hâlâ 3 satırdı; bitiş kartı iPhone'da taşıyordu → telefon işini Playwright cihaz taklidiyle (iPhone 15 Pro / SE yatay) ekran görüntüsünde Yönetici kendisi görmeden kabul etme → kesin

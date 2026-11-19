@@ -1324,6 +1324,7 @@ html.kisa .mbtn.sm{height:44px!important;font-size:18px!important}
 #stage.tel #right .sc:not(.bob):not(.rcoin) .sm .st{grid-column:2!important;grid-row:2!important;align-self:start}
 #stage.tel #right .sc:not(.bob):not(.rcoin) .sm .sg{grid-column:2!important;grid-row:3!important;margin-top:6px!important}
 #stage.tel #right .sc:not(.bob):not(.rcoin) .sb{grid-column:3!important;grid-row:2/4!important;align-self:end!important;margin-top:0!important}
+#stage.tel #right .sc:not(.bob):not(.rcoin) .sb .mx{width:auto!important;min-width:0!important;padding:0 10px!important;font-size:calc(var(--tf) * .66)!important;white-space:nowrap}
 #stage.tel #right .sc:not(.bob):not(.rcoin) .sb:has(.mx){grid-row:3!important;align-self:center!important}
 #stage.tel #right .sc:not(.bob):not(.rcoin):has(.sb .mx) .sm .st{grid-column:2/4!important}
 #stage.tel #right .sc:not(.bob):not(.rcoin) .sm b{padding-right:52px!important}
@@ -1345,6 +1346,55 @@ html.kisa .mbtn.sm{height:44px!important;font-size:18px!important}
 #stage.tel #receipt .rw>span:last-child{font-size:var(--tf)!important}
 /* telefon katalog kartı: iç boşluk biraz az */
 #stage.tel .tk{height:104px!important}
+/* Adım 9 (2026-11-19): telefonda mağaza kartı 2 satır — ikon+seviye noktaları | başlık / alt yazı | i | fiyat */
+#stage.tel #right .sc:not(.bob):not(.rcoin),#stage.tel.dar #right .sc:not(.bob):not(.rcoin){grid-template-columns:52px minmax(0,1fr) 44px auto!important;grid-template-rows:auto auto!important;padding:8px 12px 8px 10px!important;row-gap:2px!important;column-gap:10px!important;min-height:0!important;align-items:center!important}
+#stage.tel #right .sc:not(.bob):not(.rcoin) .si,#stage.tel.dar #right .sc:not(.bob):not(.rcoin) .si{grid-column:1!important;grid-row:1!important;align-self:end!important;justify-self:center}
+#stage.tel #right .sc:not(.bob):not(.rcoin) .sm .sg,#stage.tel.dar #right .sc:not(.bob):not(.rcoin) .sm .sg{grid-column:1!important;grid-row:2!important;justify-self:center!important;align-self:start!important;margin:2px 0 0!important}
+#stage.tel #right .sc:not(.bob):not(.rcoin) .sm b,#stage.tel.dar #right .sc:not(.bob):not(.rcoin) .sm b{grid-column:2!important;grid-row:1!important;min-height:0!important;padding-right:0!important;align-self:end!important;line-height:1.1!important}
+#stage.tel #right .sc:not(.bob):not(.rcoin) .sm .st,#stage.tel.dar #right .sc:not(.bob):not(.rcoin) .sm .st{grid-column:2!important;grid-row:2!important;align-self:start!important;line-height:1.15!important}
+#stage.tel #right .sc:not(.bob):not(.rcoin) .info,#stage.tel.dar #right .sc:not(.bob):not(.rcoin) .info{position:static!important;grid-column:3!important;grid-row:1/3!important;align-self:center!important;justify-self:center!important;margin:0!important}
+#stage.tel #right .sc:not(.bob):not(.rcoin) .sb,#stage.tel.dar #right .sc:not(.bob):not(.rcoin) .sb,#stage.tel #right .sc:not(.bob):not(.rcoin) .sb:has(.mx){grid-column:4!important;grid-row:1/3!important;align-self:center!important;margin:0!important}
+#stage.tel #right .sc:not(.bob):not(.rcoin):has(.sb .mx) .sm .st{grid-column:2!important}
+#stage.tel #right .sc.lk .sm b,#stage.tel.dar #right .sc.lk .sm b{grid-row:1/3!important;align-self:center!important}
+#stage.tel #right .sc:not(.bob):not(.rcoin),#stage.tel.dar #right .sc:not(.bob):not(.rcoin){grid-template-columns:46px minmax(0,1fr) 38px auto!important;column-gap:8px!important;padding:8px 10px 8px 8px!important}
+#stage.tel #right .sc:not(.bob):not(.rcoin) .sb .sw{width:136px!important;padding:0 12px 0 44px!important}
+#stage.tel #right .sc:not(.bob):not(.rcoin) .sm b{white-space:nowrap!important;overflow:hidden!important;text-overflow:clip!important}
+#stage.tel #right .sc:not(.bob):not(.rcoin) .sm .st{white-space:normal!important;overflow-wrap:normal!important;word-break:normal!important}
+#stage.tel #right .sc:not(.bob):not(.rcoin) .sm b{font-size:calc(var(--tf) * .86)!important;letter-spacing:0!important}
+#stage.tel #right .sc:not(.bob):not(.rcoin) .sm .sg{transform:scale(.8);transform-origin:center top}
+#stage.tel #right .sc.lk,#stage.tel #right .sc.bob.lk{padding-top:6px!important;padding-bottom:6px!important}
+#stage.tel #right .sc.lk .si,#stage.tel.dar #right .sc.lk .si{grid-row:1/3!important;align-self:center!important}
+#stage.tel #right .sc:not(.bob):not(.rcoin) .sm b,#stage.tel.dar #right .sc:not(.bob):not(.rcoin) .sm b{grid-column:2/4!important}
+#stage.tel #right .sc:not(.bob):not(.rcoin) .info,#stage.tel.dar #right .sc:not(.bob):not(.rcoin) .info{grid-row:2!important;align-self:center!important;transform:scale(.82)}
+#stage.tel #right .sc:not(.bob):not(.rcoin) .sb .sw{width:auto!important;min-width:128px!important;white-space:nowrap!important}
+#stage.tel #right .sc:not(.bob):not(.rcoin),#stage.tel.dar #right .sc:not(.bob):not(.rcoin){grid-template-columns:50px minmax(0,1fr) auto!important;position:relative}
+#stage.tel #right .sc:not(.bob):not(.rcoin) .sm b,#stage.tel.dar #right .sc:not(.bob):not(.rcoin) .sm b{grid-column:2!important}
+#stage.tel #right .sc:not(.bob):not(.rcoin) .info,#stage.tel.dar #right .sc:not(.bob):not(.rcoin) .info{grid-column:1!important;grid-row:1!important;align-self:start!important;justify-self:end!important;transform:translate(14px,-12px) scale(.6)!important;z-index:2}
+#stage.tel #right .sc:not(.bob):not(.rcoin) .sb,#stage.tel.dar #right .sc:not(.bob):not(.rcoin) .sb,#stage.tel #right .sc:not(.bob):not(.rcoin) .sb:has(.mx){grid-column:3!important}
+#stage.tel #right .sc:not(.bob):not(.rcoin) .sb .sw{min-width:120px!important;padding:0 12px 0 40px!important;font-size:calc(var(--tf) * .92)!important}
+/* Adım 9: bitiş kartı kısa ekranda (telefon yatay) iki sütun: üstte başlık, solda mesaj, sağda istatistik + düğme; güvenli alan içinde */
+@media (max-height:520px){
+ #endt{display:grid!important;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);grid-template-areas:"h h" "a s" "p s" "p b";column-gap:18px;row-gap:8px;align-items:start;text-align:left;
+  width:min(780px,calc(100vw - var(--sal,0px) - var(--sar,0px) - 24px))!important;max-height:calc(100vh - var(--sat,0px) - var(--sab,0px) - 16px);overflow:auto;padding:14px 20px 16px!important;box-sizing:border-box}
+ #endt h1{grid-area:h;text-align:center;font-size:24px!important;line-height:1.15!important;margin:0 0 4px!important}
+ #endt p{grid-area:p;font-size:14px!important;line-height:1.45!important;margin:0!important;align-self:center}
+ #endstats{grid-area:s;grid-template-columns:1fr!important;gap:6px!important;margin:0!important}
+ #endstats .es{padding:6px 10px!important;border-radius:8px!important}#endstats .es span{font-size:12px!important}#endstats .es b{font-size:16px!important}
+ #endstats .es:last-child:nth-child(odd){grid-column:auto!important}
+ #endt small{grid-area:s;display:none!important}
+ #endt #again{grid-area:b;justify-self:stretch;font-size:18px!important;padding:8px 16px!important;min-height:44px}
+}
+#stage.tel #right .sc.bob .bh{grid-template-columns:52px minmax(0,1fr) auto!important;grid-template-rows:auto!important}
+#stage.tel #right .sc.bob .bh>.si{grid-column:1!important;grid-row:1!important}#stage.tel #right .sc.bob .bh>.sm{grid-column:2!important;grid-row:1!important;min-width:0}
+#stage.tel #right .sc.bob .bh>.sb{grid-column:3!important;grid-row:1!important;justify-self:end!important;align-self:center!important}
+#stage.tel #right .sc:not(.bob):not(.rcoin):has(.sb .mx) .sm b{grid-column:2!important}
+#stage.tel #right .sc:not(.bob):not(.rcoin):has(.sb .mx) .sm .st{grid-column:2/4!important}
+#stage.tel #right .sc:not(.bob):not(.rcoin) .sb:has(.mx){grid-column:3!important;grid-row:1!important;align-self:center!important}
+#stage.tel.dar #right .sc.bob .bh>.sb .sw{width:124px!important;padding:0 12px 0 46px!important;font-size:calc(var(--tf) * .85)!important}#stage.tel.dar #right .sc.bob .bh>.sb .sw.on{padding:0 46px 0 12px!important}
+#stage.tel.dar #right .sc.bob .bh .sm b{font-size:calc(var(--tf) * .9)!important}
+#stage.tel #right .sc.bob .bh>.sb .sw{width:156px!important;padding:0 14px 0 58px!important;text-align:center!important}#stage.tel #right .sc.bob .bh>.sb .sw.on{padding:0 58px 0 14px!important}
+#endpets{display:flex;justify-content:center;align-items:flex-end;gap:18px;margin:2px 0 10px}#endpets canvas{image-rendering:pixelated;display:block}
+@media (max-height:520px){#endpets{grid-area:a;margin:0}#endt p{align-self:start!important}}
 </style>
 </head><body>
 <div id="stage"><div class="floor f1"></div><div class="floor f2"></div>
@@ -2938,4 +2988,15 @@ setView(S.view||'main',false);ready();G.revOK=true;if(S.food&&!S.over)sackIntro(
 /* v30: rakam fontu yüklenince yeniden çiz */
 document.fonts&&document.fonts.load('20px TINum').then(()=>{cashLast='';SD=SH=LH='';RBK='';ui()});
 
+
+/* Adım 9: telefonda uzun mağaza başlıklarını karta sığdır (yalnız görünüm) */
+function fitShopTitles(){const st=document.getElementById('stage');if(!st||!st.classList.contains('tel'))return;
+ document.querySelectorAll('#right .sc:not(.bob):not(.rcoin) .sm b').forEach(b=>{if(!b.clientWidth)return;b.style.removeProperty('font-size');let f=parseFloat(getComputedStyle(b).fontSize)||20,n=0;
+  while(b.scrollWidth>b.clientWidth+1&&n<14){f*=.92;b.style.setProperty('font-size',f.toFixed(1)+'px','important');n++}})}
+{let q=0,tm=0;const f=()=>{try{fitShopTitles()}catch(e){}},go=()=>{if(!q)q=requestAnimationFrame(()=>{q=0;f()});clearTimeout(tm);tm=setTimeout(f,120)};const rt=document.getElementById('stage')||document.body;new MutationObserver(go).observe(rt,{childList:true,subtree:true,characterData:true});{const _rsF=renderShop;renderShop=function(){const r=_rsF.apply(this,arguments);go();return r}}addEventListener('resize',go);setInterval(go,1500);go()}
+
+/* Adım 9: bitiş kartında doymuş kedi (ve Bobby varsa) — piksel sprite, oyunun kendi çizimleri */
+{const _set=showEndText;showEndText=function(){const r=_set.apply(this,arguments);try{const t=$('#endt');let a=$('#endpets');
+ if(!a){a=document.createElement('div');a.id='endpets';t.insertBefore(a,$('#endmsg'))}a.innerHTML='';const k=innerHeight<=520?3:4;
+ const c=catCanvas2({tail:1},k);a.appendChild(c);if(S.rob){const d=dogCanvas2({tail:1},k);a.appendChild(d)}}catch(e){}return r}}
 </script></body></html>
