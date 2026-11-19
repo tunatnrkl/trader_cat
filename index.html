@@ -1291,6 +1291,60 @@ html,body{position:fixed;inset:0;width:100%;height:100%;overflow:hidden;margin:0
 *{touch-action:manipulation}canvas,img{-webkit-user-drag:none}#list,#shop,.modal .mp,#mb{touch-action:pan-x pan-y;-webkit-overflow-scrolling:touch}
 #rot{position:fixed;left:0;top:0;width:100%;height:100%;overflow:hidden}html.rot #rot{transform-origin:0 0}
 html.rot #mwood{width:min(55vh,880px)}html.rot #endt{width:min(900px,92vh)}html.rot .mp{max-height:88vw}
+</style><style>/* =====================================================================
+   TUR 2 / ADIM 8 — güvenli alan (iPhone adası/çentik + ana ekran çizgisi), telefon mağaza sıkı, menü kısa ekran, katalog kaydırma.
+   Palet/kimlik Adım 6/7 aynen; yalnız düzen/boşluk.
+   --pl/--pr/--pt/--pb: fiziksel ekran env() değerleri (test: html'e inline --pl:59px gibi verilir).
+   --sal/--sar/--sat/--sab: oyunun yatay düzenindeki kenarlar; dikeyde döndürülmüş kipte (html.rot) eşlenir.
+   ===================================================================== */
+:root{--pl:env(safe-area-inset-left,0px);--pr:env(safe-area-inset-right,0px);--pt:env(safe-area-inset-top,0px);--pb:env(safe-area-inset-bottom,0px);--sal:var(--pl);--sar:var(--pr);--sat:var(--pt);--sab:var(--pb)}
+html.rot{--sal:var(--pt);--sar:var(--pb);--sat:var(--pr);--sab:var(--pl)}
+#saprobe{position:fixed;left:0;top:0;width:0;height:0;overflow:hidden;visibility:hidden;pointer-events:none;padding:var(--sat) var(--sar) var(--sab) var(--sal)}
+/* tam ekran katmanlar da güvenli alanda */
+#menu{box-sizing:border-box;padding:var(--sat) var(--sar) var(--sab) var(--sal)!important}
+#mver{right:calc(14px + var(--sar))!important;bottom:calc(10px + var(--sab))!important}
+#endt{margin-left:calc((var(--sal) - var(--sar)) / 2);margin-top:calc((var(--sat) - var(--sab)) / 2)}
+#toast{top:calc(12px + var(--sat))!important}
+/* kısa (telefon yatay) ekranda menü: logo solda, düğmeler sağda; hiçbir şey kesilmez */
+html.kisa #menu{flex-direction:row!important;gap:calc(var(--lw) * .05)!important}
+html.kisa #mlogo canvas{width:auto!important;height:auto!important;max-width:calc(var(--lw) * .36);max-height:calc(var(--lh) * .42)}
+html.kisa #mlogo .mcoin{width:48px!important;height:48px!important;right:-20px!important;top:-18px!important}
+html.kisa #mwood{width:min(calc(var(--lw) * .38),440px)!important;min-width:0!important;padding:20px 20px 24px!important;border-radius:26px}
+html.kisa #mpanel{gap:14px!important}
+html.kisa .mbtn{width:100%!important;height:54px!important;font-size:22px!important}
+html.kisa .mbtn.sm{height:44px!important;font-size:18px!important}
+/* katalog listesi: kart yarım kesik durmasın (kaydırma kartın başına oturur) */
+#list{scroll-snap-type:y proximity;scroll-padding-top:8px}#list .tk{scroll-snap-align:start}
+#list{-webkit-mask-image:linear-gradient(180deg,transparent 0,#000 10px,#000 calc(100% - 22px),transparent 100%);mask-image:linear-gradient(180deg,transparent 0,#000 10px,#000 calc(100% - 22px),transparent 100%)}
+#shop{scroll-padding-top:8px}
+/* telefon mağaza kartı: başlık üstte; ikon başlık+alt yazıyla hizalı; fiyat düğmesi alt yazının yanında (dikeyde ~%25 daha az yer) */
+#stage.tel #right .sc:not(.bob):not(.rcoin){padding:10px 14px 12px!important;row-gap:0!important;column-gap:14px!important;align-items:center!important}
+#stage.tel #right .sc:not(.bob):not(.rcoin) .si{grid-row:1/3!important;align-self:center!important}
+#stage.tel #right .sc:not(.bob):not(.rcoin) .sm b{grid-row:1!important;min-height:52px;display:flex!important;align-items:center}
+#stage.tel #right .sc:not(.bob):not(.rcoin) .sm .st{grid-column:2!important;grid-row:2!important;align-self:start}
+#stage.tel #right .sc:not(.bob):not(.rcoin) .sm .sg{grid-column:2!important;grid-row:3!important;margin-top:6px!important}
+#stage.tel #right .sc:not(.bob):not(.rcoin) .sb{grid-column:3!important;grid-row:2/4!important;align-self:end!important;margin-top:0!important}
+#stage.tel #right .sc:not(.bob):not(.rcoin) .sb:has(.mx){grid-row:3!important;align-self:center!important}
+#stage.tel #right .sc:not(.bob):not(.rcoin):has(.sb .mx) .sm .st{grid-column:2/4!important}
+#stage.tel #right .sc:not(.bob):not(.rcoin) .sm b{padding-right:52px!important}
+#stage.tel #right .sc.lk .sm b{grid-row:1/3!important;align-self:center}
+#stage.tel #right .go{height:68px!important}
+#stage.tel #right .sc.bob{gap:6px!important;padding:10px 14px 12px!important}
+#stage.tel #shop{gap:12px!important}
+#stage.tel .shd,#stage.tel #right .shd{margin:8px 4px 0!important}#stage.tel #right .shd:first-child{margin-top:2px!important}
+/* dar telefon (667 gibi): alt yazı tam genişlik, fiyat düğmesi noktaların yanında; sözcük ortadan bölünmez */
+#stage.tel.dar #right .sc:not(.bob):not(.rcoin) .sm .st{grid-column:2/4!important}
+#stage.tel.dar #right .sc:not(.bob):not(.rcoin){padding:10px 12px 12px!important;column-gap:10px!important}
+#stage.tel.dar #right .sc:not(.bob):not(.rcoin) .sb{grid-row:3!important;margin-top:4px!important}
+#stage.tel.dar #right .sc:not(.bob):not(.rcoin) .sm .sg{align-self:center;margin-top:4px!important}
+#stage.tel #right .sm b,#stage.tel #right .sm .st{overflow-wrap:normal!important;word-break:normal!important}
+/* dar telefon üst şerit: coin adı ("Kedi Maması") kesilmesin — boşluklar az, sağ/sol içerik kadar */
+#stage.tel.dar .tstrip{gap:6px!important;padding:0 10px!important}#stage.tel.dar .tstrip .tl{gap:8px!important;flex:0 1 auto!important}
+#stage.tel.dar .tstrip .tr{flex:0 0 auto!important}#stage.tel.dar .tstrip .tc{flex:1 1 auto!important;min-width:0}
+/* telefon işlem raporu: değerler etiketle aynı boy (önce ~8 px okunmuyordu) */
+#stage.tel #receipt .rw>span:last-child{font-size:var(--tf)!important}
+/* telefon katalog kartı: iç boşluk biraz az */
+#stage.tel .tk{height:104px!important}
 </style>
 </head><body>
 <div id="stage"><div class="floor f1"></div><div class="floor f2"></div>
@@ -1816,10 +1870,13 @@ let SD='',LH='',SH='';
 /* Tur 2/Adım 4: telefon kipi (TEL). Sahne ölçeği ~0.4'e düşen yatay telefonlarda: sahne ekran oranında yatay genişler,
    monitör alanı daralır, yan sütunlar genişler; sahne yazıları ≥30 px (gerçek ≥12 px). Masaüstü/tablet düzeni değişmez. */
 let TEL=false;
-function fit(){const st=$('#stage'),por=false,H0=por?1790:900,k0=Math.min(innerWidth/1600,innerHeight/H0),tel=!por&&k0<.6,ar=innerWidth/Math.max(1,innerHeight),
+/* Tur 2/Adım 8: güvenli alan (çentik/ada, ana ekran çizgisi). --sal/--sar/--sat/--sab CSS'te env()'den gelir (döndürülmüş kipte eşlenir); sahne bu alanın ortasına sığar */
+function safeA(){let e=document.getElementById('saprobe');if(!e){e=document.createElement('i');e.id='saprobe';e.setAttribute('aria-hidden','true');document.body.appendChild(e)}const c=getComputedStyle(e),n=v=>Math.max(0,parseFloat(v)||0);return{l:n(c.paddingLeft),r:n(c.paddingRight),t:n(c.paddingTop),b:n(c.paddingBottom)}}
+function fit(){const sa=safeA(),IW=Math.max(200,innerWidth-sa.l-sa.r),IH=Math.max(150,innerHeight-sa.t-sa.b),rt=document.documentElement;rt.classList.toggle('kisa',innerHeight<520);rt.style.setProperty('--lw',innerWidth+'px');rt.style.setProperty('--lh',innerHeight+'px');
+ const st=$('#stage'),por=false,H0=por?1790:900,k0=Math.min(IW/1600,IH/H0),tel=!por&&k0<.6,ar=IW/Math.max(1,IH),
  W=tel?Math.round(Math.min(2100,Math.max(1600,900*ar))):por?900:1600,H=H0,cw=tel?Math.min(480,Math.floor((W-800)/2)):340,sw=W-2*cw-40;
- TEL=tel;st.classList.toggle('tel',tel);document.body.classList.toggle('tel',tel);st.style.width=W+'px';st.style.setProperty('--cw',cw+'px');st.style.setProperty('--sw',sw+'px');
- st.classList.toggle('portrait',por);const k=Math.min(innerWidth/W,innerHeight/H),s=k>=1?Math.floor(k*4)/4:Math.floor(k*40)/40;st.style.transform=`translate(-50%,-50%) scale(${s})`}
+ TEL=tel;st.classList.toggle('tel',tel);st.classList.toggle('dar',tel&&cw<440);document.body.classList.toggle('tel',tel);st.style.width=W+'px';st.style.setProperty('--cw',cw+'px');st.style.setProperty('--sw',sw+'px');
+ st.classList.toggle('portrait',por);const k=Math.min(IW/W,IH/H),s=k>=1?Math.floor(k*4)/4:Math.floor(k*40)/40;st.style.left=(sa.l+IW/2)+'px';st.style.top=(sa.t+IH/2)+'px';st.style.transform=`translate(-50%,-50%) scale(${s})`}
 addEventListener('resize',fit);fit();
 function applyRm(){cashLast='';cashKick&&cashKick();document.body.classList.toggle('rm',!!S.set.rm);document.body.classList.remove('soft')}
 function shint(){const s=$('#shop'),h=$('#shint');if(h)h.classList.toggle('on',s.scrollTop+s.clientHeight<s.scrollHeight-6)}
@@ -2022,7 +2079,7 @@ const end=$('#end'),cv=$('#fx'),x=cv.getContext('2d');clearFx();FX.done=false;FX
  const SK=sackCanvas(FK(4));   /* v39: imleç boyu 2 katı (~112x136 px) */
  const hs=(a,b)=>{let h=(a*374761393+b*668265263)|0;h=(h^(h>>>13))*1274126177;return((h^(h>>>16))>>>0)/4294967295};
  const fe=document.querySelector('.floor.f1'),fr0=fe?fe.getBoundingClientRect():{top:H-30,bottom:H};
- const floorY=Math.min(H,Math.round(fr0.bottom)),hm=new Float32Array(NC).fill(floorY);
+ const floorY=Math.min(H-Math.round(safeA().b),Math.round(fr0.bottom)),hm=new Float32Array(NC).fill(floorY);
  const c0=Math.floor(br.left/CS),c1=Math.ceil(br.right/CS),inner=Math.round(br.bottom-br.height*.28),rim=Math.round(br.top+br.height*.18);
  for(let c=c0;c<=c1;c++)hm[c]=(c<=c0+1||c>=c1-1)?rim:inner;
  const TOTC=NC*floorY/CS,GOAL=.40,fillY=Math.round(inner-(inner-rim)*.55);let dep=0;
