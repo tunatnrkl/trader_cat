@@ -2,6 +2,8 @@
 
 | Tarih | Karar | Gerekçe | Önceki değer |
 |---|---|---|---|
+| 11-19 | Seviye fiyatları (Testçi, kullanıcı isteği): Kat.1 volatilite /30→/27 (~%11 pahalı, Pebble $8,3→$9,3); Bobby kaldıracı Kat.2–4 ×2 | Bobby kaldıraç 2–17 sn'de geri ödüyordu (karar değil); sim ortalama 134,8→139,3, iyi 97,5→99,1, Kat.1 geçişleri hızlanmadı | /30, ×1 |
+| 11-19 | Adım 8 kabul: iPhone güvenli alan, telefonda sıkı mağaza, 13 düzen düzeltmesi | Kullanıcı: ada kataloğa denk geliyor, mağaza boşluklu | — |
 | 11-19 | Ofis kendi kendine yönetiyor: yeni veri gelince (görev sonucu, döngü, uzun sessizlik) Opus yönetici kendisi toplanır (en çok 30 dk'da bir, sayfa başına 4); öncelik listesi koyar, görev (öncelik+tür+ölçüm) verir, gereksiz görevi iptal eder, geri alma önerir; plan/oyun sayıları/döngü bilgisini okur. Gerçek ekip ofis görevlerini döngüde uygular, son karar Claude Code'daki Yönetici. Günlük otomatik döngü (zamanlanmış görev) izin sisteminde reddedildi, patron kararı bekliyor | Patron: "kendi kendine yönetici karar versin her şeye, amaç daha oynanabilir" | Elle toplantı + 15 dk zamanlayıcı |
 | 11-18 | Teşhis 2 sonrası iki değişiklik TUTULDU (puan düşmedi; sim ve mama dönüşü iyileşti) | Ölçüt 1–8 değişmedi; ortalama Kat.1 52,4→40,6; rastgele oyuncu ilk 4 dk'da mamaya 4→0 düşüş | — |
 | 11-18 | Kurtarma turu yalnız bilgisayar onarıldıktan sonra (rescueOk ve start'ta S.fix) | Açılışta onarımdan önce $2 ile tura girilebiliyordu | S.fix kontrolü yok |

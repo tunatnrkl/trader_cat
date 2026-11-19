@@ -25,7 +25,7 @@ Kaynak: `docs/test/teshis-1.md`, `docs/test/teshis-2.md`. Sim (doğru ayar) orta
 ## Sonraki oturum önceliği (Teşhis 2'den)
 1. Kötü/orta oyuncu Pebble'da sıkışıyor: kurtarma turu kilidi çözdü ama $10'a çıkış yok (rastgele 13 dk'da $1,72).
 2. Kat.1 hâlâ ~40 dk (hedef ~30); iyi oyuncu 97,5 dk (hedef 120–150 altı); Kat.4 Eclipse→Pulsar 17,8 dk.
-3. Bobby seçimi anlamsız (135,1 vs 134,8): oneri-2 Sorun 3 (Bobby erken güç ya da elle işlem ×1,5) — bu bir büyük denge değişikliği.
+3. Bobby seçimi anlamsız (seviye fiyatı çalışması da çözmedi: sebep Bobby kapısı ~$3.000 / ~23. dk ve sim Bobby modeli; Kat.3–4 kaldıraç 270–494 sn geri ödeme, lc formülü kod işi) (135,1 vs 134,8): oneri-2 Sorun 3 (Bobby erken güç ya da elle işlem ×1,5) — bu bir büyük denge değişikliği.
 
 ## Öncelik (Teşhis 1'den, bu oturumda ele alındı)
 1. Kat.1 ritmi düzensiz: toplam 56,7 dk (hedef ~30), Ember→Nova 15,5 dk duvar; kullanıcı ise ilk geçişleri "çok hızlı" buluyor → coin başına eşit ritim. **Bu oturumun tek büyük denge değişikliği.**
