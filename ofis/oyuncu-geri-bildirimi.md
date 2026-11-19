@@ -17,3 +17,4 @@
 | 11-18 | Ofis: yönetici "ekip dengeli" deyip hiçbir şey yapmadı, mesajı saçma iletti | Pasif yönetici istemiyor; yönetici düşünsün, karar versin. |
 | 11-18 | Yaşayan ofis promptu: tek amaç oynanış zevki, 8 ölçüt, ölçerek ilerle | Bu oturumdan itibaren çalışma biçimi. |
 | 11-18 | "Daha akıllı olsun ofis ve GitHub'a ekleyen biri de olsun" | Ofis gerçek veriyi okuyor (puan, görev, GitHub, ders, önceki karar); Sürüm sorumlusu (araclar/surum.sh) işe alındı. |
+| 11-19 | "Ofisi daha akıllı yap, yönetici kendi kendine her şeye karar versin; amaç daha oynanabilir" | Ofis olay güdümlü kendi kendine yönetim; ofis görevleri gerçek döngüde uygulanır. |
