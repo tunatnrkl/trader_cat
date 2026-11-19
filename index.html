@@ -1922,11 +1922,11 @@ let SD='',LH='',SH='';
 let TEL=false;
 /* Tur 2/Adım 8: güvenli alan (çentik/ada, ana ekran çizgisi). --sal/--sar/--sat/--sab CSS'te env()'den gelir (döndürülmüş kipte eşlenir); sahne bu alanın ortasına sığar */
 function safeA(){let e=document.getElementById('saprobe');if(!e){e=document.createElement('i');e.id='saprobe';e.setAttribute('aria-hidden','true');document.body.appendChild(e)}const c=getComputedStyle(e),n=v=>Math.max(0,parseFloat(v)||0);return{l:n(c.paddingLeft),r:n(c.paddingRight),t:n(c.paddingTop),b:n(c.paddingBottom)}}
-function fit(){const sa=safeA(),IW=Math.max(200,innerWidth-sa.l-sa.r),IH=Math.max(150,innerHeight-sa.t-sa.b),rt=document.documentElement;rt.classList.toggle('kisa',innerHeight<520);rt.style.setProperty('--lw',innerWidth+'px');rt.style.setProperty('--lh',innerHeight+'px');
+function fit(){const sa=safeA(),IW=Math.max(200,innerWidth-sa.l-sa.r),IH=Math.max(150,innerHeight-sa.t-Math.round(sa.b*.5)),rt=document.documentElement;rt.classList.toggle('kisa',innerHeight<520);rt.style.setProperty('--lw',innerWidth+'px');rt.style.setProperty('--lh',innerHeight+'px');
  const st=$('#stage'),por=false,H0=por?1790:900,k0=Math.min(IW/1600,IH/H0),tel=!por&&k0<.6,ar=IW/Math.max(1,IH),
  W=tel?Math.round(Math.min(2100,Math.max(1600,900*ar))):por?900:1600,H=H0,cw=tel?Math.min(480,Math.floor((W-800)/2)):340,sw=W-2*cw-40;
  TEL=tel;st.classList.toggle('tel',tel);st.classList.toggle('dar',tel&&cw<440);document.body.classList.toggle('tel',tel);st.style.width=W+'px';st.style.setProperty('--cw',cw+'px');st.style.setProperty('--sw',sw+'px');
- st.classList.toggle('portrait',por);const k=Math.min(IW/W,IH/H),s=k>=1?Math.floor(k*4)/4:Math.floor(k*40)/40;st.style.left=(sa.l+IW/2)+'px';st.style.top=(sa.t+IH/2)+'px';st.style.transform=`translate(-50%,-50%) scale(${s})`}
+ st.classList.toggle('portrait',por);const k=Math.min(IW/W,IH/H),s=k>=1?Math.floor(k*4)/4:tel?Math.floor(k*1000)/1000:Math.floor(k*40)/40;st.style.left=(sa.l+IW/2)+'px';st.style.top=(sa.t+IH/2)+'px';st.style.transform=`translate(-50%,-50%) scale(${s})`}
 addEventListener('resize',fit);fit();
 function applyRm(){cashLast='';cashKick&&cashKick();document.body.classList.toggle('rm',!!S.set.rm);document.body.classList.remove('soft')}
 function shint(){const s=$('#shop'),h=$('#shint');if(h)h.classList.toggle('on',s.scrollTop+s.clientHeight<s.scrollHeight-6)}

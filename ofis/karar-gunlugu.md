@@ -2,6 +2,7 @@
 
 | Tarih | Karar | Gerekçe | Önceki değer |
 |---|---|---|---|
+| 11-19 | Telefonda sahne ekranı dolduruyor: ölçek 1/40 yerine 1/1000 yuvarlanıyor, alt güvenli alanın yarısı zemin şeridine bırakıldı | Kullanıcı: telefonda alttaki zemin (masa) çok görünüyor; iPhone taklidinde 710x360 → 733x382 | 1/40 yuvarlama, tam alt boşluk |
 | 11-19 | Kilitli coin çubuğu S.tot yerine S.stp (aşama kârı) ile hesaplanıyor | Kullanıcı: çubuk %100 ama coin açılmıyor (çubuk toplam kazancı, açılma aşama kârını ölçüyordu) | S.tot |
 | 11-19 | Adım 9 (Yönetici kendisi, iPhone 15 Pro taklidiyle doğruladı): telefonda mağaza kartı 2 satır (148→~100 iç px), i rozeti ikon köşesinde, uzun başlık sığdırma; Bobby aç/kapa düğmesi kart içinde; bitiş kartı kısa ekranda iki sütun + piksel kedi/Bobby | Kullanıcı: Adım 8 telefonda mağazayı sıkıştırmadı, bitiş ekranı kötü (gerçekte iPhone'da kart taşıyordu) | Adım 8 |
 | 11-19 | Seviye fiyatları (Testçi, kullanıcı isteği): Kat.1 volatilite /30→/27 (~%11 pahalı, Pebble $8,3→$9,3); Bobby kaldıracı Kat.2–4 ×2 | Bobby kaldıraç 2–17 sn'de geri ödüyordu (karar değil); sim ortalama 134,8→139,3, iyi 97,5→99,1, Kat.1 geçişleri hızlanmadı | /30, ×1 |
