@@ -1965,7 +1965,7 @@ function renderSide(){const k=G.cat;
  const tabs=[0,1,2,3].map(t=>S.co[t]?`<button class="tb ${t===G.cat?'on':''} ${G.unl===t?'unl':''}" data-cat="${t}">${t+1}</button>`:`<button class="tb lk" disabled aria-label="Kilitli katalog">${icn('lock',2)}</button>`).join('');
  let h='';
  for(let i=k*5;i<k*5+5;i++){const c=COINS[i],op=S.open[i];
-  if(!op){let lp='',nx='';if(i===S.open.indexOf(0)&&S.co[c.cat]){nx=' nx';const pr=Math.floor(Math.min(100,Number((S.tot||0n)*100000n/(c.p*UNLK[c.cat]))/10));lp=`<span class="lkp"><span class="lbar"><i style="width:${Math.max(4,pr)}%"></i></span><small>%${pr}</small></span>`}
+  if(!op){let lp='',nx='';if(i===S.open.indexOf(0)&&S.co[c.cat]){nx=' nx';const pr=Math.floor(Math.min(100,Number((S.stp||0n)*100000n/(c.p*UNLK[c.cat]))/10));lp=`<span class="lkp"><span class="lbar"><i style="width:${Math.max(4,pr)}%"></i></span><small>%${pr}</small></span>`}
   h+=`<div class="tk lk ${c.boss?'boss':''}${nx}"><img class="ci lkic" src="${ICN.lock}" alt=""><div class="tn"><b>Kilitli</b>${lp}</div></div>`;continue}   /* v52: yalnız kilit + Kilitli */
   const mx=S.cl[i]===c.max;
   h+=`<div class="tk ${i===G.ci?'on':''} ${c.boss?'boss':''}" data-i="${i}">${i===G.ci?`<img class="ptr" src="${ICN.arrow}" alt="">`:''}<img class="ci" src="${ICONS[i]}" alt=""><div class="tn"><b>${c.n}${mx?' <img class="ic" src="'+ICN.star+'" width="22" height="22" alt="">':''}</b><span class="num">$ ${cp(c.p)}</span>${seg(S.cl[i],c.max)}</div>${c.boss?'<em class="bb">BOSS</em>':''}</div>`}
