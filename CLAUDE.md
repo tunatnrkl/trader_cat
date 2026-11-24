@@ -17,7 +17,7 @@ Ayrıntılı kod haritası: `docs/kod-haritasi.md` (satır numaraları yaklaşı
 - **Yeni metin:** Türkçe yazılır, İngilizcesi `I18N.en`'e eklenir, gösterimde `L()` kullanılır. Not: bazı fonksiyonlarda yerel `const L` global `L()`'yi gölgeler.
 - Kayıt formatı ve anahtarı asla bozulmaz. Sayı/fiyat/denge değişikliği: kullanıcı (2026-11-18) Yöneticiye yetki verdi; değişikliği Oyun tasarımcısı yapar, önce yedek, sonra ölçüm (sim + testçi), oturumda en fazla bir büyük denge değişikliği. Günlük: `ofis/karar-gunlugu.md`. Denge notları: `docs/denge-onerisi.md`.
 - GitHub kaydı: `araclar/surum.sh "mesaj" dosyalar…` (Sürüm sorumlusu): yalnız geliştirme dalı; index.html değiştiyse smoke geçmeden kaydetmez.
-- Ofis görevleri (artifact veritabanı `gorevler`, `durum/oncelik`): ofisteki yöneticinin önerileridir; gerçek döngüde öncelik sırasıyla uygulanır, son karar Yöneticide; sonuç görev notuna yazılır.
+- Ofis görevleri (artifact veritabanı `gorevler`): ofiste yönetici görev verir → çalışan (sample) çıktı üretir (`cikti`, `oneriler`) → yönetici inceler (`onaylandi`/`revize`/`ret`). Gerçek döngüde önce `onaylandi` görevler öncelik sırasıyla oyuna uygulanır (son karar Yöneticide), sonra durum `bitti` + not yazılır. Ekonomi sabitleri ofise `durum/ekonomi` ile verilir; sabit değişince güncelle.
 - Yönetici çalışma düzeni ve hafıza: `ofis/` (hafiza, ogrenilenler, karar-gunlugu, oyuncu-geri-bildirimi, ajan-performansi). Oturum başında oku.
 - Görsel: kullanıcı modern, yuvarlak, "oyun gibi" bir arayüz istiyor (örnek: `docs/tasarim/ornek/`); arayüz pixel art olmak zorunda değil, hayvan sprite'ları pixel kalabilir. Göz yormayan, glow/neon yok, emoji yok. Süren yeniden tasarım: `docs/tasarim/durum.md`.
 

@@ -38,6 +38,8 @@ label{color:var(--tx2);font-size:12px;display:flex;gap:6px;align-items:center}
 #log span{color:var(--tx)}
 #note{font-size:12px;color:var(--tx2);margin-top:6px}
 #dongu{font-size:12px;color:var(--mint);margin-top:4px}
+.lst details{margin-top:3px}.lst summary{cursor:pointer;color:var(--mint)}.lst .ck{white-space:pre-wrap;color:var(--tx);background:#070A1A;border:2px solid #18255A;border-radius:8px;padding:8px;margin-top:4px;max-height:320px;overflow:auto;font-weight:600}
+#gorev{max-height:420px}
 .sc{display:grid;grid-template-columns:1fr auto auto;gap:3px 8px;font-size:12px;align-items:center;margin-top:6px}
 .sc .ad{color:var(--tx2)}.sc .bar{display:flex;gap:2px}.sc .bar i{width:12px;height:9px;border-radius:2px;background:#18255A}.sc .bar i.on{background:var(--mint)}
 .sc .v{color:var(--tx);font-variant-numeric:tabular-nums;min-width:44px;text-align:right}
@@ -58,11 +60,11 @@ label{color:var(--tx2);font-size:12px;display:flex;gap:6px;align-items:center}
     <div id="brain">Yönetici beyni: <i id="model">claude-opus-5-5 · yüksek efor</i> · <span id="state">hazır</span></div>
     <div id="thought"></div>
     <div id="dongu">Gerçek ekip döngüsü: bilgi yok</div>
-    <div id="note">Yönetici gerçek puanları, görevleri, GitHub kayıtlarını ve kendi önceki kararlarını okuyarak düşünür. Kendi kendine yönetim açıkken yeni veri geldiğinde (puan, görev sonucu, GitHub kaydı) kendisi toplanır; en çok 30 dk'da bir, sayfa başına en çok 4 kez. Verdiği görevleri gerçek ekip her gün otomatik döngüde öncelik sırasıyla uygular; Claude Code'daki Yönetici kurala aykırı olanı gerekçesiyle reddeder. Her düşünme senin Claude kullanımından harcar.</div>
+    <div id="note">Yönetici gerçek puanları, görevleri, GitHub kayıtlarını ve kendi önceki kararlarını okuyarak düşünür. Kendi kendine yönetim açıkken yeni veri geldiğinde (puan, görev sonucu, GitHub kaydı) kendisi toplanır; en çok 30 dk'da bir (bir çıktı gelince 1 dk içinde inceler), sayfa başına en çok 8 kez; çalışanlar sayfa başına en çok 8 iş yapar. Verdiği görevleri gerçek ekip her gün otomatik döngüde öncelik sırasıyla uygular; Claude Code'daki Yönetici kurala aykırı olanı gerekçesiyle reddeder. Her düşünme senin Claude kullanımından harcar.</div>
   </div>
   <div class="box"><b>Ofis kaydı</b><div id="log"></div></div>
   <div class="box"><b>Oynanış ölçütleri</b> <span id="pkay" class="nm" style="position:static;transform:none"></span><div class="sc" id="puan"><span class="ad">Henüz ölçüm yok</span></div></div>
-  <div class="box"><b>Görevler</b> <span class="nm" style="position:static;transform:none">ofisin verdiği işler ve gerçek ekipteki durumu</span><div class="lst" id="gorev"><div>Açık görev yok</div></div></div>
+  <div class="box"><b>Görevler</b> <span class="nm" style="position:static;transform:none">yönetici verir → çalışan yapar → yönetici inceler → onaylananı gerçek ekip oyuna işler</span><div class="lst" id="gorev"><div>Açık görev yok</div></div></div>
   <div class="box"><b>GitHub</b> <span class="nm" style="position:static;transform:none">Sürüm sorumlusunun son kayıtları</span><div class="lst" id="gh"><div>Kayıt yok</div></div></div>
 </div>
 <script>
@@ -108,7 +110,7 @@ function person(p,t){const px=Math.round(p.x),py=Math.round(p.y),st=p.q.length?(
  if(p.bot){x.fillStyle='#B4C4F0';x.fillRect(px-4,py-6,8,7);x.fillStyle='#45D6A0';x.fillRect(px-2,py-4,1,1);x.fillRect(px+1,py-4,1,1);x.fillStyle='#6F8FE0';x.fillRect(px-4,py+1,8,8);x.fillRect(px-3,py+9,2,4);x.fillRect(px+1,py+9,2,4)}
  else{x.fillStyle='#1A1420';x.fillRect(px-3,py+8,2,5-st);x.fillRect(px+1,py+8,2,4+st);x.fillStyle=p.body;x.fillRect(px-4,py,8,9);x.fillStyle=p.acc;x.fillRect(px-1,py+1,2,4);
   x.fillStyle='#F0C9A8';x.fillRect(px-3,py-7,6,7);x.fillStyle=p.hair;x.fillRect(px-3,py-8,6,3);x.fillRect(px-3,py-6,1,3);x.fillStyle='#1A1420';x.fillRect(px-2,py-4,1,1);x.fillRect(px+1,py-4,1,1)}
- if(p.ad==='Yönetici'&&thinking){const k=(t/300|0)%4;x.fillStyle='#F2B83C';for(let i=0;i<k;i++)x.fillRect(px-4+i*3,py-13,2,2)}
+ if((p.ad==='Yönetici'&&thinking)||p.work){const k=(t/300|0)%4;x.fillStyle='#F2B83C';for(let i=0;i<k;i++)x.fillRect(px-4+i*3,py-13,2,2)}
  if(sel===p){x.strokeStyle='#F2B83C';x.lineWidth=1;x.strokeRect(px-6,py-10,12,26)}}
 // ---- hareket: oda kapısı → koridor → hedef ----
 function roomAt(px,py){return Object.values(ROOMS).find(r=>px>=r.x&&px<=r.x+r.w&&py>=r.y&&py<=r.y+r.h)}
@@ -137,6 +139,7 @@ let sample=null,db=null;
  db.doc('durum/dersler').onSnapshot(d=>{const v=d&&d.data&&d.data();if(v&&v.metin)DERS=String(v.metin)},()=>{});
  db.doc('durum/github').onSnapshot(d=>{const v=d&&d.data&&d.data();if(v&&Array.isArray(v.liste))ghGeldi(v.liste)},()=>{});
  db.collection('gorevler').orderBy('t','desc').limit(30).onSnapshot(s=>{const eski=new Map(GOREV.map(g=>[g.id,g.durum]));GOREV=s.docs.map(x=>({id:x.id,...x.data()}));drawGorev();const deg=GOREV.find(g=>eski.has(g.id)&&eski.get(g.id)!==g.durum&&g.durum!=='iptal');if(deg)olay('görev sonucu: '+String(deg.metin).slice(0,40)+' → '+deg.durum)},()=>{});
+ db.doc('durum/ekonomi').onSnapshot(d=>{const v=d&&d.data&&d.data();if(v&&v.metin)EKONOMI=String(v.metin)},()=>{});
  db.doc('durum/plan').onSnapshot(d=>{const v=d&&d.data&&d.data();if(v&&v.metin)PLAN=String(v.metin)},()=>{});
  db.doc('durum/oyun').onSnapshot(d=>{const v=d&&d.data&&d.data();if(v&&v.metin)OYUNSAYI=String(v.metin)},()=>{});
  db.doc('durum/oncelik').onSnapshot(d=>{const v=d&&d.data&&d.data();if(v&&Array.isArray(v.liste))ONCELIK=v},()=>{});
@@ -144,23 +147,24 @@ let sample=null,db=null;
  setTimeout(ilkBakis,9000)}catch(e){}})();
 async function kaydet(col,obj){if(!db)return;try{await db.collection(col).add({...obj,t:Date.now(),durum:'yeni'})}catch(e){}}
 // ---- gerçek ekipten gelen veri: puanlar, görevler, GitHub, şu anki işler, dersler ----
-let PUAN=null,SIMDI={},DERS='',GOREV=[],GH=[],PLAN='',OYUNSAYI='',ONCELIK=null,DONGU=null;
+let EKONOMI='',PUAN=null,SIMDI={},DERS='',GOREV=[],GH=[],PLAN='',OYUNSAYI='',ONCELIK=null,DONGU=null;
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const once=t=>{const m=Math.round((Date.now()-t)/60000);return !t?'':m<1?'şimdi':m<60?m+' dk önce':m<1440?Math.round(m/60)+' sa önce':Math.round(m/1440)+' gün önce'};
 function drawPuan(){const el=document.getElementById('puan');if(!PUAN)return;el.innerHTML='';document.getElementById('pkay').textContent=PUAN.kaynak?'· '+PUAN.kaynak:'';
  PUAN.liste.slice(0,8).forEach(r=>{const s=+r.simdi||0;const a=document.createElement('span');a.className='ad';a.textContent=(r.n||'')+' '+(r.ad||'');
   const b=document.createElement('span');b.className='bar';for(let i=1;i<=5;i++){const q=document.createElement('i');if(i<=s)q.className='on';b.appendChild(q)}
   const v=document.createElement('span');v.className='v';v.textContent=(r.once==null||r.once===''?'—':r.once)+' → '+(s||'—');el.append(a,b,v)})}
-const STN={yeni:['yeni',''],'yapılıyor':['yapılıyor','yap'],bitti:['bitti','bit'],ret:['reddedildi','ret'],iptal:['iptal','ret']};
+const STN={yeni:['sırada',''],calisiyor:['ofiste çalışılıyor','yap'],incelemede:['yönetici inceliyor','yap'],revize:['düzeltilecek','yap'],onaylandi:['onaylandı · gerçek ekibe','bit'],'yapılıyor':['gerçek ekipte','yap'],bitti:['oyuna işlendi','bit'],ret:['reddedildi','ret'],iptal:['iptal','ret']};
 const ileri=t=>{const m=Math.round((t-Date.now())/60000);return m<=0?'şimdi':m<60?m+' dk sonra':m<1440?Math.round(m/60)+' sa sonra':Math.round(m/1440)+' gün sonra'};
 function drawDongu(){if(!DONGU)return;document.getElementById('dongu').textContent='Gerçek ekip döngüsü: son '+(once(DONGU.son)||'—')+(DONGU.sonraki?' · sonraki '+ileri(DONGU.sonraki):'')+(DONGU.ozet?' · '+DONGU.ozet:'')}
 function drawGorev(){const el=document.getElementById('gorev');if(!GOREV.length){el.innerHTML='<div>Açık görev yok</div>';return}
- el.innerHTML=GOREV.slice(0,12).map(g=>{const s=STN[g.durum]||STN.yeni;return `<div><span class="st ${s[1]}">${esc(s[0])}</span> <b>${esc(g.kime)}</b>: <span>${esc(g.metin)}</span>${g.olcut?' · ölçüt '+esc(g.olcut):''}${g.not?'<br>↳ '+esc(g.not):''}</div>`}).join('')}
+ el.innerHTML=GOREV.slice(0,12).map(g=>{const s=STN[g.durum]||STN.yeni;return `<div><span class="st ${s[1]}">${esc(s[0])}</span> <b>${esc(g.kime)}</b>: <span>${esc(g.metin)}</span>${g.olcut?' · ölçüt '+esc(g.olcut):''}${g.not?'<br>↳ '+esc(g.not):''}${g.cikti?`<details><summary>çıktı${g.rev?' (düzeltme '+g.rev+')':''}: ${esc(g.ozet||'')}</summary><div class="ck">${esc(g.cikti)}</div></details>`:''}</div>`}).join('')}
 function drawGh(){const el=document.getElementById('gh');el.innerHTML=GH.length?GH.slice(0,8).map(c=>`<div><code>${esc(String(c.h||'').slice(0,7))}</code> <span>${esc(c.m)}</span> · ${esc(once(c.t))}</div>`).join(''):'<div>Kayıt yok</div>'}
 let ghIlk=true;async function ghGeldi(l){const yeni=!ghIlk&&l[0]&&(!GH[0]||l[0].h!==GH[0].h);GH=l;ghIlk=false;drawGh();
  if(yeni){const s=byName('Sürüm Sorumlusu'),y=byName('Yönetici');if(s&&y&&!busy){busy=true;try{await walkTo(s,y);await say(s,'GitHub\'a gönderdim: '+String(l[0].m||'').slice(0,80));await home(s)}finally{busy=false}}}}
 const puanText=()=>PUAN?PUAN.liste.map(r=>`${r.n} ${r.ad}: ${r.once==null?'—':r.once} → ${r.simdi}`).join('; ')+(PUAN.kaynak?' (kaynak: '+PUAN.kaynak+')':''):'(henüz ölçüm yok)';
 const gorevText=()=>GOREV.length?GOREV.slice(0,12).map(g=>`- id=${g.id} [${(STN[g.durum]||STN.yeni)[0]}]${g.oncelik?' öncelik '+g.oncelik:''}${g.tur?' ('+g.tur+')':''} ${g.kime}: ${g.metin}${g.not?' → SONUÇ: '+g.not:''}`).join('\n'):'(yok)';
+const incText=()=>{const l=GOREV.filter(g=>g.durum==='incelemede');return l.length?l.slice(0,4).map(g=>`- id=${g.id} ${g.kime} — görev: ${g.metin}\n  özet: ${g.ozet||''}\n  çıktı: ${String(g.cikti||'').slice(0,1600)}\n  öneriler: ${String(g.oneriler||'').slice(0,600)}${g.rev?'\n  (bu '+g.rev+'. düzeltme)':''}`).join('\n'):'(yok)'};
 const oncelikText=()=>ONCELIK&&ONCELIK.liste.length?ONCELIK.liste.map((o,i)=>`${i+1}. ${o.sorun} (ölçüt ${o.olcut||'?'})${o.neden?' — '+o.neden:''}`).join('\n')+' ('+once(ONCELIK.t)+')':'(henüz belirlemedin)';
 const ghText=()=>GH.length?GH.slice(0,6).map(c=>`- ${String(c.h||'').slice(0,7)} ${c.m} (${once(c.t)})`).join('\n'):'(yok)';
 const simdiText=()=>{const e=Object.entries(SIMDI);return e.length?e.map(([k,v])=>`- ${k}: ${v}`).join('\n'):'(bilgi yok)'};
@@ -187,6 +191,8 @@ GERÇEK EKİPTE ŞU AN KİM NE YAPIYOR:\n${simdiText()}
 
 OFİSİN VERDİĞİ GÖREVLER VE GERÇEK DURUMLARI:\n${gorevText()}
 
+İNCELEMENİ BEKLEYEN ÇIKTILAR (çalışanların ofiste yaptığı işler; her birine karar ver):\n${incText()}
+
 SON GITHUB KAYITLARI (Sürüm Sorumlusu):\n${ghText()}
 
 ÖĞRENİLEN DERSLER (tekrarlama):\n${DERS||'(yok)'}
@@ -206,7 +212,7 @@ Odalar: ${Object.keys(ROOMS).join(', ')} (oda başına en çok 4 kişi).
 
 OFİSTE SON KONUŞMALAR:\n${sonKayit()||'(yok)'}
 
-NASIL ÇALIŞIR: Sen kendi kendine karar verirsin; patrondan onay bekleme. Verdiğin 'yeni' görevleri gerçek ekip (Claude Code'daki Yönetici ve ajanlar) her gün otomatik döngüde öncelik sırasıyla uygular, ölçer, sonucu görev notuna yazar; kurala aykırı ya da ölçülemeyen görevi gerekçesiyle reddeder. Bu yüzden görevlerin tek döngüde yapılabilir, somut ve ölçülebilir olsun. Döngü başına en çok bir büyük denge değişikliği yapılır.
+NASIL ÇALIŞIR: Sen kendi kendine karar verirsin; patrondan onay bekleme. Görev verdiğin rol işi OFİSTE HEMEN GERÇEKTEN YAPAR (analiz, eski→yeni sayı önerisi, tasarım tarifi, TR/EN metin, test planı) ve çıktısını sana getirir; sen çıktıyı incelersin: yeterince somut ve kurallara uygunsa kabul, eksikse ne eksik olduğunu yazarak revize, yanlışsa ret. Kabul ettiklerin gerçek ekibe gider. Verdiğin 'yeni' görevleri gerçek ekip (Claude Code'daki Yönetici ve ajanlar) her gün otomatik döngüde öncelik sırasıyla uygular, ölçer, sonucu görev notuna yazar; kurala aykırı ya da ölçülemeyen görevi gerekçesiyle reddeder. Bu yüzden görevlerin tek döngüde yapılabilir, somut ve ölçülebilir olsun. Döngü başına en çok bir büyük denge değişikliği yapılır.
 
 ${OTO_SEBEP?'KENDİN TOPLANDIN, sebep: '+OTO_SEBEP+'\n':''}${patron?`PATRONUN SANA MESAJI: "${patron}"\nMesaj organizasyon, yetki ya da sana soru ise kendin cevapla; yalnız gerçekten bir role ait somut iş varsa görev ver.`:'Patron mesaj yazmadı: bu bir YÖNETİM TOPLANTISI. Durumu değerlendir ve oynanış keyfi için en değerli sonraki adımları seç.'}
 
@@ -218,6 +224,7 @@ YALNIZ şu JSON'u döndür (Türkçe):
  {"eylem":"cikar","kime":"kadrodaki ad","neden":"..."},
  {"eylem":"gorev","kime":"kadrodaki ad","metin":"somut görev, 1-2 cümle","olcut":"1-8 arası hedef ölçüt","olcum":"başarıyı nasıl ölçeceğiz (sim/testçi/puan)","oncelik":1,"tur":"denge|kod|gorsel|ses|metin|test"},
  {"eylem":"oncelik","liste":[{"sorun":"kısa","olcut":"1-8","neden":"kanıt"}]},
+ {"eylem":"incele","id":"görev id","karar":"kabul|revize|ret","not":"kabulde gerçek ekibe uygulama notu; revizede neyin eksik olduğu, somut"},
  {"eylem":"iptal","id":"görev id","neden":"..."},
  {"eylem":"geri_al","commit":"kısa hash","neden":"hangi ölçüt düştü"},
  {"eylem":"tartisma","kimler":["ad1","ad2"],"konu":"tartışma konusu"}]}
@@ -253,6 +260,10 @@ async function uygula(k,y){try{
   if(db)try{await db.collection('gorevler').add({kime:h.ad,metin:String(k.metin||'').slice(0,400),olcut:String(k.olcut||'').slice(0,20),olcum:String(k.olcum||'').slice(0,200),oncelik:Math.max(1,Math.min(3,+k.oncelik||2)),tur:String(k.tur||'').slice(0,12),durum:'yeni',t:Date.now(),kaynak:'ofis'})}catch(e){}const c=await rolCevap(h,k.metin);await say(h,c||(h.bot?'BİP. Çalıştırıyorum.':'Anlaşıldı, başlıyorum!'));await home(y)}}
  else if(k.eylem==='oncelik'&&Array.isArray(k.liste)){const l=k.liste.slice(0,3).map(o=>({sorun:String(o.sorun||'').slice(0,160),olcut:String(o.olcut||'').slice(0,10),neden:String(o.neden||'').slice(0,200)}));
   await say(y,'Öncelik: '+l.map((o,i)=>(i+1)+') '+o.sorun).join(' '));if(db)try{await db.doc('durum/oncelik').set({liste:l,t:Date.now()})}catch(e){}}
+ else if(k.eylem==='incele'){const g=GOREV.find(x=>x.id===k.id);if(g&&g.durum==='incelemede'&&db){const kr=k.karar==='kabul'?'onaylandi':k.karar==='revize'&&(g.rev||0)<2?'revize':'ret';const h=byName(g.kime);
+  if(h){await walkTo(y,h);await say(y,(kr==='onaylandi'?'Kabul: ':kr==='revize'?'Düzelt: ':'Ret: ')+String(k.not||'').slice(0,140))}
+  try{await db.doc('gorevler/'+g.id).update(kr==='revize'?{durum:'revize',geri:String(k.not||'').slice(0,600),rev:(g.rev||0)+1}:{durum:kr,not:'Yönetici: '+String(k.not||'').slice(0,300)})}catch(e){}
+  if(h){await say(h,kr==='onaylandi'?'Harika, gerçek ekibe gidiyor.':kr==='revize'?'Tamam, düzeltip getiriyorum.':'Anlaşıldı.');await home(y)}}}
  else if(k.eylem==='iptal'){const g=GOREV.find(x=>x.id===k.id);if(g&&g.durum==='yeni'&&db){try{await db.doc('gorevler/'+g.id).update({durum:'iptal',not:'Yönetici iptal etti: '+String(k.neden||'').slice(0,160)})}catch(e){}await say(y,'İptal: '+String(g.metin).slice(0,60))}}
  else if(k.eylem==='geri_al'&&k.commit){const s2=byName('Sürüm Sorumlusu');if(s2){await walkTo(y,s2);await say(y,'Şu kaydı geri almayı değerlendir: '+k.commit+(k.neden?' — '+k.neden:''));
   if(db)try{await db.collection('gorevler').add({kime:s2.ad,metin:'Geri alma önerisi: '+String(k.commit).slice(0,12)+' — '+String(k.neden||'').slice(0,200),olcut:'',olcum:'Testçi yeniden ölçer',oncelik:1,tur:'geri_al',durum:'yeni',t:Date.now(),kaynak:'ofis'})}catch(e){}
@@ -273,19 +284,56 @@ async function yonet(patron){if(thinking)return;const y=byName('Yönetici');if(!
  busy=false}
 document.getElementById('meet').onclick=()=>{if(!busy){sonDusunme=Date.now();yonet(null)}};
 // ---- kendi kendine yönetim: yeni veri gelince düşünür (en çok 30 dk'da bir, sayfa başına 4 kez) ----
-let OTO_SEBEP='',otoSay=0,sonDusunme=0,otoT=null;const OTO_ARA=30*60*1000,OTO_MAX=4,autoEl=document.getElementById('auto');
+let OTO_SEBEP='',otoSay=0,sonDusunme=0,otoT=null;const OTO_ARA=30*60*1000,OTO_MAX=8,autoEl=document.getElementById('auto');
 try{const v=localStorage.getItem('ofis-oto');if(v!==null)autoEl.checked=v==='1'}catch(e){}
 autoEl.onchange=()=>{try{localStorage.setItem('ofis-oto',autoEl.checked?'1':'0')}catch(e){}otoDurum()};
 function otoDurum(){if(thinking)return;stateEl.textContent=!autoEl.checked?'hazır':otoSay>=OTO_MAX?'bu sayfada otomatik düşünme hakkı bitti':'yeni veri bekliyor'}
-function olay(sebep){if(!autoEl.checked||!sample||otoSay>=OTO_MAX)return;clearTimeout(otoT);
- const bekle=Math.max(90*1000,sonDusunme+OTO_ARA-Date.now());stateEl.textContent='yeni veri: '+sebep+' · '+Math.round(bekle/60000||1)+' dk içinde düşünecek';
+function olay(sebep,hizli){if(!autoEl.checked||!sample||otoSay>=OTO_MAX)return;clearTimeout(otoT);
+ const bekle=hizli?45*1000:Math.max(90*1000,sonDusunme+OTO_ARA-Date.now());stateEl.textContent='yeni veri: '+sebep+' · '+Math.round(bekle/60000||1)+' dk içinde düşünecek';
  otoT=setTimeout(async()=>{while(busy)await wait(1000);otoSay++;sonDusunme=Date.now();OTO_SEBEP=sebep;try{await yonet(null)}finally{OTO_SEBEP='';otoDurum()}},bekle)}
 async function ilkBakis(){if(!db)return;try{const s=await db.collection('kararlar').orderBy('t','desc').limit(1).get();const son=s.docs[0]&&s.docs[0].data().t||0;
  if(Date.now()-son>3*3600*1000)olay('son kararın üzerinden '+(son?once(son).replace(' önce',''):'uzun süre')+' geçti');else{sonDusunme=son;otoDurum()}}catch(e){}}
+// ---- ofis çalışanları: yöneticinin görevini gerçekten yapar, çıktıyı yöneticiye getirir ----
+const ISCI_MAX=8,ISCI_YOK=['Yönetici','Sürüm Sorumlusu','Test Robotu'];let isciSay=0,calisan=null;
+const MODEL_ROL={'Oyun Tasarımcısı':{model:'claude-opus-5-5',modelTier:'complex',effort:'medium'}};
+const ROL_IS={'Oyun Tasarımcısı':'ekonomi ve sayı işi: eski→yeni değer tablosu, gerekçe, beklenen süre etkisi (tahmin), nasıl ölçüleceği',
+ 'Görsel Tasarımcı':'arayüz işi: hangi ekranda hangi öğe, ölçü/renk/hiza önerisi (paletin hex değerleriyle), önce/sonra tarifi',
+ 'Ses ve Müzik':'ses işi: hangi olayda hangi ses, süre, ton, yükseklik; WebAudio ile üretilebilir tarif',
+ 'Metin':'metin işi: oyundaki yer, eski metin, yeni TR metin ve İngilizcesi',
+ 'Testçi':'test işi: adım adım oynanış/test planı, ölçülecek sayılar, başarı ölçütü; kendi deneyimin yoksa "ölçülmeli" de',
+ 'Kod Araştırmacısı':'kod işi: hangi fonksiyon/sabit etkilenir, değişikliğin yeri ve riski (bilmiyorsan söyle)',
+ 'Yazılımcı':'uygulama tarifi: hangi fonksiyonda ne değişir, sözde kod, test, risk'};
+function siradaki(){return GOREV.filter(g=>(g.durum==='yeni'||g.durum==='revize')&&g.kaynak==='ofis'&&!ISCI_YOK.includes(g.kime)&&exists(g.kime)).sort((a,b)=>(a.oncelik||2)-(b.oncelik||2)||(a.t||0)-(b.t||0))[0]}
+function isciPrompt(p,g){return `Sen "Trading Idle" oyununu geliştiren yapay zekâ ekibinde ${p.ad}sın. Rolün: ${p.rol}. Yöneticin sana bir görev verdi; şimdi işi GERÇEKTEN yapacaksın: sohbet değil, kullanılabilir bir çıktı üret.
+Bu rolde iş biçimin: ${ROL_IS[p.ad]||'rolüne uygun somut çıktı: ne, nerede, eski→yeni, neden, nasıl ölçülür'}.
+GÖREV: ${g.metin}
+HEDEF ÖLÇÜT: ${g.olcut||'?'} · ÖLÇÜM: ${g.olcum||'?'}
+${g.geri?`YÖNETİCİNİN DÜZELTME İSTEĞİ (önceki çıktın yetersizdi): ${g.geri}\nÖNCEKİ ÇIKTIN: ${String(g.cikti||'').slice(0,1500)}\n`:''}
+OYUN: ${OYUN}
+GÜNCEL DURUM: ${DURUM}
+OYUNUN EKONOMİSİ (gerçek sabitler): ${EKONOMI||'(yok)'}
+SİMÜLASYON SAYILARI: ${OYUNSAYI||'(yok)'}
+AÇIK SORUNLAR: ${PLAN||'(yok)'}
+ÖLÇÜT PUANLARI: ${puanText()}
+DERSLER: ${DERS||'(yok)'}
+KURALLAR: Kayıt formatı ve anahtarı, BigInt para ve calculateTradeResult değişmez. Patron kararları değişmez: coin geçişi hızlanmaz, robot ekleme fiyatı öncekinin +%8'i, renk paleti (lacivert/kobalt/altın/nane) korunur, glow/neon/emoji yok. Oyunu çalıştıramazsın: ölçüm uydurma, tahminleri "(tahmin)" diye yaz, bilmediğini "ölçülmeli" de. Sahte aciliyet ve kumar döngüsü önerme.
+YALNIZ şu JSON'u döndür (Türkçe): {"ozet":"1-2 cümle: ne ürettin","cikti":"asıl iş, düz metin, maddeli, somut, en çok 350 kelime","oneriler":[{"tur":"denge|kod|gorsel|ses|metin|test","degisiklik":"eski → yeni","gerekce":"kısa","olcum":"nasıl ölçülür"}],"emin_degil":"ölçülmesi gerekenler"}`}
+async function isciCalis(){if(calisan||busy||thinking||!sample||!db||!autoEl.checked||isciSay>=ISCI_MAX)return;const g=siradaki();if(!g)return;const p=byName(g.kime);if(!p)return;
+ calisan=g.id;isciSay++;try{await db.doc('gorevler/'+g.id).update({durum:'calisiyor',bas:Date.now()})}catch(e){calisan=null;return}
+ p.work=true;await say(p,(g.geri?'Düzeltiyorum: ':'İşe başladım: ')+String(g.metin).slice(0,70),3000);
+ const t0=Date.now(),tick=setInterval(()=>say(p,'çalışıyor… '+Math.round((Date.now()-t0)/1000)+' sn',1400),1000);
+ let r=null,err='';try{r=await sample.json(isciPrompt(p,g),{...(MODEL_ROL[p.ad]||{modelTier:'default'}),cache:false})}catch(e){err=e&&e.code||'hata'}
+ clearInterval(tick);p.work=false;
+ if(!r||!r.cikti){try{await db.doc('gorevler/'+g.id).update({durum:g.geri?'revize':'yeni',not:'Ofiste çalışılamadı ('+err+'), tekrar denenecek'})}catch(e){}calisan=null;if(err==='rate_limited'||err==='not_granted')isciSay=ISCI_MAX;return}
+ const ck=String(r.cikti)+(r.emin_degil?'\n\nÖlçülmesi gerekenler: '+r.emin_degil:'');
+ try{await db.doc('gorevler/'+g.id).update({durum:'incelemede',ozet:String(r.ozet||'').slice(0,300),cikti:ck.slice(0,6000),oneriler:JSON.stringify(r.oneriler||[]).slice(0,3000),bitis:Date.now()})}catch(e){}
+ const y=byName('Yönetici');if(y&&!busy){busy=true;try{await walkTo(p,y);await say(p,'Bitti: '+String(r.ozet||'').slice(0,120));await home(p)}finally{busy=false}}
+ calisan=null;olay('çıktı geldi: '+g.kime,true)}
+setInterval(()=>{isciCalis().catch(()=>{calisan=null})},7000);
 // ---- boşta ofis hayatı (model harcamaz) ----
 const IDLE=[['Psikolog A','Kâr anında ödül hissi şart: nane yeşili ▲.'],['Psikolog B','Zararda alarm yok; kehribar ▼ yeter.'],['Testçi','Her değişiklikten sonra 8 ölçüte yeniden puan veririm.'],['Oyun Tasarımcısı','Önce ölçerim, sonra sayıya dokunurum.'],['Görsel Tasarımcı','Kâr anı net görünüyor mu, testçiye soracağım.'],['Ses ve Müzik','Kârlı satışa kısa, tatlı bir ses lazım.'],['Sürüm Sorumlusu','Testler yeşilse GitHub\'a kaydederim, kırmızıysa beklerim.'],['Test Robotu','BİP. Kontroller hazır.']];
 // gerçek ekipte şu an çalışanlar kendi gerçek işlerini söyler; bilgi yoksa kısa hazır replikler
-let ii=0;setInterval(()=>{if(busy)return;const gs=Object.entries(SIMDI).filter(([n,t])=>t&&byName(n)&&exists(n));const L=gs.length?gs:IDLE;const[n,t]=L[ii++%L.length],p=byName(n);if(p)say(p,String(t).slice(0,140),3600)},6000);
+const soylendi=new Set();setInterval(()=>{if(busy||calisan)return;const c=Object.entries(SIMDI).filter(([n,t])=>t&&exists(n)&&!soylendi.has(n+t))[0];if(c){soylendi.add(c[0]+c[1]);const p=byName(c[0]);if(p)say(p,String(c[1]).slice(0,140),4200)}},9000);
 // ---- kullanıcı ----
 const who=document.getElementById('who'),inp=document.getElementById('msg'),btn=document.getElementById('send');
 cv.addEventListener('click',e=>{const r=cv.getBoundingClientRect(),mx=(e.clientX-r.left)/r.width*W,my=(e.clientY-r.top)/r.height*H;
